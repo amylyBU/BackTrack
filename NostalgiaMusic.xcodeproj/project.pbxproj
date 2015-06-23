@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		072DE7A01B39739B000A1162 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE79F1B39739B000A1162 /* main.m */; };
 		072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7A21B39739B000A1162 /* AppDelegate.m */; };
-		072DE7A61B39739B000A1162 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7A51B39739B000A1162 /* ViewController.m */; };
 		072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AA1B39739B000A1162 /* Images.xcassets */; };
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
@@ -31,8 +30,6 @@
 		072DE79F1B39739B000A1162 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		072DE7A11B39739B000A1162 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		072DE7A21B39739B000A1162 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		072DE7A41B39739B000A1162 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		072DE7A51B39739B000A1162 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		072DE7AA1B39739B000A1162 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		072DE7AD1B39739B000A1162 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		072DE7B31B39739B000A1162 /* NostalgiaMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NostalgiaMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +78,6 @@
 			children = (
 				072DE7A11B39739B000A1162 /* AppDelegate.h */,
 				072DE7A21B39739B000A1162 /* AppDelegate.m */,
-				072DE7A41B39739B000A1162 /* ViewController.h */,
-				072DE7A51B39739B000A1162 /* ViewController.m */,
 				072DE7AA1B39739B000A1162 /* Images.xcassets */,
 				072DE7AC1B39739B000A1162 /* LaunchScreen.xib */,
 				072DE79D1B39739B000A1162 /* Supporting Files */,
@@ -215,7 +210,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072DE7A61B39739B000A1162 /* ViewController.m in Sources */,
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 			);
