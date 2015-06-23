@@ -41,7 +41,9 @@
 }
 
 - (void) goToHome {
-    self.window.rootViewController = [NMAHomeViewController new];
+    NMAHomeViewController *homeVC = [NMAHomeViewController new];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeVC];
+    self.window.rootViewController = navigationController;
 }
 
 @end

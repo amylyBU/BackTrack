@@ -1,19 +1,19 @@
 //
-//  NMAHomeViewController.m
+//  NMASettingsViewController.m
 //  NostalgiaMusic
 //
-//  Created by Bryan Weber on 6/23/15.
+//  Created by Eric Peterson on 6/23/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "NMAHomeViewController.h"
 #import "NMASettingsViewController.h"
+#import "NMAOnboardingViewController.h"
 
-@interface NMAHomeViewController ()
+@interface NMASettingsViewController ()
 
 @end
 
-@implementation NMAHomeViewController
+@implementation NMASettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,9 +25,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)goToSettings:(UIButton *)sender {
-    NMASettingsViewController *settingsVC = [NMASettingsViewController new];
-    [self.navigationController pushViewController:settingsVC animated:YES];
+- (IBAction)goToOnboarding:(UIButton *)sender {
+    NMAOnboardingViewController *onboardVC = [NMAOnboardingViewController new];
+    [self.navigationController pushViewController:onboardVC animated:YES];
 }
 
 /*

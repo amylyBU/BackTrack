@@ -26,8 +26,11 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)completeOnboarding:(UIButton *)sender {
+    //TODO: Load actual VC here
+    /*
     NMAHomeViewController *homeVC = [NMAHomeViewController new];
     [self.navigationController pushViewController:homeVC animated:YES];
+     */
 }
 
 - (IBAction)skipOnboarding:(UIButton *)sender {
