@@ -11,7 +11,10 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) BOOL onboardingComplete;
 
+- (void)goToOnboarding;
+- (void)goToHome;
 
 @end
 
