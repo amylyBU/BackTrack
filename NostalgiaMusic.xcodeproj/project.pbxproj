@@ -55,6 +55,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		072A085D1B3975C00068EEF0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		072A085E1B3975C70068EEF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		072A085F1B3975CE0068EEF0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		072A08601B3975D40068EEF0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		072A08611B3975DD0068EEF0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		072DE7911B39739B000A1162 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +111,11 @@
 		072DE79C1B39739B000A1162 /* NostalgiaMusic */ = {
 			isa = PBXGroup;
 			children = (
+				072A08601B3975D40068EEF0 /* Categories */,
+				072A085F1B3975CE0068EEF0 /* Controllers */,
+				072A085D1B3975C00068EEF0 /* Models */,
+				072A08611B3975DD0068EEF0 /* Networking */,
+				072A085E1B3975C70068EEF0 /* Views */,
 				072DE7A11B39739B000A1162 /* AppDelegate.h */,
 				072DE7A21B39739B000A1162 /* AppDelegate.m */,
 				072DE7AA1B39739B000A1162 /* Images.xcassets */,
@@ -400,6 +440,7 @@
 				072DE7BF1B39739B000A1162 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		072DE7C01B39739B000A1162 /* Build configuration list for PBXNativeTarget "NostalgiaMusicTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +449,7 @@
 				072DE7C21B39739B000A1162 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
