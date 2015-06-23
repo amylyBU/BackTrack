@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
 #import "NMAOnboardingViewController.h"
 
@@ -21,7 +22,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     //TODO: replace with a NMASettings check once its merged
-    if(!self.onboardingComplete) {
+    NMAAppSettings *settings = [NMAAppSettings sharedSettings];
+    if(![settings getUserBool:Onboard]) {
         [self goToOnboarding];
     } else {
         [self goToHome];

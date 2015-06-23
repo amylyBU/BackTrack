@@ -19,6 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if(self.hideSkip)
+    {
+        [self.skipButton setEnabled:NO];
+        self.skipButton.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

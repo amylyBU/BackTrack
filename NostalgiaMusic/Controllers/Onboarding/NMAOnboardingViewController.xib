@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAOnboardingViewController">
             <connections>
+                <outlet property="skipButton" destination="Lg3-23-2z3" id="EG0-Jl-0iU"/>
                 <outlet property="view" destination="7UB-Aa-UYL" id="7vU-fp-E5c"/>
             </connections>
         </placeholder>

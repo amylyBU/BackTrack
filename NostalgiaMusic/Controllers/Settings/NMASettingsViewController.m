@@ -27,6 +27,7 @@
 
 - (IBAction)goToOnboarding:(UIButton *)sender {
     NMAOnboardingViewController *onboardVC = [NMAOnboardingViewController new];
+    onboardVC.hideSkip = YES; //Can't skip from setttings
     [self.navigationController pushViewController:onboardVC animated:YES];
 }
 
