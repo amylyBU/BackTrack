@@ -9,7 +9,12 @@
 #import "AppDelegate.h"
 #import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
+<<<<<<< HEAD
 #import "NMAOnboardingViewController.h"
+=======
+#import "NMALoginViewController.h"
+
+>>>>>>> 8581a70... Initial commit
 
 @interface AppDelegate ()
 
@@ -20,6 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+<<<<<<< HEAD
     
     //TODO: replace with a NMASettings check once its merged
     NMAAppSettings *settings = [NMAAppSettings sharedSettings];
@@ -29,7 +35,13 @@
         [self goToHome];
     }
     
+=======
+    self.window.rootViewController = [NMALoginViewController new];
+>>>>>>> 8581a70... Initial commit
     [self.window makeKeyAndVisible];
+    
+    [FBSDKLoginButton class];
+    
     return YES;
 }
 

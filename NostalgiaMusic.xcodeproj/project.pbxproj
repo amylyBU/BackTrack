@@ -19,6 +19,11 @@
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
+		E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */; };
+		E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */; };
+		E55638121B39FEC300FA01E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */; };
+		E55638131B39FEC300FA01E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */; };
+		E55638141B39FEC300FA01E3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,12 @@
 		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
 		07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAAppSettings.h; path = Models/NMAAppSettings.h; sourceTree = "<group>"; };
 		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
+		E55638081B39FA2B00FA01E3 /* NMALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMALoginViewController.h; path = Controllers/Login/NMALoginViewController.h; sourceTree = "<group>"; };
+		E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMALoginViewController.m; path = Controllers/Login/NMALoginViewController.m; sourceTree = "<group>"; };
+		E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMALoginViewController.xib; path = Controllers/Login/NMALoginViewController.xib; sourceTree = "<group>"; };
+		E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55638131B39FEC300FA01E3 /* FBSDKLoginKit.framework in Frameworks */,
+				E55638121B39FEC300FA01E3 /* FBSDKCoreKit.framework in Frameworks */,
+				E55638141B39FEC300FA01E3 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +109,7 @@
 				07ECCBF11B3A0A7C0089D042 /* Settings */,
 				07ECCBEB1B39F4DC0089D042 /* Onboarding */,
 				072A08621B3976320068EEF0 /* Home */,
+				E556380D1B39FA3900FA01E3 /* Login */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +159,7 @@
 		072DE79C1B39739B000A1162 /* NostalgiaMusic */ = {
 			isa = PBXGroup;
 			children = (
+				E556380E1B39FEC300FA01E3 /* Frameworks */,
 				072A08601B3975D40068EEF0 /* Categories */,
 				072A085F1B3975CE0068EEF0 /* Controllers */,
 				072A085D1B3975C00068EEF0 /* Models */,
@@ -203,6 +219,26 @@
 			);
 			name = Settings;
 			sourceTree = "<group>";
+		};
+		E556380D1B39FA3900FA01E3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E55638081B39FA2B00FA01E3 /* NMALoginViewController.h */,
+				E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */,
+				E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		E556380E1B39FEC300FA01E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */,
+				E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */,
+				E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */,
+			);
+			path = Frameworks;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -289,6 +325,7 @@
 				07ECCBF01B39F5100089D042 /* NMAOnboardingViewController.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
+				E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +349,7 @@
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
+				E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +469,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -441,6 +483,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
