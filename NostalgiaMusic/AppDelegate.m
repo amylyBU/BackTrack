@@ -23,7 +23,7 @@
     
     //TODO: replace with a NMASettings check once its merged
     NMAAppSettings *settings = [NMAAppSettings sharedSettings];
-    if(![settings getUserBool:Onboard]) {
+    if(![settings hasCompletedOnboarding]) {
         [self goToOnboarding];
     } else {
         [self goToHome];
@@ -34,6 +34,11 @@
 }
 
 #pragma mark - Instance Methods
+
+- (void) completedOnboarding {
+    [[NMAAppSettings sharedSettings] setCompleteOnboarding:YES];
+    [self goToHome];
+}
 
 - (void) goToOnboarding {
     //TODO: replace with actual first VC of onboarding once it is complete

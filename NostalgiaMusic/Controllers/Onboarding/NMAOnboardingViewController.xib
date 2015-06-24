@@ -23,6 +23,7 @@
                     </state>
                     <connections>
                         <action selector="completeOnboarding:" destination="-1" eventType="touchUpInside" id="Nc7-vL-QR2"/>
+                        <action selector="fakeOnboarding:" destination="-1" eventType="touchUpInside" id="3I3-KJ-o4z"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg3-23-2z3">

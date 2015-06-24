@@ -8,16 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(int, NMASettingBool) {
-    Onboard,
-    //...
-    AutoplayMusic
-};
 
 @interface NMAAppSettings : NSObject
 
 + (instancetype)sharedSettings;
-- (void)setUserBool:(NMASettingBool)key value:(BOOL)value;
-- (BOOL)getUserBool:(NMASettingBool)key;
+
+- (void)setCompleteOnboarding:(BOOL)value;
+- (BOOL)hasCompletedOnboarding;
 
 @end

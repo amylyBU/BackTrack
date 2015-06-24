@@ -10,6 +10,13 @@
 
 @implementation NMAAppSettings
 
+typedef NS_ENUM(int, NMASettingBool) {
+    Onboard,
+    //...
+    AutoplayMusic
+};
+
+
 #pragma mark - Class Methods
 
 + (instancetype)sharedSettings {
@@ -24,6 +31,14 @@
 }
 
 #pragma mark - Setting NSUserDefaults
+
+- (void)setCompleteOnboarding:(BOOL)value {
+    [self setUserBool:Onboard value:value];
+}
+
+- (BOOL)hasCompletedOnboarding {
+    return [self getUserBool:Onboard];
+}
 
 - (void)setUserBool:(NMASettingBool)key value:(BOOL)value {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
