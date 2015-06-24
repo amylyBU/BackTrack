@@ -7,10 +7,10 @@
 //
 
 #import "NMALoginViewController.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface NMALoginViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
+@property (strong, nonatomic) NMAFacebookManager *FBManager;
 
 @end
 
@@ -19,36 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // don't know how to set fbsdkloginbutton to logout--it does this automatically in storyboard...
-    //self.loginButtonView = [[FBSDKLoginButton alloc] init];
+    self.descriptionTextField.editable = NO;
     
-     self.loginButtonView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-//    NSLog(@"%@", )
+    self.FBManager = [[NMAFacebookManager alloc] init];
+
     
+    self.loginButtonView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    
+    NSLog(@"permissions are: %@", self.loginButtonView.readPermissions);
+    //NSLog(@"the user is: %@", )
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if ([FBSDKAccessToken currentAccessToken]) {
-        NSLog(@"user is logged in");
-    } else {
-        NSLog(@"display button");
-    }
-    
-}
-- (IBAction)loginButtonPressed:(FBSDKLoginButton *)sender {
-    
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

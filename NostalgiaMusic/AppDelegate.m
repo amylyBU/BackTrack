@@ -13,8 +13,12 @@
 #import "NMAOnboardingViewController.h"
 =======
 #import "NMALoginViewController.h"
+<<<<<<< HEAD
 
 >>>>>>> 8581a70... Initial commit
+=======
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+>>>>>>> 82322c9... Added NMAFacebookManager
 
 @interface AppDelegate ()
 
@@ -41,8 +45,18 @@
     [self.window makeKeyAndVisible];
     
     [FBSDKLoginButton class];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
     
-    return YES;
+    
+    //return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 #pragma mark - Instance Methods
@@ -52,11 +66,16 @@
     [self goToHome];
 }
 
+<<<<<<< HEAD
 - (void) goToOnboarding {
     //TODO: replace with actual first VC of onboarding once it is complete
     NMAOnboardingViewController *onboardVC = [NMAOnboardingViewController new];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:onboardVC];
     self.window.rootViewController = navigationController;
+=======
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBSDKAppEvents activateApp];
+>>>>>>> 82322c9... Added NMAFacebookManager
 }
 
 - (void) goToHome {

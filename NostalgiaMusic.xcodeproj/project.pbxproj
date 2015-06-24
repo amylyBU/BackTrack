@@ -24,6 +24,7 @@
 		E55638121B39FEC300FA01E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */; };
 		E55638131B39FEC300FA01E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */; };
 		E55638141B39FEC300FA01E3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */; };
+		E5F1F3721B3B229C00E92D37 /* NMAFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		E5F1F3701B3B229C00E92D37 /* NMAFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFacebookManager.h; path = Models/NMAFacebookManager.h; sourceTree = "<group>"; };
+		E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFacebookManager.m; path = Models/NMAFacebookManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 			children = (
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
+				E5F1F3701B3B229C00E92D37 /* NMAFacebookManager.h */,
+				E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
 				07ECCBEF1B39F5100089D042 /* NMAOnboardingViewController.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
+				E5F1F3721B3B229C00E92D37 /* NMAFacebookManager.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 				E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */,

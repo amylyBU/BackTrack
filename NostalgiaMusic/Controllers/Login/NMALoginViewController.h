@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@import FBSDKCoreKit;
-@import FBSDKLoginKit;
+#import "NMAFacebookManager.h"
 
 @interface NMALoginViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButtonView;
+@property (weak, nonatomic) IBOutlet UIButton *skipFacebookLoginButton;
 
 @end
