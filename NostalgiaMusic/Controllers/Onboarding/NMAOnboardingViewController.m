@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "NMAOnboardingViewController.h"
 #import "NMAHomeViewController.h"
+#import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController ()
 
@@ -36,6 +37,7 @@
     NMAHomeViewController *homeVC = [NMAHomeViewController new];
     [self.navigationController pushViewController:homeVC animated:YES];
      */
+    [[NMAAppSettings sharedSettings] setUserBool:Onboard value:YES];
 }
 
 - (IBAction)skipOnboarding:(UIButton *)sender {
