@@ -14,6 +14,11 @@
 		072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AA1B39739B000A1162 /* Images.xcassets */; };
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
+		07ECCBEF1B39F5100089D042 /* NMAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBED1B39F5100089D042 /* NMAOnboardingViewController.m */; };
+		07ECCBF01B39F5100089D042 /* NMAOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBEE1B39F5100089D042 /* NMAOnboardingViewController.xib */; };
+		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
+		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
+		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,14 @@
 		072DE7B31B39739B000A1162 /* NostalgiaMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NostalgiaMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		072DE7B81B39739B000A1162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NostalgiaMusicTests.m; sourceTree = "<group>"; };
+		07ECCBEC1B39F5100089D042 /* NMAOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAOnboardingViewController.h; path = Controllers/Onboarding/NMAOnboardingViewController.h; sourceTree = "<group>"; };
+		07ECCBED1B39F5100089D042 /* NMAOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAOnboardingViewController.m; path = Controllers/Onboarding/NMAOnboardingViewController.m; sourceTree = "<group>"; };
+		07ECCBEE1B39F5100089D042 /* NMAOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAOnboardingViewController.xib; path = Controllers/Onboarding/NMAOnboardingViewController.xib; sourceTree = "<group>"; };
+		07ECCBF21B3A0B730089D042 /* NMASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMASettingsViewController.h; path = Controllers/Settings/NMASettingsViewController.h; sourceTree = "<group>"; };
+		07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMASettingsViewController.m; path = Controllers/Settings/NMASettingsViewController.m; sourceTree = "<group>"; };
+		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
+		07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAAppSettings.h; path = Models/NMAAppSettings.h; sourceTree = "<group>"; };
+		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +76,8 @@
 		072A085D1B3975C00068EEF0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
+				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -77,6 +92,8 @@
 		072A085F1B3975CE0068EEF0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				07ECCBF11B3A0A7C0089D042 /* Settings */,
+				07ECCBEB1B39F4DC0089D042 /* Onboarding */,
 				072A08621B3976320068EEF0 /* Home */,
 			);
 			name = Controllers;
@@ -167,6 +184,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		07ECCBEB1B39F4DC0089D042 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				07ECCBEC1B39F5100089D042 /* NMAOnboardingViewController.h */,
+				07ECCBED1B39F5100089D042 /* NMAOnboardingViewController.m */,
+				07ECCBEE1B39F5100089D042 /* NMAOnboardingViewController.xib */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		07ECCBF11B3A0A7C0089D042 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				07ECCBF21B3A0B730089D042 /* NMASettingsViewController.h */,
+				07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */,
+				07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,7 +286,9 @@
 			files = (
 				072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */,
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
+				07ECCBF01B39F5100089D042 /* NMAOnboardingViewController.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
+				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +308,10 @@
 			files = (
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
+				07ECCBEF1B39F5100089D042 /* NMAOnboardingViewController.m in Sources */,
+				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
+				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
