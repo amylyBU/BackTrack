@@ -10,5 +10,4 @@
 
 @interface NMAOnboardingViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
-@property (nonatomic) BOOL hideSkip;
 @end

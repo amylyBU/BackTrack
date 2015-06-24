@@ -8,26 +8,12 @@
 
 #import "AppDelegate.h"
 #import "NMAOnboardingViewController.h"
-#import "NMAHomeViewController.h"
-#import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController ()
 
 @end
 
 @implementation NMAOnboardingViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    if(self.hideSkip)
-    {
-        [self.skipButton setEnabled:NO];
-        self.skipButton.hidden = YES;
-    }
-}
-
-- (IBAction)fakeOnboarding:(UIButton *)sender {}
 
 - (IBAction)skipOnboarding:(UIButton *)sender {
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
