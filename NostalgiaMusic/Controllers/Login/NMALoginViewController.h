@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButtonView;
 @property (weak, nonatomic) IBOutlet UIButton *skipFacebookLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
 
 @end

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NMAOnboardingViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
+
 @end

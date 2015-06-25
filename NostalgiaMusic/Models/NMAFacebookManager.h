@@ -12,5 +12,10 @@
 
 @interface NMAFacebookManager : NSObject <FBSDKLoginButtonDelegate>
 
++ (instancetype)sharedManager;
+
+- (BOOL)userIsLoggedIn;
+- (void)setAccessTokenForKey:(NSString *)key withAccessToken:(FBSDKAccessToken *)token;
+- (NSString *)getAccessTokenForKey:(NSString *)key;
 
 @end

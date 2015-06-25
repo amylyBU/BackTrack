@@ -6,9 +6,15 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "NMAFacebookManager.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "NMAFacebookManager.h"
+#import "NMAAppSettings.h"
+#import "AppDelegate.h"
+
+@interface NMAFacebookManager ()
+
+@end
 
 @implementation NMAFacebookManager
 
@@ -17,8 +23,8 @@
 + (instancetype)sharedManager {
     static NMAFacebookManager *FBManager = nil;
     @synchronized (self) {
-        static dispatch_once_t once;
-        dispatch_once(&once, ^ {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^ {
             FBManager = [[NMAFacebookManager alloc] init];
         });
     }
@@ -27,19 +33,42 @@
 
 #pragma mark - Facebook Authentication
 
+- (BOOL)userIsLoggedIn {
+    NSString *accessToken = [self getAccessTokenForKey:@"accessToken"];
+    return accessToken ? YES : NO; // TODO: must check if the access token has expired
+}
 
+// for FBSDKAccessToken (key = "accessToken")
+- (void)setAccessTokenForKey:(NSString *)key withAccessToken:(FBSDKAccessToken *)token {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:token.tokenString forKey:key];
+    [userDefaults synchronize];
+}
+
+- (NSString *)getAccessTokenForKey:(NSString *)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:key];
+}
 
 #pragma mark - FBSDKLoginButtonDelegate
 
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    // sent to the delegate when the button was used to login
-    NSLog(@"user has logged in");
-    
+- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
+    if (error) {
+        //TODO: handle error
+        return;
+    } else if (result.isCancelled) {
+        //TODO: handle cancellation
+    } else {
+        [[NMAFacebookManager sharedManager] setAccessTokenForKey:@"accessToken" withAccessToken:result.token];
+    }
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [[NMAAppSettings sharedSettings] getUserDefaultSettingForKey:@"hasOnboarded"] ? [app goToHome] : [app goToOnboarding];
 }
 
-- (void) loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
-    // sent to the delegate whe the button was used to logout
-    NSLog(@"user has logged out");
-    
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    [[NMAFacebookManager sharedManager] setAccessTokenForKey:@"accessToken" withAccessToken:nil];
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app goToLogin];
 }
+
 @end

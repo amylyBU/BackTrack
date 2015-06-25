@@ -14,4 +14,9 @@
 
 @implementation NMASettingsViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
 @end

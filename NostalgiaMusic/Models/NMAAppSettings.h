@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "NMAFacebookManager.h"
 
 @interface NMAAppSettings : NSObject
 
 + (instancetype)sharedSettings;
 
-- (void)setCompleteOnboarding:(BOOL)value;
-- (BOOL)hasCompletedOnboarding;
+//- (BOOL)hasCompletedOnboarding;
+- (void)setUserDefaultSettingForKey:(NSString *)key withBool:(BOOL)value;
+- (BOOL)getUserDefaultSettingForKey:(NSString *)key;
 
 @end
