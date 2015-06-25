@@ -11,6 +11,7 @@
 #import "NMAHomeViewController.h"
 #import "NMAOnboardingViewController.h"
 #import "NMALoginViewController.h"
+#import "NMAYearCollectionViewController.h"
 
 @interface AppDelegate () <NMALoginViewControllerDelegate, NMAOnboardingViewControllerDelegate>
 
