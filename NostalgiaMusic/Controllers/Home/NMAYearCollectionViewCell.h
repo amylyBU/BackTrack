@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NMAYearCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *year;
 
 @end

@@ -10,4 +10,5 @@
 
 @interface NMAYearCollectionViewController : UICollectionViewController
 @property NSMutableArray *years;
+@property UICollectionViewFlowLayout *flow;
 @end

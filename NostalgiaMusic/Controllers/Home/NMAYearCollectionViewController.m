@@ -21,13 +21,18 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     [self.collectionView.delegate self];
     [self.years addObject:@"test"];
+    [self.collectionView.dataSource self];
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
+    
     
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"NMAYearCollectionViewCell" bundle:[NSBundle mainBundle]]
 forCellWithReuseIdentifier:@"YearCell"];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    self.flow = [[UICollectionViewFlowLayout alloc]init];
+    [self.flow setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [self.collectionView setCollectionViewLayout:self.flow];
     
     // Do any additional setup after loading the view.
 }
@@ -56,17 +61,17 @@ forCellWithReuseIdentifier:@"YearCell"];
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return 100;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(150, 150);
+    return CGSizeMake(70, 40);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
    //
    NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YearCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    cell.backgroundColor = [UIColor whiteColor];
    //cell.customLabel setText:[NSString stringWithFormat:@"My custom cell %ld", (long)indexPath.row]];
     return cell;
     
