@@ -10,7 +10,7 @@
 #import "NMAYearCollectionViewCell.h"
 
 @interface NMAYearCollectionViewController ()
-
+@property (strong, nonatomic) NSMutableArray *years;
 @end
 
 @implementation NMAYearCollectionViewController
@@ -22,10 +22,15 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView.delegate self];
     [self.years addObject:@"test"];
     [self.collectionView.dataSource self];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.collectionView.clipsToBounds = YES;
+    NSInteger earliestYear = 1980;
+    NSInteger latestYear = 2014;
+    self.years = [[NSMutableArray alloc] init];
     
-    
+    for(int i = 0; i < (latestYear - earliestYear + 1); i++){
+        NSString *yearForCell = [NSString stringWithFormat:@"%ld", earliestYear + i];
+        [self.years addObject:yearForCell];
+    }
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"NMAYearCollectionViewCell" bundle:[NSBundle mainBundle]]
 forCellWithReuseIdentifier:@"YearCell"];
@@ -33,9 +38,7 @@ forCellWithReuseIdentifier:@"YearCell"];
     self.flow = [[UICollectionViewFlowLayout alloc]init];
     [self.flow setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.collectionView setCollectionViewLayout:self.flow];
-    
-    // Do any additional setup after loading the view.
-}
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -55,13 +58,12 @@ forCellWithReuseIdentifier:@"YearCell"];
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-
     return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 100;
+    return self.years.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -69,20 +71,15 @@ forCellWithReuseIdentifier:@"YearCell"];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   //
    NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YearCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-   //cell.customLabel setText:[NSString stringWithFormat:@"My custom cell %ld", (long)indexPath.row]];
+    NSString *year = self.years[indexPath.row];
+    cell.year.text = year;
     return cell;
-    
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor redColor];
-//
-//    return cell;
 }
 
 
-#pragma mark <UICollectionViewDelegate>
+#pragma mark UICollectionViewDelegate
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

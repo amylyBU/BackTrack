@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NMAYearCollectionViewController : UICollectionViewController
-@property NSMutableArray *years;
 @property UICollectionViewFlowLayout *flow;
 @end
