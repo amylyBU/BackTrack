@@ -38,6 +38,8 @@ forCellWithReuseIdentifier:@"YearCell"];
     self.flow = [[UICollectionViewFlowLayout alloc]init];
     [self.flow setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.collectionView setCollectionViewLayout:self.flow];
+    self.collectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+   
     }
 
 - (void)didReceiveMemoryWarning {
