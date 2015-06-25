@@ -9,6 +9,7 @@
 #import "NMAHomeViewController.h"
 #import "NMASettingsViewController.h"
 #import "NMAYearCollectionViewController.h"
+#import "NMAContentTableViewController.h"
 
 @interface NMAHomeViewController ()
 
@@ -22,6 +23,10 @@
     UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
     NMAYearCollectionViewController *scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
     [self displayContentController:scroll];
+    NMAContentTableViewController *tableContent =[[NMAContentTableViewController alloc]init];
+    [self displayContentTable:tableContent];
+     self.edgesForExtendedLayout = UIRectEdgeNone;
+    //TODO: fix constraints
 }
 
 - (IBAction)goToSettings:(UIButton *)sender {
@@ -31,6 +36,14 @@
 - (void)displayContentController: (UIViewController*) content{
     [self addChildViewController:content];
     CGRect scrollFrame = CGRectMake(0, 0, self.view.frame.size.width, 50);
+    content.view.frame = scrollFrame;
+    [self.view addSubview:content.view];
+    [content didMoveToParentViewController:self];
+}
+
+- (void)displayContentTable:(UIViewController*) content{
+    [self addChildViewController:content];
+    CGRect scrollFrame = CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height);
     content.view.frame = scrollFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
