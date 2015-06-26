@@ -9,43 +9,50 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAYearCollectionViewCell.h"
 
+static NSInteger const earliestYear = 1980;
+static NSInteger const latestYear =  2014;
+
 @interface NMAYearCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *years;
+
 @end
 
 @implementation NMAYearCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.collectionView.delegate self];
-    [self.years addObject:@"test"];
-    [self.collectionView.dataSource self];
+    self.collectionView.dataSource = self;
     self.collectionView.clipsToBounds = YES;
-    NSInteger earliestYear = 1980;
-    NSInteger latestYear = 2014;
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
+forCellWithReuseIdentifier:@"YearCell"];
+    self.flow = [[UICollectionViewFlowLayout alloc]init];
+    self.flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    [self.collectionView setCollectionViewLayout:self.flow];
+    [self setUpYears];
+    }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:34 inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+}
+
+-(void)setUpYears{
     self.years = [[NSMutableArray alloc] init];
-    
     for(int i = 0; i < (latestYear - earliestYear + 1); i++){
         NSString *yearForCell = [NSString stringWithFormat:@"%ld", earliestYear + i];
         [self.years addObject:yearForCell];
     }
-    // Register cell classes
-    [self.collectionView registerNib:[UINib nibWithNibName:@"NMAYearCollectionViewCell" bundle:[NSBundle mainBundle]]
-forCellWithReuseIdentifier:@"YearCell"];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    self.flow = [[UICollectionViewFlowLayout alloc]init];
-    [self.flow setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [self.collectionView setCollectionViewLayout:self.flow];
     
-    //TODO Make cells buttons to be selected
-   
-    }
+}
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+  //  [self.collectionView reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -72,6 +79,12 @@ forCellWithReuseIdentifier:@"YearCell"];
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"indexPath - %lu",indexPath.row);
+    NSString *currentYear = [self.years objectAtIndex:indexPath.row];
+     NSLog(@"Current Year %@", currentYear);
+    [self.delegate didSelectYear:currentYear];
+}
 
 #pragma mark UICollectionViewDelegate
 

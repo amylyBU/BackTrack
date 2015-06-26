@@ -7,8 +7,10 @@
 //
 
 #import "NMAContentTableViewController.h"
+#import "NMAYearTableViewCell.h"
 
-@interface NMAContentTableViewController ()
+@interface NMAContentTableViewController () <UITableViewDelegate>
+@property (strong, nonatomic) NSMutableArray *contents;
 
 @end
 
@@ -16,12 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
+    self.contents = [[NSMutableArray alloc] init];
+    [self.contents addObject:self.year];
+    int inputYear = [self.year intValue] - 1;
+    NSString *previousYear = [NSString stringWithFormat:@"%d", inputYear];
+    [self.contents addObject:previousYear];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +34,24 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.contents.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YearTableCell" forIndexPath:indexPath];
+    NSString *contentYear = self.contents[indexPath.row];
+    cell.year.text = contentYear;
     return cell;
 }
-*/
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -113,4 +113,15 @@
 }
 */
 
+#pragma mark - Getters | Setters
+
+- (void)setYear:(NSString *)year {
+    _year = year;
+    [self.contents removeAllObjects];
+    [self.contents addObject:self.year];
+    int inputYear = [self.year intValue] - 1;
+    NSString *previousYear = [NSString stringWithFormat:@"%d", inputYear];
+    [self.contents addObject:previousYear];
+    [self.tableView reloadData];
+}
 @end

@@ -11,8 +11,9 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAContentTableViewController.h"
 
-@interface NMAHomeViewController ()
-
+@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate>
+@property (strong, nonatomic) NSString *selectedYear;
+@property (strong, nonatomic) NMAContentTableViewController *tableContent;
 @end
 
 @implementation NMAHomeViewController
@@ -22,10 +23,12 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
     NMAYearCollectionViewController *scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
+    scroll.delegate = self;
     [self displayContentController:scroll];
-    NMAContentTableViewController *tableContent =[[NMAContentTableViewController alloc]init];
-    [self displayContentTable:tableContent];
-     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.tableContent =[[NMAContentTableViewController alloc]init];
+    self.tableContent.year = @"2014";
+    [self displayContentTable:self.tableContent];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     //TODO: fix constraints
 }
 
@@ -35,7 +38,7 @@
 
 - (void)displayContentController: (UIViewController*) content{
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 0, self.view.frame.size.width, 50);
+    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50);
     content.view.frame = scrollFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
@@ -43,10 +46,18 @@
 
 - (void)displayContentTable:(UIViewController*) content{
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height);
+    CGRect scrollFrame = CGRectMake(0, 50, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     content.view.frame = scrollFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
+}
+
+#pragma mark - NMAYearCollectionViewControllerDelegate
+
+- (void)didSelectYear:(NSString *)year {
+    self.selectedYear = year;
+    self.tableContent.year = year;
+  
 }
 
 @end

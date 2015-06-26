@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NMAYearCollectionViewControllerDelegate <NSObject>
+
+-(void)didSelectYear:(NSString *)year;
+
+@end
+
 @interface NMAYearCollectionViewController : UICollectionViewController
-@property UICollectionViewFlowLayout *flow;
+@property (strong, nonatomic) UICollectionViewFlowLayout *flow;
+//@property (strong, nonatomic) NSString *currentYear;
+@property (weak, nonatomic) id<NMAYearCollectionViewControllerDelegate> delegate;
 @end
