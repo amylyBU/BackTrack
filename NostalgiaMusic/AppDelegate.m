@@ -12,7 +12,7 @@
 #import "NMAOnboardingViewController.h"
 #import "NMALoginViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <NMALoginViewControllerDelegate>
 
 @end
 
@@ -22,12 +22,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    NMAFacebookManager *facebookManager = [NMAFacebookManager sharedManager];
-    NMAAppSettings *userSettings = [NMAAppSettings sharedSettings];
-    [FBSDKLoginButton class];
+    NMAAppSettings *settings = [NMAAppSettings sharedSettings];
     
-    if ([facebookManager userIsLoggedIn]) {
-        [userSettings getUserDefaultSettingForKey:@"hasOnboarded"] ? [self goToHome] : [self goToOnboarding];
+    if ([settings userIsLoggedIn]) {
+        [settings getUserDefaultSettingForKey:@"hasOnboarded"] ? [self goToHome] : [self goToOnboarding];
         return YES;
     } else {
         [self goToLogin];
@@ -50,7 +48,9 @@
 #pragma mark - Navigation
 
 - (void)goToLogin {
-    self.window.rootViewController = [NMALoginViewController new];
+    NMALoginViewController *loginVC = [[NMALoginViewController alloc] init];
+    loginVC.delegate = self;
+    self.window.rootViewController = loginVC;
     [self.window makeKeyAndVisible];
 }
 
@@ -66,4 +66,9 @@
     [self.window makeKeyAndVisible];
 }
 
+#pragma mark - NMALoginViewControllerDelegate
+
+- (void)onboardingCompleted {
+    [self goToHome];
+}
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "NMAAppSettings.h"
-#import "NMAFacebookManager.h"
 
 @implementation NMAAppSettings
 
@@ -24,11 +23,6 @@
 
 #pragma mark - NSUserDefaults Getter and Setter Methods
 
-//- (BOOL)hasCompletedOnboarding {
-//    return [self getUserDefaultSettingForKey:@"hasOnboarded"];
-//}
-
-// for "hasOnboarded" and "autoplay" keys
 - (void)setUserDefaultSettingForKey:(NSString *)key withBool:(BOOL)value {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:value forKey:key];
@@ -39,5 +33,20 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:key];
 }
+- (void)setAccessTokenForKey:(NSString *)key withAccessToken:(FBSDKAccessToken *)token {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:token.tokenString forKey:key];
+    [userDefaults synchronize];
+}
+
+- (NSString *)getAccessTokenForKey:(NSString *)key {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:key];
+}
+
+- (BOOL)userIsLoggedIn {
+    return [self getAccessTokenForKey:@"accessToken"] != nil; // TODO: must check if the access token has expired
+}
+
 
 @end

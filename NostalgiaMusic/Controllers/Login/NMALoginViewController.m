@@ -8,7 +8,6 @@
 
 #import "NMALoginViewController.h"
 #import "AppDelegate.h"
-#import "NMAAppSettings.h"
 
 @interface NMALoginViewController ()
 
@@ -21,14 +20,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.descriptionTextField.editable = NO;
-    self.loginButtonView.delegate = [NMAFacebookManager sharedManager];
+    self.loginButtonView.delegate = self;
 }
 
-// NOTE: this is the same method as in OnboardingViewController
 - (IBAction)skipButtonPressed:(UIButton *)sender {
     [[NMAAppSettings sharedSettings] setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app goToHome];
+    [self.delegate onboardingCompleted];
 }
+
+#pragma mark - FBSDKLoginButtonDelegate
+
+- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
+    if (error) {
+        //TODO: handle error
+        return;
+    } else if (result.isCancelled) {
+        //TODO: handle cancellation
+    } else {
+        [[NMAAppSettings sharedSettings] setAccessTokenForKey:@"accessToken" withAccessToken:result.token];
+    }
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [[NMAAppSettings sharedSettings] getUserDefaultSettingForKey:@"hasOnboarded"] ? [app goToHome] : [app goToOnboarding];
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    [[NMAAppSettings sharedSettings] setAccessTokenForKey:@"accessToken" withAccessToken:nil];
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app goToLogin];
+}
+
 
 @end

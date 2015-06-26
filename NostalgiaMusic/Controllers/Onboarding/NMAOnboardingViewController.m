@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "AppDelegate.h"
 #import "NMAOnboardingViewController.h"
-#import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
+#import "AppDelegate.h"
 
 @interface NMAOnboardingViewController ()
 
@@ -22,7 +21,6 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
-// NOTE: this is the same method as in LoginViewController
 - (IBAction)skipButtonPressed:(UIButton *)sender {
     [[NMAAppSettings sharedSettings] setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;

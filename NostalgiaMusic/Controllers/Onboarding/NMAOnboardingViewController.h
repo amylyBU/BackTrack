@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController : UIViewController
 

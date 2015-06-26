@@ -19,12 +19,9 @@
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
+		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
 		E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */; };
 		E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */; };
-		E55638121B39FEC300FA01E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */; };
-		E55638131B39FEC300FA01E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */; };
-		E55638141B39FEC300FA01E3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */; };
-		E5F1F3721B3B229C00E92D37 /* NMAFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,14 +56,12 @@
 		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
 		07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAAppSettings.h; path = Models/NMAAppSettings.h; sourceTree = "<group>"; };
 		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
+		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E55638081B39FA2B00FA01E3 /* NMALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMALoginViewController.h; path = Controllers/Login/NMALoginViewController.h; sourceTree = "<group>"; };
 		E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMALoginViewController.m; path = Controllers/Login/NMALoginViewController.m; sourceTree = "<group>"; };
 		E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMALoginViewController.xib; path = Controllers/Login/NMALoginViewController.xib; sourceTree = "<group>"; };
-		E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		E5F1F3701B3B229C00E92D37 /* NMAFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFacebookManager.h; path = Models/NMAFacebookManager.h; sourceTree = "<group>"; };
-		E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFacebookManager.m; path = Models/NMAFacebookManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E55638131B39FEC300FA01E3 /* FBSDKLoginKit.framework in Frameworks */,
-				E55638121B39FEC300FA01E3 /* FBSDKCoreKit.framework in Frameworks */,
-				E55638141B39FEC300FA01E3 /* FBSDKShareKit.framework in Frameworks */,
+				7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,8 +88,6 @@
 			children = (
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
-				E5F1F3701B3B229C00E92D37 /* NMAFacebookManager.h */,
-				E5F1F3711B3B229C00E92D37 /* NMAFacebookManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -149,6 +140,8 @@
 				072DE79C1B39739B000A1162 /* NostalgiaMusic */,
 				072DE7B61B39739B000A1162 /* NostalgiaMusicTests */,
 				072DE79B1B39739B000A1162 /* Products */,
+				DBEC046852F7EF6C8E164F10 /* Pods */,
+				401998C391C3064AD667AEC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,7 +157,7 @@
 		072DE79C1B39739B000A1162 /* NostalgiaMusic */ = {
 			isa = PBXGroup;
 			children = (
-				E556380E1B39FEC300FA01E3 /* Frameworks */,
+				E5F1F3741B3D863600E92D37 /* Frameworks */,
 				072A08601B3975D40068EEF0 /* Categories */,
 				072A085F1B3975CE0068EEF0 /* Controllers */,
 				072A085D1B3975C00068EEF0 /* Models */,
@@ -225,6 +218,23 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		401998C391C3064AD667AEC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				486067421913674E7836A8E0 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBEC046852F7EF6C8E164F10 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */,
+				34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E556380D1B39FA3900FA01E3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,15 +245,12 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		E556380E1B39FEC300FA01E3 /* Frameworks */ = {
+		E5F1F3741B3D863600E92D37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E556380F1B39FEC300FA01E3 /* FBSDKCoreKit.framework */,
-				E55638101B39FEC300FA01E3 /* FBSDKLoginKit.framework */,
-				E55638111B39FEC300FA01E3 /* FBSDKShareKit.framework */,
 			);
-			path = Frameworks;
-			sourceTree = SOURCE_ROOT;
+			name = Frameworks;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -252,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 072DE7BD1B39739B000A1162 /* Build configuration list for PBXNativeTarget "NostalgiaMusic" */;
 			buildPhases = (
+				402DF7ABF2B092E974E928E8 /* Check Pods Manifest.lock */,
 				072DE7961B39739B000A1162 /* Sources */,
 				072DE7971B39739B000A1162 /* Frameworks */,
 				072DE7981B39739B000A1162 /* Resources */,
+				2784C7B3A3B1A63AB8E5E39E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,6 +352,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2784C7B3A3B1A63AB8E5E39E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		402DF7ABF2B092E974E928E8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		072DE7961B39739B000A1162 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -352,7 +394,6 @@
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
 				07ECCBEF1B39F5100089D042 /* NMAOnboardingViewController.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
-				E5F1F3721B3B229C00E92D37 /* NMAFacebookManager.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 				E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */,
@@ -473,12 +514,10 @@
 		};
 		072DE7BE1B39739B000A1162 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -487,12 +526,10 @@
 		};
 		072DE7BF1B39739B000A1162 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
