@@ -7,7 +7,6 @@
 //
 
 #import "NMAOnboardingViewController.h"
-#import "NMAHomeViewController.h"
 #import "AppDelegate.h"
 
 @interface NMAOnboardingViewController ()
@@ -22,8 +21,7 @@
 }
 
 - (IBAction)skipButtonPressed:(UIButton *)sender {
-    [[NMAAppSettings sharedSettings] setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app goToHome];
+    [self.delegate userDidSkipOnboarding];
 }
+
 @end

@@ -11,7 +11,9 @@
 
 @protocol NMALoginViewControllerDelegate <NSObject> 
 
-- (void)onboardingCompleted;
+- (void)userDidSkipLogin;
+- (void)userDidLogOut;
+- (void)setRootViewController;
 
 @end
 

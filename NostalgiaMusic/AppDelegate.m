@@ -12,20 +12,16 @@
 #import "NMAOnboardingViewController.h"
 #import "NMALoginViewController.h"
 
-@interface AppDelegate () <NMALoginViewControllerDelegate>
+@interface AppDelegate () <NMALoginViewControllerDelegate, NMAOnboardingViewControllerDelegate>
 
 @end
-
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    NMAAppSettings *settings = [NMAAppSettings sharedSettings];
-    
-    if ([settings userIsLoggedIn]) {
-        [settings getUserDefaultSettingForKey:@"hasOnboarded"] ? [self goToHome] : [self goToOnboarding];
+    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
+        [self setRootViewController];
         return YES;
     } else {
         [self goToLogin];
@@ -45,7 +41,7 @@
     [FBSDKAppEvents activateApp];
 }
 
-#pragma mark - Navigation
+#pragma mark - Private Methods
 
 - (void)goToLogin {
     NMALoginViewController *loginVC = [[NMALoginViewController alloc] init];
@@ -55,7 +51,9 @@
 }
 
 - (void)goToOnboarding {
-    UINavigationController *onboardingNav = [[UINavigationController alloc] initWithRootViewController:[NMAOnboardingViewController new]];
+    NMAOnboardingViewController *onboardingVC = [[NMAOnboardingViewController alloc] init];
+    onboardingVC.delegate = self;
+    UINavigationController *onboardingNav = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
     self.window.rootViewController = onboardingNav;
     [self.window makeKeyAndVisible];
 }
@@ -68,7 +66,23 @@
 
 #pragma mark - NMALoginViewControllerDelegate
 
-- (void)onboardingCompleted {
+- (void)userDidSkipLogin {
+    [self setRootViewController];
+}
+
+- (void)userDidLogOut {
+    [[NMAAppSettings sharedSettings] setAccessToken:nil];
+    [self goToLogin];
+}
+
+- (void)setRootViewController {
+    [[NMAAppSettings sharedSettings] userHasCompletedOnboarding] ? [self goToHome] : [self goToOnboarding];
+}
+
+#pragma mark - NMAOnboardingViewControllerDelegate 
+
+- (void)userDidSkipOnboarding {
     [self goToHome];
 }
+
 @end

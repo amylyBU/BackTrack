@@ -14,11 +14,11 @@
 
 + (instancetype)sharedSettings;
 
-- (void)setUserDefaultSettingForKey:(NSString *)key withBool:(BOOL)value;
-- (BOOL)getUserDefaultSettingForKey:(NSString *)key;
+- (BOOL)userHasCompletedOnboarding;
+- (void)setUserOnboardingStatusToCompleted;
+- (void)setAccessToken:(FBSDKAccessToken *)token;
+- (NSString *)getAccessTokenString;
 - (BOOL)userIsLoggedIn;
-- (void)setAccessTokenForKey:(NSString *)key withAccessToken:(FBSDKAccessToken *)token;
-- (NSString *)getAccessTokenForKey:(NSString *)key;
 
 
 @end

@@ -24,8 +24,7 @@
 }
 
 - (IBAction)skipButtonPressed:(UIButton *)sender {
-    [[NMAAppSettings sharedSettings] setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
-    [self.delegate onboardingCompleted];
+    [self.delegate userDidSkipLogin];
 }
 
 #pragma mark - FBSDKLoginButtonDelegate
@@ -37,17 +36,13 @@
     } else if (result.isCancelled) {
         //TODO: handle cancellation
     } else {
-        [[NMAAppSettings sharedSettings] setAccessTokenForKey:@"accessToken" withAccessToken:result.token];
+        [[NMAAppSettings sharedSettings] setAccessToken:result.token];
     }
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [[NMAAppSettings sharedSettings] getUserDefaultSettingForKey:@"hasOnboarded"] ? [app goToHome] : [app goToOnboarding];
+    [self.delegate setRootViewController];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [[NMAAppSettings sharedSettings] setAccessTokenForKey:@"accessToken" withAccessToken:nil];
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app goToLogin];
+    [self.delegate userDidLogOut];
 }
-
 
 @end

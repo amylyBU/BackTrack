@@ -10,7 +10,7 @@
 
 @implementation NMAAppSettings
 
-#pragma mark - Class Methods
+#pragma mark - Singleton
 
 + (instancetype)sharedSettings {
     static id sharedInstance = nil;
@@ -42,6 +42,24 @@
 - (NSString *)getAccessTokenForKey:(NSString *)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults objectForKey:key];
+}
+
+#pragma mark - Public Wrapper Methods
+
+- (BOOL)userHasCompletedOnboarding {
+    return [self getUserDefaultSettingForKey:@"hasOnboarded"];
+}
+
+- (void)setUserOnboardingStatusToCompleted {
+    [self setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
+}
+
+- (void)setAccessToken:(FBSDKAccessToken *)token {
+    [self setAccessTokenForKey:@"accessToken" withAccessToken:token];
+}
+
+- (NSString *)getAccessTokenString {
+    return [self getAccessTokenForKey:@"accessToken"];
 }
 
 - (BOOL)userIsLoggedIn {
