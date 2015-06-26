@@ -13,7 +13,7 @@
 
 - (void)userDidSkipLogin;
 - (void)userDidLogOut;
-- (void)setRootViewController;
+- (void)userDidLogIn;
 
 @end
 

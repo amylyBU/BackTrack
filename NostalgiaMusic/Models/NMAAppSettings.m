@@ -10,6 +10,10 @@
 
 @implementation NMAAppSettings
 
+static NSString * const kHasOnboardedSettingKey = @"kHasOnboardedSettingKey";
+static NSString * const kAccessTokenSettingKey = @"kAccessTokenSettingKey";
+static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
+
 #pragma mark - Singleton
 
 + (instancetype)sharedSettings {
@@ -47,23 +51,23 @@
 #pragma mark - Public Wrapper Methods
 
 - (BOOL)userHasCompletedOnboarding {
-    return [self getUserDefaultSettingForKey:@"hasOnboarded"];
+    return [self getUserDefaultSettingForKey:kHasOnboardedSettingKey];
 }
 
 - (void)setUserOnboardingStatusToCompleted {
-    [self setUserDefaultSettingForKey:@"hasOnboarded" withBool:YES];
+    [self setUserDefaultSettingForKey:kHasOnboardedSettingKey withBool:YES];
 }
 
 - (void)setAccessToken:(FBSDKAccessToken *)token {
-    [self setAccessTokenForKey:@"accessToken" withAccessToken:token];
+    [self setAccessTokenForKey:kAccessTokenSettingKey withAccessToken:token];
 }
 
 - (NSString *)getAccessTokenString {
-    return [self getAccessTokenForKey:@"accessToken"];
+    return [self getAccessTokenForKey:kAccessTokenSettingKey];
 }
 
 - (BOOL)userIsLoggedIn {
-    return [self getAccessTokenForKey:@"accessToken"] != nil; // TODO: must check if the access token has expired
+    return [self getAccessTokenForKey:kAccessTokenSettingKey] != nil; // TODO: must check if the access token has expired
 }
 
 

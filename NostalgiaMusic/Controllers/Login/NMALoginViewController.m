@@ -38,7 +38,7 @@
     } else {
         [[NMAAppSettings sharedSettings] setAccessToken:result.token];
     }
-    [self.delegate setRootViewController];
+    [self.delegate userDidLogIn];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {

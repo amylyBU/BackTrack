@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
-        [self setRootViewController];
+        [self userDidLogIn];
         return YES;
     } else {
         [self goToLogin];
@@ -67,7 +67,7 @@
 #pragma mark - NMALoginViewControllerDelegate
 
 - (void)userDidSkipLogin {
-    [self setRootViewController];
+    [self userDidLogIn];
 }
 
 - (void)userDidLogOut {
@@ -75,7 +75,7 @@
     [self goToLogin];
 }
 
-- (void)setRootViewController {
+- (void)userDidLogIn {
     [[NMAAppSettings sharedSettings] userHasCompletedOnboarding] ? [self goToHome] : [self goToOnboarding];
 }
 

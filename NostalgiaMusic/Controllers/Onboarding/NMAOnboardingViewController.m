@@ -7,7 +7,6 @@
 //
 
 #import "NMAOnboardingViewController.h"
-#import "AppDelegate.h"
 #import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController ()
