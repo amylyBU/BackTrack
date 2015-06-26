@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "AppDelegate.h"
 #import "NMAOnboardingViewController.h"
+#import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController ()
 
@@ -15,9 +15,14 @@
 
 @implementation NMAOnboardingViewController
 
-- (IBAction)skipOnboarding:(UIButton *)sender {
-    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [app completedOnboarding];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+- (IBAction)skipButtonPressed:(UIButton *)sender {
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+    [self.delegate userDidSkipOnboarding];
 }
 
 @end

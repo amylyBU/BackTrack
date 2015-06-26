@@ -10,47 +10,83 @@
 #import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
 #import "NMAOnboardingViewController.h"
+#import "NMALoginViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <NMALoginViewControllerDelegate, NMAOnboardingViewControllerDelegate>
 
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    //TODO: replace with a NMASettings check once its merged
-    NMAAppSettings *settings = [NMAAppSettings sharedSettings];
-    if(![settings hasCompletedOnboarding]) {
-        [self goToOnboarding];
+    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
+        [self goToRootViewController];
     } else {
-        [self goToHome];
+        [self goToLogin];
     }
-    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBSDKAppEvents activateApp];
+}
+
+#pragma mark - Private Methods
+
+- (void)goToLogin {
+    NMALoginViewController *loginVC = [[NMALoginViewController alloc] init];
+    loginVC.delegate = self;
+    self.window.rootViewController = loginVC;
     [self.window makeKeyAndVisible];
-    return YES;
 }
 
-#pragma mark - Instance Methods
+- (void)goToOnboarding {
+    NMAOnboardingViewController *onboardingVC = [[NMAOnboardingViewController alloc] init];
+    onboardingVC.delegate = self;
+    UINavigationController *onboardingNav = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
+    self.window.rootViewController = onboardingNav;
+    [self.window makeKeyAndVisible];
+}
 
-- (void) completedOnboarding {
-    [[NMAAppSettings sharedSettings] setCompleteOnboarding:YES];
+- (void)goToHome {
+    UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:[NMAHomeViewController new]];
+    self.window.rootViewController = homeNav;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)goToRootViewController {
+    [[NMAAppSettings sharedSettings] userHasCompletedOnboarding] ? [self goToHome] : [self goToOnboarding];
+}
+
+#pragma mark - NMALoginViewControllerDelegate
+
+- (void)userDidSkipLogin {
+    [self goToRootViewController];
+}
+
+- (void)userDidLogOut {
+    [[NMAAppSettings sharedSettings] setAccessToken:nil];
+    [self goToLogin];
+}
+
+- (void)userDidLogIn {
+    [self goToRootViewController];
+}
+
+
+#pragma mark - NMAOnboardingViewControllerDelegate 
+
+- (void)userDidSkipOnboarding {
     [self goToHome];
-}
-
-- (void) goToOnboarding {
-    //TODO: replace with actual first VC of onboarding once it is complete
-    NMAOnboardingViewController *onboardVC = [NMAOnboardingViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:onboardVC];
-    self.window.rootViewController = navigationController;
-}
-
-- (void) goToHome {
-    NMAHomeViewController *homeVC = [NMAHomeViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    self.window.rootViewController = navigationController;
 }
 
 @end

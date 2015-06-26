@@ -15,9 +15,13 @@
 
 @implementation NMAHomeViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
 - (IBAction)goToSettings:(UIButton *)sender {
-    NMASettingsViewController *settingsVC = [NMASettingsViewController new];
-    [self.navigationController pushViewController:settingsVC animated:YES];
+    [self.navigationController pushViewController:[NMASettingsViewController new] animated:YES];
 }
 
 @end

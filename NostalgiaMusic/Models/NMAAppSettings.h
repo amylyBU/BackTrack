@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface NMAAppSettings : NSObject
 
 + (instancetype)sharedSettings;
 
-- (void)setCompleteOnboarding:(BOOL)value;
-- (BOOL)hasCompletedOnboarding;
+- (BOOL)userHasCompletedOnboarding;
+- (void)setUserOnboardingStatusToCompleted;
+- (void)setAccessToken:(FBSDKAccessToken *)token;
+- (NSString *)accessTokenString;
+- (BOOL)userIsLoggedIn;
+
 
 @end
