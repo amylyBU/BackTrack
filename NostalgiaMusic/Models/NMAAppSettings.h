@@ -17,7 +17,7 @@
 - (BOOL)userHasCompletedOnboarding;
 - (void)setUserOnboardingStatusToCompleted;
 - (void)setAccessToken:(FBSDKAccessToken *)token;
-- (NSString *)getAccessTokenString;
+- (NSString *)accessTokenString;
 - (BOOL)userIsLoggedIn;
 
 

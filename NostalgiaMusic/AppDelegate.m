@@ -22,12 +22,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
         [self goToRootViewController];
-        return YES;
     } else {
         [self goToLogin];
-        return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                        didFinishLaunchingWithOptions:launchOptions];
     }
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

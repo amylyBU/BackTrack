@@ -33,7 +33,7 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     [userDefaults synchronize];
 }
 
-- (BOOL)getUserDefaultSettingForKey:(NSString *)key {
+- (BOOL)userDefaultSettingForKey:(NSString *)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:key];
 }
@@ -43,7 +43,7 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     [userDefaults synchronize];
 }
 
-- (NSString *)getAccessTokenForKey:(NSString *)key {
+- (NSString *)accessTokenForKey:(NSString *)key {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults objectForKey:key];
 }
@@ -51,7 +51,7 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
 #pragma mark - Public Wrapper Methods
 
 - (BOOL)userHasCompletedOnboarding {
-    return [self getUserDefaultSettingForKey:kHasOnboardedSettingKey];
+    return [self userDefaultSettingForKey:kHasOnboardedSettingKey];
 }
 
 - (void)setUserOnboardingStatusToCompleted {
@@ -62,12 +62,12 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     [self setAccessTokenForKey:kAccessTokenSettingKey withAccessToken:token];
 }
 
-- (NSString *)getAccessTokenString {
-    return [self getAccessTokenForKey:kAccessTokenSettingKey];
+- (NSString *)accessTokenString {
+    return [self accessTokenForKey:kAccessTokenSettingKey];
 }
 
 - (BOOL)userIsLoggedIn {
-    return [self getAccessTokenForKey:kAccessTokenSettingKey] != nil; // TODO: must check if the access token has expired
+    return [self accessTokenForKey:kAccessTokenSettingKey] != nil; // TODO: must check if the access token has expired
 }
 
 
