@@ -8,6 +8,7 @@
 
 #import "NMAOnboardingViewController.h"
 #import "AppDelegate.h"
+#import "NMAAppSettings.h"
 
 @interface NMAOnboardingViewController ()
 
@@ -21,6 +22,7 @@
 }
 
 - (IBAction)skipButtonPressed:(UIButton *)sender {
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
     [self.delegate userDidSkipOnboarding];
 }
 
