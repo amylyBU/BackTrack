@@ -12,15 +12,18 @@
 #import "NMAContentTableViewController.h"
 
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate>
-@property (strong, nonatomic) NSString *selectedYear;
+@property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAContentTableViewController *tableContent;
 @end
 
 @implementation NMAHomeViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+- (IBAction)goToSettings:(UIButton *)sender {
+    NMASettingsViewController *settingsVC = [NMASettingsViewController new];
+    [self.navigationController pushViewController:settingsVC animated:YES];
+}
+
+- (void)viewDidLoad{
     UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
     NMAYearCollectionViewController *scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
     scroll.delegate = self;
@@ -31,11 +34,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
-- (IBAction)goToSettings:(UIButton *)sender {
-    [self.navigationController pushViewController:[NMASettingsViewController new] animated:YES];
-}
-
-- (void)displayContentController: (UIViewController*) content{
+- (void)displayContentController: (UIViewController*) content {
     [self addChildViewController:content];
     CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50);
     content.view.frame = scrollFrame;
@@ -43,7 +42,7 @@
     [content didMoveToParentViewController:self];
 }
 
-- (void)displayContentTable:(UIViewController*) content{
+- (void)displayContentTable:(UIViewController*) content {
     [self addChildViewController:content];
     CGRect scrollFrame = CGRectMake(0, 50, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     content.view.frame = scrollFrame;
@@ -52,7 +51,6 @@
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
-
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
     self.tableContent.year = year;  

@@ -83,7 +83,6 @@
     [self goToRootViewController];
 }
 
-
 #pragma mark - NMAOnboardingViewControllerDelegate 
 
 - (void)userDidSkipOnboarding {

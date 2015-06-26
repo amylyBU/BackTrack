@@ -20,10 +20,6 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
     self.contents = [[NSMutableArray alloc] init];
-    [self.contents addObject:self.year];
-    int inputYear = [self.year intValue] - 1;
-    NSString *previousYear = [NSString stringWithFormat:@"%d", inputYear];
-    [self.contents addObject:previousYear];
 }
 
 #pragma mark - Table view data source
@@ -39,8 +35,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YearTableCell" forIndexPath:indexPath];
-    NSString *contentYear = self.contents[indexPath.row];
-    cell.year.text = contentYear;
+    cell.year.text = self.year;
     return cell;
 }
 

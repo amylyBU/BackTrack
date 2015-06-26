@@ -10,8 +10,4 @@
 
 @implementation NMAYearCollectionViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 @end

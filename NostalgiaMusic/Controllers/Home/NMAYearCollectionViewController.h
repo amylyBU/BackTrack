@@ -16,6 +16,5 @@
 
 @interface NMAYearCollectionViewController : UICollectionViewController
 @property (strong, nonatomic) UICollectionViewFlowLayout *flow;
-//@property (strong, nonatomic) NSString *currentYear;
 @property (weak, nonatomic) id<NMAYearCollectionViewControllerDelegate> delegate;
 @end

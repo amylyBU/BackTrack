@@ -47,7 +47,7 @@ forCellWithReuseIdentifier:@"YearCell"];
     
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -58,7 +58,7 @@ forCellWithReuseIdentifier:@"YearCell"];
     return self.years.count;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(70, 40);
 }
 
@@ -70,10 +70,8 @@ forCellWithReuseIdentifier:@"YearCell"];
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"indexPath - %lu",indexPath.row);
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *currentYear = [self.years objectAtIndex:indexPath.row];
-     NSLog(@"Current Year %@", currentYear);
     [self.delegate didSelectYear:currentYear];
 }
 
