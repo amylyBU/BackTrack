@@ -29,7 +29,6 @@
     self.tableContent.year = @"2014";
     [self displayContentTable:self.tableContent];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    //TODO: fix constraints
 }
 
 - (IBAction)goToSettings:(UIButton *)sender {
@@ -56,8 +55,7 @@
 
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
-    self.tableContent.year = year;
-  
+    self.tableContent.year = year;  
 }
 
 @end
