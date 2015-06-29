@@ -9,11 +9,10 @@
 #import "AppDelegate.h"
 #import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
-#import "NMAOnboardingViewController.h"
-#import "NMALoginViewController.h"
 #import "NMAYearCollectionViewController.h"
+#import "NMAFBConnectViewController.h"
 
-@interface AppDelegate () <NMALoginViewControllerDelegate, NMAOnboardingViewControllerDelegate>
+@interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
 @end
 
@@ -21,10 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
-        [self goToRootViewController];
+    if ([[NMAAppSettings sharedSettings] userHasCompletedOnboarding]) {
+        [self goToHome];
     } else {
-        [self goToLogin];
+        [self goToOnboarding];
     }
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -43,18 +42,11 @@
 
 #pragma mark - Private Methods
 
-- (void)goToLogin {
-    NMALoginViewController *loginVC = [[NMALoginViewController alloc] init];
-    loginVC.delegate = self;
-    self.window.rootViewController = loginVC;
-    [self.window makeKeyAndVisible];
-}
-
 - (void)goToOnboarding {
-    NMAOnboardingViewController *onboardingVC = [[NMAOnboardingViewController alloc] init];
-    onboardingVC.delegate = self;
-    UINavigationController *onboardingNav = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
-    self.window.rootViewController = onboardingNav;
+    NMAFBConnectViewController *FBConnectVC = [[NMAFBConnectViewController alloc] init];
+    FBConnectVC.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:FBConnectVC];
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 }
 
@@ -64,28 +56,10 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)goToRootViewController {
-    [[NMAAppSettings sharedSettings] userHasCompletedOnboarding] ? [self goToHome] : [self goToOnboarding];
-}
+#pragma mark - NMAOnboardingViewControllerDelegate
 
-#pragma mark - NMALoginViewControllerDelegate
-
-- (void)userDidSkipLogin {
-    [self goToRootViewController];
-}
-
-- (void)userDidLogOut {
-    [[NMAAppSettings sharedSettings] setAccessToken:nil];
-    [self goToLogin];
-}
-
-- (void)userDidLogIn {
-    [self goToRootViewController];
-}
-
-#pragma mark - NMAOnboardingViewControllerDelegate 
-
-- (void)userDidSkipOnboarding {
+- (void)userDidFinishOnboarding {
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
     [self goToHome];
 }
 

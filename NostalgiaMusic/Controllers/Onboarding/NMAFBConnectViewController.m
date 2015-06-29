@@ -1,30 +1,27 @@
 //
-//  NMALoginViewController.m
+//  NMAFBConnectViewController.m
 //  NostalgiaMusic
 //
-//  Created by Amy Ly on 6/23/15.
+//  Created by Amy Ly on 6/29/15.
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "NMALoginViewController.h"
-#import "AppDelegate.h"
+#import "NMAFBConnectViewController.h"
 
-@interface NMALoginViewController ()
-
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextField;
+@interface NMAFBConnectViewController ()
 
 @end
 
-@implementation NMALoginViewController
+@implementation NMAFBConnectViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.descriptionTextField.editable = NO;
-    self.loginButtonView.delegate = self;
+    self.loginButton.delegate = self;
 }
 
-- (IBAction)skipButtonPressed:(UIButton *)sender {
-    [self.delegate userDidSkipLogin];
+- (IBAction)notNowButton:(UIButton *)sender {
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+    [self.delegate userDidFinishOnboarding];
 }
 
 #pragma mark - FBSDKLoginButtonDelegate
@@ -38,11 +35,13 @@
     } else {
         [[NMAAppSettings sharedSettings] setAccessToken:result.token];
     }
-    [self.delegate userDidLogIn];
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+    [self.delegate userDidFinishOnboarding];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [self.delegate userDidLogOut];
+    [[NMAAppSettings sharedSettings] setAccessToken:nil];
+    [self.delegate userDidFinishOnboarding];
 }
 
 @end

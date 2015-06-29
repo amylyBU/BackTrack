@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NMAOnboardingViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

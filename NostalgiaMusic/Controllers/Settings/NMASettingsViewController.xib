@@ -14,18 +14,28 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings Page" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY6-iC-1xg">
-                    <rect key="frame" x="247" y="289.5" width="107" height="20.5"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-EP-Pmm">
+                    <rect key="frame" x="319" y="289" width="38" height="30"/>
+                    <state key="normal" title="Email">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8Q-F0-gAS">
+                    <rect key="frame" x="235" y="289" width="76" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="cY6-iC-1xg" secondAttribute="centerX" id="3r3-2w-Iqt"/>
-                <constraint firstAttribute="centerY" secondItem="cY6-iC-1xg" secondAttribute="centerY" constant="0.5" id="rWi-DU-guW"/>
+                <constraint firstAttribute="centerX" secondItem="M8Q-F0-gAS" secondAttribute="centerX" constant="26.5" id="FBr-V3-D4q"/>
+                <constraint firstAttribute="centerY" secondItem="M8Q-F0-gAS" secondAttribute="centerY" constant="-4.5" id="eSv-Du-fN1"/>
+                <constraint firstItem="M8Q-F0-gAS" firstAttribute="bottom" secondItem="E8l-EP-Pmm" secondAttribute="bottom" constant="-0.5" id="mbm-yo-bfL"/>
+                <constraint firstItem="M8Q-F0-gAS" firstAttribute="height" secondItem="E8l-EP-Pmm" secondAttribute="height" id="rRd-c0-kng"/>
+                <constraint firstItem="E8l-EP-Pmm" firstAttribute="leading" secondItem="M8Q-F0-gAS" secondAttribute="trailing" constant="8" symbolic="YES" id="wRY-6C-sl7"/>
             </constraints>
+            <point key="canvasLocation" x="271" y="402"/>
         </view>
     </objects>
 </document>
