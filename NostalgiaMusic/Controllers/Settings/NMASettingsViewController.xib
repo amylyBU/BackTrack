@@ -19,9 +19,6 @@
                     <state key="normal" title="Email">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="emailFeedbackButton:" destination="-1" eventType="touchUpInside" id="tXM-xJ-l8F"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8Q-F0-gAS">
                     <rect key="frame" x="235" y="289" width="76" height="30"/>
