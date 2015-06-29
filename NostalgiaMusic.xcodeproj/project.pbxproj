@@ -22,6 +22,14 @@
 		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
 		E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */; };
 		E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */; };
+		61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */; };
+		61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */; };
+		6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 615911491B3C4B6B006B6779 /* NMAYearCollectionViewController.m */; };
+		6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6159114A1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib */; };
+		615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */; };
+		615911511B3C89B3006B6779 /* NMAContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */; };
+		615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 615911551B3D83AA006B6779 /* NMAYearTableViewCell.m */; };
+		615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +70,18 @@
 		E55638081B39FA2B00FA01E3 /* NMALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMALoginViewController.h; path = Controllers/Login/NMALoginViewController.h; sourceTree = "<group>"; };
 		E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMALoginViewController.m; path = Controllers/Login/NMALoginViewController.m; sourceTree = "<group>"; };
 		E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMALoginViewController.xib; path = Controllers/Login/NMALoginViewController.xib; sourceTree = "<group>"; };
+		61550BBF1B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAYearCollectionViewCell.h; path = Controllers/Home/NMAYearCollectionViewCell.h; sourceTree = "<group>"; };
+		61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAYearCollectionViewCell.m; path = Controllers/Home/NMAYearCollectionViewCell.m; sourceTree = "<group>"; };
+		61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAYearCollectionViewCell.xib; path = Controllers/Home/NMAYearCollectionViewCell.xib; sourceTree = "<group>"; };
+		615911481B3C4B6B006B6779 /* NMAYearCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAYearCollectionViewController.h; path = Controllers/Home/NMAYearCollectionViewController.h; sourceTree = "<group>"; };
+		615911491B3C4B6B006B6779 /* NMAYearCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAYearCollectionViewController.m; path = Controllers/Home/NMAYearCollectionViewController.m; sourceTree = "<group>"; };
+		6159114A1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAYearCollectionViewController.xib; path = Controllers/Home/NMAYearCollectionViewController.xib; sourceTree = "<group>"; };
+		6159114D1B3C89B3006B6779 /* NMAContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAContentTableViewController.h; path = Controllers/Home/NMAContentTableViewController.h; sourceTree = "<group>"; };
+		6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAContentTableViewController.m; path = Controllers/Home/NMAContentTableViewController.m; sourceTree = "<group>"; };
+		6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAContentTableViewController.xib; path = Controllers/Home/NMAContentTableViewController.xib; sourceTree = "<group>"; };
+		615911541B3D83AA006B6779 /* NMAYearTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearTableViewCell.h; sourceTree = "<group>"; };
+		615911551B3D83AA006B6779 /* NMAYearTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAYearTableViewCell.m; sourceTree = "<group>"; };
+		615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAYearTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +115,7 @@
 		072A085E1B3975C70068EEF0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				615911591B3D850A006B6779 /* Home */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -130,6 +151,12 @@
 				072A08631B3976660068EEF0 /* NMAHomeViewController.h */,
 				072A08641B3976660068EEF0 /* NMAHomeViewController.m */,
 				072A08651B3976660068EEF0 /* NMAHomeViewController.xib */,
+				6159114D1B3C89B3006B6779 /* NMAContentTableViewController.h */,
+				6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */,
+				6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */,
+				615911481B3C4B6B006B6779 /* NMAYearCollectionViewController.h */,
+				615911491B3C4B6B006B6779 /* NMAYearCollectionViewController.m */,
+				6159114A1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -252,6 +279,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		615911591B3D850A006B6779 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				61550BBF1B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.h */,
+				61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */,
+				61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */,
+				615911541B3D83AA006B6779 /* NMAYearTableViewCell.h */,
+				615911551B3D83AA006B6779 /* NMAYearTableViewCell.m */,
+				615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -334,9 +374,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				615911511B3C89B3006B6779 /* NMAContentTableViewController.xib in Resources */,
+				61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */,
 				072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */,
+				6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */,
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
 				07ECCBF01B39F5100089D042 /* NMAOnboardingViewController.xib in Resources */,
+				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 				E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */,
@@ -391,12 +435,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
+				61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */,
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
 				07ECCBEF1B39F5100089D042 /* NMAOnboardingViewController.m in Sources */,
+				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
+				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 				E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */,
+				615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
