@@ -11,6 +11,7 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAContentTableViewController.h"
 
+
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate>
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAContentTableViewController *tableContent;
@@ -32,11 +33,12 @@
     self.tableContent.year = @"2014";
     [self displayContentTable:self.tableContent];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
 }
 
 - (void)displayContentController: (UIViewController*) content {
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50);
+    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40);
     content.view.frame = scrollFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
@@ -44,7 +46,7 @@
 
 - (void)displayContentTable:(UIViewController*) content {
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 50, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    CGRect scrollFrame = CGRectMake(0, 40, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     content.view.frame = scrollFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];

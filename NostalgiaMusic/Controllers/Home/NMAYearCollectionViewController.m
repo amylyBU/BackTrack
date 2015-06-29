@@ -29,6 +29,7 @@ static NSString * const yearCellIdentifier = @"YearCell";
 forCellWithReuseIdentifier:yearCellIdentifier];
     self.flow = [[UICollectionViewFlowLayout alloc]init];
     self.flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView setCollectionViewLayout:self.flow];
     [self setUpYears];
     }
@@ -58,7 +59,15 @@ forCellWithReuseIdentifier:yearCellIdentifier];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(70, 40);
+    return CGSizeMake(CGRectGetWidth(self.view.frame)/4, 30);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0.0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
