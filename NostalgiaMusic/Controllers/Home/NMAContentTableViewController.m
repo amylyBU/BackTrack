@@ -20,6 +20,7 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
     self.contents = [[NSMutableArray alloc] init];
+    [self.contents addObject:self.year];
 }
 
 #pragma mark - Table view data source
@@ -43,6 +44,8 @@
 
 - (void)setYear:(NSString *)year {
     _year = year;
+    [self.contents removeAllObjects];
+    [self.contents addObject:self.year];
     [self.tableView reloadData];
 }
 @end
