@@ -12,7 +12,7 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAFBConnectViewController.h"
 
-@interface AppDelegate () <NMAOnboardingViewControllerDelegate>
+@interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
 @end
 
@@ -45,8 +45,8 @@
 - (void)goToOnboarding {
     NMAFBConnectViewController *FBConnectVC = [[NMAFBConnectViewController alloc] init];
     FBConnectVC.delegate = self;
-    UINavigationController *FBConnectNav = [[UINavigationController alloc] initWithRootViewController:FBConnectVC];
-    self.window.rootViewController = FBConnectNav;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:FBConnectVC];
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 }
 

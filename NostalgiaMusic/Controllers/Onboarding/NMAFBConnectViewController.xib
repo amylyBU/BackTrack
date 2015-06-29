@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAFBConnectViewController">
             <connections>
                 <outlet property="loginButton" destination="Xpv-FW-Dvy" id="jkZ-pf-tHO"/>
-                <outlet property="textDescription" destination="vNg-hf-ejf" id="sxp-6Z-X0S"/>
+                <outlet property="textDescription" destination="GWB-HQ-bdC" id="C8s-a9-cIc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,18 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Sign in with Facebook account will provide full experience while using the app" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNg-hf-ejf">
-                    <rect key="frame" x="200" y="166" width="200" height="100"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="100" id="kq6-97-4Pu"/>
-                    </constraints>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nostalgia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOr-Vj-c0f">
-                    <rect key="frame" x="239" y="122" width="123" height="36"/>
+                    <rect key="frame" x="239" y="171" width="123" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -52,17 +42,26 @@
                         <constraint firstAttribute="width" constant="200" id="vV5-vs-4cJ"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with Facebook account will provide full experience while using the app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWB-HQ-bdC">
+                    <rect key="frame" x="200" y="215" width="200" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="NoK-mK-vj9"/>
+                        <constraint firstAttribute="width" constant="200" id="pcN-Ut-dSv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="vNg-hf-ejf" secondAttribute="centerX" id="JMc-wn-bJP"/>
-                <constraint firstItem="vNg-hf-ejf" firstAttribute="top" secondItem="ZOr-Vj-c0f" secondAttribute="bottom" constant="8" id="Rnp-t7-eRG"/>
+                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="top" secondItem="GWB-HQ-bdC" secondAttribute="bottom" constant="8" id="ElV-oT-LgR"/>
+                <constraint firstAttribute="centerX" secondItem="GWB-HQ-bdC" secondAttribute="centerX" id="KaA-2T-pYK"/>
                 <constraint firstAttribute="centerX" secondItem="X0v-Se-6hN" secondAttribute="centerX" constant="-0.5" id="SP2-H7-2rc"/>
                 <constraint firstAttribute="centerX" secondItem="ZOr-Vj-c0f" secondAttribute="centerX" constant="-0.5" id="W3E-U9-meS"/>
+                <constraint firstItem="GWB-HQ-bdC" firstAttribute="top" secondItem="ZOr-Vj-c0f" secondAttribute="bottom" constant="8" id="WHJ-iz-f0L"/>
                 <constraint firstAttribute="centerY" secondItem="Xpv-FW-Dvy" secondAttribute="centerY" constant="1" id="cEM-oa-gG3"/>
                 <constraint firstItem="X0v-Se-6hN" firstAttribute="top" secondItem="Xpv-FW-Dvy" secondAttribute="bottom" constant="8" id="lYX-nH-Zpp"/>
-                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="width" secondItem="vNg-hf-ejf" secondAttribute="width" id="qWe-g7-tgr"/>
-                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="top" secondItem="vNg-hf-ejf" secondAttribute="bottom" constant="8" id="t8u-9g-0Va"/>
                 <constraint firstAttribute="centerX" secondItem="Xpv-FW-Dvy" secondAttribute="centerX" id="vS7-TF-2K8"/>
             </constraints>
         </view>

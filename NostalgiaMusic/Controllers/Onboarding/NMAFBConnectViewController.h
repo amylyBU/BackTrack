@@ -8,17 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NMAAppSettings.h"
-
-@protocol NMAOnboardingViewControllerDelegate <NSObject>
-
-- (void)userDidFinishOnboarding;
-
-@end
+#import "NMAOnboardingCompletionDelegate.h"
 
 @interface NMAFBConnectViewController : UIViewController <FBSDKLoginButtonDelegate>
 
-@property (weak, nonatomic) id <NMAOnboardingViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <NMAOnboardingCompletionDelegate> delegate;
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
-@property (weak, nonatomic) IBOutlet UITextView *textDescription;
+@property (weak, nonatomic) IBOutlet UILabel *textDescription;
+
 
 @end

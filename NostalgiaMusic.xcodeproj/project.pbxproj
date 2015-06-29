@@ -76,6 +76,7 @@
 		E508FB191B41C1B80040AEF9 /* NMAFBConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBConnectViewController.h; path = Controllers/Onboarding/NMAFBConnectViewController.h; sourceTree = "<group>"; };
 		E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBConnectViewController.m; path = Controllers/Onboarding/NMAFBConnectViewController.m; sourceTree = "<group>"; };
 		E508FB1B1B41C1B80040AEF9 /* NMAFBConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAFBConnectViewController.xib; path = Controllers/Onboarding/NMAFBConnectViewController.xib; sourceTree = "<group>"; };
+		E508FB1E1B41DDC90040AEF9 /* NMAOnboardingCompletionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAOnboardingCompletionDelegate.h; path = Controllers/Onboarding/NMAOnboardingCompletionDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +224,7 @@
 				E508FB191B41C1B80040AEF9 /* NMAFBConnectViewController.h */,
 				E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */,
 				E508FB1B1B41C1B80040AEF9 /* NMAFBConnectViewController.xib */,
+				E508FB1E1B41DDC90040AEF9 /* NMAOnboardingCompletionDelegate.h */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";

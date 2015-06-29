@@ -20,6 +20,7 @@
 }
 
 - (IBAction)notNowButton:(UIButton *)sender {
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
     [self.delegate userDidFinishOnboarding];
 }
 
@@ -34,11 +35,13 @@
     } else {
         [[NMAAppSettings sharedSettings] setAccessToken:result.token];
     }
+    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
     [self.delegate userDidFinishOnboarding];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [self.delegate userDidDisconnectFB];
+    [[NMAAppSettings sharedSettings] setAccessToken:nil];
+    [self.delegate userDidFinishOnboarding];
 }
 
 @end
