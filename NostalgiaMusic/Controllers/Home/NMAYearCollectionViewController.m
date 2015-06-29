@@ -11,7 +11,7 @@
 
 static NSInteger const earliestYear = 1980;
 static NSInteger const latestYear =  2014;
-static NSString const *yearCellIdentifier = @"YearCell";
+static NSString * const yearCellIdentifier = @"YearCell";
 
 @interface NMAYearCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *years;
