@@ -189,7 +189,6 @@
 		072DE79C1B39739B000A1162 /* NostalgiaMusic */ = {
 			isa = PBXGroup;
 			children = (
-				E5F1F3741B3D863600E92D37 /* Frameworks */,
 				072A08601B3975D40068EEF0 /* Categories */,
 				072A085F1B3975CE0068EEF0 /* Controllers */,
 				072A085D1B3975C00068EEF0 /* Models */,

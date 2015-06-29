@@ -25,7 +25,7 @@
 }
 
 - (IBAction)skipButtonPressed:(UIButton *)sender {
-    [self.delegate userDidFinishConnectingFB]; // will always go to the onboardingEnd
+    [self.delegate userDidFinishConnectingFB];
 }
 
 #pragma mark - FBSDKLoginButtonDelegate

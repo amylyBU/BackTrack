@@ -54,7 +54,6 @@
 - (void)goToOnboarding {
     NMAOnboardingViewController *onboardingVC = [[NMAOnboardingViewController alloc] init];
     onboardingVC.delegate = self;
-    //UINavigationController *onboardingNav = [[UINavigationController alloc] initWithRootViewController:onboardingVC];
     self.window.rootViewController = onboardingVC;
     [self.window makeKeyAndVisible];
 }
@@ -79,7 +78,7 @@
     [self goToHome];
 }
 
-- (void)userDidFinishConnectingFB { // will always go to the conclusion
+- (void)userDidFinishConnectingFB {
     [self goToOnboardingEnd];
 }
 
