@@ -20,6 +20,8 @@
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
 		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
+		E5171E9D1B418F80005059E4 /* NMAOnboardingEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5171E9B1B418F80005059E4 /* NMAOnboardingEndViewController.m */; };
+		E5171E9E1B418F80005059E4 /* NMAOnboardingEndViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5171E9C1B418F80005059E4 /* NMAOnboardingEndViewController.xib */; };
 		E556380B1B39FA2B00FA01E3 /* NMALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */; };
 		E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */; };
 		61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */; };
@@ -67,6 +69,9 @@
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E5171E9A1B418F80005059E4 /* NMAOnboardingEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAOnboardingEndViewController.h; path = Controllers/Onboarding/NMAOnboardingEndViewController.h; sourceTree = "<group>"; };
+		E5171E9B1B418F80005059E4 /* NMAOnboardingEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAOnboardingEndViewController.m; path = Controllers/Onboarding/NMAOnboardingEndViewController.m; sourceTree = "<group>"; };
+		E5171E9C1B418F80005059E4 /* NMAOnboardingEndViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAOnboardingEndViewController.xib; path = Controllers/Onboarding/NMAOnboardingEndViewController.xib; sourceTree = "<group>"; };
 		E55638081B39FA2B00FA01E3 /* NMALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMALoginViewController.h; path = Controllers/Login/NMALoginViewController.h; sourceTree = "<group>"; };
 		E55638091B39FA2B00FA01E3 /* NMALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMALoginViewController.m; path = Controllers/Login/NMALoginViewController.m; sourceTree = "<group>"; };
 		E556380A1B39FA2B00FA01E3 /* NMALoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMALoginViewController.xib; path = Controllers/Login/NMALoginViewController.xib; sourceTree = "<group>"; };
@@ -231,6 +236,9 @@
 				07ECCBEC1B39F5100089D042 /* NMAOnboardingViewController.h */,
 				07ECCBED1B39F5100089D042 /* NMAOnboardingViewController.m */,
 				07ECCBEE1B39F5100089D042 /* NMAOnboardingViewController.xib */,
+				E5171E9A1B418F80005059E4 /* NMAOnboardingEndViewController.h */,
+				E5171E9B1B418F80005059E4 /* NMAOnboardingEndViewController.m */,
+				E5171E9C1B418F80005059E4 /* NMAOnboardingEndViewController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -384,6 +392,7 @@
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 				E556380C1B39FA2B00FA01E3 /* NMALoginViewController.xib in Resources */,
+				E5171E9E1B418F80005059E4 /* NMAOnboardingEndViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5171E9D1B418F80005059E4 /* NMAOnboardingEndViewController.m in Sources */,
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
 				61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */,
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,

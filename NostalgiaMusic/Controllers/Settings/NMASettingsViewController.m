@@ -19,4 +19,8 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
+- (IBAction)emailFeedbackButton:(UIButton *)sender {
+    
+}
+
 @end

@@ -8,8 +8,6 @@
             <connections>
                 <outlet property="descriptionTextField" destination="KNe-L1-zgQ" id="dc6-SC-dS5"/>
                 <outlet property="loginButtonView" destination="ySG-8O-S3i" id="zkB-Nc-WDZ"/>
-                <outlet property="skipButton" destination="uIE-S9-dJd" id="ZD8-y1-yfs"/>
-                <outlet property="skipFacebookLoginButton" destination="uIE-S9-dJd" id="BWM-fq-8P1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -48,7 +46,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="skipButtonPressed:" destination="-1" eventType="touchUpInside" id="Any-F4-mJr"/>
+                        <action selector="skipButtonPressed:" destination="-1" eventType="touchUpInside" id="9ir-0k-cL1"/>
                     </connections>
                 </button>
             </subviews>

@@ -11,9 +11,8 @@
 
 @protocol NMALoginViewControllerDelegate <NSObject> 
 
-- (void)userDidSkipLogin;
 - (void)userDidLogOut;
-- (void)userDidLogIn;
+- (void)userDidFinishConnectingFB;
 
 @end
 

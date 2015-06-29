@@ -10,13 +10,13 @@
 
 @protocol NMAOnboardingViewControllerDelegate <NSObject>
 
-- (void)userDidSkipOnboarding;
+- (void)userDidSeeWelcome;
+- (void)userDidFinishOnboarding;
 
 @end
 
 @interface NMAOnboardingViewController : UIViewController
 
 @property (weak, nonatomic) id <NMAOnboardingViewControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UIButton *skipButton;
 
 @end

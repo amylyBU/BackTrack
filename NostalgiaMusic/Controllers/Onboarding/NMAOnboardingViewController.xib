@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAOnboardingViewController">
             <connections>
-                <outlet property="skipButton" destination="j57-Jr-MCy" id="Lxh-4n-TGl"/>
                 <outlet property="view" destination="7UB-Aa-UYL" id="7vU-fp-E5c"/>
             </connections>
         </placeholder>
@@ -15,19 +14,19 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Onboarding Walkthrough*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJz-xX-Z65">
-                    <rect key="frame" x="198" y="289" width="204" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Nostalgia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJz-xX-Z65">
+                    <rect key="frame" x="216" y="289" width="168" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j57-Jr-MCy">
-                    <rect key="frame" x="285" y="318" width="31" height="30"/>
-                    <state key="normal" title="Skip">
+                    <rect key="frame" x="260" y="318" width="80" height="30"/>
+                    <state key="normal" title="Get Started">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="skipButtonPressed:" destination="-1" eventType="touchUpInside" id="Oum-u4-Jbj"/>
+                        <action selector="userDidGetStarted:" destination="-1" eventType="touchUpInside" id="Zdv-RR-HXn"/>
                     </connections>
                 </button>
             </subviews>

@@ -8,6 +8,7 @@
 
 #import "NMALoginViewController.h"
 #import "AppDelegate.h"
+#import "NMAOnboardingEndViewController.h"
 
 @interface NMALoginViewController ()
 
@@ -24,7 +25,7 @@
 }
 
 - (IBAction)skipButtonPressed:(UIButton *)sender {
-    [self.delegate userDidSkipLogin];
+    [self.delegate userDidFinishConnectingFB]; // will always go to the onboardingEnd
 }
 
 #pragma mark - FBSDKLoginButtonDelegate
@@ -34,11 +35,11 @@
         //TODO: handle error
         return;
     } else if (result.isCancelled) {
-        //TODO: handle cancellation
+        [self skipButtonPressed:loginButton];
     } else {
         [[NMAAppSettings sharedSettings] setAccessToken:result.token];
     }
-    [self.delegate userDidLogIn];
+    [self.delegate userDidFinishConnectingFB];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {

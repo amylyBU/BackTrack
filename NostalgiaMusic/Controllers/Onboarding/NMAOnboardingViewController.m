@@ -8,6 +8,8 @@
 
 #import "NMAOnboardingViewController.h"
 #import "NMAAppSettings.h"
+#import "AppDelegate.h"
+#import "NMALoginViewController.h"
 
 @interface NMAOnboardingViewController ()
 
@@ -15,14 +17,8 @@
 
 @implementation NMAOnboardingViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-}
-
-- (IBAction)skipButtonPressed:(UIButton *)sender {
-    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
-    [self.delegate userDidSkipOnboarding];
+- (IBAction)userDidGetStarted:(UIButton *)sender {
+    [self.delegate userDidSeeWelcome];
 }
 
 @end
