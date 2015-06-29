@@ -10,7 +10,7 @@
 #import "NMAYearTableViewCell.h"
 
 @interface NMAContentTableViewController () <UITableViewDelegate>
-@property (strong, nonatomic) NSMutableArray *contents;
+@property (strong, nonatomic) NSMutableArray *dateRelatedContent;
 
 @end
 
@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
-    self.contents = [[NSMutableArray alloc] init];
-    [self.contents addObject:self.year];
+    self.dateRelatedContent = [[NSMutableArray alloc] init];
+    [self.dateRelatedContent addObject:self.year];
 }
 
 #pragma mark - Table view data source
@@ -30,7 +30,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.contents.count;
+    return self.dateRelatedContent.count;
 }
 
 
@@ -44,8 +44,8 @@
 
 - (void)setYear:(NSString *)year {
     _year = year;
-    [self.contents removeAllObjects];
-    [self.contents addObject:self.year];
+    [self.dateRelatedContent removeAllObjects];
+    [self.dateRelatedContent addObject:self.year];
     [self.tableView reloadData];
 }
 @end
