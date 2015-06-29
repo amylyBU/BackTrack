@@ -9,12 +9,10 @@
 #import "AppDelegate.h"
 #import "NMAAppSettings.h"
 #import "NMAHomeViewController.h"
-#import "NMAOnboardingViewController.h"
-#import "NMALoginViewController.h"
 #import "NMAYearCollectionViewController.h"
-#import "NMAOnboardingEndViewController.h"
+#import "NMAFBConnectViewController.h"
 
-@interface AppDelegate () <NMALoginViewControllerDelegate, NMAOnboardingViewControllerDelegate>
+@interface AppDelegate () <NMAOnboardingViewControllerDelegate>
 
 @end
 
@@ -44,24 +42,11 @@
 
 #pragma mark - Private Methods
 
-- (void)goToLogin {
-    NMALoginViewController *loginVC = [[NMALoginViewController alloc] init];
-    loginVC.delegate = self;
-    self.window.rootViewController = loginVC;
-    [self.window makeKeyAndVisible];
-}
-
 - (void)goToOnboarding {
-    NMAOnboardingViewController *onboardingVC = [[NMAOnboardingViewController alloc] init];
-    onboardingVC.delegate = self;
-    self.window.rootViewController = onboardingVC;
-    [self.window makeKeyAndVisible];
-}
-
-- (void)goToOnboardingEnd {
-    NMAOnboardingEndViewController *onboardingEndVC = [[NMAOnboardingEndViewController alloc] init];
-    onboardingEndVC.delegate = self;
-    self.window.rootViewController = onboardingEndVC;
+    NMAFBConnectViewController *FBConnectVC = [[NMAFBConnectViewController alloc] init];
+    FBConnectVC.delegate = self;
+    UINavigationController *FBConnectNav = [[UINavigationController alloc] initWithRootViewController:FBConnectVC];
+    self.window.rootViewController = FBConnectNav;
     [self.window makeKeyAndVisible];
 }
 
@@ -71,22 +56,7 @@
     [self.window makeKeyAndVisible];
 }
 
-#pragma mark - NMALoginViewControllerDelegate
-
-- (void)userDidLogOut {
-    [[NMAAppSettings sharedSettings] setAccessToken:nil];
-    [self goToHome];
-}
-
-- (void)userDidFinishConnectingFB {
-    [self goToOnboardingEnd];
-}
-
 #pragma mark - NMAOnboardingViewControllerDelegate
-
-- (void) userDidSeeWelcome {
-    [self goToLogin];
-}
 
 - (void)userDidFinishOnboarding {
     [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
