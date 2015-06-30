@@ -29,34 +29,30 @@
 }
 
 - (void)viewDidLoad{
-    UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
-    self.scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
-    self.scroll.delegate = self;
-    [self displayContentController:self.scroll];
-    self.scrollView = [[NMAYearActivityScrollViewController alloc] init];
-    self.scrollView.delegate = self;
-    [self displayContentTable:self.scrollView];
+    [self setUpHomeView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
 }
 
-- (void)displayContentController: (UIViewController*) content {
+- (void)setUpHomeView {
+    UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
+    self.scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
+    self.scroll.delegate = self;
+    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/15);
+    [self displayContentController:self.scroll frame:scrollFrame];
+    self.scrollView = [[NMAYearActivityScrollViewController alloc] init];
+    self.scrollView.delegate = self;
+    CGRect activityFrame = CGRectMake(0, CGRectGetHeight(self.view.frame)/15, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    [self displayContentController:self.scrollView frame:activityFrame];
+    
+}
+
+- (void)displayContentController: (UIViewController*) content frame:(CGRect)contentFrame {
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40);
-    content.view.frame = scrollFrame;
+    content.view.frame = contentFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
 }
-
-- (void)displayContentTable:(UIViewController*) content {
-    [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 40, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    content.view.frame = scrollFrame;
-    [self.view addSubview:content.view];
-    [content didMoveToParentViewController:self];
-}
-
-
 
 
 #pragma mark - NMAYearCollectionViewControllerDelegate

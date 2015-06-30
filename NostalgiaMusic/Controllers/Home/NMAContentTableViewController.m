@@ -10,6 +10,7 @@
 #import "NMAYearTableViewCell.h"
 #import <SVPullToRefresh.h>
 
+static NSString *yearTableCellIdentifier = @"YearTableCell";
 @interface NMAContentTableViewController () <UITableViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dateRelatedContent;
 
@@ -21,21 +22,15 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:yearTableCellIdentifier];
     self.dateRelatedContent = [[NSMutableArray alloc] init];
     if (self.year) {
         [self.dateRelatedContent addObject:self.year];
     }
-    //infinite scroll
+    //infinite scroll block, add objects to daterelatedcontnent and reload table
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        for (int i = 0; i < 10; i++){
-            [weakSelf.dateRelatedContent addObject:@"i"];
-            [weakSelf.tableView reloadData];
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        }
-        // append data to data source, insert new cells at the end of table view
-        // call [tableView.infiniteScrollingView stopAnimating] when done
     }];
 }
 
@@ -49,11 +44,9 @@
     return self.dateRelatedContent.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YearTableCell" forIndexPath:indexPath];
+    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:yearTableCellIdentifier forIndexPath:indexPath];
     cell.year.text = [self.dateRelatedContent objectAtIndex:indexPath.row];
-    //cell.year.text = self.year;
     return cell;
 }
 
@@ -61,14 +54,9 @@
 
 - (void)setYear:(NSString *)year {
     _year = year;
-    if(self.dateRelatedContent){
-        [self.dateRelatedContent removeAllObjects];
-        [self.dateRelatedContent addObject:self.year];
-        [self.tableView reloadData];
-    } else{
-        self.dateRelatedContent = [[NSMutableArray alloc]init];
-        [self.dateRelatedContent addObject:self.year];
-       [self.tableView reloadData];
-    }
+    [self.dateRelatedContent removeAllObjects];
+    [self.dateRelatedContent addObject:self.year];
+    [self.tableView reloadData];
+
 }
 @end
