@@ -28,7 +28,9 @@ static NSString * const yearCellIdentifier = @"YearCell";
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
 forCellWithReuseIdentifier:yearCellIdentifier];
     self.flow = [[UICollectionViewFlowLayout alloc]init];
+    [self.flow setSectionInset:UIEdgeInsetsMake(0, self.collectionView.frame.size.width / 2, 0, self.collectionView.frame.size.width/ 2)];
     self.flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.flow.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView setCollectionViewLayout:self.flow];
     [self setUpYears];
@@ -83,5 +85,10 @@ forCellWithReuseIdentifier:yearCellIdentifier];
     [self.delegate didSelectYear:currentYear];
 }
 
+- (void)moveToYear:(NSString *)year {
+    NSInteger indexYear = [self.years indexOfObject:year];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+}
 
 @end

@@ -10,11 +10,15 @@
 #import "NMASettingsViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAContentTableViewController.h"
+#import "NMAYearActivityScrollViewController.h"
+#import "NMAYearActivityScrollDelegate.h"
 
 
-@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate>
+@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollViewControllerDelegate>
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAContentTableViewController *tableContent;
+@property (strong, nonatomic) NMAYearActivityScrollViewController *scrollView;
+@property (strong, nonatomic) NMAYearCollectionViewController *scroll;
 @end
 
 @implementation NMAHomeViewController
@@ -26,12 +30,12 @@
 
 - (void)viewDidLoad{
     UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
-    NMAYearCollectionViewController *scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
-    scroll.delegate = self;
-    [self displayContentController:scroll];
-    self.tableContent =[[NMAContentTableViewController alloc]init];
-    self.tableContent.year = @"2014";
-    [self displayContentTable:self.tableContent];
+    self.scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
+    self.scroll.delegate = self;
+    [self displayContentController:self.scroll];
+    self.scrollView = [[NMAYearActivityScrollViewController alloc] init];
+    self.scrollView.delegate = self;
+    [self displayContentTable:self.scrollView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
 }
@@ -52,10 +56,18 @@
     [content didMoveToParentViewController:self];
 }
 
+
+
+
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
-    self.tableContent.year = year;  
+    [self.scrollView setUpScrollView:year];
+}
+
+#pragma mark - NMAActivityScrollDelegate
+- (void)updateScrollYear:(NSString *)year {
+    [self.scroll moveToYear:year];
 }
 
 @end

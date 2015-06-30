@@ -19,10 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
     self.dateRelatedContent = [[NSMutableArray alloc] init];
-    [self.dateRelatedContent addObject:self.year];
-    
+    if (self.year) {
+        [self.dateRelatedContent addObject:self.year];
+    }
+    //infinite scroll
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         for (int i = 0; i < 10; i++){
@@ -57,8 +61,14 @@
 
 - (void)setYear:(NSString *)year {
     _year = year;
-   [self.dateRelatedContent removeAllObjects];
-    [self.dateRelatedContent addObject:self.year];
-    [self.tableView reloadData];
+    if(self.dateRelatedContent){
+        [self.dateRelatedContent removeAllObjects];
+        [self.dateRelatedContent addObject:self.year];
+        [self.tableView reloadData];
+    } else{
+        self.dateRelatedContent = [[NSMutableArray alloc]init];
+        [self.dateRelatedContent addObject:self.year];
+       [self.tableView reloadData];
+    }
 }
 @end
