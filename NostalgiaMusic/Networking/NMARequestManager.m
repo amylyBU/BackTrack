@@ -22,13 +22,12 @@
 
 
 - (void)getBillBoardSongFromYear:(NSString *)year
-                         success:(void (^)(NMABillBoardSong *song))success
+                         success:(void (^)(NMABillboardSong *song))success
                          failure:(void (^)(NSError *error))failure {
     if (success) {
-        NSArray *allSongsFromYear = [[NMADatabaseManager sharedDatabaseMgr] runQueryForYear:year];
-        NSUInteger randomIndex = arc4random() % [allSongsFromYear count];
+        NMABillboardSong *billboardSong = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
         dispatch_async(dispatch_get_main_queue(), ^ {
-            success(allSongsFromYear[randomIndex]);
+            success(billboardSong);
         });
     } else {
         if (failure) {

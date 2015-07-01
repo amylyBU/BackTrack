@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
+@class NMABillboardSong;
 
 @interface NMADatabaseManager : NSObject
 
-+ (instancetype)sharedDatabaseMgr;
++ (instancetype)sharedDatabaseManager;
 
-- (NSArray *)runQueryForYear:(NSString *)year;
+- (NMABillboardSong *)getSongFromYear:(NSString *)year;
 
 @end

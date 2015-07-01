@@ -7,7 +7,8 @@
 //
 
 #import "NMADatabaseManager.h"
-#import "NMABillBoardSong.h"
+#import "NMABillboardSong.h"
+#import <sqlite3.h>
 
 @interface NMADatabaseManager ()
 
@@ -17,11 +18,9 @@
 
 @implementation NMADatabaseManager
 
-static NMADatabaseManager *_database;
-
 #pragma mark - Singleton
 
-+ (instancetype)sharedDatabaseMgr {
++ (instancetype)sharedDatabaseManager {
     static id sharedDB = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -30,37 +29,38 @@ static NMADatabaseManager *_database;
     return sharedDB;
 }
 
-- (NSArray *)runQueryForYear:(NSString *)year {
-    self.queryResultsArray = [[NSMutableArray alloc] init];
+#pragma mark - Public Methods
+
+- (NMABillboardSong *)getSongFromYear:(NSString *)year {
+    NMABillboardSong *randomSong;
     sqlite3 *database;
-    
     NSString *dbFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/tracks.db"];
     if (sqlite3_open([dbFilePath UTF8String], &database) == SQLITE_OK) {
-        
         const char *sql = [[NSString stringWithFormat:@"SELECT * FROM tracks WHERE year_peaked = %@", year] UTF8String];
         sqlite3_stmt *selectStatement;
-        
         if (sqlite3_prepare_v2(database, sql, -1, &selectStatement, NULL) == SQLITE_OK) {
-
-            while (sqlite3_step(selectStatement) == SQLITE_ROW) {
-                NMABillBoardSong *newSong = [[NMABillBoardSong alloc] init];
-                
-                char *yearPeaked = (char *) sqlite3_column_text(selectStatement, 2);
-                newSong.yearPeaked = [[NSString alloc] initWithUTF8String:yearPeaked];
-                char *yearlyRank = (char *) sqlite3_column_text(selectStatement, 3);
-                newSong.yearlyRank = [[NSString alloc] initWithUTF8String:yearlyRank];
-                char *artistAsAppearsOnLabel = (char *) sqlite3_column_text(selectStatement, 10);
-                newSong.artistAsAppearsOnLabel = [[NSString alloc] initWithUTF8String:artistAsAppearsOnLabel];
-                char *title = (char *) sqlite3_column_text(selectStatement, 13);
-                newSong.title = [[NSString alloc] initWithUTF8String:title];
-                
-                [self.queryResultsArray addObject:newSong];
-            }
+            randomSong = [self getRandomSongWithSQLStatement:selectStatement];
         }
         sqlite3_finalize(selectStatement); // destroy prepared statement object
     }
     sqlite3_close(database); // close database
-    return [self.queryResultsArray copy];
+    return randomSong;
+}
+
+#pragma mark - Private Methods
+
+- (NMABillboardSong *)getRandomSongWithSQLStatement:(sqlite3_stmt *)statement {
+    self.queryResultsArray = [[NSMutableArray alloc] init];
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        NMABillboardSong *newSong = [[NMABillboardSong alloc] init];
+        newSong.yearPeaked = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+        newSong.yearlyRank = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+        newSong.artistAsAppearsOnLabel = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+        newSong.title = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+        [self.queryResultsArray addObject:newSong];
+    }
+    NSUInteger randomIndex = arc4random() % [self.queryResultsArray count];
+    return self.queryResultsArray[randomIndex];
 }
 
 @end

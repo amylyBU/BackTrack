@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NMABillBoardSong.h"
+#import "NMABillboardSong.h"
 
 @interface NMARequestManager : NSObject
 
 + (instancetype)sharedManager;
 
 - (void)getBillBoardSongFromYear:(NSString *)year
-                         success:(void (^)(NMABillBoardSong *song))success
+                         success:(void (^)(NMABillboardSong *song))success
                          failure:(void (^)(NSError *error))failure;
 
 @end

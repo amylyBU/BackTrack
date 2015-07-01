@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NMABillBoardSong : NSObject
+@interface NMABillboardSong : NSObject
 
 @property (strong, nonatomic) NSString *yearPeaked;
 @property (strong, nonatomic) NSString *yearlyRank;

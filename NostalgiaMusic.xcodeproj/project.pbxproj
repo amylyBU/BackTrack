@@ -33,7 +33,7 @@
 		E50E34801B431D1000F10A5A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E50E347F1B431D1000F10A5A /* libsqlite3.dylib */; };
 		E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */; };
 		E50E34861B43331900F10A5A /* tracks.db in Resources */ = {isa = PBXBuildFile; fileRef = E50E34851B43331900F10A5A /* tracks.db */; };
-		E50E348A1B44461E00F10A5A /* NMABillBoardSong.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E34891B44461E00F10A5A /* NMABillBoardSong.m */; };
+		E50E348A1B44461E00F10A5A /* NMABillboardSong.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E34891B44461E00F10A5A /* NMABillboardSong.m */; };
 		E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E348C1B44584E00F10A5A /* NMARequestManager.m */; };
 /* End PBXBuildFile section */
 
@@ -93,8 +93,8 @@
 		E50E347D1B43068100F10A5A /* NMADatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMADatabaseManager.m; path = Models/NMADatabaseManager.m; sourceTree = "<group>"; };
 		E50E347F1B431D1000F10A5A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E50E34851B43331900F10A5A /* tracks.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = tracks.db; sourceTree = "<group>"; };
-		E50E34881B44461E00F10A5A /* NMABillBoardSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMABillBoardSong.h; path = Models/NMABillBoardSong.h; sourceTree = "<group>"; };
-		E50E34891B44461E00F10A5A /* NMABillBoardSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMABillBoardSong.m; path = Models/NMABillBoardSong.m; sourceTree = "<group>"; };
+		E50E34881B44461E00F10A5A /* NMABillboardSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMABillboardSong.h; path = Models/NMABillboardSong.h; sourceTree = "<group>"; };
+		E50E34891B44461E00F10A5A /* NMABillboardSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMABillboardSong.m; path = Models/NMABillboardSong.m; sourceTree = "<group>"; };
 		E50E348B1B44584E00F10A5A /* NMARequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMARequestManager.h; path = Networking/NMARequestManager.h; sourceTree = "<group>"; };
 		E50E348C1B44584E00F10A5A /* NMARequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMARequestManager.m; path = Networking/NMARequestManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,10 +124,10 @@
 			children = (
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
+				E50E34881B44461E00F10A5A /* NMABillboardSong.h */,
+				E50E34891B44461E00F10A5A /* NMABillboardSong.m */,
 				E50E347C1B43068100F10A5A /* NMADatabaseManager.h */,
 				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
-				E50E34881B44461E00F10A5A /* NMABillBoardSong.h */,
-				E50E34891B44461E00F10A5A /* NMABillBoardSong.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -457,7 +457,7 @@
 				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
-				E50E348A1B44461E00F10A5A /* NMABillBoardSong.m in Sources */,
+				E50E348A1B44461E00F10A5A /* NMABillboardSong.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
