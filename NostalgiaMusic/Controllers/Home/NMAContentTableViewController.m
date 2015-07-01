@@ -10,8 +10,8 @@
 #import "NMAYearTableViewCell.h"
 #import <SVPullToRefresh.h>
 
-static NSString *yearTableCellIdentifier = @"YearTableCell";
-@interface NMAContentTableViewController () <UITableViewDelegate>
+static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
+@interface NMAContentTableViewController ()
 @property (strong, nonatomic) NSMutableArray *dateRelatedContent;
 
 @end
@@ -20,9 +20,7 @@ static NSString *yearTableCellIdentifier = @"YearTableCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:yearTableCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:kNMAYearTableCellIdentifier];
     self.dateRelatedContent = [[NSMutableArray alloc] init];
     if (self.year) {
         [self.dateRelatedContent addObject:self.year];
@@ -45,7 +43,7 @@ static NSString *yearTableCellIdentifier = @"YearTableCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:yearTableCellIdentifier forIndexPath:indexPath];
+    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAYearTableCellIdentifier forIndexPath:indexPath];
     cell.year.text = [self.dateRelatedContent objectAtIndex:indexPath.row];
     return cell;
 }

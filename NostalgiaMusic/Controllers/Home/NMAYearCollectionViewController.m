@@ -11,7 +11,7 @@
 
 static NSInteger const earliestYear = 1980;
 static NSInteger const latestYear =  2014;
-static NSString * const yearCellIdentifier = @"YearCell";
+static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 
 @interface NMAYearCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *years;
@@ -26,7 +26,7 @@ static NSString * const yearCellIdentifier = @"YearCell";
     self.collectionView.dataSource = self;
     self.collectionView.clipsToBounds = YES;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
-forCellWithReuseIdentifier:yearCellIdentifier];
+forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
 }
@@ -38,12 +38,11 @@ forCellWithReuseIdentifier:yearCellIdentifier];
 }
 
 - (void)setUpCollectionViewWithLayout {
-    self.flow = [[UICollectionViewFlowLayout alloc]init];
-    [self.flow setSectionInset:UIEdgeInsetsMake(0, self.collectionView.frame.size.width / 2, 0, self.collectionView.frame.size.width/ 2)];
-    self.flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    [self.flowLayout setSectionInset:UIEdgeInsetsMake(0, self.collectionView.frame.size.width / 2, 0, self.collectionView.frame.size.width/ 2)];
+    self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView.backgroundColor = [UIColor whiteColor];
-    [self.collectionView setCollectionViewLayout:self.flow];
-
+    [self.collectionView setCollectionViewLayout:self.flowLayout];
     
 }
 
@@ -78,7 +77,7 @@ forCellWithReuseIdentifier:yearCellIdentifier];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:yearCellIdentifier forIndexPath:indexPath];
+   NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     NSString *year = self.years[indexPath.row];
     cell.year.text = year;

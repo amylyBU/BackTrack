@@ -9,6 +9,18 @@
 #import "NMAYearActivityScrollViewController.h"
 #import "NMAContentTableViewController.h"
 
+@interface NMAYearActivityScrollViewController ()
+@property (strong, nonatomic) NMAContentTableViewController *pastYearVC;
+@property (strong, nonatomic) NMAContentTableViewController *currentYearVC;
+@property (strong, nonatomic) NMAContentTableViewController *nextYearVC;
+@end
+
+typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
+    NMAScrollViewPositionPastYear = 0,
+    NMAScrollViewPositionCurrentYear,
+    NMAScrollViewPositionNextYear,
+};
+
 
 @implementation NMAYearActivityScrollViewController
 
@@ -29,26 +41,14 @@
 - (void)setUpScrollView:(NSString *)year {
     NSInteger numberOfViews = 3;
     self.year = year;
-    NSInteger pastyear = [self.year integerValue] - 1;
-    NSInteger currentyear = [self.year integerValue];
-    NSInteger nextyear = [self.year integerValue] + 1;
     self.pastYearVC = [[NMAContentTableViewController alloc]init];
-    [self initializeTableViews:0 tableView:self.pastYearVC inputYear:pastyear];
+    [self configureNMAContentTableViewController:self.pastYearVC withYear:[self decrementStringValue:self.year] atPosition:NMAScrollViewPositionPastYear];
     self.currentYearVC = [[NMAContentTableViewController alloc]init];
-    [self initializeTableViews:1 tableView:self.currentYearVC inputYear:currentyear];
+     [self configureNMAContentTableViewController:self.currentYearVC withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
     self.nextYearVC = [[NMAContentTableViewController alloc]init];
-    [self initializeTableViews:2 tableView:self.nextYearVC inputYear:nextyear];
+   [self configureNMAContentTableViewController:self.nextYearVC withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews,
                                              self.view.frame.size.height);
-}
-
-- (void) initializeTableViews:(int)i tableView:(NMAContentTableViewController *)tableView inputYear:(NSInteger)year{
-    CGFloat origin = i * self.view.frame.size.width;
-    [tableView.view setFrame:CGRectMake(origin, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    tableView.year = [NSString stringWithFormat:@"%li", year];
-    self.scrollView.delegate = self;
-    [self.scrollView addSubview:tableView.view];
-    [self addChildViewController:tableView];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -70,8 +70,7 @@
     self.nextYearVC = self.currentYearVC;
     self.currentYearVC = self.pastYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
-    NSInteger pastyear = [self.currentYearVC.year integerValue] - 1;
-    [self initializeTableViews:0 tableView:newYear inputYear:pastyear];
+    [self configureNMAContentTableViewController:newYear withYear:[self decrementStringValue:self.currentYearVC.year] atPosition:NMAScrollViewPositionPastYear];
     self.pastYearVC = newYear;
     self.year = self.currentYearVC.year;
     [self.delegate updateScrollYear:self.year];
@@ -81,8 +80,7 @@
     self.pastYearVC = self.currentYearVC;
     self.currentYearVC = self.nextYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
-    NSInteger nextyear = [self.currentYearVC.year integerValue] + 1;
-    [self initializeTableViews:2 tableView:newYear inputYear:nextyear];
+       [self configureNMAContentTableViewController:newYear withYear:[self incrementStringValue:self.currentYearVC.year] atPosition:NMAScrollViewPositionNextYear];
     self.nextYearVC = newYear;
     self.year = self.currentYearVC.year;
     [self.delegate updateScrollYear:self.year];
@@ -90,8 +88,29 @@
 }
 
 - (void)adjustFrameView {
-    self.pastYearVC.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    self.currentYearVC.view.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
-    self.nextYearVC.view.frame = CGRectMake(self.view.frame.size.width * 2, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.pastYearVC.view.frame = CGRectMake(NMAScrollViewPositionPastYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.currentYearVC.view.frame = CGRectMake(CGRectGetWidth(self.view.frame), 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.nextYearVC.view.frame = CGRectMake(CGRectGetWidth(self.view.frame) * NMAScrollViewPositionNextYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+}
+
+- (void)configureNMAContentTableViewController:(NMAContentTableViewController *)viewController withYear:(NSString *)year atPosition:(NMAScrollViewYearPosition)position {
+    CGFloat origin = position * self.view.frame.size.width;
+    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    viewController.year = year;
+    self.scrollView.delegate = self;
+    [self.scrollView addSubview:viewController.view];
+    [self addChildViewController:viewController];
+}
+
+#pragma mark - Helper 
+
+- (NSString *)incrementStringValue:(NSString *)value {
+    NSInteger nextyear = [value integerValue] + 1;
+    return [NSString stringWithFormat:@"%li", nextyear];
+}
+
+- (NSString *)decrementStringValue:(NSString *)value {
+    NSInteger pastyear = [value integerValue] - 1;
+    return [NSString stringWithFormat:@"%li", pastyear];
 }
 @end
