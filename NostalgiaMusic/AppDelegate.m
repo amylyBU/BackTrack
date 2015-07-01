@@ -11,6 +11,7 @@
 #import "NMAHomeViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAFBConnectViewController.h"
+#import "NMARequestManager.h"
 
 @interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
@@ -22,6 +23,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     if ([[NMAAppSettings sharedSettings] userHasCompletedOnboarding]) {
         [self goToHome];
+        
+        [[NMARequestManager sharedManager] getBillBoardSongFromYear:@"1983"
+                                                            success:^(NMABillBoardSong *song) {
+                                                                NSLog(@"success");
+                                                            } failure:^(NSError *error) {
+                                                                NSLog(@"error");
+                                                            }];
     } else {
         [self goToOnboarding];
     }
