@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
     NMAScrollViewPositionNextYear,
 };
 
+BOOL lastYear;
+BOOL firstYear;
 
 @implementation NMAYearActivityScrollViewController
 
@@ -32,8 +34,6 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
                                                   self.view.frame.size.height)];
     self.scrollView.pagingEnabled = YES;
     [self setUpScrollView:@"2014"];
-    CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 1, 0);
-    [self.scrollView setContentOffset:scrollPoint animated:YES];
     [self.view addSubview:self.scrollView];
     
 }
@@ -41,24 +41,55 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
 - (void)setUpScrollView:(NSString *)year {
     NSInteger numberOfViews = 3;
     self.year = year;
+    
+    if ([self.year isEqualToString:@"1980"]) {
+       self.year = @"1981";
+        lastYear = YES;
+        CGPoint scrollPoint = CGPointMake(0, 0);
+        [self.scrollView setContentOffset:scrollPoint animated:NO];
+    } else if ([self.year isEqualToString:@"2014"]) {
+        self.year = @"2013";
+        firstYear = YES;
+        CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 2, 0);
+        [self.scrollView setContentOffset:scrollPoint animated:NO];
+    } else {
+         [self setContentOffsetToCenter];
+    }
     self.pastYearVC = [[NMAContentTableViewController alloc]init];
     [self configureNMAContentTableViewController:self.pastYearVC withYear:[self decrementStringValue:self.year] atPosition:NMAScrollViewPositionPastYear];
     self.currentYearVC = [[NMAContentTableViewController alloc]init];
-     [self configureNMAContentTableViewController:self.currentYearVC withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
+    [self configureNMAContentTableViewController:self.currentYearVC withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
+   
     self.nextYearVC = [[NMAContentTableViewController alloc]init];
    [self configureNMAContentTableViewController:self.nextYearVC withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews,
                                              self.view.frame.size.height);
+    
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2) {
-        [self pushLeft];
-    } else {
-        [self pushRight];
+    [self scrollingDidEnd];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        [self scrollingDidEnd];
     }
-    [self adjustFrameView];
-    [self setContentOffsetToCenter];
+}
+
+- (void)scrollingDidEnd {
+    NSLog(@"really done");
+        if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2) {
+            [self pushLeft];
+    
+        } else {
+            [self pushRight];
+        }
 }
 
 - (void)setContentOffsetToCenter {
@@ -67,6 +98,15 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
 }
 
 - (void)pushRight {
+    if ([self.pastYearVC.year isEqualToString:@"1980"]){
+        lastYear = YES;
+    } else if ([self.currentYearVC.year isEqualToString:@"2013"] && firstYear)  {
+        NSLog(@"test");
+        firstYear = NO;
+        
+    } else {
+          lastYear = NO;
+        firstYear = NO;
     self.nextYearVC = self.currentYearVC;
     self.currentYearVC = self.pastYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
@@ -74,9 +114,19 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
     self.pastYearVC = newYear;
     self.year = self.currentYearVC.year;
     [self.delegate updateScrollYear:self.year];
+    [self adjustFrameView];
+    [self setContentOffsetToCenter];
+    }
 }
 
 - (void)pushLeft {
+    if ([self.nextYearVC.year isEqualToString:@"2014"]){
+        firstYear = YES;
+    } else if ([self.pastYearVC.year isEqualToString:@"1980" ] && lastYear) {
+          lastYear = NO;
+    } else{
+        lastYear = NO;
+        firstYear = NO;
     self.pastYearVC = self.currentYearVC;
     self.currentYearVC = self.nextYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
@@ -84,8 +134,11 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
     self.nextYearVC = newYear;
     self.year = self.currentYearVC.year;
     [self.delegate updateScrollYear:self.year];
-    
+    [self adjustFrameView];
+    [self setContentOffsetToCenter];
+    }
 }
+
 
 - (void)adjustFrameView {
     self.pastYearVC.view.frame = CGRectMake(NMAScrollViewPositionPastYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
