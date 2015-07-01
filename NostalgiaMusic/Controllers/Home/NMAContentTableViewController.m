@@ -8,8 +8,10 @@
 
 #import "NMAContentTableViewController.h"
 #import "NMAYearTableViewCell.h"
+#import <SVPullToRefresh.h>
 
-@interface NMAContentTableViewController () <UITableViewDelegate>
+static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
+@interface NMAContentTableViewController ()
 @property (strong, nonatomic) NSMutableArray *dateRelatedContent;
 
 @end
@@ -18,9 +20,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"YearTableCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:kNMAYearTableCellIdentifier];
     self.dateRelatedContent = [[NSMutableArray alloc] init];
-    [self.dateRelatedContent addObject:self.year];
+    if (self.year) {
+        [self.dateRelatedContent addObject:self.year];
+    }
+    //infinite scroll block, add objects to daterelatedcontnent and reload table
+    __weak NMAContentTableViewController *weakSelf = self;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -33,10 +42,9 @@
     return self.dateRelatedContent.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"YearTableCell" forIndexPath:indexPath];
-    cell.year.text = self.year;
+    NMAYearTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAYearTableCellIdentifier forIndexPath:indexPath];
+    cell.year.text = [self.dateRelatedContent objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -47,5 +55,6 @@
     [self.dateRelatedContent removeAllObjects];
     [self.dateRelatedContent addObject:self.year];
     [self.tableView reloadData];
+
 }
 @end

@@ -11,7 +11,7 @@
 
 static NSInteger const earliestYear = 1980;
 static NSInteger const latestYear =  2014;
-static NSString * const yearCellIdentifier = @"YearCell";
+static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 
 @interface NMAYearCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *years;
@@ -26,12 +26,10 @@ static NSString * const yearCellIdentifier = @"YearCell";
     self.collectionView.dataSource = self;
     self.collectionView.clipsToBounds = YES;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
-forCellWithReuseIdentifier:yearCellIdentifier];
-    self.flow = [[UICollectionViewFlowLayout alloc]init];
-    self.flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    [self.collectionView setCollectionViewLayout:self.flow];
+forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
+    [self setUpCollectionViewWithLayout];
     [self setUpYears];
-    }
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -39,10 +37,19 @@ forCellWithReuseIdentifier:yearCellIdentifier];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 }
 
--(void)setUpYears{
+- (void)setUpCollectionViewWithLayout {
+    self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    [self.flowLayout setSectionInset:UIEdgeInsetsMake(0, self.collectionView.frame.size.width / 2, 0, self.collectionView.frame.size.width/ 2)];
+    self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.collectionView setCollectionViewLayout:self.flowLayout];
+    
+}
+
+- (void)setUpYears {
     self.years = [[NSMutableArray alloc] init];
     for(int i = 0; i < (latestYear - earliestYear + 1); i++){
-        NSString *yearForCell = [NSString stringWithFormat:@"%ld", earliestYear + i];
+        NSString *yearForCell = [NSString stringWithFormat:@"%li", earliestYear + i];
         [self.years addObject:yearForCell];
     }
 }
@@ -58,11 +65,19 @@ forCellWithReuseIdentifier:yearCellIdentifier];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(70, 40);
+    return CGSizeMake(CGRectGetWidth(self.view.frame)/4, 30);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:yearCellIdentifier forIndexPath:indexPath];
+   NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     NSString *year = self.years[indexPath.row];
     cell.year.text = year;
@@ -74,5 +89,12 @@ forCellWithReuseIdentifier:yearCellIdentifier];
     [self.delegate didSelectYear:currentYear];
 }
 
+- (void)moveToYear:(NSString *)year {
+    if([year integerValue] < 2015 && [year integerValue] > 1980){
+    NSInteger indexYear = [self.years indexOfObject:year];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+}
 
 @end

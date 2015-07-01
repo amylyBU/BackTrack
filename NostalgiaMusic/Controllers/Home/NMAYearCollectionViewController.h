@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NMAYearActivityScrollDelegate.h"
 
 @protocol NMAYearCollectionViewControllerDelegate <NSObject>
 
@@ -15,6 +16,8 @@
 @end
 
 @interface NMAYearCollectionViewController : UICollectionViewController
-@property (strong, nonatomic) UICollectionViewFlowLayout *flow;
-@property (weak, nonatomic) id<NMAYearCollectionViewControllerDelegate> delegate;
+@property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) id <NMAYearCollectionViewControllerDelegate> delegate;
+
+- (void)moveToYear:(NSString *)year;
 @end

@@ -10,10 +10,14 @@
 #import "NMASettingsViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAContentTableViewController.h"
+#import "NMAYearActivityScrollViewController.h"
+#import "NMAYearActivityScrollDelegate.h"
 
-@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate>
+
+@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollViewControllerDelegate>
 @property (copy, nonatomic) NSString *selectedYear;
-@property (strong, nonatomic) NMAContentTableViewController *tableContent;
+@property (strong, nonatomic) NMAYearActivityScrollViewController *yearActivityScrollVC;
+@property (strong, nonatomic) NMAYearCollectionViewController *yearScrollBarCollectionVC;
 @end
 
 @implementation NMAHomeViewController
@@ -24,36 +28,41 @@
 }
 
 - (void)viewDidLoad{
-    UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
-    NMAYearCollectionViewController *scroll = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
-    scroll.delegate = self;
-    [self displayContentController:scroll];
-    self.tableContent =[[NMAContentTableViewController alloc]init];
-    self.tableContent.year = @"2014";
-    [self displayContentTable:self.tableContent];
+    [self setUpHomeView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
 }
 
-- (void)displayContentController: (UIViewController*) content {
+- (void)setUpHomeView {
+    UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
+    self.yearScrollBarCollectionVC = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:flow];
+    self.yearScrollBarCollectionVC.delegate = self;
+    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/15);
+    [self displayContentController:self.yearScrollBarCollectionVC frame:scrollFrame];
+    self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];
+    self.yearActivityScrollVC.delegate = self;
+    CGRect activityFrame = CGRectMake(0, CGRectGetHeight(self.view.frame)/15, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    [self displayContentController:self.yearActivityScrollVC frame:activityFrame];
+    
+}
+
+- (void)displayContentController:(UIViewController*)content frame:(CGRect)contentFrame {
     [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50);
-    content.view.frame = scrollFrame;
+    content.view.frame = contentFrame;
     [self.view addSubview:content.view];
     [content didMoveToParentViewController:self];
 }
 
-- (void)displayContentTable:(UIViewController*) content {
-    [self addChildViewController:content];
-    CGRect scrollFrame = CGRectMake(0, 50, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    content.view.frame = scrollFrame;
-    [self.view addSubview:content.view];
-    [content didMoveToParentViewController:self];
-}
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
-    self.tableContent.year = year;  
+    [self.yearActivityScrollVC setUpScrollView:year];
+}
+
+#pragma mark - NMAActivityScrollDelegate
+- (void)updateScrollYear:(NSString *)year {
+    [self.yearScrollBarCollectionVC moveToYear:year];
 }
 
 @end
