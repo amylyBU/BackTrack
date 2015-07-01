@@ -10,9 +10,9 @@
 #import "NMAContentTableViewController.h"
 
 @interface NMAYearActivityScrollViewController ()
-@property (strong, nonatomic) NMAContentTableViewController *pastYearVC;
-@property (strong, nonatomic) NMAContentTableViewController *currentYearVC;
-@property (strong, nonatomic) NMAContentTableViewController *nextYearVC;
+@property (strong, nonatomic) NMAContentTableViewController *leftTableViewController;
+@property (strong, nonatomic) NMAContentTableViewController *middleTableViewController;
+@property (strong, nonatomic) NMAContentTableViewController *rightTableViewController;
 @end
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
@@ -30,8 +30,8 @@ BOOL isMostRecentYearVisible;
     [super viewDidLoad];
     self.scrollView = [[UIScrollView alloc]
                          initWithFrame:CGRectMake(0, 0,
-                                                  self.view.frame.size.width,
-                                                  self.view.frame.size.height)];
+                                                  CGRectGetWidth(self.view.frame),
+                                                    CGRectGetHeight(self.view.frame))];
     self.scrollView.pagingEnabled = YES;
     [self setUpScrollView:@"2014"];
     [self.view addSubview:self.scrollView];
@@ -55,13 +55,13 @@ BOOL isMostRecentYearVisible;
     } else {
          [self setContentOffsetToCenter];
     }
-    self.pastYearVC = [[NMAContentTableViewController alloc]init];
-    [self configureNMAContentTableViewController:self.pastYearVC withYear:[self decrementStringValue:self.year] atPosition:NMAScrollViewPositionPastYear];
-    self.currentYearVC = [[NMAContentTableViewController alloc]init];
-    [self configureNMAContentTableViewController:self.currentYearVC withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
+    self.leftTableViewController = [[NMAContentTableViewController alloc]init];
+    [self configureNMAContentTableViewController:self.leftTableViewController withYear:[self decrementStringValue:self.year] atPosition:NMAScrollViewPositionPastYear];
+    self.middleTableViewController = [[NMAContentTableViewController alloc]init];
+    [self configureNMAContentTableViewController:self.middleTableViewController withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
    
-    self.nextYearVC = [[NMAContentTableViewController alloc]init];
-   [self configureNMAContentTableViewController:self.nextYearVC withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
+    self.rightTableViewController = [[NMAContentTableViewController alloc]init];
+   [self configureNMAContentTableViewController:self.rightTableViewController withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews,
                                              self.view.frame.size.height);
     
@@ -96,19 +96,19 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)pushRight {
-    if ([self.pastYearVC.year isEqualToString:@"1980"]){
+    if ([self.leftTableViewController.year isEqualToString:@"1980"]){
         isEarliestYearVisble = YES;
-    } else if ([self.currentYearVC.year isEqualToString:@"2013"] && isMostRecentYearVisible)  {
+    } else if ([self.middleTableViewController.year isEqualToString:@"2013"] && isMostRecentYearVisible)  {
         isMostRecentYearVisible = NO;
     } else {
           isEarliestYearVisble = NO;
         isMostRecentYearVisible = NO;
-    self.nextYearVC = self.currentYearVC;
-    self.currentYearVC = self.pastYearVC;
+    self.rightTableViewController = self.middleTableViewController;
+    self.middleTableViewController = self.leftTableViewController;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
-    [self configureNMAContentTableViewController:newYear withYear:[self decrementStringValue:self.currentYearVC.year] atPosition:NMAScrollViewPositionPastYear];
-    self.pastYearVC = newYear;
-    self.year = self.currentYearVC.year;
+    [self configureNMAContentTableViewController:newYear withYear:[self decrementStringValue:self.middleTableViewController.year] atPosition:NMAScrollViewPositionPastYear];
+    self.leftTableViewController = newYear;
+    self.year = self.middleTableViewController.year;
     [self.delegate updateScrollYear:self.year];
     [self adjustFrameView];
     [self setContentOffsetToCenter];
@@ -116,19 +116,19 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)pushLeft {
-    if ([self.nextYearVC.year isEqualToString:@"2014"]){
+    if ([self.rightTableViewController.year isEqualToString:@"2014"]){
         isMostRecentYearVisible = YES;
-    } else if ([self.pastYearVC.year isEqualToString:@"1980" ] && isEarliestYearVisble) {
+    } else if ([self.leftTableViewController.year isEqualToString:@"1980" ] && isEarliestYearVisble) {
           isEarliestYearVisble = NO;
     } else{
         isEarliestYearVisble = NO;
         isMostRecentYearVisible = NO;
-    self.pastYearVC = self.currentYearVC;
-    self.currentYearVC = self.nextYearVC;
+    self.leftTableViewController = self.middleTableViewController;
+    self.middleTableViewController = self.rightTableViewController;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
-       [self configureNMAContentTableViewController:newYear withYear:[self incrementStringValue:self.currentYearVC.year] atPosition:NMAScrollViewPositionNextYear];
-    self.nextYearVC = newYear;
-    self.year = self.currentYearVC.year;
+       [self configureNMAContentTableViewController:newYear withYear:[self incrementStringValue:self.middleTableViewController.year] atPosition:NMAScrollViewPositionNextYear];
+    self.rightTableViewController = newYear;
+    self.year = self.middleTableViewController.year;
     [self.delegate updateScrollYear:self.year];
     [self adjustFrameView];
     [self setContentOffsetToCenter];
@@ -137,9 +137,9 @@ BOOL isMostRecentYearVisible;
 
 
 - (void)adjustFrameView {
-    self.pastYearVC.view.frame = CGRectMake(NMAScrollViewPositionPastYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    self.currentYearVC.view.frame = CGRectMake(CGRectGetWidth(self.view.frame), 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    self.nextYearVC.view.frame = CGRectMake(CGRectGetWidth(self.view.frame) * NMAScrollViewPositionNextYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.leftTableViewController.view.frame = CGRectMake(NMAScrollViewPositionPastYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.middleTableViewController.view.frame = CGRectMake(CGRectGetWidth(self.view.frame), 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.rightTableViewController.view.frame = CGRectMake(CGRectGetWidth(self.view.frame) * NMAScrollViewPositionNextYear, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
 }
 
 - (void)configureNMAContentTableViewController:(NMAContentTableViewController *)viewController withYear:(NSString *)year atPosition:(NMAScrollViewYearPosition)position {
