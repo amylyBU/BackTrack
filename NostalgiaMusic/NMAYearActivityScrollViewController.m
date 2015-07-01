@@ -21,8 +21,8 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
     NMAScrollViewPositionNextYear,
 };
 
-BOOL lastYear;
-BOOL firstYear;
+BOOL isEarliestYearVisble;
+BOOL isMostRecentYearVisible;
 
 @implementation NMAYearActivityScrollViewController
 
@@ -44,12 +44,12 @@ BOOL firstYear;
     
     if ([self.year isEqualToString:@"1980"]) {
        self.year = @"1981";
-        lastYear = YES;
+        isEarliestYearVisble = YES;
         CGPoint scrollPoint = CGPointMake(0, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
     } else if ([self.year isEqualToString:@"2014"]) {
         self.year = @"2013";
-        firstYear = YES;
+        isMostRecentYearVisible = YES;
         CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 2, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
     } else {
@@ -64,7 +64,6 @@ BOOL firstYear;
    [self configureNMAContentTableViewController:self.nextYearVC withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews,
                                              self.view.frame.size.height);
-    
     
 }
 
@@ -83,7 +82,6 @@ BOOL firstYear;
 }
 
 - (void)scrollingDidEnd {
-    NSLog(@"really done");
         if (self.scrollView.contentOffset.x == self.view.frame.size.width * 2) {
             [self pushLeft];
     
@@ -99,14 +97,12 @@ BOOL firstYear;
 
 - (void)pushRight {
     if ([self.pastYearVC.year isEqualToString:@"1980"]){
-        lastYear = YES;
-    } else if ([self.currentYearVC.year isEqualToString:@"2013"] && firstYear)  {
-        NSLog(@"test");
-        firstYear = NO;
-        
+        isEarliestYearVisble = YES;
+    } else if ([self.currentYearVC.year isEqualToString:@"2013"] && isMostRecentYearVisible)  {
+        isMostRecentYearVisible = NO;
     } else {
-          lastYear = NO;
-        firstYear = NO;
+          isEarliestYearVisble = NO;
+        isMostRecentYearVisible = NO;
     self.nextYearVC = self.currentYearVC;
     self.currentYearVC = self.pastYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
@@ -121,12 +117,12 @@ BOOL firstYear;
 
 - (void)pushLeft {
     if ([self.nextYearVC.year isEqualToString:@"2014"]){
-        firstYear = YES;
-    } else if ([self.pastYearVC.year isEqualToString:@"1980" ] && lastYear) {
-          lastYear = NO;
+        isMostRecentYearVisible = YES;
+    } else if ([self.pastYearVC.year isEqualToString:@"1980" ] && isEarliestYearVisble) {
+          isEarliestYearVisble = NO;
     } else{
-        lastYear = NO;
-        firstYear = NO;
+        isEarliestYearVisble = NO;
+        isMostRecentYearVisible = NO;
     self.pastYearVC = self.currentYearVC;
     self.currentYearVC = self.nextYearVC;
     NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc]init];
