@@ -21,19 +21,19 @@
 }
 
 
-- (void)getBillBoardSongFromYear:(NSString *)year
-                         success:(void (^)(NMABillboardSong *song))success
+- (void)getSongFromYear:(NSString *)year
+                         success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure {
-    NMABillboardSong *billboardSong = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
+    NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
     
-    if (billboardSong.sqlite3ErrorCode) { // if there exists an error code (error code = nil if db call was successful)
-        NSError *error = [[NSError alloc] initWithDomain:@"SQL error or missing database" code:billboardSong.sqlite3ErrorCode userInfo:nil];
-        if (failure) {
-            failure(error); // TODO: maybe send alert message
-        }
-    } else { // successful call to database
+    if (song) {
         if (success) {
-            success(billboardSong); // billboardSong can either be nil or an actual song. TODO: show 'no song' UI or search song in itunes api
+            success(song);
+        }
+    } else {
+        if (failure) {
+            NSError *error = [[NSError alloc] init];
+            failure(error);
         }
     }
 }

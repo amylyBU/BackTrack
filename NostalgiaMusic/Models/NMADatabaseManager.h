@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@class NMABillboardSong;
+@class NMASong;
 
 @interface NMADatabaseManager : NSObject
 
 + (instancetype)sharedDatabaseManager;
 
-- (NMABillboardSong *)getSongFromYear:(NSString *)year;
+- (NMASong *)getSongFromYear:(NSString *)year;
 
 @end

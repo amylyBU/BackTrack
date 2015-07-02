@@ -7,7 +7,7 @@
 //
 
 #import "NMADatabaseManager.h"
-#import "NMABillboardSong.h"
+#import "NMASong.h"
 #import <sqlite3.h>
 
 @interface NMADatabaseManager ()
@@ -31,8 +31,8 @@
 
 #pragma mark - Public Methods
 
-- (NMABillboardSong *)getSongFromYear:(NSString *)year {
-    NMABillboardSong *randomSong;
+- (NMASong *)getSongFromYear:(NSString *)year {
+    NMASong *randomSong;
     sqlite3 *database;
     NSString *dbFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/tracks.db"];
     if (sqlite3_open([dbFilePath UTF8String], &database) == SQLITE_OK) {
@@ -44,7 +44,7 @@
         if (databaseCallResult == SQLITE_OK) {
             randomSong = [self getRandomSongWithSQLStatement:selectStatement];
         } else {
-            randomSong.sqlite3ErrorCode = databaseCallResult;
+            randomSong = nil;
         }
         sqlite3_finalize(selectStatement); // destroy prepared statement object
     }
@@ -54,10 +54,10 @@
 
 #pragma mark - Private Methods
 
-- (NMABillboardSong *)getRandomSongWithSQLStatement:(sqlite3_stmt *)statement {
+- (NMASong *)getRandomSongWithSQLStatement:(sqlite3_stmt *)statement {
     self.queryResultsArray = [[NSMutableArray alloc] init];
     while (sqlite3_step(statement) == SQLITE_ROW) {
-        NMABillboardSong *newSong = [[NMABillboardSong alloc] init];
+        NMASong *newSong = [[NMASong alloc] init];
         newSong.yearPeaked = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
         newSong.yearlyRank = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
         newSong.artistAsAppearsOnLabel = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
@@ -68,7 +68,7 @@
         NSUInteger randomIndex = arc4random() % [self.queryResultsArray count];
         return self.queryResultsArray[randomIndex];
     } else {
-        return nil; // return nil if no songs are from that year
+        return nil;
     }
 }
 

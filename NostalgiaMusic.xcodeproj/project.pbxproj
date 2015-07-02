@@ -17,7 +17,6 @@
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
-		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */; };
 		61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */; };
@@ -33,7 +32,7 @@
 		E50E34801B431D1000F10A5A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E50E347F1B431D1000F10A5A /* libsqlite3.dylib */; };
 		E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */; };
 		E50E34861B43331900F10A5A /* tracks.db in Resources */ = {isa = PBXBuildFile; fileRef = E50E34851B43331900F10A5A /* tracks.db */; };
-		E50E348A1B44461E00F10A5A /* NMABillboardSong.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E34891B44461E00F10A5A /* NMABillboardSong.m */; };
+		E50E348A1B44461E00F10A5A /* NMASong.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E34891B44461E00F10A5A /* NMASong.m */; };
 		E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E348C1B44584E00F10A5A /* NMARequestManager.m */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +67,6 @@
 		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearActivityScrollViewController.h; sourceTree = "<group>"; };
 		611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAYearActivityScrollViewController.m; sourceTree = "<group>"; };
 		611F6A4C1B42E18500091809 /* NMAYearActivityScrollDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NMAYearActivityScrollDelegate.h; path = Controllers/Home/NMAYearActivityScrollDelegate.h; sourceTree = "<group>"; };
@@ -93,8 +91,8 @@
 		E50E347D1B43068100F10A5A /* NMADatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMADatabaseManager.m; path = Models/NMADatabaseManager.m; sourceTree = "<group>"; };
 		E50E347F1B431D1000F10A5A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E50E34851B43331900F10A5A /* tracks.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = tracks.db; sourceTree = "<group>"; };
-		E50E34881B44461E00F10A5A /* NMABillboardSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMABillboardSong.h; path = Models/NMABillboardSong.h; sourceTree = "<group>"; };
-		E50E34891B44461E00F10A5A /* NMABillboardSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMABillboardSong.m; path = Models/NMABillboardSong.m; sourceTree = "<group>"; };
+		E50E34881B44461E00F10A5A /* NMASong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMASong.h; path = Models/NMASong.h; sourceTree = "<group>"; };
+		E50E34891B44461E00F10A5A /* NMASong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMASong.m; path = Models/NMASong.m; sourceTree = "<group>"; };
 		E50E348B1B44584E00F10A5A /* NMARequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMARequestManager.h; path = Networking/NMARequestManager.h; sourceTree = "<group>"; };
 		E50E348C1B44584E00F10A5A /* NMARequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMARequestManager.m; path = Networking/NMARequestManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,8 +122,8 @@
 			children = (
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
-				E50E34881B44461E00F10A5A /* NMABillboardSong.h */,
-				E50E34891B44461E00F10A5A /* NMABillboardSong.m */,
+				E50E34881B44461E00F10A5A /* NMASong.h */,
+				E50E34891B44461E00F10A5A /* NMASong.m */,
 				E50E347C1B43068100F10A5A /* NMADatabaseManager.h */,
 				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
 			);
@@ -301,13 +299,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		E5F1F3741B3D863600E92D37 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -457,7 +448,7 @@
 				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
-				E50E348A1B44461E00F10A5A /* NMABillboardSong.m in Sources */,
+				E50E348A1B44461E00F10A5A /* NMASong.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,

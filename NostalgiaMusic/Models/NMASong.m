@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "NMABillboardSong.h"
+#import "NMASong.h"
 
-@implementation NMABillboardSong
+@implementation NMASong
 
 @end
