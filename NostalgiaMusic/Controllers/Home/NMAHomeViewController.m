@@ -12,7 +12,8 @@
 #import "NMAContentTableViewController.h"
 #import "NMAYearActivityScrollViewController.h"
 #import "NMAYearActivityScrollDelegate.h"
-
+#import "UIView+Constraints.h"
+#import "UIViewController+Containment.h"
 
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollViewControllerDelegate>
 @property (copy, nonatomic) NSString *selectedYear;
@@ -28,6 +29,7 @@
 }
 
 - (void)viewDidLoad{
+    [super viewDidLoad];
     [self setUpHomeView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -39,18 +41,23 @@
     self.yearScrollBarCollectionVC.delegate = self;
     CGRect scrollFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/15);
     [self displayContentController:self.yearScrollBarCollectionVC frame:scrollFrame];
+    
+    [self.view constrainView:self.yearScrollBarCollectionVC.view top:0 left:0 bottom:NSNotFound right:0];
+    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:48];
+    
+    
     self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];
     self.yearActivityScrollVC.delegate = self;
     CGRect activityFrame = CGRectMake(0, CGRectGetHeight(self.view.frame)/15, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     [self displayContentController:self.yearActivityScrollVC frame:activityFrame];
     
+    [self.view constrainView:self.yearActivityScrollVC.view belowView:self.yearScrollBarCollectionVC.view];
+    [self.view constrainView:self.yearActivityScrollVC.view top:NSNotFound left:0 bottom:0 right:0];
+    
 }
 
 - (void)displayContentController:(UIViewController*)content frame:(CGRect)contentFrame {
-    [self addChildViewController:content];
-    content.view.frame = contentFrame;
-    [self.view addSubview:content.view];
-    [content didMoveToParentViewController:self];
+    [self ip_addChildViewController:content];
 }
 
 
