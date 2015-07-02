@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.loginButton.delegate = self;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (IBAction)notNowButton:(UIButton *)sender {

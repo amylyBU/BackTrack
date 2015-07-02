@@ -11,6 +11,7 @@
 #import "NMAHomeViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAFBConnectViewController.h"
+#import "NMARequestManager.h"
 
 @interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
