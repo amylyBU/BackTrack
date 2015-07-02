@@ -26,6 +26,14 @@
     } else {
         [self goToOnboarding];
     }
+    NMARequestManager *manager = [[NMARequestManager alloc] init];
+    [manager getNewYorkTimesStory:@"1933"
+                          success:^(NMANewsStory *story){
+                              NSLog(@"test");
+                          }
+                          failure:^(NSError *error) {
+                              
+                          }];
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

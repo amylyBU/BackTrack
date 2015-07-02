@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NMASong.h"
+#import "NMANewsStory.h"
 
 @interface NMARequestManager : NSObject
 
@@ -16,5 +17,9 @@
 - (void)getSongFromYear:(NSString *)year
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure;
+
+- (void)getNewYorkTimesStory:(NSString *)year
+                     success:(void (^)(NMANewsStory *story))success
+                     failure:(void (^)(NSError *error))failure;
 
 @end
