@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSString *yearlyRank;
 @property (strong, nonatomic) NSString *artistAsAppearsOnLabel;
 @property (strong, nonatomic) NSString *title;
+@property (nonatomic) int sqlite3ErrorCode;
 
 @end

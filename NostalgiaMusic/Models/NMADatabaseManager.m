@@ -38,8 +38,13 @@
     if (sqlite3_open([dbFilePath UTF8String], &database) == SQLITE_OK) {
         const char *sql = [[NSString stringWithFormat:@"SELECT * FROM tracks WHERE year_peaked = %@", year] UTF8String];
         sqlite3_stmt *selectStatement;
-        if (sqlite3_prepare_v2(database, sql, -1, &selectStatement, NULL) == SQLITE_OK) {
+        
+        int databaseCallResult = sqlite3_prepare_v2(database, sql, -1, &selectStatement, NULL);
+        
+        if (databaseCallResult == SQLITE_OK) {
             randomSong = [self getRandomSongWithSQLStatement:selectStatement];
+        } else {
+            randomSong.sqlite3ErrorCode = databaseCallResult;
         }
         sqlite3_finalize(selectStatement); // destroy prepared statement object
     }
@@ -59,8 +64,12 @@
         newSong.title = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
         [self.queryResultsArray addObject:newSong];
     }
-    NSUInteger randomIndex = arc4random() % [self.queryResultsArray count];
-    return self.queryResultsArray[randomIndex];
+    if ([self.queryResultsArray count]) {
+        NSUInteger randomIndex = arc4random() % [self.queryResultsArray count];
+        return self.queryResultsArray[randomIndex];
+    } else {
+        return nil; // return nil if no songs are from that year
+    }
 }
 
 @end
