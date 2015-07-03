@@ -21,6 +21,10 @@
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
+
+- (void)getPreviewURLForSong:(NSString *)songTitle
+                   AndArtist:(NSString *)songArtist
+                     success:(void (^)(NSURL *previewURL))success
                      failure:(void (^)(NSError *error))failure;
 
 @end

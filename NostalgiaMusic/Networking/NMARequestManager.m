@@ -27,7 +27,6 @@
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure {
     NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
-    
     if (song) {
         if (success) {
             success(song);
@@ -44,7 +43,7 @@
                       onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure {
-    
+
     NSURL *requestURL = [NSURL URLWithString:[self configureQueryString:date withYear:year]];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
@@ -54,11 +53,11 @@
             success([self parseNYTJSON:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get NYT information");
-        
+
      }];
-    
+
     [operation start];
-    
+
 }
 
 - (NSString *)configureQueryString:(NSString *)date withYear:(NSString *)year{
@@ -89,5 +88,43 @@
         [stories addObject:story];
     }
     return stories;
+
+- (void)getPreviewURLForSong:(NSString *)songTitle
+                   AndArtist:(NSString *)songArtist
+                     success:(void (^)(NSURL *previewURL))success
+                     failure:(void (^)(NSError *error))failure {
+
+    NSString *searchTerm = [NSString stringWithFormat:@"%@ %@", songTitle, songArtist];
+    NSDictionary *parameters = @{ @"term":searchTerm, @"media":@"music" };
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/JSON"];
+
+    NSString *searchString = @"https://itunes.apple.com/search";
+
+    [manager GET:searchString
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSString *previewUrlString;
+
+             NSArray *resultsArray = [responseObject objectForKey:@"results"];
+             for (NSDictionary *song in resultsArray) {
+                 if ([[song valueForKey:@"kind"] isEqualToString:@"song"]) {
+                     previewUrlString = [song objectForKey:@"previewUrl"];
+                     break;
+                 }
+             }
+             NSURL *url = [[NSURL alloc] initWithString:previewUrlString];
+             if (success) {
+                 success(url);
+             }
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             if (failure) {
+                 failure (error);
+             }
+         }
+     ];
 }
 @end
