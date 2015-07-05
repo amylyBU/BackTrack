@@ -11,6 +11,7 @@
 #import <SVPullToRefresh.h>
 
 static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
+static NSString * const kNMATodaysSongTableCellIdentifier = @"NMATodaysSongCell";
 @interface NMAContentTableViewController ()
 @property (strong, nonatomic) NSMutableArray *dateRelatedContent;
 @end

@@ -48,7 +48,6 @@
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    NSMutableArray *stories = [[NSMutableArray alloc] init];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             success([self parseNYTJSON:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -88,13 +87,13 @@
         [stories addObject:story];
     }
     return stories;
+  }
 
-- (void)getPreviewURLForSong:(NSString *)songTitle
-                   AndArtist:(NSString *)songArtist
-                     success:(void (^)(NSURL *previewURL))success
-                     failure:(void (^)(NSError *error))failure {
+- (void)getiTunesMusicForSong:(NMASong *)song
+                      success:(void (^)(NMASong *songWithPreview))success
+                      failure:(void (^)(NSError *error))failure {
 
-    NSString *searchTerm = [NSString stringWithFormat:@"%@ %@", songTitle, songArtist];
+    NSString *searchTerm = [NSString stringWithFormat:@"%@ %@", song.title, song.artistAsAppearsOnLabel];
     NSDictionary *parameters = @{ @"term":searchTerm, @"media":@"music" };
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -106,18 +105,22 @@
     [manager GET:searchString
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSString *previewUrlString;
-
              NSArray *resultsArray = [responseObject objectForKey:@"results"];
-             for (NSDictionary *song in resultsArray) {
-                 if ([[song valueForKey:@"kind"] isEqualToString:@"song"]) {
-                     previewUrlString = [song objectForKey:@"previewUrl"];
+             for (NSDictionary *result in resultsArray) {
+                 if ([[result valueForKey:@"kind"] isEqualToString:@"song"]) {
+                     song.previewURL = [result objectForKey:@"previewUrl"];
+
+                     NSMutableArray *images = [[NSMutableArray alloc] init];
+                     [images addObject:[result objectForKey:@"artworkUrl100"]];
+                     [images addObject:[result objectForKey:@"artworkUrl30"]];
+                     [images addObject:[result objectForKey:@"artworkUrl60"]];
+                     song.albumImageUrlsArray = [images copy];
+
                      break;
                  }
              }
-             NSURL *url = [[NSURL alloc] initWithString:previewUrlString];
              if (success) {
-                 success(url);
+                 success(song);
              }
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {

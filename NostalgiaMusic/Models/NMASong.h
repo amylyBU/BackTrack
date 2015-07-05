@@ -14,5 +14,7 @@
 @property (strong, nonatomic) NSString *yearlyRank;
 @property (strong, nonatomic) NSString *artistAsAppearsOnLabel;
 @property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSArray *albumImageUrlsArray;
+@property (strong, nonatomic) NSString *previewURL;
 
 @end

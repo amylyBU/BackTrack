@@ -18,13 +18,13 @@
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure;
 
+
+- (void)getiTunesMusicForSong:(NMASong *)song
+                      success:(void (^)(NMASong *songWithPreview))success
+                      failure:(void (^)(NSError *error))failure;
+
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
-
-- (void)getPreviewURLForSong:(NSString *)songTitle
-                   AndArtist:(NSString *)songArtist
-                     success:(void (^)(NSURL *previewURL))success
                      failure:(void (^)(NSError *error))failure;
-
 @end
