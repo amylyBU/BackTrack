@@ -34,7 +34,7 @@ BOOL isMostRecentYearVisible;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.earliestYear = @"1981";
-    self.latestYear = @"2014";
+    [self getLatestYear];
     self.scrollView = [[UIScrollView alloc]
                        initWithFrame:CGRectMake(0, 0,
                                                 CGRectGetWidth(self.view.frame),
@@ -184,4 +184,13 @@ BOOL isMostRecentYearVisible;
     return [NSString stringWithFormat:@"%li", pastyear];
 }
 
+- (void) getLatestYear {
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSInteger pastyear = [currentYear integerValue] - 1;
+    NSString *pastYearString = [NSString stringWithFormat:@"%i", pastyear];
+    self.latestYear = pastYearString;
+    
+}
 @end
