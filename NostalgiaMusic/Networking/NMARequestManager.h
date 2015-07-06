@@ -18,8 +18,8 @@
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure;
 
-- (void)getNewYorkTimesStory:(NSString *)year
-                     success:(void (^)(NMANewsStory *story))success
+- (void)getNewYorkTimesStory:(NSString *)date
+                     success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure;
 
 @end

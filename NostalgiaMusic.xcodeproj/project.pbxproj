@@ -19,6 +19,7 @@
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */; };
+		614DB12E1B4ABAFB003CAAA6 /* NMANewsStoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614DB12D1B4ABAFB003CAAA6 /* NMANewsStoryCell.xib */; };
 		61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */; };
 		61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */; };
 		6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 615911491B3C4B6B006B6779 /* NMAYearCollectionViewController.m */; };
@@ -73,6 +74,7 @@
 		611F6A4C1B42E18500091809 /* NMAYearActivityScrollDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NMAYearActivityScrollDelegate.h; path = Controllers/Home/NMAYearActivityScrollDelegate.h; sourceTree = "<group>"; };
 		612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANewsStory.h; path = Models/NMANewsStory.h; sourceTree = "<group>"; };
 		612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMANewsStory.m; path = Models/NMANewsStory.m; sourceTree = "<group>"; };
+		614DB12D1B4ABAFB003CAAA6 /* NMANewsStoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMANewsStoryCell.xib; path = Controllers/Home/NMANewsStoryCell.xib; sourceTree = "<group>"; };
 		61550BBF1B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAYearCollectionViewCell.h; path = Controllers/Home/NMAYearCollectionViewCell.h; sourceTree = "<group>"; };
 		61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAYearCollectionViewCell.m; path = Controllers/Home/NMAYearCollectionViewCell.m; sourceTree = "<group>"; };
 		61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAYearCollectionViewCell.xib; path = Controllers/Home/NMAYearCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		615911591B3D850A006B6779 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				614DB12D1B4ABAFB003CAAA6 /* NMANewsStoryCell.xib */,
 				61550BBF1B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.h */,
 				61550BC01B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m */,
 				61550BC11B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib */,
@@ -388,6 +391,7 @@
 			files = (
 				E50E34861B43331900F10A5A /* tracks.db in Resources */,
 				E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */,
+				614DB12E1B4ABAFB003CAAA6 /* NMANewsStoryCell.xib in Resources */,
 				61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */,
 				072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */,
 				6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */,

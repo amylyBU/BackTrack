@@ -28,7 +28,7 @@
     }
     NMARequestManager *manager = [[NMARequestManager alloc] init];
     [manager getNewYorkTimesStory:@"1933"
-                          success:^(NMANewsStory *story){
+                          success:^(NSArray *story){
                               NSLog(@"test");
                           }
                           failure:^(NSError *error) {

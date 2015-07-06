@@ -13,7 +13,6 @@
 static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
 @interface NMAContentTableViewController ()
 @property (strong, nonatomic) NSMutableArray *dateRelatedContent;
-
 @end
 
 @implementation NMAContentTableViewController
@@ -30,6 +29,13 @@ static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
     [self.tableView addInfiniteScrollingWithActionHandler:^{
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
+    [self getDate];
+}
+
+- (void)getDate {
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyyMMdd"];
+    NSString *currentDate = [DateFormatter stringFromDate:[NSDate date]];
 }
 
 #pragma mark - Table view data source

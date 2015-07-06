@@ -40,19 +40,25 @@
     }
 }
 
-- (void)getNewYorkTimesStory:(NSString *)year
-                     success:(void (^)(NMANewsStory *story))success
+- (void)getNewYorkTimesStory:(NSString *)date
+                     success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure {
-    NSString *urltest = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22&begin_date=20000623&end_date=20000623&api-key=dcea47d59f7c08951bc83252867d596d:1:72360000";
-    NSURL *requestURL = [NSURL URLWithString:urltest];
+    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22";
+    NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
+    NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", date]];
+    NSString *urlWithYearRange = [urlWithStartYear stringByAppendingString:[NSString stringWithFormat:@"&end_date=%@", date]];
+    NSString *urlWithAPI = [urlWithYearRange stringByAppendingString:[NSString stringWithFormat:@"&api-key=%@", apiKey]];
+    
+    NSURL *requestURL = [NSURL URLWithString:urlWithAPI];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     NMANewsStory *story = [[NMANewsStory alloc] init];
+    NSMutableArray *stories = [[NSMutableArray alloc] init];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *json = responseObject;
-            NSLog(@"JSON: %@", responseObject);
-            success(story);
+            [self parseNYTJSON:responseObject intoArray:stories];
+        
+            success(stories);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failure");
         
@@ -60,5 +66,23 @@
     
     [operation start];
     
+}
+
+- (void)parseNYTJSON:(NSDictionary *)json intoArray:(NSMutableArray *)stories {
+    NMANewsStory *story = [[NMANewsStory alloc] init];
+    NSDictionary *response = [json objectForKey:@"response"];
+    NSDictionary *docs = [response objectForKey:@"docs"];
+    for (NSDictionary *item in docs){
+        NSMutableArray *images = [item valueForKey:@"multimedia"];
+        story.imageLinks = images;
+        story.abstract = [item valueForKey:@"abstract"];
+        story.headline = [item valueForKey:@"headline"];
+        story.headline = [story.headline valueForKey:@"main"];
+        story.snippet = [item valueForKey:@"snippet"];
+        story.articleURL = [item valueForKey:@"web_url"];
+        story.byline = [item valueForKey:@"byline"];
+        story.byline = [story.byline valueForKey:@"original"];
+        [stories addObject:story];
+    }
 }
 @end
