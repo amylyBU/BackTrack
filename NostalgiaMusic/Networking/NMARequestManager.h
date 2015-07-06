@@ -18,7 +18,6 @@
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure;
 
-
 - (void)getiTunesMusicForSong:(NMASong *)song
                       success:(void (^)(NMASong *songWithPreview))success
                       failure:(void (^)(NSError *error))failure;
@@ -27,4 +26,9 @@
                       onYear:(NSString *)year
                      success:(void (^)(NMANewsStory *story))success
                      failure:(void (^)(NSError *error))failure;
+
+- (void)requestFBPostsFromDate:(NSString *)year
+                       success:(void (^)(NSArray *posts))success
+                       failure:(void (^)(NSError *error))failure;
+
 @end

@@ -10,6 +10,7 @@
 #import "NMASong.h"
 #import "NMAFBPost.h"
 #import "FBSDKGraphRequest.h"
+#import "NMARequestManager.h"
 
 @interface NMADay : NSObject
 @property (strong, nonatomic, readonly) NSString *year;
