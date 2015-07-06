@@ -42,7 +42,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:33 inSection:0];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:self.years.count - 1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 }
 
