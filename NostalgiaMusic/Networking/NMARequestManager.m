@@ -144,27 +144,15 @@
 - (void)requestFBPostsFromDate:(NSString *)year
                        success:(void (^)(NSArray *posts))success
                        failure:(void (^)(NSError *error))failure {
+    //Facebook wants its dates in UTC, so make sure we set local boundaries before converting
+    NSDate *targetDateStart = [self getUTCDate:year start:YES];
+    NSDate *targetDateEnd = [self getUTCDate:year start:NO];
     
-    //Collect today's date information
-    NSDateComponents *presentDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
-                                                                              fromDate:[NSDate date]];
-    
-    //Create a date in the past of today's date (month & day) during our year
-    NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
-    [targetDateComponents setYear:[year integerValue]];
-    [targetDateComponents setMonth:presentDateComponents.month];
-    [targetDateComponents setDay:presentDateComponents.day];
-    NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *targetDate = [gregorianCal dateFromComponents:targetDateComponents];
-    
-    //Format the target date into a string we can make the reqest with
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *date = [dateFormatter stringFromDate:targetDate];
-    NSString *dayStart = @"T00:00:00";
-    NSString *dayEnd = @"T23:59:59";
-    NSString *sinceTime = [NSString stringWithFormat:@"%@%@", date, dayStart];
-    NSString *untilTime = [NSString stringWithFormat:@"%@%@", date, dayEnd];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *sinceTime = [dateFormatter stringFromDate:targetDateStart];
+    NSString *untilTime = [dateFormatter stringFromDate:targetDateEnd];
     NSDictionary *params = @{
                              @"since" : sinceTime,
                              @"until" : untilTime
@@ -184,6 +172,28 @@
         }
         
     }];
+}
+
+#pragma mark - Format Utility
+
+- (NSDate *)getUTCDate:(NSString *)year
+                start:(BOOL)start {
+    //Collect today's date information
+    NSDateComponents *presentDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                              fromDate:[NSDate date]];
+    
+    //Create a date in the past of today's date (month & day) during our year
+    NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
+    [targetDateComponents setYear:[year integerValue]];
+    [targetDateComponents setMonth:presentDateComponents.month];
+    [targetDateComponents setDay:presentDateComponents.day];
+    [targetDateComponents setHour:(start ? 0 : 23)];
+    [targetDateComponents setMinute:(start ? 0 : 59)];
+    [targetDateComponents setSecond:(start ? 0 : 59)];
+    [targetDateComponents setTimeZone:[NSTimeZone localTimeZone]];
+    NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    return [gregorianCal dateFromComponents:targetDateComponents];
     
 }
 

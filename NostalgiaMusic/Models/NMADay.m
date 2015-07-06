@@ -39,19 +39,21 @@
      requestFBPostsFromDate:self.year
      success:^(NSArray *posts) {
          for(id post in posts) {
-             //We look for all of these keys indiscrimintently, but certain
-             //types of posts won't have these keys, so will just be nil
-             //In the displaying of these keys, we check for nil
-             NSString *message = [post objectForKey:@"message"];
-             NSString *picture = [post objectForKey:@"picture"];
-             NSString *createdTime = [post objectForKey:@"created_time"];
-             NMAFBPost *FBPost = [[NMAFBPost alloc] initWithMessage:message
-                                                        picturePath:picture
-                                                          likeCount:0
-                                                       commentCount:0
-                                                        createdTime:createdTime];
-             NSLog(FBPost.message);
-             [mutablePosts addObject:FBPost];
+             //we are only interested in status and photo updates for now
+             NSString *type = [post objectForKey:@"type"];
+             if([type  isEqual: @"status"] || [type  isEqual: @"photo"]) {
+                 NSLog([post objectForKey:@"type"]);
+                 NSString *message = [post objectForKey:@"message"];
+                 NSString *picture = [post objectForKey:@"picture"];
+                 NSString *createdTime = [post objectForKey:@"created_time"];
+                 NMAFBPost *FBPost = [[NMAFBPost alloc] initWithMessage:message
+                                                            picturePath:picture
+                                                              likeCount:0
+                                                           commentCount:0
+                                                            createdTime:createdTime];
+                 NSLog(FBPost.message);
+                 [mutablePosts addObject:FBPost];
+             }
          }
          self.FBPosts = [mutablePosts copy];
      }
