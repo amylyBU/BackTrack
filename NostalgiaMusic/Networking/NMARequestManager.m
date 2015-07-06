@@ -41,23 +41,23 @@
 }
 
 - (void)getNewYorkTimesStory:(NSString *)date
+                    withYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure {
     NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22";
     NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
-    NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", date]];
-    NSString *urlWithYearRange = [urlWithStartYear stringByAppendingString:[NSString stringWithFormat:@"&end_date=%@", date]];
+    NSString *dateWithYear = [year stringByAppendingString:date];
+    NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", dateWithYear]];
+    NSString *urlWithYearRange = [urlWithStartYear stringByAppendingString:[NSString stringWithFormat:@"&end_date=%@", dateWithYear]];
     NSString *urlWithAPI = [urlWithYearRange stringByAppendingString:[NSString stringWithFormat:@"&api-key=%@", apiKey]];
     
     NSURL *requestURL = [NSURL URLWithString:urlWithAPI];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    NMANewsStory *story = [[NMANewsStory alloc] init];
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self parseNYTJSON:responseObject intoArray:stories];
-        
             success(stories);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failure");
