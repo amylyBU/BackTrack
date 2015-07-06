@@ -26,14 +26,7 @@
     } else {
         [self goToOnboarding];
     }
-    NMARequestManager *manager = [[NMARequestManager alloc] init];
-    [manager getNewYorkTimesStory:@"1013" withYear:@"1999"
-                          success:^(NSArray *story){
-                              NSLog(@"test");
-                          }
-                          failure:^(NSError *error) {
-                              
-                          }];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

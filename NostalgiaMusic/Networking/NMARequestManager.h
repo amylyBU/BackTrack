@@ -19,7 +19,7 @@
                          failure:(void (^)(NSError *error))failure;
 
 - (void)getNewYorkTimesStory:(NSString *)date
-                    withYear:(NSString *)year
+                      onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure;
 
