@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface NMANewsStoryTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *headline;
-@property (weak, nonatomic) IBOutlet UILabel *byline;
-@property (weak, nonatomic) IBOutlet UITextView *summary;
-@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bylineLabel;
+@property (weak, nonatomic) IBOutlet UITextView *summaryTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

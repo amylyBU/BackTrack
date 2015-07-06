@@ -32,14 +32,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self setUpYears];
 }
 
-- (void) getLatestYear {
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
-    NSInteger pastyear = [currentYear integerValue] - 1;
-    self.latestYear = pastyear;
-    
-}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:self.years.count - 1 inSection:0];
@@ -104,6 +96,16 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
+}
+
+#pragma mark - Getters and Setters
+- (void) getLatestYear {
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSInteger pastyear = [currentYear integerValue] - 1;
+    self.latestYear = pastyear;
+    
 }
 
 @end

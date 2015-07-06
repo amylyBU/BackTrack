@@ -44,21 +44,14 @@
                       onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure {
-    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22+OR+%22World%22";
-    NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
-    NSString *dateWithYear = [year stringByAppendingString:date];
-    NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", dateWithYear]];
-    NSString *urlWithYearRange = [urlWithStartYear stringByAppendingString:[NSString stringWithFormat:@"&end_date=%@", dateWithYear]];
-    NSString *urlWithAPI = [urlWithYearRange stringByAppendingString:[NSString stringWithFormat:@"&api-key=%@", apiKey]];
     
-    NSURL *requestURL = [NSURL URLWithString:urlWithAPI];
+    NSURL *requestURL = [NSURL URLWithString:[self configureQueryString:date withYear:year]];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:requestURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableArray *stories = [[NSMutableArray alloc] init];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [self parseNYTJSON:responseObject intoArray:stories];
-            success(stories);
+            success([self parseNYTJSON:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get NYT information");
         
@@ -68,7 +61,18 @@
     
 }
 
-- (void)parseNYTJSON:(NSDictionary *)json intoArray:(NSMutableArray *)stories {
+- (NSString *)configureQueryString:(NSString *)date withYear:(NSString *)year{
+    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22+OR+%22World%22";
+    NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
+    NSString *dateWithYear = [year stringByAppendingString:date];
+    NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", dateWithYear]];
+    NSString *urlWithYearRange = [urlWithStartYear stringByAppendingString:[NSString stringWithFormat:@"&end_date=%@", dateWithYear]];
+    NSString *urlWithAPI = [urlWithYearRange stringByAppendingString:[NSString stringWithFormat:@"&api-key=%@", apiKey]];
+    return urlWithAPI;
+}
+
+- (NSMutableArray *)parseNYTJSON:(NSDictionary *)json {
+    NSMutableArray *stories = [[NSMutableArray alloc] init];
     NMANewsStory *story = [[NMANewsStory alloc] init];
     NSDictionary *response = [json objectForKey:@"response"];
     NSDictionary *docs = [response objectForKey:@"docs"];
@@ -84,5 +88,6 @@
         story.byline = [story.byline valueForKey:@"original"];
         [stories addObject:story];
     }
+    return stories;
 }
 @end
