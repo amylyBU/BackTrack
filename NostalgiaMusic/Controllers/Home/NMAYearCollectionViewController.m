@@ -9,7 +9,7 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAYearCollectionViewCell.h"
 
-static NSInteger const earliestYear = 1980;
+static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 
 @interface NMAYearCollectionViewController ()
@@ -42,7 +42,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:34 inSection:0];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:33 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 }
 

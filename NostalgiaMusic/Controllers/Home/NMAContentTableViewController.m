@@ -21,10 +21,6 @@ static NSString * const kNMAYearTableCellIdentifier = @"NMAYearTableCell";
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearTableViewCell class]) bundle:nil] forCellReuseIdentifier:kNMAYearTableCellIdentifier];
     self.dateRelatedContent = [[NSMutableArray alloc] init];
-    if (self.year) {
-        [self.dateRelatedContent addObject:self.year];
-    }
-    //infinite scroll block, add objects to daterelatedcontnent and reload table
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
