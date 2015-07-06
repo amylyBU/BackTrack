@@ -17,6 +17,8 @@
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
+		07ECCBFC1B4AEEB70089D042 /* NMAFBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */; };
+		07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFE1B4B12830089D042 /* NMADay.m */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE411B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m */; };
 		612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE421B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib */; };
@@ -74,6 +76,10 @@
 		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
 		07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAAppSettings.h; path = Models/NMAAppSettings.h; sourceTree = "<group>"; };
 		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
+		07ECCBFA1B4AEEB70089D042 /* NMAFBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBPost.h; path = Models/NMAFBPost.h; sourceTree = "<group>"; };
+		07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBPost.m; path = Models/NMAFBPost.m; sourceTree = "<group>"; };
+		07ECCBFD1B4B12830089D042 /* NMADay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMADay.h; path = Models/NMADay.h; sourceTree = "<group>"; };
+		07ECCBFE1B4B12830089D042 /* NMADay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMADay.m; path = Models/NMADay.m; sourceTree = "<group>"; };
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearActivityScrollViewController.h; sourceTree = "<group>"; };
@@ -151,6 +157,10 @@
 				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
 				612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */,
 				612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */,
+				07ECCBFA1B4AEEB70089D042 /* NMAFBPost.h */,
+				07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */,
+				07ECCBFD1B4B12830089D042 /* NMADay.h */,
+				07ECCBFE1B4B12830089D042 /* NMADay.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -495,10 +505,12 @@
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */,
 				E50E348A1B44461E00F10A5A /* NMASong.m in Sources */,
+				07ECCBFC1B4AEEB70089D042 /* NMAFBPost.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
+				07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */,
 				611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */,
 				615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */,
 			);
