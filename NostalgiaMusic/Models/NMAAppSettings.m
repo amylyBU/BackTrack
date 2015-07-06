@@ -70,5 +70,8 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     return [self accessTokenForKey:kAccessTokenSettingKey] != nil; // TODO: must check if the access token has expired
 }
 
+- (BOOL)userDidAutoplay {
+    return [self accessTokenForKey:kAutoplaySettingKey];
+}
 
 @end

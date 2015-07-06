@@ -15,6 +15,4 @@
 @property (weak, nonatomic) IBOutlet UIImageView *albumImage;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
 
-
-
 @end

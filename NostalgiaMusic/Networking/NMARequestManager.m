@@ -112,8 +112,8 @@
 
                      NSMutableArray *images = [[NSMutableArray alloc] init];
                      [images addObject:[result objectForKey:@"artworkUrl100"]];
-                     [images addObject:[result objectForKey:@"artworkUrl30"]];
                      [images addObject:[result objectForKey:@"artworkUrl60"]];
+                     [images addObject:[result objectForKey:@"artworkUrl30"]];
                      song.albumImageUrlsArray = [images copy];
 
                      break;

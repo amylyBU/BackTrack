@@ -166,8 +166,8 @@ BOOL isMostRecentYearVisible;
                                       withYear:(NSString *)year
                                     atPosition:(NMAScrollViewYearPosition)position {
     CGFloat origin = position * self.view.frame.size.width;
-    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     viewController.year = year;
+    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [self.scrollView addSubview:viewController.view];
     [self addChildViewController:viewController];
 }
