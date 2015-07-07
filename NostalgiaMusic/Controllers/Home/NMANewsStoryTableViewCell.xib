@@ -39,7 +39,7 @@
             <connections>
                 <outlet property="bylineLabel" destination="HK3-1A-87S" id="JvK-pA-Zvd"/>
                 <outlet property="headlineLabel" destination="v7d-3c-DqA" id="e4Z-Mx-aTy"/>
-                <outlet property="imageView" destination="1dE-HU-0EW" id="pcz-6i-klw"/>
+                <outlet property="newsStoryImageView" destination="1dE-HU-0EW" id="bIa-Nn-lXZ"/>
                 <outlet property="summaryTextView" destination="tI7-66-cal" id="RqG-sf-vy4"/>
             </connections>
             <point key="canvasLocation" x="368" y="214"/>
