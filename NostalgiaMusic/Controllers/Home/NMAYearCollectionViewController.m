@@ -9,12 +9,12 @@
 #import "NMAYearCollectionViewController.h"
 #import "NMAYearCollectionViewCell.h"
 
-static NSInteger const earliestYear = 1980;
-static NSInteger const latestYear =  2014;
+static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 
 @interface NMAYearCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *years;
+@property (nonatomic) NSInteger latestYear;
 
 @end
 
@@ -27,13 +27,14 @@ static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCe
     self.collectionView.clipsToBounds = YES;
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
 forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
+    [self getLatestYear];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:34 inSection:0];
+    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:self.years.count - 1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 }
 
@@ -48,7 +49,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)setUpYears {
     self.years = [[NSMutableArray alloc] init];
-    for(int i = 0; i < (latestYear - earliestYear + 1); i++){
+    for(int i = 0; i < (self.latestYear - earliestYear + 1); i++){
         NSString *yearForCell = [NSString stringWithFormat:@"%li", earliestYear + i];
         [self.years addObject:yearForCell];
     }
@@ -95,6 +96,16 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
     [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
+}
+
+#pragma mark - Getters and Setters
+- (void) getLatestYear {
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSInteger pastyear = [currentYear integerValue] - 1;
+    self.latestYear = pastyear;
+    
 }
 
 @end

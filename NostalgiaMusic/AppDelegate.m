@@ -26,6 +26,7 @@
     } else {
         [self goToOnboarding];
     }
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

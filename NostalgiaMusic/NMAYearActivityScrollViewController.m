@@ -23,6 +23,8 @@ BOOL isMostRecentYearVisible;
 @property (strong, nonatomic) NMAContentTableViewController *leftTableViewController;
 @property (strong, nonatomic) NMAContentTableViewController *middleTableViewController;
 @property (strong, nonatomic) NMAContentTableViewController *rightTableViewController;
+@property (copy, nonatomic) NSString *earliestYear;
+@property (copy, nonatomic) NSString *latestYear;
 
 @end
 
@@ -31,6 +33,8 @@ BOOL isMostRecentYearVisible;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.earliestYear = @"1981";
+    [self getLatestYear];
     self.scrollView = [[UIScrollView alloc]
                        initWithFrame:CGRectMake(0, 0,
                                                 CGRectGetWidth(self.view.frame),
@@ -38,7 +42,7 @@ BOOL isMostRecentYearVisible;
     
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
-    [self setUpScrollView:@"2014"];
+    [self setUpScrollView:self.latestYear];
     [self.view addSubview:self.scrollView];
     
 }
@@ -47,13 +51,13 @@ BOOL isMostRecentYearVisible;
     NSInteger numberOfViews = 3;
     self.year = year;
     
-    if ([self.year isEqualToString:@"1980"]) {
-        self.year = @"1981";
+    if ([self.year isEqualToString:self.earliestYear]) {
+        self.year = [self incrementStringValue:self.earliestYear];
         isEarliestYearVisble = YES;
         CGPoint scrollPoint = CGPointMake(0, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
-    } else if ([self.year isEqualToString:@"2014"]) {
-        self.year = @"2013";
+    } else if ([self.year isEqualToString:self.latestYear]) {
+        self.year = [self decrementStringValue:self.latestYear];
         isMostRecentYearVisible = YES;
         CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 2, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
@@ -61,13 +65,13 @@ BOOL isMostRecentYearVisible;
         [self setContentOffsetToCenter];
     }
     
-    self.leftTableViewController = [[NMAContentTableViewController alloc]init];
+    self.leftTableViewController = [[NMAContentTableViewController alloc] init];
     [self configureNMAContentTableViewController:self.leftTableViewController
                                         withYear:[self decrementStringValue:self.year] atPosition:NMAScrollViewPositionPastYear];
-    self.middleTableViewController = [[NMAContentTableViewController alloc]init];
+   self.middleTableViewController = [[NMAContentTableViewController alloc] init];
     [self configureNMAContentTableViewController:self.middleTableViewController withYear:self.year atPosition:NMAScrollViewPositionCurrentYear];
     
-    self.rightTableViewController = [[NMAContentTableViewController alloc]init];
+   self.rightTableViewController = [[NMAContentTableViewController alloc] init];
     [self configureNMAContentTableViewController:self.rightTableViewController withYear:[self incrementStringValue:self.year] atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews,
                                              self.view.frame.size.height);
@@ -104,9 +108,9 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)didSwipeToPastYear {
-    if ([self.leftTableViewController.year isEqualToString:@"1980"]){
+    if ([self.leftTableViewController.year isEqualToString:self.earliestYear]){
         isEarliestYearVisble = YES;
-    } else if ([self.middleTableViewController.year isEqualToString:@"2013"] && isMostRecentYearVisible)  {
+    } else if ([self.middleTableViewController.year isEqualToString:[self decrementStringValue:self.latestYear]] && isMostRecentYearVisible)  {
         isMostRecentYearVisible = NO;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
@@ -114,9 +118,9 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)didSwipeToNextYear {
-    if ([self.rightTableViewController.year isEqualToString:@"2014"]){
+    if ([self.rightTableViewController.year isEqualToString:self.latestYear]){
         isMostRecentYearVisible = YES;
-    } else if ([self.leftTableViewController.year isEqualToString:@"1980" ] && isEarliestYearVisble) {
+    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear ] && isEarliestYearVisble) {
         isEarliestYearVisble = NO;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
@@ -180,4 +184,13 @@ BOOL isMostRecentYearVisible;
     return [NSString stringWithFormat:@"%li", pastyear];
 }
 
+- (void) getLatestYear {
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSInteger pastyear = [currentYear integerValue] - 1;
+    NSString *pastYearString = [NSString stringWithFormat:@"%i", pastyear];
+    self.latestYear = pastYearString;
+    
+}
 @end
