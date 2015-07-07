@@ -46,17 +46,16 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
-    if (self.year) {
-        [[NMARequestManager sharedManager] getSongFromYear:self.year
-                                                   success:^(NMASong *song) {
-                                                       [self.billboardSongs addObject:song];
+    [[NMARequestManager sharedManager] getSongFromYear:self.year
+                                               success:^(NMASong *song) {
+                                                   [self.billboardSongs addObject:song];
+                                                   
+                                                   [self.tableView reloadData];
+                                               }
+                                               failure:^(NSError *error) {
+                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
+                                               }];
 
-                                                       [self.tableView reloadData];
-                                                   }
-                                                   failure:^(NSError *error) {
-                                                       NSLog(@"something went horribly wrong"); //TODO: handle error
-                                                   }];
-    }
 
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{

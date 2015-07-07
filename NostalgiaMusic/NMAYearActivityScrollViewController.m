@@ -189,7 +189,7 @@ BOOL isMostRecentYearVisible;
     [DateFormatter setDateFormat:@"yyyy"];
     NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
-    NSString *pastYearString = [NSString stringWithFormat:@"%i", pastyear];
+    NSString *pastYearString = [NSString stringWithFormat:@"%li", (long)pastyear];
     self.latestYear = pastYearString;
     
 }

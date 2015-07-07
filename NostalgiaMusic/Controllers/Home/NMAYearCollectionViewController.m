@@ -50,7 +50,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 - (void)setUpYears {
     self.years = [[NSMutableArray alloc] init];
     for(int i = 0; i < (self.latestYear - earliestYear + 1); i++){
-        NSString *yearForCell = [NSString stringWithFormat:@"%i", earliestYear + i];
+        NSString *yearForCell = [NSString stringWithFormat:@"%li", (long)(earliestYear + i)];
         [self.years addObject:yearForCell];
     }
 }
