@@ -82,19 +82,19 @@
     for (NSDictionary *item in docs) {
         NSMutableArray *images = [item valueForKey:@"multimedia"];
         story.imageLinks = images;
-        story.abstract = [self checkIfNSNull:[item valueForKey:@"abstract"]];
+        story.abstract = [self resolveNSNullToNil:[item valueForKey:@"abstract"]];
         story.headline = [item valueForKey:@"headline"];
-        story.headline = [self checkIfNSNull:[story.headline valueForKey:@"main"]];
-        story.snippet = [self checkIfNSNull:[item valueForKey:@"snippet"]];
-        story.articleURL = [self checkIfNSNull:[item valueForKey:@"web_url"]];
+        story.headline = [self resolveNSNullToNil:[story.headline valueForKey:@"main"]];
+        story.snippet = [self resolveNSNullToNil:[item valueForKey:@"snippet"]];
+        story.articleURL = [self resolveNSNullToNil:[item valueForKey:@"web_url"]];
         story.byline = [item valueForKey:@"byline"];
-        story.byline = [self checkIfNSNull:[story.byline valueForKey:@"original"]];
+        story.byline = [self resolveNSNullToNil:[story.byline valueForKey:@"original"]];
         [stories addObject:story];
     }
     return stories;
   }
 
-- (id)checkIfNSNull:(id)objectForKey {
+- (id)resolveNSNullToNil:(id)objectForKey {
     return [NSNull null] == objectForKey ? nil : objectForKey;
 }
 
