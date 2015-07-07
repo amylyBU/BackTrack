@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -37,10 +37,10 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="byline" destination="HK3-1A-87S" id="PUe-ZQ-f9d"/>
-                <outlet property="headline" destination="v7d-3c-DqA" id="lTT-ey-JL8"/>
-                <outlet property="image" destination="1dE-HU-0EW" id="QQt-VG-7Im"/>
-                <outlet property="summary" destination="tI7-66-cal" id="Q38-kj-4nG"/>
+                <outlet property="bylineLabel" destination="HK3-1A-87S" id="JvK-pA-Zvd"/>
+                <outlet property="headlineLabel" destination="v7d-3c-DqA" id="e4Z-Mx-aTy"/>
+                <outlet property="newsStoryImageView" destination="1dE-HU-0EW" id="bIa-Nn-lXZ"/>
+                <outlet property="summaryTextView" destination="tI7-66-cal" id="RqG-sf-vy4"/>
             </connections>
             <point key="canvasLocation" x="368" y="214"/>
         </tableViewCell>

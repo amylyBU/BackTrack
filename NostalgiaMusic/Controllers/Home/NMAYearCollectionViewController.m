@@ -44,13 +44,13 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView setCollectionViewLayout:self.flowLayout];
-    
+
 }
 
 - (void)setUpYears {
     self.years = [[NSMutableArray alloc] init];
     for(int i = 0; i < (self.latestYear - earliestYear + 1); i++){
-        NSString *yearForCell = [NSString stringWithFormat:@"%li", earliestYear + i];
+        NSString *yearForCell = [NSString stringWithFormat:@"%li", (long)(earliestYear + i)];
         [self.years addObject:yearForCell];
     }
 }
@@ -105,7 +105,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     self.latestYear = pastyear;
-    
+
 }
 
 @end

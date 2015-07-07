@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NMAContentTableViewController : UITableViewController
+
 @property (copy, nonatomic) NSString *year;
 
 @end

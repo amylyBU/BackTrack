@@ -166,8 +166,8 @@ BOOL isMostRecentYearVisible;
                                       withYear:(NSString *)year
                                     atPosition:(NMAScrollViewYearPosition)position {
     CGFloat origin = position * self.view.frame.size.width;
-    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     viewController.year = year;
+    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [self.scrollView addSubview:viewController.view];
     [self addChildViewController:viewController];
 }
@@ -176,12 +176,12 @@ BOOL isMostRecentYearVisible;
 
 - (NSString *)incrementStringValue:(NSString *)value {
     NSInteger nextyear = [value integerValue] + 1;
-    return [NSString stringWithFormat:@"%li", nextyear];
+    return [NSString stringWithFormat:@"%li", (long)nextyear];
 }
 
 - (NSString *)decrementStringValue:(NSString *)value {
     NSInteger pastyear = [value integerValue] - 1;
-    return [NSString stringWithFormat:@"%li", pastyear];
+    return [NSString stringWithFormat:@"%li", (long)pastyear];
 }
 
 - (void) getLatestYear {
@@ -189,7 +189,7 @@ BOOL isMostRecentYearVisible;
     [DateFormatter setDateFormat:@"yyyy"];
     NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
-    NSString *pastYearString = [NSString stringWithFormat:@"%i", pastyear];
+    NSString *pastYearString = [NSString stringWithFormat:@"%li", (long)pastyear];
     self.latestYear = pastYearString;
     
 }

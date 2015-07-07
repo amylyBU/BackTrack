@@ -11,7 +11,6 @@
 #import "NMAHomeViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAFBConnectViewController.h"
-#import "NMARequestManager.h"
 
 @interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
@@ -26,7 +25,6 @@
     } else {
         [self goToOnboarding];
     }
-    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

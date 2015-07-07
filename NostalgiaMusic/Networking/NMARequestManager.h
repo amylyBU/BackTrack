@@ -18,9 +18,13 @@
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure;
 
+
+- (void)getiTunesMusicForSong:(NMASong *)song
+                      success:(void (^)(NMASong *songWithPreview))success
+                      failure:(void (^)(NSError *error))failure;
+
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
                      success:(void (^)(NSMutableArray *stories))success
                      failure:(void (^)(NSError *error))failure;
-
 @end
