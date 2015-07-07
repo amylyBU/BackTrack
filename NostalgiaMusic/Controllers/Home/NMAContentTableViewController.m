@@ -64,37 +64,6 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     }];
 }
 
-<<<<<<< HEAD
-- (void)makeiTunesWebCall:(NMASong *)song {
-    [[NMARequestManager sharedManager] getiTunesMusicForSong:song
-                                                     success:^(NMASong *songWithPreview) {
-                                                         [self.billboardSongs addObject:songWithPreview];
-                                                         [self.tableView reloadData];
-                                                         NSLog(@"success");
-                                                     } failure:^(NSError *error) {
-                                                         NSLog(@"failed"); //TODO: handle error
-                                                     }];
-}
-
-- (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl {
-    NSError *error = [[NSError alloc] init];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:previewUrl error:&error];
-    player.numberOfLoops = 1; //TODO: configure autoplay settings
-
-    //TODO: initialize player.delegate when the home view controller is initialized
-    [player prepareToPlay];
-
-    if (player) {
-        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-            [player play];
-        }
-    } else {
-        NSLog(@"%@",[error description]); //TODO: handle error
-    }
-}
-
-=======
->>>>>>> ebf1342... refactored web calls and cell configuration. return statements for switch cases. Can now view songs and album images from iTunes.
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -103,11 +72,6 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-<<<<<<< HEAD
-
-    NSInteger numRows = 0;
-=======
->>>>>>> ebf1342... refactored web calls and cell configuration. return statements for switch cases. Can now view songs and album images from iTunes.
     switch (section) {
         case NMASectionTypeBillboardSong:
             return self.billboardSongs.count;
