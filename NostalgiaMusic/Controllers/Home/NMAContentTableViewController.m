@@ -60,11 +60,11 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
     
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"ddMM"];
-    NSString *currentDayMonth = [DateFormatter  stringFromDate:[NSDate date]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"ddMM"];
+    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
     NMARequestManager *manager = [[NMARequestManager alloc] init];
-    [manager getNewYorkTimesStory:@"0707" onYear:self.year
+    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story){
                               if (!story == nil) {
                               [self.NYTimesNews addObject:story];
@@ -116,11 +116,9 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
         case NMASectionTypeFacebookActivity:
 
         case NMASectionTypeNYTimesNews: {
-            if (self.NYTimesNews.count) {
                 NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
                 [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
                 return cell;
-            }
         }
 
         default:

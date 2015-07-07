@@ -57,7 +57,7 @@
         success([stories objectAtIndex:0]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get NYT information");
-
+        failure(nil);
      }];
 
     [operation start];
