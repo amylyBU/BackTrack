@@ -12,10 +12,9 @@
 #import "NMASong.h"
 #import <SVPullToRefresh.h>
 #import "NMARequestManager.h"
-#import <AVFoundation/AVFoundation.h>
 #import "NMAAppSettings.h"
 
-NS_ENUM(NSInteger, NMASectionType) {
+NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
     NMASectionTypeFacebookActivity,
     NMASectionTypeNYTimesNews
@@ -48,11 +47,15 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
     if (self.year) {
-        [[NMARequestManager sharedManager] getSongFromYear:self.year success:^(NMASong *song) {
-            [self makeiTunesWebCall:song];
-        } failure:^(NSError *error) {
-            NSLog(@"something went horribly wrong"); //TODO: handle error
-        }];
+        [[NMARequestManager sharedManager] getSongFromYear:self.year
+                                                   success:^(NMASong *song) {
+                                                       [self.billboardSongs addObject:song];
+
+                                                       [self.tableView reloadData];
+                                                   }
+                                                   failure:^(NSError *error) {
+                                                       NSLog(@"something went horribly wrong"); //TODO: handle error
+                                                   }];
     }
 
     __weak NMAContentTableViewController *weakSelf = self;
@@ -61,6 +64,7 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     }];
 }
 
+<<<<<<< HEAD
 - (void)makeiTunesWebCall:(NMASong *)song {
     [[NMARequestManager sharedManager] getiTunesMusicForSong:song
                                                      success:^(NMASong *songWithPreview) {
@@ -89,6 +93,8 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     }
 }
 
+=======
+>>>>>>> ebf1342... refactored web calls and cell configuration. return statements for switch cases. Can now view songs and album images from iTunes.
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -97,49 +103,38 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
+<<<<<<< HEAD
 
     NSInteger numRows = 0;
+=======
+>>>>>>> ebf1342... refactored web calls and cell configuration. return statements for switch cases. Can now view songs and album images from iTunes.
     switch (section) {
         case NMASectionTypeBillboardSong:
-            numRows = self.billboardSongs.count;
-            break;
+            return self.billboardSongs.count;
         case NMASectionTypeFacebookActivity:
-            numRows = self.facebookActivities.count;
-            break;
+            return self.facebookActivities.count;
         case NMASectionTypeNYTimesNews:
-            numRows = self.NYTimesNews.count;
-            break;
+            return self.NYTimesNews.count;
+        default:
+            return 0;
     }
-    return numRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    NMATodaysSongTableViewCell *songCell;
-    //TODO: declare other table view cell classes
-
     switch (indexPath.section) {
-
-        case NMASectionTypeBillboardSong:
-           songCell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
-            songCell.songTitleLabel.text = ((NMASong *)self.billboardSongs[0]).title;
-            songCell.artistLabel.text = ((NMASong *)self.billboardSongs[0]).artistAsAppearsOnLabel;
-            songCell.albumImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:((NMASong *)self.billboardSongs[0]).albumImageUrlsArray[0]]]];
-            songCell.albumImage.layer.cornerRadius = songCell.albumImage.frame.size.height /2;
-            songCell.albumImage.layer.masksToBounds = YES;
-            break;
-
+        case NMASectionTypeBillboardSong: {
+            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
+            [cell configureCellForSong:self.billboardSongs[indexPath.row]];
+            return cell;
+        }
         case NMASectionTypeFacebookActivity:
-            //TODO: set up cell for facebook activity from model
-            break;
 
         case NMASectionTypeNYTimesNews:
-            //TODO: set up cell for news from model
-            break;
 
+        default:
+            return nil;
     }
-    return songCell; // TODO: move return statements
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
@@ -149,20 +144,16 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-
-    NSString *sectionTitle;
     switch (section) {
         case NMASectionTypeBillboardSong:
-            sectionTitle = @"Top 100 Billboard Song"; //TODO: Remove this title, it is not in the design.
-            break;
+            return @"Top 100 Billboard Song"; //TODO: Remove this title, it is not in the design.
         case NMASectionTypeFacebookActivity:
-            sectionTitle = @"Facebook Activities";
-            break;
+            return @"Facebook Activities";
         case NMASectionTypeNYTimesNews:
-            sectionTitle = @"News";
-            break;
+            return @"News";
+        default:
+            return @"";
     }
-    return sectionTitle;
 }
 
 @end

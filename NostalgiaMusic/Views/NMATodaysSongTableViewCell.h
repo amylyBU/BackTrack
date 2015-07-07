@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class NMASong;
 
 @interface NMATodaysSongTableViewCell : UITableViewCell
 
@@ -14,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *albumImage;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
+
+- (void)configureCellForSong:(NMASong *)song;
 
 @end

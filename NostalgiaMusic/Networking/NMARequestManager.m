@@ -22,19 +22,23 @@
     return sharedManager;
 }
 
-
 - (void)getSongFromYear:(NSString *)year
                          success:(void (^)(NMASong *song))success
                          failure:(void (^)(NSError *error))failure {
     NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
+    
     if (song) {
         if (success) {
-            success(song);
+            [self getiTunesMusicForSong:song
+                                success:success
+                                failure:^(NSError *error) {
+                                    NSLog(@"can't find song on itunes"); //TODO: handle error
+                                }];
         }
     } else {
         if (failure) {
             NSError *error = [[NSError alloc] init];
-            failure(error);
+            failure(error); //TODO: handle error
         }
     }
 }
@@ -125,7 +129,7 @@
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              if (failure) {
-                 failure (error);
+                 failure (error); //TODO: handle error
              }
          }
      ];

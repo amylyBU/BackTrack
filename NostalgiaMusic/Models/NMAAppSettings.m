@@ -71,7 +71,7 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
 }
 
 - (BOOL)userDidAutoplay {
-    return [self accessTokenForKey:kAutoplaySettingKey];
+    return [self userDefaultSettingForKey:kAutoplaySettingKey];
 }
 
 @end

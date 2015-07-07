@@ -176,12 +176,12 @@ BOOL isMostRecentYearVisible;
 
 - (NSString *)incrementStringValue:(NSString *)value {
     NSInteger nextyear = [value integerValue] + 1;
-    return [NSString stringWithFormat:@"%li", nextyear];
+    return [NSString stringWithFormat:@"%li", (long)nextyear];
 }
 
 - (NSString *)decrementStringValue:(NSString *)value {
     NSInteger pastyear = [value integerValue] - 1;
-    return [NSString stringWithFormat:@"%li", pastyear];
+    return [NSString stringWithFormat:@"%li", (long)pastyear];
 }
 
 - (void) getLatestYear {

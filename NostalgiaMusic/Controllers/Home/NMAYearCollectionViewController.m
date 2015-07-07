@@ -44,7 +44,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView setCollectionViewLayout:self.flowLayout];
-    
+
 }
 
 - (void)setUpYears {
@@ -105,7 +105,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     self.latestYear = pastyear;
-    
+
 }
 
 @end
