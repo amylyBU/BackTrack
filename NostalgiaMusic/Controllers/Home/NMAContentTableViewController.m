@@ -28,7 +28,6 @@ static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
 static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
-static NSString * const kNMAFBActivityTableCellIdentifier = @"NMAFBActivityTableCell";
 
 @interface NMAContentTableViewController ()
 
@@ -45,6 +44,9 @@ static NSString * const kNMAFBActivityTableCellIdentifier = @"NMAFBActivityTable
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
@@ -93,8 +95,10 @@ static NSString * const kNMAFBActivityTableCellIdentifier = @"NMAFBActivityTable
     switch (section) {
         case NMASectionTypeBillboardSong:
             return self.billboardSongs.count;
-        case NMASectionTypeFacebookActivity:
-            return self.facebookActivities.count;
+        case NMASectionTypeFacebookActivity: {
+            NSUInteger activityCount = self.day.FBActivities.count;
+            return activityCount > 0 ? activityCount : 1;
+        }
         case NMASectionTypeNYTimesNews:
             return self.NYTimesNews.count;
         default:
@@ -110,12 +114,20 @@ static NSString * const kNMAFBActivityTableCellIdentifier = @"NMAFBActivityTable
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             return cell;
         }
-        case NMASectionTypeFacebookActivity:
+        case NMASectionTypeFacebookActivity: {
+            NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAFacebookActivityCellIdentifier forIndexPath:indexPath];
+            if(self.day.FBActivities.count) {
+                [cell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+            } else {
+                [cell configureEmptyCell];
+            }
+            return cell;
+        }
 
         case NMASectionTypeNYTimesNews: {
-                NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
-                [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
-                return cell;
+            NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
+            [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
+            return cell;
         }
         default:
             return nil;

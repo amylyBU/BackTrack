@@ -14,4 +14,15 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)configureCellForFBActivity:(NMAFBActivity *)FBPost {
+    self.timeLabel.text = FBPost.createdTime;
+    self.postMessage.text = FBPost.message;
+}
+
+- (void)configureEmptyCell {
+    self.timeView.hidden = YES;
+    self.postImageView.hidden = YES;
+    self.postMessage.text = @"There is no Facebook activity from this day";
+}
+
 @end
