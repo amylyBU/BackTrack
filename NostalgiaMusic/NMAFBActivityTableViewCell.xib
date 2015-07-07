@@ -59,8 +59,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="postImageView" destination="K6e-yE-LWU" id="vu9-Tg-QDn"/>
                 <outlet property="postMessage" destination="rOa-b0-wMo" id="Tje-pV-o19"/>
                 <outlet property="timeLabel" destination="Aas-Yi-Z6H" id="9Wx-8f-scw"/>
+                <outlet property="timeView" destination="JiY-vI-LNW" id="bOI-oL-NPC"/>
             </connections>
             <point key="canvasLocation" x="691" y="549.5"/>
         </tableViewCell>

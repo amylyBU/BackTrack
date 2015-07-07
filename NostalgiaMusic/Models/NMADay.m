@@ -11,7 +11,7 @@
 @interface NMADay()
 @property (strong, nonatomic, readwrite) NSString *year;
 @property (strong, nonatomic, readwrite) NMASong *song;
-@property (strong, nonatomic, readwrite) NSArray *FBPosts;
+@property (strong, nonatomic, readwrite) NSArray *FBActivities;
 @end
 
 @implementation NMADay
@@ -32,7 +32,7 @@
 
 #pragma mark - Facebook Post Utility
 
-- (void) collectFBPosts {
+- (void)collectFBPosts {
     NSMutableArray *mutablePosts = [[NSMutableArray alloc] init];
     
     [[NMARequestManager sharedManager]
@@ -41,21 +41,17 @@
          for(id post in posts) {
              //we are only interested in status and photo updates for now
              NSString *type = [post objectForKey:@"type"];
-             if([type  isEqual: @"status"] || [type  isEqual: @"photo"]) {
-                 NSLog([post objectForKey:@"type"]);
+             if([type isEqual: @"status"] || [type isEqual: @"photo"]) {
                  NSString *message = [post objectForKey:@"message"];
                  NSString *picture = [post objectForKey:@"picture"];
                  NSString *createdTime = [post objectForKey:@"created_time"];
-                 NMAFBActivity *FBPost = [[NMAFBActivity alloc] initWithMessage:message
-                                                            picturePath:picture
-                                                              likeCount:0
-                                                           commentCount:0
-                                                            createdTime:createdTime];
-                 NSLog(FBPost.message);
-                 [mutablePosts addObject:FBPost];
+                 NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithMessage:message
+                                                                    picturePath:picture
+                                                                    createdTime:createdTime];
+                 [mutablePosts addObject:FBActivity];
              }
          }
-         self.FBPosts = [mutablePosts copy];
+         self.FBActivities = [mutablePosts copy];
          [self.delegate updatedFBActivity];
      }
      failure:nil];

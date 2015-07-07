@@ -11,4 +11,6 @@
 @interface NMAFBActivityTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postMessage;
+@property (weak, nonatomic) IBOutlet UIView *timeView;
+@property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @end

@@ -144,10 +144,11 @@
 - (void)requestFBPostsFromDate:(NSString *)year
                        success:(void (^)(NSArray *posts))success
                        failure:(void (^)(NSError *error))failure {
-    //Facebook wants its dates in UTC, so make sure we set local boundaries before converting
-    NSDate *targetDateStart = [self getUTCDate:year start:YES];
-    NSDate *targetDateEnd = [self getUTCDate:year start:NO];
+    //Facebook wants its dates in UTC, so make sure we set local boundaries...
+    NSDate *targetDateStart = [self getLocalDate:year startOfDay:YES];
+    NSDate *targetDateEnd = [self getLocalDate:year startOfDay:NO];
     
+    //...Before formatting in UTC time
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -158,8 +159,7 @@
                              @"until" : untilTime
                              };
     NSString *path = @"/me/posts";
-    
-    //Build the request to get all posts during that day
+
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:params
                                                                    HTTPMethod:@"GET"];
@@ -179,13 +179,12 @@
 
 #pragma mark - Format Utility
 
-- (NSDate *)getUTCDate:(NSString *)year
-                start:(BOOL)start {
-    //Collect today's date information
+///@discussion if startOfDay, the time of the date is 00:00:00am, else its 11:59:59pm (the end of the day)
+- (NSDate *)getLocalDate:(NSString *)year
+              startOfDay:(BOOL)start {
     NSDateComponents *presentDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                                               fromDate:[NSDate date]];
     
-    //Create a date in the past of today's date (month & day) during our year
     NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
     [targetDateComponents setYear:[year integerValue]];
     [targetDateComponents setMonth:presentDateComponents.month];

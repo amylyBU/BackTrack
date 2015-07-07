@@ -17,7 +17,5 @@
 
 - (instancetype) initWithMessage:(NSString *)message
                      picturePath:(NSString *)picturePath
-                       likeCount:(NSInteger *)likeCount
-                    commentCount:(NSInteger *)commentCount
-                            createdTime:(NSString *)createdTime;
+                     createdTime:(NSString *)createdTime;
 @end

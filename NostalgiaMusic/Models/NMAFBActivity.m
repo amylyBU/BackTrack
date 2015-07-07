@@ -11,8 +11,6 @@
 @interface NMAFBActivity()
 @property (strong, nonatomic, readwrite) NSString *message;
 @property (strong, nonatomic, readwrite) NSString *picturePath;
-@property (nonatomic, readwrite) NSInteger *likeCount;
-@property (nonatomic, readwrite) NSInteger *commentCount;
 @property (strong, nonatomic, readwrite) NSString *createdTime;
 @end
 
@@ -21,16 +19,12 @@
 #pragma mark - Initializer
 - (instancetype) initWithMessage:(NSString *)message
                      picturePath:(NSString *)picturePath
-                       likeCount:(NSInteger *)likeCount
-                    commentCount:(NSInteger *)commentCount
-                            createdTime:(NSString *) createdTime {
+                     createdTime:(NSString *) createdTime {
     self = [super init];
     
     if(self) {
         self.message = message;
         self.picturePath = picturePath;
-        self.likeCount = likeCount;
-        self.commentCount = commentCount;
         self.createdTime = createdTime;
     }
     
