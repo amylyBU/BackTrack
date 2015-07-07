@@ -66,12 +66,8 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     NMARequestManager *manager = [[NMARequestManager alloc] init];
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story){
-                              if (!story == nil) {
                               [self.NYTimesNews addObject:story];
                               [self.tableView reloadData];
-                              } else {
-                                  self.NYTimesNews = [[NSMutableArray alloc]init];
-                              }
                           }
                           failure:^(NSError *error) {
                               
