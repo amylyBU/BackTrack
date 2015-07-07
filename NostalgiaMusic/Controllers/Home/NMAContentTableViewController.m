@@ -13,6 +13,7 @@
 #import <SVPullToRefresh.h>
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
+#import "NMANewsStoryTableViewCell.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -41,6 +42,9 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
 
     self.billboardSongs = [[NSMutableArray alloc] init];
     self.facebookActivities = [[NSMutableArray alloc] init];
@@ -55,6 +59,24 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
+    
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"ddMM"];
+    NSString *currentDayMonth = [DateFormatter  stringFromDate:[NSDate date]];
+    NMARequestManager *manager = [[NMARequestManager alloc] init];
+    [manager getNewYorkTimesStory:@"0707" onYear:self.year
+                          success:^(NMANewsStory *story){
+                              if (!story == nil) {
+                              [self.NYTimesNews addObject:story];
+                              [self.tableView reloadData];
+                              } else {
+                                  self.NYTimesNews = [[NSMutableArray alloc]init];
+                              }
+                          }
+                          failure:^(NSError *error) {
+                              
+                          }];
+
 
 
     __weak NMAContentTableViewController *weakSelf = self;
@@ -93,7 +115,13 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
         }
         case NMASectionTypeFacebookActivity:
 
-        case NMASectionTypeNYTimesNews:
+        case NMASectionTypeNYTimesNews: {
+            if (self.NYTimesNews.count) {
+                NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
+                [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
+                return cell;
+            }
+        }
 
         default:
             return nil;

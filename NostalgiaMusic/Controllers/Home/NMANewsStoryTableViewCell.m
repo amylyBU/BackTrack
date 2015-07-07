@@ -7,7 +7,23 @@
 //
 
 #import "NMANewsStoryTableViewCell.h"
+#import "NMANewsStory.h"
 
 @implementation NMANewsStoryTableViewCell
+
+- (void)configureCellForStory:(NMANewsStory *)story {
+    if(story.headline) {
+    self.headlineLabel.text = story.headline;
+    }
+    
+    if(story.byline) {
+    self.bylineLabel.text = story.byline;
+    }
+    
+    if(story.snippet) {
+    self.summaryTextView.text = story.snippet;
+    }
+
+}
 
 @end

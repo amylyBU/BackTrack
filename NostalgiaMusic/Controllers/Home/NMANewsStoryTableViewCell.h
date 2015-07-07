@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NMANewsStory.h"
 
 @interface NMANewsStoryTableViewCell : UITableViewCell
 
@@ -14,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *bylineLabel;
 @property (weak, nonatomic) IBOutlet UITextView *summaryTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *newsStoryImageView;
+
+
+- (void)configureCellForStory:(NMANewsStory *)story;
 
 @end

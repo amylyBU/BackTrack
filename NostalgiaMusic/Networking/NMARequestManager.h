@@ -25,6 +25,6 @@
 
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
-                     success:(void (^)(NSMutableArray *stories))success
+                     success:(void (^)(NMANewsStory *))success
                      failure:(void (^)(NSError *error))failure;
 @end

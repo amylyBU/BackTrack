@@ -45,7 +45,7 @@
 
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
-                     success:(void (^)(NSMutableArray *stories))success
+                     success:(void (^)(NMANewsStory *story))success
                      failure:(void (^)(NSError *error))failure {
 
     NSURL *requestURL = [NSURL URLWithString:[self configureQueryString:date withYear:year]];
@@ -53,7 +53,8 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            success([self parseNYTJSON:responseObject]);
+        NSMutableArray *stories = [self parseNYTJSON:responseObject];
+        success([stories objectAtIndex:0]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get NYT information");
 
@@ -78,20 +79,24 @@
     NMANewsStory *story = [[NMANewsStory alloc] init];
     NSDictionary *response = [json objectForKey:@"response"];
     NSDictionary *docs = [response objectForKey:@"docs"];
-    for (NSDictionary *item in docs){
+    for (NSDictionary *item in docs) {
         NSMutableArray *images = [item valueForKey:@"multimedia"];
         story.imageLinks = images;
-        story.abstract = [item valueForKey:@"abstract"];
+        story.abstract = [self checkIfNSNull:[item valueForKey:@"abstract"]];
         story.headline = [item valueForKey:@"headline"];
-        story.headline = [story.headline valueForKey:@"main"];
-        story.snippet = [item valueForKey:@"snippet"];
-        story.articleURL = [item valueForKey:@"web_url"];
+        story.headline = [self checkIfNSNull:[story.headline valueForKey:@"main"]];
+        story.snippet = [self checkIfNSNull:[item valueForKey:@"snippet"]];
+        story.articleURL = [self checkIfNSNull:[item valueForKey:@"web_url"]];
         story.byline = [item valueForKey:@"byline"];
-        story.byline = [story.byline valueForKey:@"original"];
+        story.byline = [self checkIfNSNull:[story.byline valueForKey:@"original"]];
         [stories addObject:story];
     }
     return stories;
   }
+
+- (id)checkIfNSNull:(id)objectForKey {
+    return [NSNull null] == objectForKey ? nil : objectForKey;
+}
 
 - (void)getiTunesMusicForSong:(NMASong *)song
                       success:(void (^)(NMASong *songWithPreview))success
