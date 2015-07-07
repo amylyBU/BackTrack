@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
-#import "NMAFBPost.h"
+#import "NMAFBActivity.h"
 
-@interface NMAFBPost()
+@interface NMAFBActivity()
 @property (strong, nonatomic, readwrite) NSString *message;
 @property (strong, nonatomic, readwrite) NSString *picturePath;
 @property (nonatomic, readwrite) NSInteger *likeCount;
@@ -16,7 +16,7 @@
 @property (strong, nonatomic, readwrite) NSString *createdTime;
 @end
 
-@implementation NMAFBPost
+@implementation NMAFBActivity
 
 #pragma mark - Initializer
 - (instancetype) initWithMessage:(NSString *)message

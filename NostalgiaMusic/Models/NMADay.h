@@ -8,14 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "NMASong.h"
-#import "NMAFBPost.h"
+#import "NMAFBActivity.h"
 #import "FBSDKGraphRequest.h"
 #import "NMARequestManager.h"
+
+//Delegate protocol
+@protocol NMADayDelegate
+- (void)updatedFBActivity;
+@end
 
 @interface NMADay : NSObject
 @property (strong, nonatomic, readonly) NSString *year;
 @property (strong, nonatomic, readonly) NMASong *song;
 @property (strong, nonatomic, readonly) NSArray *FBPosts;
+@property (nonatomic, weak) id <NMADayDelegate> delegate;
 
 - (instancetype) initWithYear:(NSString *)year;
 

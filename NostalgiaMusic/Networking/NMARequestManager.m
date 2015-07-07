@@ -166,10 +166,13 @@
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         
-        NSArray *posts = [result objectForKey:@"data"];
-        if(posts) {
-            success(posts);
-        }
+        //we need to update the posts on the main thread with the UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *posts = [result objectForKey:@"data"];
+            if(posts) {
+                success(posts);
+            }
+        });
         
     }];
 }

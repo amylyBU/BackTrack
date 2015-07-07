@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NMAFBPost : NSObject
+@interface NMAFBActivity : NSObject
 @property (strong, nonatomic, readonly) NSString *message;
 @property (strong, nonatomic, readonly) NSString *picturePath;
 @property (nonatomic, readonly) NSInteger *likeCount;

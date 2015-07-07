@@ -17,8 +17,10 @@
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
-		07ECCBFC1B4AEEB70089D042 /* NMAFBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */; };
+		07ECCBFC1B4AEEB70089D042 /* NMAFBActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */; };
 		07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFE1B4B12830089D042 /* NMADay.m */; };
+		07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */; };
+		07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE411B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m */; };
 		612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE421B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib */; };
@@ -76,10 +78,13 @@
 		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
 		07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAAppSettings.h; path = Models/NMAAppSettings.h; sourceTree = "<group>"; };
 		07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAAppSettings.m; path = Models/NMAAppSettings.m; sourceTree = "<group>"; };
-		07ECCBFA1B4AEEB70089D042 /* NMAFBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBPost.h; path = Models/NMAFBPost.h; sourceTree = "<group>"; };
-		07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBPost.m; path = Models/NMAFBPost.m; sourceTree = "<group>"; };
+		07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBActivity.h; path = Models/NMAFBActivity.h; sourceTree = "<group>"; };
+		07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBActivity.m; path = Models/NMAFBActivity.m; sourceTree = "<group>"; };
 		07ECCBFD1B4B12830089D042 /* NMADay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMADay.h; path = Models/NMADay.h; sourceTree = "<group>"; };
 		07ECCBFE1B4B12830089D042 /* NMADay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMADay.m; path = Models/NMADay.m; sourceTree = "<group>"; };
+		07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAFBActivityTableViewCell.h; sourceTree = "<group>"; };
+		07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAFBActivityTableViewCell.m; sourceTree = "<group>"; };
+		07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAFBActivityTableViewCell.xib; sourceTree = "<group>"; };
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearActivityScrollViewController.h; sourceTree = "<group>"; };
@@ -159,6 +164,8 @@
 				612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */,
 				07ECCBFA1B4AEEB70089D042 /* NMAFBPost.h */,
 				07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */,
+				07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */,
+				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
 				07ECCBFD1B4B12830089D042 /* NMADay.h */,
 				07ECCBFE1B4B12830089D042 /* NMADay.m */,
 			);
@@ -177,6 +184,7 @@
 				E5141B611B4899D3002BC232 /* NMATodaysSongTableViewCell.h */,
 				E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */,
 				E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */,
+				07ECCC021B4C08920089D042 /* FBActivity */,
 				615911591B3D850A006B6779 /* Home */,
 			);
 			name = Views;
@@ -312,6 +320,16 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		07ECCC021B4C08920089D042 /* FBActivity */ = {
+			isa = PBXGroup;
+			children = (
+				07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */,
+				07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */,
+				07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */,
+			);
+			name = FBActivity;
+			sourceTree = "<group>";
+		};
 		401998C391C3064AD667AEC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +455,7 @@
 				6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */,
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
 				E5141B651B4899D3002BC232 /* NMATodaysSongTableViewCell.xib in Resources */,
+				07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */,
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
 				E508FB1D1B41C1B80040AEF9 /* NMAFBConnectViewController.xib in Resources */,
@@ -505,8 +524,9 @@
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */,
 				E50E348A1B44461E00F10A5A /* NMASong.m in Sources */,
-				07ECCBFC1B4AEEB70089D042 /* NMAFBPost.m in Sources */,
+				07ECCBFC1B4AEEB70089D042 /* NMAFBActivity.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
+				07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,

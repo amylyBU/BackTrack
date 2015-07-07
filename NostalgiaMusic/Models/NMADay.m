@@ -46,7 +46,7 @@
                  NSString *message = [post objectForKey:@"message"];
                  NSString *picture = [post objectForKey:@"picture"];
                  NSString *createdTime = [post objectForKey:@"created_time"];
-                 NMAFBPost *FBPost = [[NMAFBPost alloc] initWithMessage:message
+                 NMAFBActivity *FBPost = [[NMAFBActivity alloc] initWithMessage:message
                                                             picturePath:picture
                                                               likeCount:0
                                                            commentCount:0
@@ -56,6 +56,7 @@
              }
          }
          self.FBPosts = [mutablePosts copy];
+         [self.delegate updatedFBActivity];
      }
      failure:nil];
 }

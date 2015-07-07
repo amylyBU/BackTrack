@@ -10,6 +10,8 @@
 #import "NMAYearTableViewCell.h"
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
+#import "NMAFBActivityTableViewCell.h"
+#import "NMAFBActivity.h"
 #import <SVPullToRefresh.h>
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
@@ -26,13 +28,14 @@ static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
 static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
+static NSString * const kNMAFBActivityTableCellIdentifier = @"NMAFBActivityTableCell";
 
 @interface NMAContentTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *billboardSongs;
 @property (strong, nonatomic) NSMutableArray *facebookActivities;
 @property (strong, nonatomic) NSMutableArray *NYTimesNews;
-
+@property (strong, nonatomic, readwrite) NMADay *day;
 @end
 
 @implementation NMAContentTableViewController
@@ -72,8 +75,6 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
                           failure:^(NSError *error) {
                               
                           }];
-
-
 
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -116,7 +117,6 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
                 [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
                 return cell;
         }
-
         default:
             return nil;
     }
@@ -125,6 +125,18 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kBillboardSongHeightForRow;
+}
+
+- (void)setYear:(NSString *)year {
+    _year = year;
+    self.day = [[NMADay alloc] initWithYear:self.year];
+    self.day.delegate = self;
+    [self.tableView reloadData];
+}
+
+#pragma mark - NMADayDelegate
+- (void)updatedFBActivity {
+    [self.tableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView
