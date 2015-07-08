@@ -11,6 +11,7 @@
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
 #import "NMAFBActivityTableViewCell.h"
+#import "NMANoFBActivityTableViewCell.h"
 #import "NMAFBActivity.h"
 #import <SVPullToRefresh.h>
 #import "NMARequestManager.h"
@@ -28,6 +29,7 @@ static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
 static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
+static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCell";
 
 @interface NMAContentTableViewController ()
 
@@ -47,6 +49,9 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
@@ -115,11 +120,12 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
-            NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAFacebookActivityCellIdentifier forIndexPath:indexPath];
+            UITableViewCell *cell;
             if(self.day.FBActivities.count) {
-                [cell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+                cell = [tableView dequeueReusableCellWithIdentifier:kNMAFacebookActivityCellIdentifier forIndexPath:indexPath];
+                [(NMAFBActivityTableViewCell*)cell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
             } else {
-                [cell configureEmptyCell];
+                cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFacebookActivityCellIdentifier forIndexPath:indexPath];
             }
             [cell layoutIfNeeded];
             return cell;
@@ -141,13 +147,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         case NMASectionTypeBillboardSong:
             return kBillboardSongHeightForRow;
         case NMASectionTypeFacebookActivity: {
-            static NMAFBActivityTableViewCell *prototypeFBCell = nil;
-            prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMAFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
-            if(self.day.FBActivities.count) {
-                [prototypeFBCell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
-            } else {
-                [prototypeFBCell configureEmptyCell];
-            }
+            static UITableViewCell *prototypeFBCell = nil;
+            prototypeFBCell = [self setAppropriateFBCellAtIndexPath:indexPath];
             [prototypeFBCell layoutIfNeeded];
             CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
             return size.height + 1;
@@ -184,6 +185,19 @@ titleForHeaderInSection:(NSInteger)section {
         default:
             return @"";
     }
+}
+
+#pragma mark - Table Cell Utility
+//@discussion while this returns UITableViewCell, it is a FB cell (either NoActivity or not)
+- (UITableViewCell *)setAppropriateFBCellAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *prototypeFBCell;
+    if(self.day.FBActivities.count) {
+        prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMAFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
+        [(NMAFBActivityTableViewCell*)prototypeFBCell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+    } else {
+        prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMANoFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
+    }
+    return prototypeFBCell;
 }
 
 @end

@@ -14,6 +14,8 @@
 		072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AA1B39739B000A1162 /* Images.xcassets */; };
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
+		07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */; };
+		07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */; };
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
 		07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */; };
 		07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */; };
@@ -73,6 +75,9 @@
 		072DE7B31B39739B000A1162 /* NostalgiaMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NostalgiaMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		072DE7B81B39739B000A1162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NostalgiaMusicTests.m; sourceTree = "<group>"; };
+		07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANoFBActivityTableViewCell.h; path = Views/FBActivity/NMANoFBActivityTableViewCell.h; sourceTree = "<group>"; };
+		07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMANoFBActivityTableViewCell.m; path = Views/FBActivity/NMANoFBActivityTableViewCell.m; sourceTree = "<group>"; };
+		07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMANoFBActivityTableViewCell.xib; path = Views/FBActivity/NMANoFBActivityTableViewCell.xib; sourceTree = "<group>"; };
 		07ECCBF21B3A0B730089D042 /* NMASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMASettingsViewController.h; path = Controllers/Settings/NMASettingsViewController.h; sourceTree = "<group>"; };
 		07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMASettingsViewController.m; path = Controllers/Settings/NMASettingsViewController.m; sourceTree = "<group>"; };
 		07ECCBF41B3A0B730089D042 /* NMASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASettingsViewController.xib; path = Controllers/Settings/NMASettingsViewController.xib; sourceTree = "<group>"; };
@@ -162,8 +167,6 @@
 				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
 				612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */,
 				612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */,
-				07ECCBFA1B4AEEB70089D042 /* NMAFBPost.h */,
-				07ECCBFB1B4AEEB70089D042 /* NMAFBPost.m */,
 				07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */,
 				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
 				07ECCBFD1B4B12830089D042 /* NMADay.h */,
@@ -326,6 +329,9 @@
 				07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */,
 				07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */,
 				07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */,
+				07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */,
+				07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */,
+				07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */,
 			);
 			name = FBActivity;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */,
 				E50E34861B43331900F10A5A /* tracks.db in Resources */,
 				E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */,
 				61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */,
@@ -518,6 +525,7 @@
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
 				612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */,
 				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
+				07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */,
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */,
 				E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */,
