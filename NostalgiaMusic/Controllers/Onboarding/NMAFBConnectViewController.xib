@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAFBConnectViewController">
             <connections>
+                <outlet property="appDescription" destination="c9K-uT-CSf" id="lkU-3W-7YA"/>
+                <outlet property="facebookDisclaimer" destination="GWB-HQ-bdC" id="Sfh-6C-WYt"/>
                 <outlet property="loginButton" destination="Xpv-FW-Dvy" id="jkZ-pf-tHO"/>
-                <outlet property="textDescription" destination="GWB-HQ-bdC" id="C8s-a9-cIc"/>
+                <outlet property="notNowButton" destination="X0v-Se-6hN" id="aWc-CO-LAk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,56 +18,124 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nostalgia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOr-Vj-c0f">
-                    <rect key="frame" x="239" y="171" width="123" height="36"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle_bg" translatesAutoresizingMaskIntoConstraints="NO" id="bel-v2-eMN">
+                    <rect key="frame" x="0.0" y="192" width="320" height="270"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="270" id="PVn-Cn-wnY"/>
+                        <constraint firstAttribute="width" constant="320" id="fCd-Ca-5o7"/>
+                    </constraints>
+                </imageView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpv-FW-Dvy" customClass="FBSDKLoginButton">
+                    <rect key="frame" x="0.0" y="442" width="320" height="55"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="5e6-3X-tVw"/>
+                        <constraint firstAttribute="width" constant="320" id="H1D-FO-Amd"/>
+                        <constraint firstAttribute="height" constant="55" id="lRd-Q2-S8r"/>
+                        <constraint firstAttribute="width" constant="200" id="vV5-vs-4cJ"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="5e6-3X-tVw"/>
+                            <exclude reference="vV5-vs-4cJ"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travel back in time with rock music, Facebook, and news" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9K-uT-CSf">
+                    <rect key="frame" x="0.0" y="281" width="320" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="BVu-FP-E8M"/>
+                        <constraint firstAttribute="width" constant="320" id="g9f-M1-uUf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0v-Se-6hN">
-                    <rect key="frame" x="266" y="332" width="178" height="18"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0v-Se-6hN">
+                    <rect key="frame" x="71" y="509" width="178" height="18"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="178" id="3ae-ck-BZ5"/>
+                        <constraint firstAttribute="height" constant="18" id="F9R-59-blY"/>
                         <constraint firstAttribute="width" constant="70" id="oya-aR-ibh"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Continue without Signing In">
-                        <color key="titleColor" red="0.67450980392156867" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="oya-aR-ibh"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="notNowButton:" destination="-1" eventType="touchUpInside" id="Nrr-jl-IxG"/>
                     </connections>
                 </button>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xpv-FW-Dvy" customClass="FBSDKLoginButton">
-                    <rect key="frame" x="200" y="274" width="200" height="50"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="City" translatesAutoresizingMaskIntoConstraints="NO" id="1pQ-8y-gIk">
+                    <rect key="frame" x="0.0" y="363" width="320" height="79"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="5e6-3X-tVw"/>
-                        <constraint firstAttribute="width" constant="200" id="vV5-vs-4cJ"/>
+                        <constraint firstAttribute="width" constant="320" id="50C-un-3Ch"/>
+                        <constraint firstAttribute="height" constant="79" id="tpA-Ex-aFw"/>
                     </constraints>
-                </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with Facebook account will provide full experience while using the app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWB-HQ-bdC">
-                    <rect key="frame" x="200" y="215" width="200" height="51"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't worry! We never post on Facebook without your permission." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWB-HQ-bdC">
+                    <rect key="frame" x="107" y="372" width="155" height="48"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="155" id="DtO-So-tR0"/>
                         <constraint firstAttribute="height" constant="51" id="NoK-mK-vj9"/>
+                        <constraint firstAttribute="height" constant="48" id="Vys-9R-KYA"/>
                         <constraint firstAttribute="width" constant="200" id="pcN-Ut-dSv"/>
                     </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="NoK-mK-vj9"/>
+                            <exclude reference="pcN-Ut-dSv"/>
+                        </mask>
+                    </variation>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UFO" translatesAutoresizingMaskIntoConstraints="NO" id="eN8-48-BjK">
+                    <rect key="frame" x="114" y="130" width="91" height="58"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="91" id="4p8-jQ-V4s"/>
+                        <constraint firstAttribute="height" constant="58" id="UuY-dn-oTV"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UFO_lights" translatesAutoresizingMaskIntoConstraints="NO" id="LKz-rv-u8P">
+                    <rect key="frame" x="89" y="208" width="143" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="i0U-jI-nmX"/>
+                        <constraint firstAttribute="width" constant="143" id="sNq-jl-eUR"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.87450980392156863" green="0.94509803921568625" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="top" secondItem="GWB-HQ-bdC" secondAttribute="bottom" constant="8" id="ElV-oT-LgR"/>
-                <constraint firstAttribute="centerX" secondItem="GWB-HQ-bdC" secondAttribute="centerX" id="KaA-2T-pYK"/>
-                <constraint firstAttribute="centerX" secondItem="X0v-Se-6hN" secondAttribute="centerX" constant="-0.5" id="SP2-H7-2rc"/>
-                <constraint firstAttribute="centerX" secondItem="ZOr-Vj-c0f" secondAttribute="centerX" constant="-0.5" id="W3E-U9-meS"/>
-                <constraint firstItem="GWB-HQ-bdC" firstAttribute="top" secondItem="ZOr-Vj-c0f" secondAttribute="bottom" constant="8" id="WHJ-iz-f0L"/>
-                <constraint firstAttribute="centerY" secondItem="Xpv-FW-Dvy" secondAttribute="centerY" constant="1" id="cEM-oa-gG3"/>
-                <constraint firstItem="X0v-Se-6hN" firstAttribute="top" secondItem="Xpv-FW-Dvy" secondAttribute="bottom" constant="8" id="lYX-nH-Zpp"/>
-                <constraint firstAttribute="centerX" secondItem="Xpv-FW-Dvy" secondAttribute="centerX" id="vS7-TF-2K8"/>
+                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="442" id="0Gb-1O-Qsq"/>
+                <constraint firstItem="bel-v2-eMN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0dz-UW-SMR"/>
+                <constraint firstItem="LKz-rv-u8P" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="208" id="1DG-lO-CI0"/>
+                <constraint firstItem="c9K-uT-CSf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2bn-Zc-EN3"/>
+                <constraint firstItem="X0v-Se-6hN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="509" id="7Qr-LC-mr3"/>
+                <constraint firstItem="eN8-48-BjK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="130" id="7zL-SL-STu"/>
+                <constraint firstItem="1pQ-8y-gIk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="363" id="Jwx-7b-Yb5"/>
+                <constraint firstItem="c9K-uT-CSf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="281" id="Q3L-8D-tkx"/>
+                <constraint firstItem="1pQ-8y-gIk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XmH-R1-Q7Q"/>
+                <constraint firstItem="LKz-rv-u8P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="89" id="dvZ-x4-n3X"/>
+                <constraint firstItem="GWB-HQ-bdC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="107" id="fBM-S9-QZR"/>
+                <constraint firstItem="X0v-Se-6hN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="71" id="hsH-EJ-V14"/>
+                <constraint firstItem="bel-v2-eMN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="192" id="iaP-Ac-x4o"/>
+                <constraint firstItem="Xpv-FW-Dvy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="odN-jB-ft3"/>
+                <constraint firstItem="GWB-HQ-bdC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="372" id="pm0-El-4Y7"/>
+                <constraint firstItem="eN8-48-BjK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="114" id="qYa-UT-wOO"/>
             </constraints>
+            <point key="canvasLocation" x="341" y="357"/>
         </view>
     </objects>
+    <resources>
+        <image name="City" width="320" height="80"/>
+        <image name="UFO" width="97" height="63"/>
+        <image name="UFO_lights" width="145" height="29"/>
+        <image name="triangle_bg" width="320" height="270"/>
+    </resources>
 </document>

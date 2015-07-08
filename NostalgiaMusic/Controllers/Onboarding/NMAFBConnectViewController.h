@@ -14,7 +14,9 @@
 
 @property (weak, nonatomic) id <NMAOnboardingCompletionDelegate> delegate;
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
-@property (weak, nonatomic) IBOutlet UILabel *textDescription;
+@property (weak, nonatomic) IBOutlet UILabel *facebookDisclaimer;
+@property (weak, nonatomic) IBOutlet UILabel *appDescription;
+@property (weak, nonatomic) IBOutlet UIButton *notNowButton;
 
 
 @end

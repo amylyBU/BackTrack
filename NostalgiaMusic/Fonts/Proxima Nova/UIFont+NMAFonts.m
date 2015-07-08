@@ -10,4 +10,16 @@
 
 @implementation UIFont (NMAFonts)
 
++ (UIFont *)NMA_proximaNovaLightWithSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Light" size:fontSize];
+}
+
++ (UIFont *)NMA_proximaNovaRegularWithSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
+}
+
++ (UIFont *)NMA_proximaNovaSemiBoldWithSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
+}
+
 @end
