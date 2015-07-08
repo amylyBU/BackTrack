@@ -27,6 +27,7 @@
     }
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
+    
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -60,6 +61,7 @@
 
 - (void)userDidFinishOnboarding {
     [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+    [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
     [self goToHome];
 }
 

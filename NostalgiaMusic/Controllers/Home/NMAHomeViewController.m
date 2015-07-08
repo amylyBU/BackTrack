@@ -31,6 +31,12 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpHomeView];
+    
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                                                       style:UIBarButtonItemStyleDone
+                                                                      target:self
+                                                                      action:@selector(goToSettings:)];
+    [self.navigationItem setRightBarButtonItem:settingsButton];
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 

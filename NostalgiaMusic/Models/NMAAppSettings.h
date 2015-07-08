@@ -20,5 +20,7 @@
 - (NSString *)accessTokenString;
 - (BOOL)userIsLoggedIn;
 - (BOOL)userDidAutoplay; //TODO: must have set autoplay function in the Settings VC.
+- (void)setAutoplaySettingToOff;
+- (void)setAutoplaySettingToOn;
 
 @end
