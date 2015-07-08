@@ -121,6 +121,7 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
             } else {
                 [cell configureEmptyCell];
             }
+            [cell layoutIfNeeded];
             return cell;
         }
 
@@ -136,7 +137,28 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kBillboardSongHeightForRow;
+    switch (indexPath.section) {
+        case NMASectionTypeBillboardSong:
+            return kBillboardSongHeightForRow;
+        case NMASectionTypeFacebookActivity: {
+            static NMAFBActivityTableViewCell *prototypeFBCell = nil;
+            prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMAFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
+            if(self.day.FBActivities.count) {
+                [prototypeFBCell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+            } else {
+                [prototypeFBCell configureEmptyCell];
+            }
+            [prototypeFBCell layoutIfNeeded];
+            CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+            //CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:CGSizeMake(CGRectGetWidth(tableView.bounds), CGFLOAT_MAX)];
+            return size.height + 1;
+        }
+        case NMASectionTypeNYTimesNews: {
+            return kBillboardSongHeightForRow;
+        }
+        default:
+            return 0;
+    }
 }
 
 - (void)setYear:(NSString *)year {

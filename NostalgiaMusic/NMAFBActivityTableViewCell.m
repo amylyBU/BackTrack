@@ -17,12 +17,21 @@
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBPost {
     self.timeLabel.text = FBPost.createdTime;
     self.postMessage.text = FBPost.message;
+    NSLog(@"full activity picture height = %f", self.timeView.frame.size.height);
+    self.timeViewHeight.constant = 360;
+    self.timeView.hidden = NO;
 }
 
 - (void)configureEmptyCell {
     self.timeView.hidden = YES;
     self.postImageView.hidden = YES;
     self.postMessage.text = @"There is no Facebook activity from this day";
+    NSLog(@"empty activity picture height = %f", self.timeView.frame.size.height);
+    [self collapseImage];
+}
+
+- (void)collapseImage {
+    self.timeViewHeight.constant = 0;
 }
 
 @end

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postMessage;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeViewHeight;
 
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBPost;
 - (void)configureEmptyCell;
