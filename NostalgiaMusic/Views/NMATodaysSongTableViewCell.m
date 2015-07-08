@@ -10,17 +10,19 @@
 #import "NMASong.h"
 #import "NMAAppSettings.h"
 
-static NSString * const kPlayImageName = @"play image name here";
-static NSString * const kPauseImageName = @"pause image name here";
+static NSString * const kPlayImageName = @"play";
+static NSString * const kPauseImageName = @"pause";
 
 @interface NMATodaysSongTableViewCell () <AVAudioPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @end
 
 @implementation NMATodaysSongTableViewCell
+
+
 
 - (void)configureCellForSong:(NMASong *)song {
     self.delegate = self;
@@ -37,29 +39,36 @@ static NSString * const kPauseImageName = @"pause image name here";
 }
 
 - (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl {
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:previewUrl error:nil];
-    self.audioPlayer.numberOfLoops = 1;
+    self.audioPlayer = [[AVPlayer alloc] initWithURL:previewUrl];
     
     if (self.audioPlayer) {
         NSLog(@"successful audioplayer init");
-        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+        //if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+        if (NO) {
             self.playButton.imageView.image = [UIImage imageNamed:kPauseImageName]; // set image to pause
+            self.playButton.titleLabel.text = @"PAUSE";
             [self.audioPlayer play]; // autoplay
         } else {
+            self.playButton.titleLabel.text = @"PLAY";
             self.playButton.imageView.image = [UIImage imageNamed:kPlayImageName]; // set image to play
         }
     } else {
-        NSLog(@"handle error"); // audio player could not be initialized
+        NSLog(@"handle error");
     }
 }
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
     if (sender.imageView.image == [UIImage imageNamed:kPlayImageName]) {
+    //if ([sender.titleLabel.text isEqualToString:@"play"]) {
+        NSLog(@"played the song");
         [self.audioPlayer play];
-        sender.imageView.image = [UIImage imageNamed:kPauseImageName];
+        self.playButton.titleLabel.text = @"PAUSE";
+        self.playButton.imageView.image = [UIImage imageNamed:kPauseImageName];
     } else {
+        NSLog(@"paused the song");
         [self.audioPlayer pause];
-        sender.imageView.image = [UIImage imageNamed:kPlayImageName];
+        self.playButton.titleLabel.text = @"PLAY";
+        self.playButton.imageView.image = [UIImage imageNamed:kPlayImageName];
     }
 }
 
