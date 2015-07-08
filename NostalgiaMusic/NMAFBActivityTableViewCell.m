@@ -15,28 +15,29 @@
 }
 
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBPost {
-    [self prepareFullActivity];
+    [self setHiddenElements:NO];
     self.timeLabel.text = FBPost.createdTime;
     self.postMessage.text = FBPost.message;
-    NSLog(@"full activity picture height = %f", self.timeView.frame.size.height);
-    self.postImageHeightConstraint.constant = 360;
+    [self.postMessage sizeToFit];
+    self.imageHeightConstraint.constant = 300; //TODO: get actual picture size
+    self.collapseImageConstraint.priority = 1;
+    self.messageHeightFromBottomConstraint.constant = 46;
 }
 
 - (void)configureEmptyCell {
-    [self prepareNoActivity];
+    [self setHiddenElements:YES];
     self.postMessage.text = @"There is no Facebook activity from this day";
-    NSLog(@"empty activity picture height = %f", self.timeView.frame.size.height);
-    self.postImageHeightConstraint.constant = 0;
+    [self.postMessage sizeToFit];
+    self.collapseImageConstraint.priority = 999;
+    self.messageHeightFromBottomConstraint.constant = 20;
 }
 
-- (void)prepareFullActivity {
-    self.timeView.hidden = NO;
-    self.postImageView.hidden = NO;
-}
-
-- (void)prepareNoActivity {
-    self.timeView.hidden = YES;
-    self.postImageView.hidden = YES;
+- (void)setHiddenElements:(BOOL)isHidden {
+    self.timeView.hidden = isHidden;
+    self.postImageView.hidden = isHidden;
+    self.commentsButton.hidden = isHidden;
+    self.likesButton.hidden = isHidden;
+    self.shareButton.hidden = isHidden;
 }
 
 @end

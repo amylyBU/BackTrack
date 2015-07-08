@@ -150,7 +150,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             }
             [prototypeFBCell layoutIfNeeded];
             CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-            //CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:CGSizeMake(CGRectGetWidth(tableView.bounds), CGFLOAT_MAX)];
             return size.height + 1;
         }
         case NMASectionTypeNYTimesNews: {

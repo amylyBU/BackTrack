@@ -15,10 +15,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK">
-                        <rect key="frame" x="8" y="8" width="304" height="245"/>
+                        <rect key="frame" x="8" y="8" width="304" height="310"/>
                         <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="245" id="wvr-ZO-fJL"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="998" id="enc-gl-jgB"/>
+                            <constraint firstAttribute="height" priority="1" id="wvr-ZO-fJL"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-R5-j66">
@@ -38,28 +39,28 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0">
-                        <rect key="frame" x="8" y="251" width="304" height="139"/>
+                        <rect key="frame" x="8" y="316" width="304" height="75"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
-                                <rect key="frame" x="8" y="8" width="288" height="85"/>
+                                <rect key="frame" x="8" y="8" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RP5-HH-adE">
-                                <rect key="frame" x="8" y="101" width="30" height="30"/>
+                                <rect key="frame" x="8" y="37" width="30" height="30"/>
                                 <state key="normal" title="💬">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBl-C0-09Y">
-                                <rect key="frame" x="46" y="101" width="30" height="30"/>
+                                <rect key="frame" x="46" y="37" width="30" height="30"/>
                                 <state key="normal" title="👍">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1y-p7-ycZ">
-                                <rect key="frame" x="266" y="101" width="30" height="30"/>
+                                <rect key="frame" x="266" y="37" width="30" height="30"/>
                                 <state key="normal" title="⬆️">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -96,9 +97,15 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="postImageHeightConstraint" destination="wvr-ZO-fJL" id="Jqp-0y-89g"/>
+                <outlet property="collapseImageConstraint" destination="wvr-ZO-fJL" id="YCG-8m-lqy"/>
+                <outlet property="commentsButton" destination="RP5-HH-adE" id="D1c-Xi-71i"/>
+                <outlet property="imageHeightConstraint" destination="enc-gl-jgB" id="ZGl-fo-oQA"/>
+                <outlet property="likesButton" destination="kBl-C0-09Y" id="Azx-05-Ndn"/>
+                <outlet property="messageHeightFromBottomConstraint" destination="sgk-Mg-Iwq" id="svL-YA-coY"/>
+                <outlet property="postContainerView" destination="6Hu-Bj-SX0" id="inc-vt-91a"/>
                 <outlet property="postImageView" destination="kIy-YX-jjK" id="RSB-Li-NUe"/>
                 <outlet property="postMessage" destination="Y78-Sd-aWd" id="fPt-gi-Zn3"/>
+                <outlet property="shareButton" destination="M1y-p7-ycZ" id="Q9c-jI-ZPn"/>
                 <outlet property="timeLabel" destination="pyN-Pl-1gA" id="Dmw-Ba-xD0"/>
                 <outlet property="timeView" destination="YNb-R5-j66" id="RNB-ds-7WF"/>
             </connections>
