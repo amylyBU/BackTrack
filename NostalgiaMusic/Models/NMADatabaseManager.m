@@ -32,29 +32,29 @@
 #pragma mark - Public Methods
 
 - (NMASong *)getSongFromYear:(NSString *)year {
-    NMASong *randomSong;
+    NMASong *song;
     sqlite3 *database;
     NSString *dbFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/tracks.db"];
     if (sqlite3_open([dbFilePath UTF8String], &database) == SQLITE_OK) {
-        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM tracks WHERE year_peaked = %@", year] UTF8String];
+        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM tracks WHERE year_peaked = %@ AND yearly_rank = 1", year] UTF8String];
         sqlite3_stmt *selectStatement;
         
         int databaseCallResult = sqlite3_prepare_v2(database, sql, -1, &selectStatement, NULL);
         
         if (databaseCallResult == SQLITE_OK) {
-            randomSong = [self getRandomSongWithSQLStatement:selectStatement];
+            song = [self getSongWithSQLStatement:selectStatement];
         } else {
-            randomSong = nil;
+            song = nil;
         }
-        sqlite3_finalize(selectStatement); // destroy prepared statement object
+        sqlite3_finalize(selectStatement);
     }
-    sqlite3_close(database); // close database
-    return randomSong;
+    sqlite3_close(database);
+    return song;
 }
 
 #pragma mark - Private Methods
 
-- (NMASong *)getRandomSongWithSQLStatement:(sqlite3_stmt *)statement {
+- (NMASong *)getSongWithSQLStatement:(sqlite3_stmt *)statement {
     self.queryResultsArray = [[NSMutableArray alloc] init];
     while (sqlite3_step(statement) == SQLITE_ROW) {
         NMASong *newSong = [[NMASong alloc] init];
@@ -65,8 +65,7 @@
         [self.queryResultsArray addObject:newSong];
     }
     if ([self.queryResultsArray count]) {
-        NSUInteger randomIndex = arc4random() % [self.queryResultsArray count];
-        return self.queryResultsArray[randomIndex];
+        return [self.queryResultsArray firstObject];
     } else {
         return nil;
     }

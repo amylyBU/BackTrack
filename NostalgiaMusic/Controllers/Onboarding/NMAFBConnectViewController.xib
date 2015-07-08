@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -22,12 +22,14 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0v-Se-6hN">
-                    <rect key="frame" x="266" y="332" width="70" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0v-Se-6hN">
+                    <rect key="frame" x="266" y="332" width="178" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="oya-aR-ibh"/>
                     </constraints>
-                    <state key="normal" title="Not now">
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Continue without Signing In">
+                        <color key="titleColor" red="0.67450980392156867" green="0.71764705882352942" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -53,7 +55,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.87450980392156863" green="0.94509803921568625" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Xpv-FW-Dvy" firstAttribute="top" secondItem="GWB-HQ-bdC" secondAttribute="bottom" constant="8" id="ElV-oT-LgR"/>
                 <constraint firstAttribute="centerX" secondItem="GWB-HQ-bdC" secondAttribute="centerX" id="KaA-2T-pYK"/>
