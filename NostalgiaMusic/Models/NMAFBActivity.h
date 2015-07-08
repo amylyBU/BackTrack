@@ -13,7 +13,7 @@
 @property (strong, nonatomic, readonly) NSString *picturePath;
 @property (nonatomic, readonly) NSInteger *likeCount;
 @property (nonatomic, readonly) NSInteger *commentCount;
-@property (strong, nonatomic, readonly) NSString *createdTime;
+@property (strong, nonatomic, readonly) NSString *timeString;
 
 - (instancetype) initWithMessage:(NSString *)message
                      picturePath:(NSString *)picturePath

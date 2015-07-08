@@ -16,7 +16,7 @@
 
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBPost {
     [self setHiddenElements:NO];
-    self.timeLabel.text = FBPost.createdTime;
+    self.timeLabel.text = FBPost.timeString;
     self.postMessage.text = FBPost.message;
     [self.postMessage sizeToFit];
     self.imageHeightConstraint.constant = 300; //TODO: get actual picture size

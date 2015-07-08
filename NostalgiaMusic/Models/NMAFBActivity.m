@@ -11,7 +11,7 @@
 @interface NMAFBActivity()
 @property (strong, nonatomic, readwrite) NSString *message;
 @property (strong, nonatomic, readwrite) NSString *picturePath;
-@property (strong, nonatomic, readwrite) NSString *createdTime;
+@property (strong, nonatomic, readwrite) NSString *timeString;
 @end
 
 @implementation NMAFBActivity
@@ -25,7 +25,17 @@
     if(self) {
         self.message = message;
         self.picturePath = picturePath;
-        self.createdTime = createdTime;
+        
+        //create a date from the createdTime string we are given
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZ"];
+        
+        //convert it into a date we can spit back out
+        NSDate *date = [dateFormatter dateFromString:createdTime];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        [dateFormatter setDateFormat:@"h:mm a"];
+        
+        self.timeString = [dateFormatter stringFromDate:date];
     }
     
     return self;

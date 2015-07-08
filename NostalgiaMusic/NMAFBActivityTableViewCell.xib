@@ -23,10 +23,10 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNb-R5-j66">
-                        <rect key="frame" x="3" y="18" width="80" height="26"/>
+                        <rect key="frame" x="3" y="18" width="91" height="26"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
-                                <rect key="frame" x="8" y="2" width="38" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
+                                <rect key="frame" x="8" y="2" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +35,11 @@
                         <color key="backgroundColor" red="0.45882352939999999" green="0.84705882349999995" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="2UI-19-0qA"/>
-                            <constraint firstAttribute="width" constant="80" id="jtF-Kj-YEo"/>
+                            <constraint firstAttribute="trailing" secondItem="pyN-Pl-1gA" secondAttribute="trailing" constant="8" id="Loh-UN-nL3"/>
+                            <constraint firstItem="pyN-Pl-1gA" firstAttribute="top" secondItem="YNb-R5-j66" secondAttribute="top" constant="2" id="d6q-P2-LrJ"/>
+                            <constraint firstAttribute="bottom" secondItem="pyN-Pl-1gA" secondAttribute="bottom" constant="3" id="ePD-ma-fGL"/>
+                            <constraint firstAttribute="width" constant="91" id="jtF-Kj-YEo"/>
+                            <constraint firstItem="pyN-Pl-1gA" firstAttribute="leading" secondItem="YNb-R5-j66" secondAttribute="leading" constant="8" id="qr9-1X-PAC"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0">
