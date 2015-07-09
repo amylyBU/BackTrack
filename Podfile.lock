@@ -40,6 +40,9 @@ PODS:
   - FBSDKShareKit (4.3.0):
     - FBSDKCoreKit
   - IP-UIKit-Wisdom (0.0.2)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
   - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
@@ -48,6 +51,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - IP-UIKit-Wisdom
+  - SDWebImage
   - SVPullToRefresh
 
 SPEC CHECKSUMS:
@@ -57,6 +61,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 6bc2f8f2628c3b6d2e346762fff8cb55cfd3a58d
   FBSDKShareKit: 15806d69714de39d5dff2c84645f4cde23f5876e
   IP-UIKit-Wisdom: 653fbfc6f689684d3dda7926781d3cad42ace475
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
 
 COCOAPODS: 0.37.2

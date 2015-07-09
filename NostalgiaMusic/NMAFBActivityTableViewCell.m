@@ -7,6 +7,7 @@
 //
 
 #import "NMAFBActivityTableViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation NMAFBActivityTableViewCell
 
@@ -19,9 +20,19 @@
     self.timeLabel.text = FBPost.timeString;
     self.postMessage.text = FBPost.message;
     [self.postMessage sizeToFit];
-    self.imageHeightConstraint.constant = 300; //TODO: get actual picture size
     self.collapseImageConstraint.priority = 1;
     self.messageHeightFromBottomConstraint.constant = 46;
+    
+    //check for image
+    if(FBPost.picturePath) {
+        NSURL *imageURL = [NSURL URLWithString:FBPost.picturePath];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *postImage = [UIImage imageWithData:imageData];
+        [self setImageViewDimensions:postImage];
+        [self.postImageView setImage:postImage];
+    } else {
+        self.collapseImageConstraint.priority = 999;
+    }
 }
 
 - (void)configureEmptyCell {
@@ -38,6 +49,11 @@
     self.commentsButton.hidden = isHidden;
     self.likesButton.hidden = isHidden;
     self.shareButton.hidden = isHidden;
+}
+
+- (void)setImageViewDimensions:(UIImage *)targetImage {
+    float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
+    self.imageHeightConstraint.constant = heightToWidthRatio * self.postImageView.frame.size.width;
 }
 
 @end
