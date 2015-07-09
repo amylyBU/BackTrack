@@ -27,8 +27,8 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
          forCellReuseIdentifier:kNMASettingsSwitchCellIdentifier];
     [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFeedbackTableViewCell class]) bundle:nil]
                forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
-    [self.staticTableView setDelegate:self];
-    [self.staticTableView setDataSource:self];
+    self.staticTableView.delegate = self;
+    self.staticTableView.dataSource = self;
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -52,22 +52,14 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
         if (indexPath.row == 0) {
             NMASettingsSwitchCell *facebookCell = [tableView dequeueReusableCellWithIdentifier:@"SettingsSwitchCell" forIndexPath:indexPath];
             facebookCell.settingsCategoryLabel.text = @"Connect to Facebook";
-            if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
-                [facebookCell.settingsSwitch setOn:YES];
-            } else {
-                [facebookCell.settingsSwitch setOn:NO];
-            }
+            facebookCell.settingsSwitch.on = [[NMAAppSettings sharedSettings] userIsLoggedIn];
             facebookCell.delegate = self;
             facebookCell.settingsSwitch.tag = 0;
             return facebookCell;
         } else {
             NMASettingsSwitchCell *autoplayCell =  [tableView dequeueReusableCellWithIdentifier:kNMASettingsSwitchCellIdentifier forIndexPath:indexPath];
             autoplayCell.settingsCategoryLabel.text = @"Autoplay";
-            if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                [autoplayCell.settingsSwitch setOn:YES];
-            } else {
-                [autoplayCell.settingsSwitch  setOn:NO];
-            }
+            autoplayCell.settingsSwitch.on = [[NMAAppSettings sharedSettings] userDidAutoplay];
             autoplayCell.delegate = self;
             autoplayCell.settingsSwitch.tag = 1;
             return autoplayCell;
@@ -77,7 +69,6 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
         feedbackCell.feedbackLabel.text = @"Feedback";
         return feedbackCell;
     }
-    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,12 +86,11 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
 }
 
 #pragma mark - Switch statement delegate method
-
-- (void)didPressSwitch:(id)sender {
-    if ([sender tag] == 0) {
+- (void)didPressSwitch:(UISwitch *)sender {
+    if (sender.tag == 0) {
         NSLog(@"Facebook Settings Toggled. Settings are not saved.");
     } else {
-        if ([sender isOn]) {
+        if (sender.on) {
             [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
             
         } else {

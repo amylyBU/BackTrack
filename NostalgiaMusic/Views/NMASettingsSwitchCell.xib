@@ -15,6 +15,7 @@
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a60-Y4-8Sh">
                         <rect key="frame" x="255" y="6" width="51" height="31"/>
+                        <color key="onTintColor" red="1" green="0.0" blue="0.010051519906341788" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <action selector="switchClicked:" destination="KGk-i7-Jjw" eventType="valueChanged" id="GfH-PM-Ay8"/>
                         </connections>

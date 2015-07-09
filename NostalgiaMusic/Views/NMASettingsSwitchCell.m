@@ -10,7 +10,7 @@
 
 @implementation NMASettingsSwitchCell
 
-- (IBAction)switchClicked:(id)sender {
+- (IBAction)switchClicked:(UISwitch *)sender {
     [self.delegate didPressSwitch:sender];
 }
 
