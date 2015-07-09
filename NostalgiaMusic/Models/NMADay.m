@@ -43,11 +43,19 @@
              NSString *type = [post objectForKey:@"type"];
              if([type isEqual: @"status"] || [type isEqual: @"photo"]) {
                  NSString *message = [post objectForKey:@"message"];
-                 NSString *picture = [post objectForKey:@"picture"];
+                 NSString *pictureId = [post objectForKey:@"object_id"];
                  NSString *createdTime = [post objectForKey:@"created_time"];
                  NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithMessage:message
-                                                                    picturePath:picture
-                                                                    createdTime:createdTime];
+                                                                    pictureObjectId:pictureId
+                                                                        createdTime:createdTime];
+                 //We need to make a separate request to get a high res image for the FBActivity
+                 [[NMARequestManager sharedManager] requestFBPostPicture:pictureId
+                                                                 success:^(NSString *imagePath) {
+                                                                     FBActivity.picturePath = imagePath;
+                                                                     //Then we need to reload with the image
+                                                                     [self.delegate updatedFBActivity];
+                                                                 }
+                                                                 failure:nil];
                  [mutablePosts addObject:FBActivity];
              }
          }

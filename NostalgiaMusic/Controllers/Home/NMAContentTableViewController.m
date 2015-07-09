@@ -170,6 +170,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - NMADayDelegate
 - (void)updatedFBActivity {
+    NSLog(@"FBActivity Updated");
     [self.tableView reloadData];
 }
 

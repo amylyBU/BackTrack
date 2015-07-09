@@ -31,4 +31,8 @@
                        success:(void (^)(NSArray *posts))success
                        failure:(void (^)(NSError *error))failure;
 
+- (void)requestFBPostPicture:(NSString *)imageId
+                     success:(void (^)(NSString *imagePath))success
+                     failure:(void (^)(NSError *error))failure;
+
 @end

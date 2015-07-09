@@ -141,6 +141,7 @@
      ];
 }
 
+#pragma mark - Facebook Requests
 - (void)requestFBPostsFromDate:(NSString *)year
                        success:(void (^)(NSArray *posts))success
                        failure:(void (^)(NSError *error))failure {
@@ -154,12 +155,12 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *sinceTime = [dateFormatter stringFromDate:targetDateStart];
     NSString *untilTime = [dateFormatter stringFromDate:targetDateEnd];
+
+    NSString *path = @"/me/posts";
     NSDictionary *params = @{
                              @"since" : sinceTime,
                              @"until" : untilTime
                              };
-    NSString *path = @"/me/posts";
-
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:params
                                                                    HTTPMethod:@"GET"];
@@ -177,6 +178,28 @@
     }];
 }
 
+- (void)requestFBPostPicture:(NSString *)imageId
+                     success:(void (^)(NSString *imagePath))success
+                     failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"/%@", imageId];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
+                                                                   parameters:nil
+                                                                   HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        
+        //we need to update the posts on the main thread with the UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *imageVersions = [result objectForKey:@"images"];
+            if(imageVersions) {
+                NSString *imagePath = [imageVersions[0] objectForKey:@"source"];
+                success(imagePath);
+            }
+        });
+        
+    }];
+}
+
 #pragma mark - Format Utility
 
 ///@discussion if startOfDay, the time of the date is 00:00:00am, else its 11:59:59pm (the end of the day)
@@ -188,7 +211,7 @@
     NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
     [targetDateComponents setYear:[year integerValue]];
     [targetDateComponents setMonth:presentDateComponents.month];
-    [targetDateComponents setDay:presentDateComponents.day];
+    [targetDateComponents setDay:presentDateComponents.day - 1];
     [targetDateComponents setHour:(start ? 0 : 23)];
     [targetDateComponents setMinute:(start ? 0 : 59)];
     [targetDateComponents setSecond:(start ? 0 : 59)];

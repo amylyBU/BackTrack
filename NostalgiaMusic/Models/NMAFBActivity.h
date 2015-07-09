@@ -10,12 +10,12 @@
 
 @interface NMAFBActivity : NSObject
 @property (strong, nonatomic, readonly) NSString *message;
-@property (strong, nonatomic, readonly) NSString *picturePath;
+@property (strong, nonatomic, readwrite) NSString *picturePath;
 @property (nonatomic, readonly) NSInteger *likeCount;
 @property (nonatomic, readonly) NSInteger *commentCount;
 @property (strong, nonatomic, readonly) NSString *timeString;
 
 - (instancetype) initWithMessage:(NSString *)message
-                     picturePath:(NSString *)picturePath
+                 pictureObjectId:(NSString *)pictureObjectId
                      createdTime:(NSString *)createdTime;
 @end

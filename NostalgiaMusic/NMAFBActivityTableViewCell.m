@@ -30,6 +30,7 @@
         UIImage *postImage = [UIImage imageWithData:imageData];
         [self setImageViewDimensions:postImage];
         [self.postImageView setImage:postImage];
+        [self layoutIfNeeded];
     } else {
         self.collapseImageConstraint.priority = 999;
     }
@@ -53,7 +54,8 @@
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
     float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
-    self.imageHeightConstraint.constant = heightToWidthRatio * self.postImageView.frame.size.width;
+    float newViewHeight = heightToWidthRatio * self.postImageView.frame.size.width;
+    self.imageHeightConstraint.constant = newViewHeight;
 }
 
 @end

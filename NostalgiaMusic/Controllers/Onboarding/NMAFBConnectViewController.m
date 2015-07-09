@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.loginButton.delegate = self;
-    self.loginButton.readPermissions = @[@"user_posts"];
+    self.loginButton.readPermissions = @[@"user_posts", @"user_photos"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
