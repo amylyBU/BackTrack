@@ -10,14 +10,7 @@
 
 @implementation NMASettingsSwitchCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (IBAction)switchClicked:(id)sender {
+    [self.delegate didPressSwitch:sender];
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 @end

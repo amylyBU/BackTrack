@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol NMASettingsSwitchCellDelegate<NSObject>
+
+-(void)didPressSwitch:(id)sender;
+
+@end
 
 @interface NMASettingsSwitchCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *settingsCategoryLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *settingsSwitch;
+@property (weak, nonatomic) id <NMASettingsSwitchCellDelegate> delegate;
 
 @end

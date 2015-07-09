@@ -11,8 +11,10 @@
 #import "NMASettingsSwitchCell.h"
 #import "NMAFeedbackTableViewCell.h"
 
-@interface NMASettingsViewController () <UITableViewDataSource, UITableViewDelegate>
-@property  NSMutableArray *settings;
+static NSString * const kNMASettingsSwitchCellIdentifier = @"SettingsSwitchCell";
+static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableViewCell";
+
+@interface NMASettingsViewController () <UITableViewDataSource, UITableViewDelegate, NMASettingsSwitchCellDelegate>
 
 @end
 
@@ -20,66 +22,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.feedbackButton addTarget:self
-                            action:@selector(launchMailAppOnDevice:)
-                  forControlEvents:UIControlEventTouchUpInside];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-        [self.autoplayMusicSwitch setOn:YES];
-    } else {
-        [self.autoplayMusicSwitch setOn:NO];
-    }
-    
-    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
-        [self.facebookSwitch setOn:YES];
-    } else {
-        [self.facebookSwitch setOn:NO];
-    }
-    
     [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASettingsSwitchCell class]) bundle:nil]
-         forCellReuseIdentifier:@"SettingsSwitchCell"];
+         forCellReuseIdentifier:kNMASettingsSwitchCellIdentifier];
     [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFeedbackTableViewCell class]) bundle:nil]
-               forCellReuseIdentifier:@"FeedbackTableViewCell"];
-    self.settings = [[NSMutableArray alloc]init];
-    //[self configureSettingsDataSource];
+               forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
     [self.staticTableView setDelegate:self];
     [self.staticTableView setDataSource:self];
 
-}
-
-- (void)configureSettingsDataSource {
-    NMASettingsSwitchCell *facebookCell = [[NMASettingsSwitchCell alloc] init];
-    facebookCell.settingsCategoryLabel.text = @"Connect to Facebook";
-    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
-        [facebookCell.settingsSwitch setOn:YES];
-    } else {
-        [facebookCell.settingsSwitch setOn:NO];
-    }
-    [self.settings addObject:facebookCell];
-    
-    NMASettingsSwitchCell *autoplayCell = [[NMASettingsSwitchCell alloc] init];
-    autoplayCell.settingsCategoryLabel.text = @"Autoplay";
-    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-        [autoplayCell.settingsSwitch setOn:YES];
-    } else {
-        [autoplayCell.settingsSwitch  setOn:NO];
-    }
-    [self.settings addObject:autoplayCell];
-    
-    NMAFeedbackTableViewCell *feedbackCell = [[NMAFeedbackTableViewCell alloc] init];
-    feedbackCell.feedbackLabel.text = @"Feedback";
-    [self.settings addObject:feedbackCell];
-    
-    
-}
-
-- (IBAction)launchMailAppOnDevice:(UIButton *)sender {
-    NSString *recipientsAndSubject = @"mailto:sara@intrepid.io?subject=Feedback for Nostalgia";
-    NSString *body = @"&body=";
-    NSString *feedbackEmail = [NSString stringWithFormat:@"%@%@", recipientsAndSubject, body];
-    feedbackEmail = [feedbackEmail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackEmail]];
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -108,45 +58,57 @@
             } else {
                 [facebookCell.settingsSwitch setOn:NO];
             }
+            facebookCell.delegate = self;
+            facebookCell.settingsSwitch.tag = 0;
             return facebookCell;
         } else {
-            NMASettingsSwitchCell *autoplayCell =  [tableView dequeueReusableCellWithIdentifier:@"SettingsSwitchCell" forIndexPath:indexPath];
+            NMASettingsSwitchCell *autoplayCell =  [tableView dequeueReusableCellWithIdentifier:kNMASettingsSwitchCellIdentifier forIndexPath:indexPath];
             autoplayCell.settingsCategoryLabel.text = @"Autoplay";
             if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
                 [autoplayCell.settingsSwitch setOn:YES];
             } else {
                 [autoplayCell.settingsSwitch  setOn:NO];
             }
+            autoplayCell.delegate = self;
+            autoplayCell.settingsSwitch.tag = 1;
             return autoplayCell;
         }
     } else {
-        NMAFeedbackTableViewCell *feedbackCell =  [tableView dequeueReusableCellWithIdentifier:@"FeedbackTableViewCell" forIndexPath:indexPath];
+        NMAFeedbackTableViewCell *feedbackCell =  [tableView dequeueReusableCellWithIdentifier:kNMAFeedbackTableViewCellIdentifier forIndexPath:indexPath];
         feedbackCell.feedbackLabel.text = @"Feedback";
         return feedbackCell;
     }
     return nil;
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 1) {
-        NSString *recipientsAndSubject = @"mailto:sara@intrepid.io?subject=Feedback for Nostalgia";
-        NSString *body = @"&body=";
-        NSString *feedbackEmail = [NSString stringWithFormat:@"%@%@", recipientsAndSubject, body];
-        feedbackEmail = [feedbackEmail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackEmail]];
-
+        [self sendEmailFeedback];
     }
 }
 
-- (IBAction)switchAutoplay:(id)sender {
-    if (self.autoplayMusicSwitch.on) {
-          [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
-      
+- (void)sendEmailFeedback {
+    NSString *recipientsAndSubject = @"mailto:sara@intrepid.io?subject=Feedback for Nostalgia";
+    NSString *body = @"&body=";
+    NSString *feedbackEmail = [NSString stringWithFormat:@"%@%@", recipientsAndSubject, body];
+    feedbackEmail = [feedbackEmail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackEmail]];
+}
+
+#pragma mark - Switch statement delegate method
+
+- (void)didPressSwitch:(id)sender {
+    if ([sender tag] == 0) {
+        NSLog(@"Facebook Settings Toggled");
     } else {
-          [[NMAAppSettings sharedSettings] setAutoplaySettingToOff];
-
+        if ([sender isOn]) {
+            [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
+            
+        } else {
+            [[NMAAppSettings sharedSettings] setAutoplaySettingToOff];
+            
+        }
     }
 }
+
 @end

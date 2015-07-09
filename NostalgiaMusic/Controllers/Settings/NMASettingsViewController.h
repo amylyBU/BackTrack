@@ -9,11 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NMASettingsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *feedbackButton;
-@property (weak, nonatomic) IBOutlet UISwitch *facebookSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *autoplayMusicSwitch;
-@property (weak, nonatomic) IBOutlet UILabel *facebookLabel;
-@property (weak, nonatomic) IBOutlet UILabel *autoplayMusicLabel;
 @property (weak, nonatomic) IBOutlet UITableView *staticTableView;
-
 @end
