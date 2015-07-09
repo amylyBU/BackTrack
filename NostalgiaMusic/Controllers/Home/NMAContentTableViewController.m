@@ -17,6 +17,7 @@
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
 #import "NMANewsStoryTableViewCell.h"
+#import "NMAPlaybackManager.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -46,7 +47,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -54,7 +55,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
 
@@ -67,16 +68,29 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs addObject:song];
-                                                   
+
                                                    [self.tableView reloadData];
                                                }
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"ddMM"];
+    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
+    NMARequestManager *manager = [[NMARequestManager alloc] init];
+    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
+                          success:^(NMANewsStory *story){
+                              [self.NYTimesNews addObject:story];
+                              [self.tableView reloadData];
+                          }
+                          failure:^(NSError *error) {
+                              
+                          }];
+
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
 }
 
@@ -172,6 +186,10 @@ titleForHeaderInSection:(NSInteger)section {
         default:
             return @"";
     }
+}
+
+- (void)playAudioPlayer {
+    NSLog(@"configure this method!");
 }
 
 @end

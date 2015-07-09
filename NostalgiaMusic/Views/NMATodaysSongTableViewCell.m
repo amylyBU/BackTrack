@@ -9,11 +9,12 @@
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
 #import "NMAAppSettings.h"
+#import "NMAPlaybackManager.h"
 
-static NSString * const kPlayImageName = @"play";
-static NSString * const kPauseImageName = @"pause";
+static NSString * const kPlayImageName = @"play-circle-icon";
+static NSString * const kPauseImageName = @"pause-circle-icon";
 
-@interface NMATodaysSongTableViewCell () <AVAudioPlayerDelegate>
+@interface NMATodaysSongTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (strong, nonatomic) AVPlayer *audioPlayer;
@@ -22,11 +23,7 @@ static NSString * const kPauseImageName = @"pause";
 
 @implementation NMATodaysSongTableViewCell
 
-
-
 - (void)configureCellForSong:(NMASong *)song {
-    self.delegate = self;
-    
     self.songTitleLabel.text = song.title;
     self.artistLabel.text = song.artistAsAppearsOnLabel;
     
@@ -39,18 +36,16 @@ static NSString * const kPauseImageName = @"pause";
 }
 
 - (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl {
-    self.audioPlayer = [[AVPlayer alloc] initWithURL:previewUrl];
+    self.audioPlayer = [NMAPlaybackManager sharedPlayerWithURL:previewUrl];
     
     if (self.audioPlayer) {
         NSLog(@"successful audioplayer init");
         //if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
         if (NO) {
-            self.playButton.imageView.image = [UIImage imageNamed:kPauseImageName]; // set image to pause
-            self.playButton.titleLabel.text = @"PAUSE";
-            [self.audioPlayer play]; // autoplay
+            [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
+            [self.audioPlayer play];
         } else {
-            self.playButton.titleLabel.text = @"PLAY";
-            self.playButton.imageView.image = [UIImage imageNamed:kPlayImageName]; // set image to play
+            [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
         }
     } else {
         NSLog(@"handle error");
@@ -58,25 +53,17 @@ static NSString * const kPauseImageName = @"pause";
 }
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
-    if (sender.imageView.image == [UIImage imageNamed:kPlayImageName]) {
-    //if ([sender.titleLabel.text isEqualToString:@"play"]) {
+    if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
         NSLog(@"played the song");
         [self.audioPlayer play];
-        self.playButton.titleLabel.text = @"PAUSE";
-        self.playButton.imageView.image = [UIImage imageNamed:kPauseImageName];
+        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     } else {
         NSLog(@"paused the song");
         [self.audioPlayer pause];
-        self.playButton.titleLabel.text = @"PLAY";
-        self.playButton.imageView.image = [UIImage imageNamed:kPlayImageName];
+        [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     }
 }
 
-#pragma mark - AVAudioPlayerDelegate
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    if (flag) {
-        self.playButton.imageView.image = [UIImage imageNamed:kPlayImageName];
-    }
-}
+
 @end

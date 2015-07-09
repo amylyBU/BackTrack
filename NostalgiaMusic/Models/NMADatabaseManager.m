@@ -56,7 +56,7 @@
 
 - (NMASong *)getSongWithSQLStatement:(sqlite3_stmt *)statement {
     self.queryResultsArray = [[NSMutableArray alloc] init];
-    NSInteger numberOfSongsOnBillboard;
+    NSInteger numberOfSongsOnBillboard = 0;
     NSInteger dayOfMonth = [self dayOfMonth];
 
     while (sqlite3_step(statement) == SQLITE_ROW) {

@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NMADay.h"
+#import "NMATodaysSongTableViewCellDelegate.h"
 
 @interface NMAContentTableViewController : UITableViewController <NMADayDelegate>
+
 @property (copy, nonatomic) NSString *year;
 @property (strong, nonatomic, readonly) NMADay *day;
+
+- (void)playAudioPlayer;
+
 @end

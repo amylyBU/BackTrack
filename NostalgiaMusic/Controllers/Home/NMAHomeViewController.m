@@ -15,7 +15,7 @@
 #import "UIView+Constraints.h"
 #import "UIViewController+Containment.h"
 
-@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollViewControllerDelegate>
+@interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollDelegate>
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAYearActivityScrollViewController *yearActivityScrollVC;
 @property (strong, nonatomic) NMAYearCollectionViewController *yearScrollBarCollectionVC;

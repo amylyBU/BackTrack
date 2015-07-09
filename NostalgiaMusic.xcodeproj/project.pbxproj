@@ -55,6 +55,12 @@
 		E515FDDD1B4DB126000E47E3 /* UIFont+NMAFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */; };
 		E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */; };
 		E515FDCE1B4D7CB3000E47E3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */; };
+		E515FDE71B4F0C9F000E47E3 /* NMAPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */; };
+		E515FDD61B4DAD13000E47E3 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */; };
+		E515FDD71B4DAD13000E47E3 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */; };
+		E515FDD81B4DAD13000E47E3 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */; };
+		E515FDDD1B4DB126000E47E3 /* UIFont+NMAFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */; };
+		E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +154,16 @@
 		E515FDDE1B4DB7B0000E47E3 /* UIColor+NMAColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+NMAColors.h"; path = "Colors/UIColor+NMAColors.h"; sourceTree = "<group>"; };
 		E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+NMAColors.m"; path = "Colors/UIColor+NMAColors.m"; sourceTree = "<group>"; };
 		E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E515FDE41B4EE621000E47E3 /* NMATodaysSongTableViewCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NMATodaysSongTableViewCellDelegate.h; sourceTree = "<group>"; };
+		E515FDE51B4F0C9F000E47E3 /* NMAPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAPlaybackManager.h; path = Models/NMAPlaybackManager.h; sourceTree = "<group>"; };
+		E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAPlaybackManager.m; path = Models/NMAPlaybackManager.m; sourceTree = "<group>"; };
+		E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.otf"; sourceTree = "<group>"; };
+		E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
+		E515FDDB1B4DB126000E47E3 /* UIFont+NMAFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+NMAFonts.h"; path = "Proxima Nova/UIFont+NMAFonts.h"; sourceTree = "<group>"; };
+		E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+NMAFonts.m"; path = "Proxima Nova/UIFont+NMAFonts.m"; sourceTree = "<group>"; };
+		E515FDDE1B4DB7B0000E47E3 /* UIColor+NMAColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+NMAColors.h"; path = "Colors/UIColor+NMAColors.h"; sourceTree = "<group>"; };
+		E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+NMAColors.m"; path = "Colors/UIColor+NMAColors.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +202,8 @@
 				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
 				07ECCBFD1B4B12830089D042 /* NMADay.h */,
 				07ECCBFE1B4B12830089D042 /* NMADay.m */,
+				E515FDE51B4F0C9F000E47E3 /* NMAPlaybackManager.h */,
+				E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -203,6 +221,7 @@
 				E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */,
 				E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */,
 				07ECCC021B4C08920089D042 /* FBActivity */,
+				E515FDE41B4EE621000E47E3 /* NMATodaysSongTableViewCellDelegate.h */,
 				615911591B3D850A006B6779 /* Home */,
 			);
 			name = Views;
@@ -587,6 +606,7 @@
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
+				E515FDE71B4F0C9F000E47E3 /* NMAPlaybackManager.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
 				E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,

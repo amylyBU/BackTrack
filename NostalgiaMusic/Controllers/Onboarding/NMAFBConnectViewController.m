@@ -20,12 +20,12 @@
     [super viewDidLoad];
     self.loginButton.delegate = self;
     self.loginButton.readPermissions = @[@"user_posts", @"user_photos"];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self configureUI];
 }
 
 - (void)configureUI {
     self.navigationController.navigationBar.hidden = YES;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     self.view.backgroundColor = [UIColor NMA_skyBlueBackground];
 
