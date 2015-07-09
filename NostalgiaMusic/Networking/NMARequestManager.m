@@ -166,15 +166,11 @@
                                                                    HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        
-        //we need to update the posts on the main thread with the UI
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *posts = [result objectForKey:@"data"];
             if(posts) {
                 success(posts);
             }
-        });
-        
     }];
 }
 
@@ -187,16 +183,11 @@
                                                                    HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        
-        //we need to update the posts on the main thread with the UI
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSArray *imageVersions = [result objectForKey:@"images"];
-            if(imageVersions) {
-                NSString *imagePath = [imageVersions[0] objectForKey:@"source"];
-                success(imagePath);
-            }
-        });
-        
+        NSArray *imageVersions = [result objectForKey:@"images"];
+        if(imageVersions) {
+            NSString *imagePath = [imageVersions[0] objectForKey:@"source"];
+            success(imagePath);
+        }
     }];
 }
 
