@@ -8,8 +8,10 @@
 
 #import "NMASettingsViewController.h"
 #import "NMAAppSettings.h"
+#import "NMASettingsSwitchCell.h"
 
 @interface NMASettingsViewController ()
+@property  NSMutableArray *settings;
 
 @end
 
@@ -18,8 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.feedbackButton addTarget:self
-               action:@selector(launchMailAppOnDevice:)
-     forControlEvents:UIControlEventTouchUpInside];
+                            action:@selector(launchMailAppOnDevice:)
+                  forControlEvents:UIControlEventTouchUpInside];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
         [self.autoplayMusicSwitch setOn:YES];
@@ -32,22 +34,23 @@
     } else {
         [self.facebookSwitch setOn:NO];
     }
-   
+    
+    [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASettingsSwitchCell class]) bundle:nil]
+         forCellReuseIdentifier:@"Cell"];
+    
+    [self.settings addObject:@"test"];
 }
-
 
 - (IBAction)launchMailAppOnDevice:(UIButton *)sender {
-    NSString *recipients = @"mailto:sara@intrepid.io?subject=Feedback for Nostalgia";
+    NSString *recipientsAndSubject = @"mailto:sara@intrepid.io?subject=Feedback for Nostalgia";
     NSString *body = @"&body=";
-    NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
-    email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *feedbackEmail = [NSString stringWithFormat:@"%@%@", recipientsAndSubject, body];
+    feedbackEmail = [feedbackEmail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackEmail]];
 }
 
-- (IBAction)switchFacebook:(id)sender {
-    
-}
+#pragma mark - UITableViewDelegate Methods
 
 - (IBAction)switchAutoplay:(id)sender {
     if (self.autoplayMusicSwitch.on) {

@@ -82,6 +82,4 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     [self setUserDefaultSettingForKey:kAutoplaySettingKey withBool:NO];
 }
 
-
-
 @end
