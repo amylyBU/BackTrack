@@ -13,4 +13,5 @@
 - (IBAction)switchClicked:(id)sender {
     [self.delegate didPressSwitch:sender];
 }
+
 @end

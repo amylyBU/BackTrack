@@ -15,7 +15,7 @@ static NSString * const kNMASettingsSwitchCellIdentifier = @"SettingsSwitchCell"
 static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableViewCell";
 
 @interface NMASettingsViewController () <UITableViewDataSource, UITableViewDelegate, NMASettingsSwitchCellDelegate>
-
+@property (weak, nonatomic) IBOutlet UITableView *staticTableView;
 @end
 
 @implementation NMASettingsViewController
@@ -29,7 +29,6 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
                forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
     [self.staticTableView setDelegate:self];
     [self.staticTableView setDataSource:self];
-
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -81,7 +80,7 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
     return nil;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 1) {
         [self sendEmailFeedback];
     }
@@ -99,7 +98,7 @@ static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableView
 
 - (void)didPressSwitch:(id)sender {
     if ([sender tag] == 0) {
-        NSLog(@"Facebook Settings Toggled");
+        NSLog(@"Facebook Settings Toggled. Settings are not saved.");
     } else {
         if ([sender isOn]) {
             [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];

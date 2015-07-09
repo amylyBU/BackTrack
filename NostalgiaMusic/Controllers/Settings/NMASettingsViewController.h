@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NMASettingsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *staticTableView;
+
 @end

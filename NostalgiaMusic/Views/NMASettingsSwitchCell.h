@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol NMASettingsSwitchCellDelegate<NSObject>
 
--(void)didPressSwitch:(id)sender;
+- (void)didPressSwitch:(id)sender;
 
 @end
 
