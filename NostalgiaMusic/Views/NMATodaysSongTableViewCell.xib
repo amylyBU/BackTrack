@@ -14,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="songTitleLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Zs-Rpu">
-                        <rect key="frame" x="135" y="9" width="109" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="songTitleLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Zs-Rpu">
+                        <rect key="frame" x="135" y="10" width="109" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -39,6 +39,15 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjN-tD-hC8">
+                        <rect key="frame" x="175" y="171" width="30" height="30"/>
+                        <state key="normal" title="play">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="playButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dDz-Hn-JRi"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="top" secondItem="Gp6-gG-QGC" secondAttribute="bottom" constant="8" id="9RG-pd-n8R"/>
@@ -47,6 +56,8 @@
                     <constraint firstAttribute="bottomMargin" secondItem="n4J-Ik-dKI" secondAttribute="bottom" constant="-7.5" id="gxP-5L-rzb"/>
                     <constraint firstAttribute="centerX" secondItem="eCa-cZ-6Yl" secondAttribute="centerX" id="h6K-Jj-jPZ"/>
                     <constraint firstAttribute="centerY" secondItem="eCa-cZ-6Yl" secondAttribute="centerY" constant="4.25" id="hvo-4M-Fce"/>
+                    <constraint firstItem="WjN-tD-hC8" firstAttribute="centerX" secondItem="eCa-cZ-6Yl" secondAttribute="centerX" id="pVd-SM-vzZ"/>
+                    <constraint firstItem="WjN-tD-hC8" firstAttribute="centerY" secondItem="eCa-cZ-6Yl" secondAttribute="centerY" id="twC-jU-Xfc"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="8.5" id="uxM-eO-OXQ"/>
                     <constraint firstAttribute="centerX" secondItem="Gp6-gG-QGC" secondAttribute="centerX" id="vcz-5N-5TX"/>
                 </constraints>
@@ -55,6 +66,7 @@
                 <outlet property="albumImage" destination="eCa-cZ-6Yl" id="Lnb-6c-rhe"/>
                 <outlet property="artistLabel" destination="Gp6-gG-QGC" id="DCg-a2-gcu"/>
                 <outlet property="iTunesButton" destination="n4J-Ik-dKI" id="Xjo-qV-mJh"/>
+                <outlet property="playButton" destination="WjN-tD-hC8" id="XgY-8z-ZwK"/>
                 <outlet property="songTitleLabel" destination="L6W-Zs-Rpu" id="oyz-Ho-dLE"/>
             </connections>
             <point key="canvasLocation" x="292" y="372"/>

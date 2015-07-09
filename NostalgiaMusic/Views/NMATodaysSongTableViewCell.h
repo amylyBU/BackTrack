@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 @class NMASong;
 
 @interface NMATodaysSongTableViewCell : UITableViewCell
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
 @property (weak, nonatomic) IBOutlet UIImageView *albumImage;
+@property (weak, nonatomic) id <AVAudioPlayerDelegate> delegate;
 
 - (void)configureCellForSong:(NMASong *)song;
 
