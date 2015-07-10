@@ -7,6 +7,10 @@
 //
 
 #import "NMADay.h"
+#import "NMASong.h"
+#import "NMAFBActivity.h"
+#import "FBSDKGraphRequest.h"
+#import "NMARequestManager.h"
 
 @interface NMADay()
 @property (strong, nonatomic, readwrite) NSString *year;
@@ -36,11 +40,11 @@
 #pragma mark - Facebook Post Utility
 
 - (void)collectFBActivities {
-    [[NMARequestManager sharedManager] requestFBActivitiesFromDate:_year
-                                                       dayDelegate:_delegate
+    [[NMARequestManager sharedManager] requestFBActivitiesFromDate:self.year
+                                                       dayDelegate:self.delegate
                                                            success:^(NSArray *FBActivities) {
-                                                               _FBActivities = FBActivities;
-                                                               [_delegate updatedFBActivity];
+                                                               self.FBActivities = FBActivities;
+                                                               [self.delegate updatedFBActivity];
                                                            }
                                                            failure:nil];
 }

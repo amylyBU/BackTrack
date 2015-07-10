@@ -18,8 +18,8 @@
 @end
 
 @interface NMAYearActivityScrollViewController:UIViewController<UIScrollViewDelegate>
-@property (strong, nonatomic) UIScrollView *scrollView;
 @property (copy, nonatomic) NSString *year;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (weak, nonatomic) id <NMAYearActivityScrollViewControllerDelegate> delegate;
 
 - (void)setUpScrollView:(NSString *)year;

@@ -60,7 +60,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
-    _day = [[NMADay alloc] initWithYear:_year dayDelgate:self];
+    self.day = [[NMADay alloc] initWithYear:self.year dayDelgate:self];
     
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
@@ -71,19 +71,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
-    
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"ddMM"];
-//    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
-//    NMARequestManager *manager = [[NMARequestManager alloc] init];
-//    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
-//                          success:^(NMANewsStory *story){
-//                              [self.NYTimesNews addObject:story];
-//                              [self.tableView reloadData];
-//                          }
-//                          failure:^(NSError *error) {
-//                              
-//                          }];
 
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -103,7 +90,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
         case NMASectionTypeBillboardSong:
             return self.billboardSongs.count;
         case NMASectionTypeFacebookActivity: {
-            NSUInteger activityCount = _day.FBActivities.count;
+            NSUInteger activityCount = self.day.FBActivities.count;
             return activityCount > 0 ? activityCount : 1;
         }
         case NMASectionTypeNYTimesNews:
@@ -125,7 +112,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
             UITableViewCell *cell;
             if(_day.FBActivities.count) {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMAFacebookActivityCellIdentifier forIndexPath:indexPath];
-                [(NMAFBActivityTableViewCell*)cell configureCellForFBActivity:_day.FBActivities[indexPath.row]];
+                [(NMAFBActivityTableViewCell*)cell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFacebookActivityCellIdentifier forIndexPath:indexPath];
             }
@@ -164,9 +151,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)setYear:(NSString *)year {
-    _year = year;
-    _day = [[NMADay alloc] initWithYear:_year dayDelgate:self];
-    _day.delegate = self;
+    self.year = year;
+    self.day = [[NMADay alloc] initWithYear:self.year dayDelgate:self];
+    self.day.delegate = self;
     [self.tableView reloadData];
 }
 

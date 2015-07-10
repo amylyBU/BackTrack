@@ -11,11 +11,11 @@
 #import "NMADay.h"
 
 @interface NMAFBActivity()
+@property (nonatomic, readwrite) int likeCount;
+@property (nonatomic, readwrite) int commentCount;
 @property (nonatomic, copy, readwrite) NSString *message;
 @property (nonatomic, copy, readwrite) NSString *timeString;
 @property (nonatomic, copy, readwrite) NSString *imageObjectId;
-@property (nonatomic, readwrite) int likeCount;
-@property (nonatomic, readwrite) int commentCount;
 @property (strong, nonatomic) id <NMADayDelegate> dayDelegate;
 @end
 
@@ -25,29 +25,27 @@
 - (instancetype) initWithPost:(id)post dayDelegate:(id)delegate{
     self = [super init];
     
-    if(self && post) {
+    if(self) {
         //we are only interested in status and photo updates for now
-        NSString *message = post[@"message"];
-        NSString *pictureId = post[@"object_id"]; //if not a photo, this is nil
-        NSString *createdTime = post[@"created_time"];
-        
-        _message = message;
-        [self formatTimeString:createdTime];
-        _imageObjectId = pictureId;
-        _imagePath = nil;
-        _dayDelegate = delegate;
+        if(post) {
+            _message = post[@"message"];
+            _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
+            [self formatTimeString:post[@"created_time"]];
+            _imagePath = nil;
+            _dayDelegate = delegate;
             
-        //We need to make a separate request to get a high res image for the FBActivity
-        [[NMARequestManager sharedManager] requestFBActivityImage:pictureId
-                                                          success:^(NSString *imagePath) {
-                                                              _imagePath = imagePath;
-                                                              //Then we need to reload with the image
-                                                              [_dayDelegate updatedFBActivity];
-                                                          }
-                                                          failure:nil];
+            //We need to make a separate request to get a high res image for the FBActivity
+            [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
+                                                              success:^(NSString *imagePath) {
+                                                                  self.imagePath = imagePath;
+                                                                  //Then we need to reload with the image
+                                                                  [self.dayDelegate updatedFBActivity];
+                                                              }
+                                                              failure:nil];
             
-        //We also need to make special paging requests for likes and comments
-        _likeCount = [self countLikes:post];
+            //We also need to make special paging requests for likes and comments
+            _likeCount = [self countLikes:post];
+        }
     }
     
     return self;
@@ -64,7 +62,7 @@
     dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
     dateFormatter.dateFormat = @"h:mm a";
     
-    _timeString = [dateFormatter stringFromDate:date];
+    self.timeString = [dateFormatter stringFromDate:date];
 }
 
 - (int)countLikes:(id)post {
@@ -83,8 +81,5 @@
     return likeCount;
 }
 
-- (void)getTotalCountWithStartingCount:(NSInteger)startingCount nextPage:(NSString *)nextPage {
-    
-}
 
 @end

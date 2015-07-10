@@ -10,12 +10,12 @@
 @protocol NMADayDelegate;
 
 @interface NMAFBActivity : NSObject
-@property (nonatomic, readonly, copy) NSString *message;
-@property (nonatomic, copy) NSString *imagePath;
-@property (nonatomic, readonly, copy) NSString *imageId;
 @property (nonatomic, readonly) int likeCount;
 @property (nonatomic, readonly) int commentCount;
-@property (nonatomic, readonly, copy) NSString *timeString;
+@property (copy, nonatomic) NSString *imagePath;
+@property (copy, nonatomic, readonly) NSString *message;
+@property (copy, nonatomic, readonly) NSString *imageId;
+@property (copy, nonatomic, readonly) NSString *timeString;
 
 - (instancetype)initWithPost:(id)post dayDelegate:(id<NMADayDelegate>)dayDelegate;
 
