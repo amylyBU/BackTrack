@@ -191,6 +191,7 @@ titleForHeaderInSection:(NSInteger)section {
 - (void)setUpPlayerForTableCell {
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
+                                                   [self.billboardSongs removeAllObjects];
                                                    [self.billboardSongs addObject:song];
 
                                                    [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];

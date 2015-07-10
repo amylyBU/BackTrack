@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface NMAPlaybackManager : AVPlayer
+@interface NMAPlaybackManager : NSObject
 
 + (instancetype)sharedAudioPlayer;
 - (void)setUpWithURL:(NSURL *)url;

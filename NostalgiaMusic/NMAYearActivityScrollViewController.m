@@ -204,10 +204,10 @@ BOOL isMostRecentYearVisible;
     self.latestYear = pastYearString;
 }
 
-#pragma mark - Audio Player
+#pragma mark - NMAPlaybackManager Initialization
 
 - (void)setUpMusicPlayer {
-    for (NMAContentTableViewController *tableVC in self.childViewControllers) { // look through left, middle, right view controllers
+    for (NMAContentTableViewController *tableVC in self.childViewControllers) {
         NSString *visibleYear;
         if (isMostRecentYearVisible) {
             visibleYear = self.latestYear;
@@ -218,9 +218,8 @@ BOOL isMostRecentYearVisible;
         else {
             visibleYear = self.year;
         }
-        
-        if ([tableVC.year isEqualToString:visibleYear]) { // find the view controller whose year is equal to self.year (the visible year)
-            [tableVC setUpPlayerForTableCell]; // set up the music player for that view controller's table cell
+        if ([tableVC.year isEqualToString:visibleYear]) {
+            [tableVC setUpPlayerForTableCell];
             break;
         }
     }

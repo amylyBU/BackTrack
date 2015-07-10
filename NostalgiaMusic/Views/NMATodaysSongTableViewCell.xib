@@ -31,7 +31,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4J-Ik-dKI">
-                        <rect key="frame" x="146" y="399" width="89" height="32"/>
+                        <rect key="frame" x="146" y="393" width="89" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="n4J-Ik-dKI" secondAttribute="height" multiplier="89:32" id="ZUy-Nr-Olq"/>
                         </constraints>
@@ -40,7 +40,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-gG-QGC">
-                        <rect key="frame" x="8" y="371" width="364" height="20"/>
+                        <rect key="frame" x="8" y="365" width="364" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="deL-CX-CDe"/>
                         </constraints>
@@ -73,7 +73,7 @@
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="38" id="hHY-LH-KM3"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qlh-X3-YL4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="eCa-cZ-6Yl" secondAttribute="trailing" constant="38" id="tOr-D4-FFb"/>
-                    <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="8" id="vWV-JH-iej"/>
+                    <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="2" id="vWV-JH-iej"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xRx-Z6-aDE"/>
                 </constraints>
             </tableViewCellContentView>

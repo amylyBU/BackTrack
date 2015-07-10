@@ -13,6 +13,7 @@ static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 
 @interface NMAYearCollectionViewController ()
+
 @property (strong, nonatomic) NSMutableArray *years;
 @property (nonatomic) NSInteger latestYear;
 
@@ -99,7 +100,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
 }
 
 - (void)moveToYear:(NSString *)year {
-    if([year integerValue] < 2015 && [year integerValue] > 1980){
+    if ([year integerValue] < 2015 && [year integerValue] > 1980) {
         NSInteger indexYear = [self.years indexOfObject:year];
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
         [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
@@ -107,6 +108,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
 }
 
 #pragma mark - Getters and Setters
+
 - (void) getLatestYear {
     NSDateFormatter *DateFormatter = [[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy"];

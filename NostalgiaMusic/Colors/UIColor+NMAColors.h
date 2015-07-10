@@ -14,5 +14,7 @@
 + (UIColor *)NMA_boldOrange;
 + (UIColor *)NMA_lightGray;
 + (UIColor *)NMA_tealGreen;
++ (UIColor *)NMA_almostBlack;
++ (UIColor *)NMA_darkGray;
 
 @end
