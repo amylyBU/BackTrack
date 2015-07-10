@@ -12,7 +12,7 @@
 #import "NMAFeedbackTableViewCell.h"
 
 static NSString * const kNMASettingsSwitchCellIdentifier = @"SettingsSwitchCell";
-static NSString * const kNMAFeedbackTableViewCellIdentifier= @"FeedbackTableViewCell";
+static NSString * const kNMAFeedbackTableViewCellIdentifier = @"FeedbackTableViewCell";
 
 @interface NMASettingsViewController () <UITableViewDataSource, UITableViewDelegate, NMASettingsSwitchCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *staticTableView;
