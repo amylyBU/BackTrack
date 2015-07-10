@@ -18,13 +18,13 @@
                         <rect key="frame" x="8" y="275" width="304" height="115"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
-                                <rect key="frame" x="8" y="43" width="288" height="20.5"/>
+                                <rect key="frame" x="8" y="43" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RP5-HH-adE">
-                                <rect key="frame" x="8" y="70.5" width="30" height="36.5"/>
+                                <rect key="frame" x="8" y="77" width="30" height="30"/>
                                 <state key="normal" title="💬">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -47,10 +47,10 @@
                             <constraint firstAttribute="trailing" secondItem="Y78-Sd-aWd" secondAttribute="trailing" constant="8" id="0Vt-7H-xbm"/>
                             <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="6Hu-Bj-SX0" secondAttribute="top" constant="43" id="Ff7-hy-eX1"/>
                             <constraint firstItem="Y78-Sd-aWd" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="8" id="GG3-X8-AaV"/>
-                            <constraint firstAttribute="bottom" secondItem="M1y-p7-ycZ" secondAttribute="bottom" constant="8" id="LWI-nG-osC"/>
+                            <constraint firstItem="kBl-C0-09Y" firstAttribute="centerY" secondItem="RP5-HH-adE" secondAttribute="centerY" id="Lih-5T-L3Q"/>
                             <constraint firstItem="kBl-C0-09Y" firstAttribute="leading" secondItem="RP5-HH-adE" secondAttribute="trailing" constant="8" id="RHs-PF-Lvp"/>
-                            <constraint firstAttribute="bottom" secondItem="kBl-C0-09Y" secondAttribute="bottom" constant="8" id="SpO-xJ-78o"/>
-                            <constraint firstItem="RP5-HH-adE" firstAttribute="top" secondItem="Y78-Sd-aWd" secondAttribute="bottom" constant="7" id="WcL-cH-i88"/>
+                            <constraint firstItem="kBl-C0-09Y" firstAttribute="centerY" secondItem="M1y-p7-ycZ" secondAttribute="centerY" id="TgB-If-dbW"/>
+                            <constraint firstItem="RP5-HH-adE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Y78-Sd-aWd" secondAttribute="bottom" constant="8" id="WcL-cH-i88"/>
                             <constraint firstItem="RP5-HH-adE" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="8" id="bK4-47-hdT"/>
                             <constraint firstAttribute="trailing" secondItem="M1y-p7-ycZ" secondAttribute="trailing" constant="8" id="jov-2m-HGo"/>
                             <constraint firstAttribute="bottom" secondItem="RP5-HH-adE" secondAttribute="bottom" constant="8" id="wYt-rj-Uj8"/>
