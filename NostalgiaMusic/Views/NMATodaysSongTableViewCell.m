@@ -36,6 +36,9 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
     self.albumImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:albumImageUrl]];
     self.albumImage.layer.cornerRadius = CGRectGetHeight(self.albumImage.frame) /2;
     self.albumImage.layer.masksToBounds = YES;
+    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
+    } // default is play
 }
 
 - (IBAction)playButtonPressed:(UIButton *)sender {

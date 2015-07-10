@@ -120,6 +120,7 @@ BOOL isMostRecentYearVisible;
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
     [self setUpMusicPlayer];
+    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
 }
 
 - (void)didSwipeToNextYear {
@@ -131,6 +132,7 @@ BOOL isMostRecentYearVisible;
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
     [self setUpMusicPlayer];
+    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
 }
 
 - (void)updatePositioningForScrollPosition:(NMAScrollViewYearPosition)position {
@@ -211,15 +213,15 @@ BOOL isMostRecentYearVisible;
         NSString *visibleYear;
         if (isMostRecentYearVisible) {
             visibleYear = self.latestYear;
-        }
-        else if (isEarliestYearVisble) {
+        } else if (isEarliestYearVisble) {
             visibleYear = self.earliestYear;
-        }
-        else {
+        } else {
             visibleYear = self.year;
         }
         if ([tableVC.year isEqualToString:visibleYear]) {
             [tableVC setUpPlayerForTableCell];
+            if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+            }
             break;
         }
     }

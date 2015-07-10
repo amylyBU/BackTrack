@@ -124,13 +124,10 @@
              for (NSDictionary *result in resultsArray) {
                  if ([[result valueForKey:@"kind"] isEqualToString:@"song"]) {
                      song.previewURL = [result objectForKey:@"previewUrl"];
-
                      NSMutableArray *images = [[NSMutableArray alloc] init];
-                     [images addObject:[result objectForKey:@"artworkUrl100"]];
-                     [images addObject:[result objectForKey:@"artworkUrl60"]];
-                     [images addObject:[result objectForKey:@"artworkUrl30"]];
+                     NSString *higherResArtworkUrl = [(NSString *)[result objectForKey:@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"600x600"];
+                     [images addObject:higherResArtworkUrl];
                      song.albumImageUrlsArray = [images copy];
-
                      break;
                  }
              }

@@ -188,6 +188,8 @@ titleForHeaderInSection:(NSInteger)section {
     }
 }
 
+#pragma mark - Public Methods
+
 - (void)setUpPlayerForTableCell {
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
