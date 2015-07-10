@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol NMADayDelegate;
 
 @interface NMAFBActivity : NSObject
-@property (strong, nonatomic, readonly) NSString *message;
-@property (strong, nonatomic, readwrite) NSString *picturePath;
-@property (nonatomic, readonly) NSInteger *likeCount;
-@property (nonatomic, readonly) NSInteger *commentCount;
-@property (strong, nonatomic, readonly) NSString *timeString;
+@property (nonatomic, readonly, copy) NSString *message;
+@property (nonatomic, copy) NSString *imagePath;
+@property (nonatomic, readonly, copy) NSString *imageId;
+@property (nonatomic, readonly) int likeCount;
+@property (nonatomic, readonly) int commentCount;
+@property (nonatomic, readonly, copy) NSString *timeString;
 
-- (instancetype) initWithMessage:(NSString *)message
-                 pictureObjectId:(NSString *)pictureObjectId
-                     createdTime:(NSString *)createdTime;
+- (instancetype)initWithPost:(id)post dayDelegate:(id<NMADayDelegate>)delegate;
+
 @end

@@ -9,14 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "NMASong.h"
 #import "NMANewsStory.h"
+#import "NMAFBActivity.h"
 
 @interface NMARequestManager : NSObject
 
 + (instancetype)sharedManager;
 
 - (void)getSongFromYear:(NSString *)year
-                         success:(void (^)(NMASong *song))success
-                         failure:(void (^)(NSError *error))failure;
+                success:(void (^)(NMASong *song))success
+                failure:(void (^)(NSError *error))failure;
 
 - (void)getiTunesMusicForSong:(NMASong *)song
                       success:(void (^)(NMASong *songWithPreview))success
@@ -27,12 +28,13 @@
                      success:(void (^)(NMANewsStory *story))success
                      failure:(void (^)(NSError *error))failure;
 
-- (void)requestFBPostsFromDate:(NSString *)year
-                       success:(void (^)(NSArray *posts))success
-                       failure:(void (^)(NSError *error))failure;
+- (void)requestFBActivitiesFromDate:(NSString *)year
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate
+                           success:(void (^)(NSArray *FBActivities))success
+                           failure:(void (^)(NSError *error))failure;
 
-- (void)requestFBPostPicture:(NSString *)imageId
-                     success:(void (^)(NSString *imagePath))success
-                     failure:(void (^)(NSError *error))failure;
+- (void)requestFBActivityImage:(NSString *)imageId
+                       success:(void (^)(NSString *imagePath))success
+                       failure:(void (^)(NSError *error))failure;
 
 @end

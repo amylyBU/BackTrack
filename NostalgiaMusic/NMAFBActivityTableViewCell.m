@@ -15,47 +15,30 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)FBPost {
-    [self setHiddenElements:NO];
-    self.timeLabel.text = FBPost.timeString;
-    self.postMessage.text = FBPost.message;
-    [self.postMessage sizeToFit];
-    self.collapseImageConstraint.priority = 1;
-    self.messageHeightFromBottomConstraint.constant = 46;
+- (void)configureCellForFBActivity:(NMAFBActivity *)FBActivity {
+    _timeLabel.text = FBActivity.timeString;
+    _postMessage.text = FBActivity.message;
+    [_postMessage sizeToFit];
+    _collapseImageConstraint.priority = 1;
+    _messageHeightFromBottomConstraint.constant = 46;
     
     //check for image
-    if(FBPost.picturePath) {
-        NSURL *imageURL = [NSURL URLWithString:FBPost.picturePath];
+    if(FBActivity.imagePath) {
+        NSURL *imageURL = [NSURL URLWithString:FBActivity.imagePath];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         [self setImageViewDimensions:postImage];
-        [self.postImageView setImage:postImage];
+        [_postImageView setImage:postImage];
         [self layoutIfNeeded];
     } else {
-        self.collapseImageConstraint.priority = 999;
+        _collapseImageConstraint.priority = 999;
     }
-}
-
-- (void)configureEmptyCell {
-    [self setHiddenElements:YES];
-    self.postMessage.text = @"There is no Facebook activity from this day";
-    [self.postMessage sizeToFit];
-    self.collapseImageConstraint.priority = 999;
-    self.messageHeightFromBottomConstraint.constant = 20;
-}
-
-- (void)setHiddenElements:(BOOL)isHidden {
-    self.timeView.hidden = isHidden;
-    self.postImageView.hidden = isHidden;
-    self.commentsButton.hidden = isHidden;
-    self.likesButton.hidden = isHidden;
-    self.shareButton.hidden = isHidden;
 }
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
     float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
-    float newViewHeight = heightToWidthRatio * self.postImageView.frame.size.width;
-    self.imageHeightConstraint.constant = newViewHeight;
+    float newViewHeight = heightToWidthRatio * _postImageView.frame.size.width;
+    _imageHeightConstraint.constant = newViewHeight;
 }
 
 @end

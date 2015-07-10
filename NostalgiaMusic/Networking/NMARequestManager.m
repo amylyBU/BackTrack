@@ -10,6 +10,7 @@
 #import "NMADatabaseManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "NMANewsStory.h"
+#import "NMAFBActivity.h"
 #import "FBSDKGraphRequest.h"
 
 @implementation NMARequestManager
@@ -142,9 +143,10 @@
 }
 
 #pragma mark - Facebook Requests
-- (void)requestFBPostsFromDate:(NSString *)year
-                       success:(void (^)(NSArray *posts))success
-                       failure:(void (^)(NSError *error))failure {
+- (void)requestFBActivitiesFromDate:(NSString *)year
+                        dayDelegate:(id<NMADayDelegate>)dayDelegate
+                            success:(void (^)(NSArray *FBActivities))success
+                            failure:(void (^)(NSError *error))failure {
     //Facebook wants its dates in UTC, so make sure we set local boundaries...
     NSDate *targetDateStart = [self getLocalDate:year startOfDay:YES];
     NSDate *targetDateEnd = [self getLocalDate:year startOfDay:NO];
@@ -165,18 +167,22 @@
                                                                    parameters:params
                                                                    HTTPMethod:@"GET"];
     
+    NSMutableArray *mutableFBActivities = [[NSMutableArray alloc] init];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        //dispatch_async(dispatch_get_main_queue(), ^{
-            NSArray *posts = [result objectForKey:@"data"];
+            NSArray *posts = result[@"data"];
             if(posts) {
-                success(posts);
+                for(id post in posts) {
+                    NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post dayDelegate:dayDelegate];
+                    [mutableFBActivities addObject:FBActivity];
+                }
+                success([mutableFBActivities copy]);
             }
     }];
 }
 
-- (void)requestFBPostPicture:(NSString *)imageId
-                     success:(void (^)(NSString *imagePath))success
-                     failure:(void (^)(NSError *error))failure {
+- (void)requestFBActivityImage:(NSString *)imageId
+                       success:(void (^)(NSString *imagePath))success
+                       failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"/%@", imageId];
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:nil
@@ -200,13 +206,13 @@
                                                                               fromDate:[NSDate date]];
     
     NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
-    [targetDateComponents setYear:[year integerValue]];
-    [targetDateComponents setMonth:presentDateComponents.month];
-    [targetDateComponents setDay:presentDateComponents.day - 1];
-    [targetDateComponents setHour:(start ? 0 : 23)];
-    [targetDateComponents setMinute:(start ? 0 : 59)];
-    [targetDateComponents setSecond:(start ? 0 : 59)];
-    [targetDateComponents setTimeZone:[NSTimeZone localTimeZone]];
+    targetDateComponents.year = [year integerValue];
+    targetDateComponents.month = presentDateComponents.month;
+    targetDateComponents.day = presentDateComponents.day;
+    targetDateComponents.hour = (start ? 0 : 23);
+    targetDateComponents.minute = (start ? 0 : 59);
+    targetDateComponents.second = (start ? 0 : 59);
+    targetDateComponents.timeZone = [NSTimeZone localTimeZone];
     NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     return [gregorianCal dateFromComponents:targetDateComponents];
