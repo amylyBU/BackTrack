@@ -85,7 +85,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
                               [self.tableView reloadData];
                           }
                           failure:^(NSError *error) {
-                              
+
                           }];
 
     __weak NMAContentTableViewController *weakSelf = self;
@@ -188,8 +188,23 @@ titleForHeaderInSection:(NSInteger)section {
     }
 }
 
-- (void)playAudioPlayer {
-    NSLog(@"configure this method!");
+- (void)setUpPlayerForTableCell {
+    [[NMARequestManager sharedManager] getSongFromYear:self.year
+                                               success:^(NMASong *song) {
+                                                   [self.billboardSongs addObject:song];
+
+                                                   [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
+
+                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                                                       [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
+                                                   }
+
+                                                   [self.tableView reloadData];
+                                               }
+                                               failure:^(NSError *error) {
+                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
+                                               }];
+
 }
 
 @end

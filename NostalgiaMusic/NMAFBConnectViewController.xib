@@ -49,7 +49,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-xw-t5i">
-                    <rect key="frame" x="0.0" y="313" width="600" height="46"/>
+                    <rect key="frame" x="0.0" y="285" width="600" height="46"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="0Hk-gK-n0p"/>
                     </constraints>
@@ -73,7 +73,6 @@ music, Facebook and news</string>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="RYT-Hu-reE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="04p-5e-3lc"/>
-                <constraint firstAttribute="centerX" secondItem="jJa-xw-t5i" secondAttribute="centerX" id="8HA-x2-ge4"/>
                 <constraint firstAttribute="trailing" secondItem="jR9-y7-keN" secondAttribute="trailing" id="APQ-M3-PB8"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="jR9-y7-keN" secondAttribute="bottom" id="M1N-Sd-Nhr"/>
                 <constraint firstAttribute="trailing" secondItem="RYT-Hu-reE" secondAttribute="trailing" id="QHI-8s-OLK"/>
@@ -85,11 +84,11 @@ music, Facebook and news</string>
                 <constraint firstItem="RYT-Hu-reE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mpy-FL-gsF"/>
                 <constraint firstItem="jJa-xw-t5i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nvV-Vn-xCC"/>
                 <constraint firstAttribute="trailing" secondItem="BuK-Aa-zec" secondAttribute="trailing" id="p5z-ty-xit"/>
-                <constraint firstAttribute="centerY" secondItem="jJa-xw-t5i" secondAttribute="centerY" constant="-36" id="qId-5Q-0Jq"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="RYT-Hu-reE" secondAttribute="bottom" id="s45-AQ-OSR"/>
                 <constraint firstAttribute="trailing" secondItem="jJa-xw-t5i" secondAttribute="trailing" id="xjL-E2-UZd"/>
                 <constraint firstAttribute="centerX" secondItem="lSR-Zk-dH9" secondAttribute="centerX" constant="211" id="xsP-kB-Mu1"/>
                 <constraint firstItem="ysj-ah-1ob" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="107" id="y9X-WN-iK3"/>
+                <constraint firstItem="ysj-ah-1ob" firstAttribute="top" secondItem="jJa-xw-t5i" secondAttribute="bottom" constant="70" id="yMC-F4-8K1"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zKF-2G-Ryw"/>
             </constraints>
             <variation key="default">

@@ -81,6 +81,7 @@ BOOL isMostRecentYearVisible;
                                       atPosition:NMAScrollViewPositionNextYear];
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
+    [self setUpMusicPlayer];
 }
 
 
@@ -90,7 +91,8 @@ BOOL isMostRecentYearVisible;
     [self scrollingDidEnd];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
         [self scrollingDidEnd];
     }
@@ -117,6 +119,7 @@ BOOL isMostRecentYearVisible;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
+    [self setUpMusicPlayer];
 }
 
 - (void)didSwipeToNextYear {
@@ -127,6 +130,7 @@ BOOL isMostRecentYearVisible;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
+    [self setUpMusicPlayer];
 }
 
 - (void)updatePositioningForScrollPosition:(NMAScrollViewYearPosition)position {
@@ -154,13 +158,6 @@ BOOL isMostRecentYearVisible;
                                           atPosition:NMAScrollViewPositionPastYear];
         self.leftTableViewController = newYear;
         self.year = self.middleTableViewController.year;
-    }
-    
-    for (NMAContentTableViewController *tableVC in self.childViewControllers) {
-        if ([tableVC.year isEqualToString:self.year]) { // find the table view controller with the current year (it is the one that is visible to the user)
-            [self setUpPlayerForTableView:tableVC];
-            break;
-        }
     }
     
     [self.delegate updateScrollYear:self.year];
@@ -199,7 +196,7 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void) getLatestYear {
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    NSDateFormatter *DateFormatter = [[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy"];
     NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
@@ -207,10 +204,26 @@ BOOL isMostRecentYearVisible;
     self.latestYear = pastYearString;
 }
 
-#pragma mark - audio player
+#pragma mark - Audio Player
 
-- (void)setUpPlayerForTableView:(NMAContentTableViewController *)table {
-    [table playAudioPlayer];
+- (void)setUpMusicPlayer {
+    for (NMAContentTableViewController *tableVC in self.childViewControllers) { // look through left, middle, right view controllers
+        NSString *visibleYear;
+        if (isMostRecentYearVisible) {
+            visibleYear = self.latestYear;
+        }
+        else if (isEarliestYearVisble) {
+            visibleYear = self.earliestYear;
+        }
+        else {
+            visibleYear = self.year;
+        }
+        
+        if ([tableVC.year isEqualToString:visibleYear]) { // find the view controller whose year is equal to self.year (the visible year)
+            [tableVC setUpPlayerForTableCell]; // set up the music player for that view controller's table cell
+            break;
+        }
+    }
 }
 
 @end

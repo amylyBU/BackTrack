@@ -11,7 +11,8 @@
 
 @interface NMAPlaybackManager : AVPlayer
 
-+ (instancetype)sharedPlayerWithURL:(NSURL *)previewUrl;
++ (instancetype)sharedAudioPlayer;
+- (void)setUpWithURL:(NSURL *)url;
 - (void)startPlaying;
 - (void)pausePlaying;
 

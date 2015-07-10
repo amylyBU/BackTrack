@@ -17,7 +17,6 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
 @interface NMATodaysSongTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @end
 
@@ -32,33 +31,25 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
     self.albumImage.layer.cornerRadius = CGRectGetHeight(self.albumImage.frame) /2;
     self.albumImage.layer.masksToBounds = YES;
     
-    [self setUpMusicPlayerWithUrl:[NSURL URLWithString:song.previewURL]];
+    //[self setUpMusicPlayerWithUrl:[NSURL URLWithString:song.previewURL]];
 }
-
-- (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl {
-    self.audioPlayer = [NMAPlaybackManager sharedPlayerWithURL:previewUrl];
-    
-    if (self.audioPlayer) {
-        NSLog(@"successful audioplayer init");
-        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-            [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
-            [self.audioPlayer play];
-        } else {
-            [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
-        }
-    } else {
-        NSLog(@"handle error");
-    }
-}
+//
+//- (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl {
+//    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+//        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
+//        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
+//    } else {
+//        [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
+//    }
+//    NSLog(@"successful audioplayer init");
+//}
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
     if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
-        NSLog(@"played the song");
-        [self.audioPlayer play];
+        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     } else {
-        NSLog(@"paused the song");
-        [self.audioPlayer pause];
+        [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     }
 }

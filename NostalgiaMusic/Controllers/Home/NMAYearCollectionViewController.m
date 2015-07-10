@@ -49,7 +49,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)setUpYears {
     self.years = [[NSMutableArray alloc] init];
-    for(int i = 0; i < (self.latestYear - earliestYear + 1); i++){
+    for ( int i = 0; i < (self.latestYear - earliestYear + 1); i++ ){
         NSString *yearForCell = [NSString stringWithFormat:@"%li", (long)(earliestYear + i)];
         [self.years addObject:yearForCell];
     }
@@ -61,23 +61,31 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
     return self.years.count;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(CGRectGetWidth(self.view.frame)/4, 30);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
    NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     NSString *year = self.years[indexPath.row];
@@ -92,20 +100,19 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)moveToYear:(NSString *)year {
     if([year integerValue] < 2015 && [year integerValue] > 1980){
-    NSInteger indexYear = [self.years indexOfObject:year];
-    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        NSInteger indexYear = [self.years indexOfObject:year];
+        NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
+        [self.collectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
 }
 
 #pragma mark - Getters and Setters
 - (void) getLatestYear {
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    NSDateFormatter *DateFormatter = [[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSString *currentYear = [DateFormatter stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     self.latestYear = pastyear;
-
 }
 
 @end

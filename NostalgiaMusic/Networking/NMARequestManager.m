@@ -85,16 +85,20 @@
         NSMutableArray *images = [item valueForKey:@"multimedia"];
         story.imageLinks = images;
         story.abstract = [self resolveNSNullToNil:[item valueForKey:@"abstract"]];
-        story.headline = [item valueForKey:@"headline"];
-        story.headline = [self resolveNSNullToNil:[story.headline valueForKey:@"main"]];
+        NSMutableArray *headlines = [self resolveNSNullToNil:[item valueForKey:@"headline"]];
+        if (headlines.count) {
+            story.headline = [self resolveNSNullToNil:[headlines valueForKey:@"main"]];
+        }
         story.snippet = [self resolveNSNullToNil:[item valueForKey:@"snippet"]];
         story.articleURL = [self resolveNSNullToNil:[item valueForKey:@"web_url"]];
-        story.byline = [item valueForKey:@"byline"];
-        story.byline = [self resolveNSNullToNil:[story.byline valueForKey:@"original"]];
+        NSMutableArray *bylines = [self resolveNSNullToNil:[item valueForKey:@"byline"]];
+        if (bylines.count) {
+            story.byline = [self resolveNSNullToNil:[bylines valueForKey:@"original"]];
+        }
         [stories addObject:story];
     }
     return stories;
-  }
+}
 
 - (id)resolveNSNullToNil:(id)objectForKey {
     return [NSNull null] == objectForKey ? nil : objectForKey;
