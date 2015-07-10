@@ -27,30 +27,27 @@
     
     if(self && post) {
         //we are only interested in status and photo updates for now
-        NSString *type = post[@"type"];
-        if([type isEqual:@"status"] || [type isEqual:@"photo"]) {
-            NSString *message = post[@"message"];
-            NSString *pictureId = post[@"object_id"]; //if not a photo, this is nil
-            NSString *createdTime = post[@"created_time"];
+        NSString *message = post[@"message"];
+        NSString *pictureId = post[@"object_id"]; //if not a photo, this is nil
+        NSString *createdTime = post[@"created_time"];
         
-            _message = message;
-            [self formatTimeString:createdTime];
-            _imageObjectId = pictureId;
-            _imagePath = nil;
-            _dayDelegate = delegate;
+        _message = message;
+        [self formatTimeString:createdTime];
+        _imageObjectId = pictureId;
+        _imagePath = nil;
+        _dayDelegate = delegate;
             
-            //We need to make a separate request to get a high res image for the FBActivity
-            [[NMARequestManager sharedManager] requestFBActivityImage:pictureId
-                                                              success:^(NSString *imagePath) {
-                                                                  _imagePath = imagePath;
-                                                                  //Then we need to reload with the image
-                                                                  [_dayDelegate updatedFBActivity];
-                                                              }
-                                                              failure:nil];
+        //We need to make a separate request to get a high res image for the FBActivity
+        [[NMARequestManager sharedManager] requestFBActivityImage:pictureId
+                                                          success:^(NSString *imagePath) {
+                                                              _imagePath = imagePath;
+                                                              //Then we need to reload with the image
+                                                              [_dayDelegate updatedFBActivity];
+                                                          }
+                                                          failure:nil];
             
-            //We also need to make special paging requests for likes and comments
-            _likeCount = [self countLikes:post];
-        }
+        //We also need to make special paging requests for likes and comments
+        _likeCount = [self countLikes:post];
     }
     
     return self;

@@ -60,6 +60,8 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
+    _day = [[NMADay alloc] initWithYear:_year dayDelgate:self];
+    
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs addObject:song];
@@ -163,7 +165,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)setYear:(NSString *)year {
     _year = year;
-    _day = [[NMADay alloc] initWithYear:_year];
+    _day = [[NMADay alloc] initWithYear:_year dayDelgate:self];
     _day.delegate = self;
     [self.tableView reloadData];
 }
@@ -193,7 +195,7 @@ titleForHeaderInSection:(NSInteger)section {
     UITableViewCell *prototypeFBCell;
     if(self.day.FBActivities.count) {
         prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMAFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
-        [(NMAFBActivityTableViewCell*)prototypeFBCell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+        [(NMAFBActivityTableViewCell*)prototypeFBCell configureCellForFBActivity:_day.FBActivities[indexPath.row]];
     } else {
         prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMANoFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
     }

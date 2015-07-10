@@ -19,11 +19,12 @@
 
 #pragma mark - Initializer
 
-- (instancetype) initWithYear:(NSString *)year {
+- (instancetype) initWithYear:(NSString *)year dayDelgate:(id<NMADayDelegate>)dayDelegate {
     self = [super init];
     
     if(self) {
-        self.year = year; //TODO: check for valid years
+        _year = year; //TODO: check for valid years
+        _delegate = dayDelegate;
         //TODO: initialize song
         [self collectFBActivities];
         //TODO: collect stories
@@ -39,7 +40,7 @@
                                                        dayDelegate:_delegate
                                                            success:^(NSArray *FBActivities) {
                                                                _FBActivities = FBActivities;
-                                                               [self.delegate updatedFBActivity];
+                                                               [_delegate updatedFBActivity];
                                                            }
                                                            failure:nil];
 }

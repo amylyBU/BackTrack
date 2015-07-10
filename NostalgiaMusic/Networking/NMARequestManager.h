@@ -29,7 +29,7 @@
                      failure:(void (^)(NSError *error))failure;
 
 - (void)requestFBActivitiesFromDate:(NSString *)year
-                       dayDelegate:(id<NMADayDelegate>)dayDelegate
+                       dayDelegate:(id)dayDelegate
                            success:(void (^)(NSArray *FBActivities))success
                            failure:(void (^)(NSError *error))failure;
 

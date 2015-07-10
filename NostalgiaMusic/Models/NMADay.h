@@ -23,6 +23,6 @@
 @property (strong, nonatomic, readonly) NSArray *FBActivities;
 @property (nonatomic, weak) id <NMADayDelegate> delegate;
 
-- (instancetype)initWithYear:(NSString *)year;
+- (instancetype)initWithYear:(NSString *)year dayDelgate:(id<NMADayDelegate>)dayDelegate;
 
 @end

@@ -17,6 +17,6 @@
 @property (nonatomic, readonly) int commentCount;
 @property (nonatomic, readonly, copy) NSString *timeString;
 
-- (instancetype)initWithPost:(id)post dayDelegate:(id<NMADayDelegate>)delegate;
+- (instancetype)initWithPost:(id)post dayDelegate:(id<NMADayDelegate>)dayDelegate;
 
 @end

@@ -144,7 +144,7 @@
 
 #pragma mark - Facebook Requests
 - (void)requestFBActivitiesFromDate:(NSString *)year
-                        dayDelegate:(id<NMADayDelegate>)dayDelegate
+                        dayDelegate:(id)dayDelegate
                             success:(void (^)(NSArray *FBActivities))success
                             failure:(void (^)(NSError *error))failure {
     //Facebook wants its dates in UTC, so make sure we set local boundaries...
@@ -172,8 +172,12 @@
             NSArray *posts = result[@"data"];
             if(posts) {
                 for(id post in posts) {
-                    NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post dayDelegate:dayDelegate];
-                    [mutableFBActivities addObject:FBActivity];
+                    NSString *type = post[@"type"];
+                    if([type isEqual:@"status"] || [type isEqual:@"photo"]) {
+                        NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post
+                                                                            dayDelegate:dayDelegate];
+                        [mutableFBActivities addObject:FBActivity];
+                    }
                 }
                 success([mutableFBActivities copy]);
             }
