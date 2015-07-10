@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NMADay.h"
-#import "NMATodaysSongTableViewCellDelegate.h"
 
 @interface NMAContentTableViewController : UITableViewController <NMADayDelegate>
 

@@ -69,8 +69,8 @@
         [self.queryResultsArray addObject:newSong];
     }
     if ([self.queryResultsArray count]) {
-        NSUInteger rank = numberOfSongsOnBillboard % dayOfMonth;
-        return self.queryResultsArray[rank];
+        NSUInteger hashIndex = numberOfSongsOnBillboard % dayOfMonth;
+        return self.queryResultsArray[0];
     } else {
         return nil;
     }

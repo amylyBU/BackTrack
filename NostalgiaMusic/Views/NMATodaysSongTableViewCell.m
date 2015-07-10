@@ -40,8 +40,7 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
     
     if (self.audioPlayer) {
         NSLog(@"successful audioplayer init");
-        //if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-        if (NO) {
+        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
             [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
             [self.audioPlayer play];
         } else {

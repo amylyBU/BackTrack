@@ -41,7 +41,6 @@ BOOL isMostRecentYearVisible;
                        initWithFrame:CGRectMake(0, 0,
                                                 CGRectGetWidth(self.view.frame),
                                                 CGRectGetHeight(self.view.frame))];
-    
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     [self setUpScrollView:self.latestYear];
