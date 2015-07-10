@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMASettingsViewController">
             <connections>
+                <outlet property="staticTableView" destination="tx4-LN-A4s" id="loy-p3-HmW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,26 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8l-EP-Pmm">
-                    <rect key="frame" x="319" y="289" width="38" height="30"/>
-                    <state key="normal" title="Email">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8Q-F0-gAS">
-                    <rect key="frame" x="235" y="289" width="76" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-LN-A4s">
+                    <rect key="frame" x="0.0" y="68" width="600" height="141"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="141" id="aQj-Gh-BhQ"/>
+                    </constraints>
+                </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="M8Q-F0-gAS" secondAttribute="centerX" constant="26.5" id="FBr-V3-D4q"/>
-                <constraint firstAttribute="centerY" secondItem="M8Q-F0-gAS" secondAttribute="centerY" constant="-4.5" id="eSv-Du-fN1"/>
-                <constraint firstItem="M8Q-F0-gAS" firstAttribute="bottom" secondItem="E8l-EP-Pmm" secondAttribute="bottom" constant="-0.5" id="mbm-yo-bfL"/>
-                <constraint firstItem="M8Q-F0-gAS" firstAttribute="height" secondItem="E8l-EP-Pmm" secondAttribute="height" id="rRd-c0-kng"/>
-                <constraint firstItem="E8l-EP-Pmm" firstAttribute="leading" secondItem="M8Q-F0-gAS" secondAttribute="trailing" constant="8" symbolic="YES" id="wRY-6C-sl7"/>
+                <constraint firstAttribute="trailing" secondItem="tx4-LN-A4s" secondAttribute="trailing" id="da9-26-dUx"/>
+                <constraint firstItem="tx4-LN-A4s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="idZ-ne-niz"/>
+                <constraint firstItem="tx4-LN-A4s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sMw-vy-Zpf"/>
             </constraints>
             <point key="canvasLocation" x="271" y="402"/>
         </view>

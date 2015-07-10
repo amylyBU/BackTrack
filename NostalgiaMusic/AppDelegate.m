@@ -60,6 +60,7 @@
 
 - (void)userDidFinishOnboarding {
     [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+    [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
     [self goToHome];
 }
 
