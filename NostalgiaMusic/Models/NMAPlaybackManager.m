@@ -7,6 +7,7 @@
 //
 
 #import "NMAPlaybackManager.h"
+#import "NMAContentTableViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 static NMAPlaybackManager *sharedPlayer;
@@ -14,6 +15,7 @@ static NMAPlaybackManager *sharedPlayer;
 @interface NMAPlaybackManager ()
 
 @property (strong, nonatomic) AVPlayer *audioPlayer;
+@property (strong, nonatomic) AVURLAsset *audioAsset;
 
 @end
 
@@ -32,21 +34,33 @@ static NMAPlaybackManager *sharedPlayer;
     return sharedPlayer;
 }
 
+#pragma mark - Public Methods
+
 - (void)setUpWithURL:(NSURL *)url {
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
-    AVPlayerItem *currentItem = [[AVPlayerItem alloc] initWithAsset:asset];
-    [sharedPlayer.audioPlayer replaceCurrentItemWithPlayerItem:currentItem];
-    NSLog(@"song url is now: %@", asset.URL);
+    sharedPlayer.audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    sharedPlayer.audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:sharedPlayer.audioAsset];
+    [sharedPlayer.audioPlayer replaceCurrentItemWithPlayerItem:sharedPlayer.audioPlayerItem];
+    NSLog(@"song url is now: %@", sharedPlayer.audioAsset.URL);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(itemDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:sharedPlayer.audioPlayerItem];
 }
 
 - (void)startPlaying {
-    NSLog(@"PLAYING THE SONG");
     [sharedPlayer.audioPlayer play];
 }
 
 - (void)pausePlaying {
-    NSLog(@"PAUSING THE SONG");
     [sharedPlayer.audioPlayer pause];
+}
+
+#pragma mark- NMAtodaysSongCell Delegate
+
+- (void)itemDidFinishPlaying:(NSNotification *)notification {
+    [sharedPlayer setUpWithURL:sharedPlayer.audioAsset.URL];
+    [self.delegate changePlayButtonImage];
 }
 
 @end

@@ -68,8 +68,6 @@
     }
     if ([self.queryResultsArray count]) {
         NSUInteger hashIndex = [self.queryResultsArray count] % dayOfMonth;
-        NSLog(@"num songs: %i", [self.queryResultsArray count]);
-        NSLog(@"hash index: %i", hashIndex);
         return self.queryResultsArray[hashIndex];
     } else {
         return nil;

@@ -15,6 +15,8 @@
 
 @implementation NMARequestManager
 
+#pragma mark - Singleton
+
 + (instancetype)sharedManager {
     static id sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -24,26 +26,7 @@
     return sharedManager;
 }
 
-- (void)getSongFromYear:(NSString *)year
-                         success:(void (^)(NMASong *song))success
-                         failure:(void (^)(NSError *error))failure {
-    NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
-    
-    if (song) {
-        if (success) {
-            [self getiTunesMusicForSong:song
-                                success:success
-                                failure:^(NSError *error) {
-                                    NSLog(@"can't find song on itunes"); //TODO: handle error
-                                }];
-        }
-    } else {
-        if (failure) {
-            NSError *error = [[NSError alloc] init];
-            failure(error); //TODO: handle error
-        }
-    }
-}
+#pragma mark - NYTimes Web Calls
 
 - (void)getNewYorkTimesStory:(NSString *)date
                       onYear:(NSString *)year
@@ -104,6 +87,8 @@
     return [NSNull null] == objectForKey ? nil : objectForKey;
 }
 
+#pragma mark - NMASong Web Calls
+
 - (void)getiTunesMusicForSong:(NMASong *)song
                       success:(void (^)(NMASong *songWithPreview))success
                       failure:(void (^)(NSError *error))failure {
@@ -124,10 +109,7 @@
              for (NSDictionary *result in resultsArray) {
                  if ([[result valueForKey:@"kind"] isEqualToString:@"song"]) {
                      song.previewURL = [result objectForKey:@"previewUrl"];
-                     NSMutableArray *images = [[NSMutableArray alloc] init];
-                     NSString *higherResArtworkUrl = [(NSString *)[result objectForKey:@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"600x600"];
-                     [images addObject:higherResArtworkUrl];
-                     song.albumImageUrlsArray = [images copy];
+                     song.albumImageUrl600x600 = [NSURL URLWithString:[(NSString *)[result objectForKey:@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"600x600"]];
                      break;
                  }
              }
@@ -151,7 +133,7 @@
     //Facebook wants its dates in UTC, so make sure we set local boundaries...
     NSDate *targetDateStart = [self getLocalDate:year startOfDay:YES];
     NSDate *targetDateEnd = [self getLocalDate:year startOfDay:NO];
-    
+
     //...Before formatting in UTC time
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
@@ -167,7 +149,7 @@
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:params
                                                                    HTTPMethod:@"GET"];
-    
+
     NSMutableArray *mutableFBActivities = [[NSMutableArray alloc] init];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             NSArray *posts = result[@"data"];
@@ -192,7 +174,7 @@
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:nil
                                                                    HTTPMethod:@"GET"];
-    
+
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         NSArray *imageVersions = [result objectForKey:@"images"];
         if(imageVersions) {
@@ -209,7 +191,7 @@
               startOfDay:(BOOL)start {
     NSDateComponents *presentDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                                               fromDate:[NSDate date]];
-    
+
     NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
     targetDateComponents.year = [year integerValue];
     targetDateComponents.month = presentDateComponents.month;
@@ -219,9 +201,28 @@
     targetDateComponents.second = (start ? 0 : 59);
     targetDateComponents.timeZone = [NSTimeZone localTimeZone];
     NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    
+
     return [gregorianCal dateFromComponents:targetDateComponents];
-    
+
+- (void)getSongFromYear:(NSString *)year
+                success:(void (^)(NMASong *song))success
+                failure:(void (^)(NSError *error))failure {
+    NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
+
+    if (song) {
+        if (success) {
+            [self getiTunesMusicForSong:song
+                                success:success
+                                failure:^(NSError *error) {
+                                    NSLog(@"can't find song on itunes"); //TODO: handle error
+                                }];
+        }
+    } else {
+        if (failure) {
+            NSError *error = [[NSError alloc] init];
+            failure(error); //TODO: handle error
+        }
+    }
 }
 
 @end

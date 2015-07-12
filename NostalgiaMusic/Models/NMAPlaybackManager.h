@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "NMATodaysSongTableViewCell.h"
 
 @interface NMAPlaybackManager : NSObject
+
+@property (strong, nonatomic) AVPlayerItem *audioPlayerItem;
+@property (weak, nonatomic) id <NMATodaysSongCellDelegate> delegate;
 
 + (instancetype)sharedAudioPlayer;
 - (void)setUpWithURL:(NSURL *)url;

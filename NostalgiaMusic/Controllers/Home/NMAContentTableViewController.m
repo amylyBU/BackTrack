@@ -122,6 +122,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
+            [NMAPlaybackManager sharedAudioPlayer].delegate = cell;
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -177,8 +178,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case NMASectionTypeBillboardSong:
-            return @"Top 100 Billboard Song"; //TODO: Remove this title, it is not in the design.
         case NMASectionTypeFacebookActivity:
             return @"Facebook Activities";
         case NMASectionTypeNYTimesNews:
@@ -197,17 +196,14 @@ titleForHeaderInSection:(NSInteger)section {
                                                    [self.billboardSongs addObject:song];
 
                                                    [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
-
                                                    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
                                                        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
                                                    }
-
                                                    [self.tableView reloadData];
                                                }
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
-
 }
 
 @end

@@ -60,14 +60,31 @@
                             <action selector="playButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dDz-Hn-JRi"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handle-music" translatesAutoresizingMaskIntoConstraints="NO" id="GyY-Cf-5zV">
+                        <rect key="frame" x="297" y="34" width="83" height="144"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="83:144" id="4me-WR-75L"/>
+                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="2:3" id="gMd-fh-VBA"/>
+                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="25:48" id="tjp-nE-902"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gMd-fh-VBA"/>
+                                <exclude reference="tjp-nE-902"/>
+                            </mask>
+                        </variation>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9Mu-ai-UMW"/>
                     <constraint firstItem="n4J-Ik-dKI" firstAttribute="top" secondItem="Gp6-gG-QGC" secondAttribute="bottom" constant="8" id="ANy-gU-jQ2"/>
+                    <constraint firstItem="eCa-cZ-6Yl" firstAttribute="top" secondItem="GyY-Cf-5zV" secondAttribute="top" id="BaL-88-Wez"/>
                     <constraint firstItem="WjN-tD-hC8" firstAttribute="centerX" secondItem="eCa-cZ-6Yl" secondAttribute="centerX" id="Ef2-Ca-FRS"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="LHe-HE-exT"/>
+                    <constraint firstItem="eCa-cZ-6Yl" firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="2:1" id="MHy-Js-kqa"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="top" secondItem="eCa-cZ-6Yl" secondAttribute="bottom" constant="12" id="Qro-2W-3Nv"/>
                     <constraint firstItem="n4J-Ik-dKI" firstAttribute="centerX" secondItem="Gp6-gG-QGC" secondAttribute="centerX" constant="0.5" id="UiB-Fk-DDB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" constant="-8" id="Y2D-5B-4uz"/>
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="Zbh-zF-xdF"/>
                     <constraint firstItem="WjN-tD-hC8" firstAttribute="centerY" secondItem="eCa-cZ-6Yl" secondAttribute="centerY" id="cF0-3D-x6N"/>
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="38" id="hHY-LH-KM3"/>
@@ -75,7 +92,13 @@
                     <constraint firstAttribute="trailingMargin" secondItem="eCa-cZ-6Yl" secondAttribute="trailing" constant="38" id="tOr-D4-FFb"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="2" id="vWV-JH-iej"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xRx-Z6-aDE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" id="zAP-lo-yVa"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="zAP-lo-yVa"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="albumImage" destination="eCa-cZ-6Yl" id="Lnb-6c-rhe"/>
@@ -88,6 +111,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="handle-music" width="95" height="127"/>
         <image name="itunes-icon" width="89" height="32"/>
         <image name="play-circle-icon" width="123" height="122"/>
     </resources>
