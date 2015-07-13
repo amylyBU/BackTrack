@@ -10,10 +10,6 @@
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 
-@interface NMAFBConnectViewController ()
-
-@end
-
 @implementation NMAFBConnectViewController
 
 - (void)viewDidLoad {
@@ -29,11 +25,11 @@
 
     self.view.backgroundColor = [UIColor NMA_skyBlueBackground];
 
-    self.appDescription.textColor = [UIColor NMA_boldOrange];
-    self.appDescription.font = [UIFont NMA_proximaNovaSemiBoldWithSize:19.0];
+    self.appDescriptionLabel.textColor = [UIColor NMA_boldOrange];
+    self.appDescriptionLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:19.0];
 
-    self.facebookDisclaimer.textColor = [UIColor NMA_tealGreen];
-    self.facebookDisclaimer.font = [UIFont NMA_proximaNovaLightWithSize:12.5];
+    self.facebookDisclaimerLabel.textColor = [UIColor NMA_tealGreen];
+    self.facebookDisclaimerLabel.font = [UIFont NMA_proximaNovaLightWithSize:12.5];
 
     [self.notNowButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.notNowButton.titleLabel setFont:[UIFont NMA_proximaNovaLightWithSize:15.0]];

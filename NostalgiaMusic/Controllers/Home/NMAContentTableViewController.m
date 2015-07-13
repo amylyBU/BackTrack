@@ -92,8 +92,16 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[NMAPlaybackManager sharedAudioPlayer].audioPlayerItem];
 }
 
+- (void)audioDidFinishPlaying:(NSNotification *)notification {
+    [(NMATodaysSongTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] changePlayButtonImage];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -122,7 +130,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            [NMAPlaybackManager sharedAudioPlayer].delegate = cell;
             return cell;
         }
         case NMASectionTypeFacebookActivity: {

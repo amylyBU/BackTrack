@@ -52,11 +52,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjN-tD-hC8">
-                        <rect key="frame" x="129" y="117" width="123" height="123"/>
+                        <rect key="frame" x="131.5" y="119.5" width="118" height="118"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="WjN-tD-hC8" secondAttribute="height" multiplier="1:1" id="tTQ-f3-5TX"/>
                         </constraints>
-                        <state key="normal" image="play-circle-icon">
+                        <state key="normal" image="play-circle-button">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -64,14 +64,16 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handle-music" translatesAutoresizingMaskIntoConstraints="NO" id="GyY-Cf-5zV">
-                        <rect key="frame" x="297" y="34" width="83" height="144"/>
+                        <rect key="frame" x="290" y="34" width="107.5" height="144"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="83:144" id="4me-WR-75L"/>
+                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="95:127" id="TMy-Uf-FWG"/>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="2:3" id="gMd-fh-VBA"/>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="25:48" id="tjp-nE-902"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="4me-WR-75L"/>
                                 <exclude reference="gMd-fh-VBA"/>
                                 <exclude reference="tjp-nE-902"/>
                             </mask>
@@ -91,6 +93,7 @@
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="Zbh-zF-xdF"/>
                     <constraint firstItem="WjN-tD-hC8" firstAttribute="centerY" secondItem="eCa-cZ-6Yl" secondAttribute="centerY" id="cF0-3D-x6N"/>
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="38" id="hHY-LH-KM3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" constant="-25.5" id="qU8-hk-xyO"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qlh-X3-YL4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="eCa-cZ-6Yl" secondAttribute="trailing" constant="38" id="tOr-D4-FFb"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="2" id="vWV-JH-iej"/>
@@ -99,23 +102,31 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="Y2D-5B-4uz"/>
                         <exclude reference="zAP-lo-yVa"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="albumImage" destination="eCa-cZ-6Yl" id="Lnb-6c-rhe"/>
+                <outlet property="albumImageView" destination="eCa-cZ-6Yl" id="OqU-qU-uU4"/>
                 <outlet property="artistLabel" destination="Gp6-gG-QGC" id="DCg-a2-gcu"/>
                 <outlet property="iTunesButton" destination="n4J-Ik-dKI" id="Xjo-qV-mJh"/>
+                <outlet property="musicHandleImage" destination="GyY-Cf-5zV" id="cAG-fb-EDH"/>
                 <outlet property="playButton" destination="WjN-tD-hC8" id="XgY-8z-ZwK"/>
                 <outlet property="songTitleLabel" destination="L6W-Zs-Rpu" id="oyz-Ho-dLE"/>
             </connections>
             <point key="canvasLocation" x="292" y="424.5"/>
         </tableViewCell>
+        <view contentMode="scaleToFill" id="tWI-e7-28x">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="644" y="174"/>
+        </view>
     </objects>
     <resources>
         <image name="handle-music" width="95" height="127"/>
         <image name="itunes-icon" width="89" height="32"/>
-        <image name="play-circle-icon" width="123" height="122"/>
+        <image name="play-circle-button" width="118" height="118"/>
     </resources>
 </document>

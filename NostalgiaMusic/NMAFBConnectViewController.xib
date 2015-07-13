@@ -2,14 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAFBConnectViewController">
             <connections>
-                <outlet property="appDescription" destination="jJa-xw-t5i" id="rYD-qm-epx"/>
-                <outlet property="facebookDisclaimer" destination="ysj-ah-1ob" id="0IU-n0-I4X"/>
-                <outlet property="facebookIcon" destination="bSR-Kd-mAz" id="86C-QW-yhz"/>
-                <outlet property="facebookSignInLabel" destination="xen-bX-PD4" id="uW9-o2-kUI"/>
+                <outlet property="appDescriptionLabel" destination="jJa-xw-t5i" id="9dP-I0-u7r"/>
+                <outlet property="facebookDisclaimerLabel" destination="ysj-ah-1ob" id="vPM-Oj-O2M"/>
                 <outlet property="loginButton" destination="BuK-Aa-zec" id="gHb-Gi-HaY"/>
                 <outlet property="notNowButton" destination="lSR-Zk-dH9" id="rsV-el-cdG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="aID-56-iFE"/>
@@ -20,15 +19,9 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-top" translatesAutoresizingMaskIntoConstraints="NO" id="RYT-Hu-reE">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-mountain-bg" translatesAutoresizingMaskIntoConstraints="NO" id="RYT-Hu-reE">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="474"/>
                     <color key="backgroundColor" red="0.85882352939999995" green="0.72941176470000002" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="City" translatesAutoresizingMaskIntoConstraints="NO" id="jR9-y7-keN">
-                    <rect key="frame" x="0.0" y="394" width="600" height="80"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="gTN-VA-l6f"/>
-                    </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSR-Zk-dH9">
                     <rect key="frame" x="211" y="541" width="178" height="18"/>
@@ -43,19 +36,8 @@
                         <action selector="notNowButton:" destination="-1" eventType="touchUpInside" id="3as-7Q-9KH"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-xw-t5i">
-                    <rect key="frame" x="0.0" y="285" width="600" height="46"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="46" id="0Hk-gK-n0p"/>
-                    </constraints>
-                    <string key="text">Travel back in time with rock 
-music, Facebook and news</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dont worry! We never post on Facebook without your permission." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysj-ah-1ob">
-                    <rect key="frame" x="107" y="401" width="155" height="48"/>
+                    <rect key="frame" x="109" y="401" width="155" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="155" id="kVl-qT-FdF"/>
                         <constraint firstAttribute="height" constant="48" id="lZj-CI-VAL"/>
@@ -66,66 +48,59 @@ music, Facebook and news</string>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuK-Aa-zec" customClass="FBSDKLoginButton">
                     <rect key="frame" x="0.0" y="474" width="600" height="55"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xen-bX-PD4">
-                            <rect key="frame" x="225" y="17" width="178" height="22"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="22" id="dQ9-yf-Pft"/>
-                                <constraint firstAttribute="width" constant="178" id="dTN-R6-U0P"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook icon" translatesAutoresizingMaskIntoConstraints="NO" id="bSR-Kd-mAz">
-                            <rect key="frame" x="199" y="18" width="20" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="JaK-2E-5yg"/>
-                                <constraint firstAttribute="width" constant="20" id="j7T-bq-r7b"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="xen-bX-PD4" firstAttribute="leading" secondItem="bSR-Kd-mAz" secondAttribute="trailing" constant="6" id="0DL-NP-am4"/>
-                        <constraint firstAttribute="centerX" secondItem="xen-bX-PD4" secondAttribute="centerX" constant="-14" id="Ami-bF-3SW"/>
                         <constraint firstAttribute="height" constant="55" id="Cco-hU-L7L"/>
-                        <constraint firstAttribute="centerY" secondItem="xen-bX-PD4" secondAttribute="centerY" constant="-0.5" id="bbu-QI-AYY"/>
-                        <constraint firstItem="xen-bX-PD4" firstAttribute="centerY" secondItem="bSR-Kd-mAz" secondAttribute="centerY" id="iDc-Kn-2E2"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-house" translatesAutoresizingMaskIntoConstraints="NO" id="P0X-18-tGr">
+                    <rect key="frame" x="0.0" y="394" width="117" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="P0X-18-tGr" secondAttribute="height" multiplier="99:80" id="aDi-Os-ZCb"/>
+                        <constraint firstAttribute="width" secondItem="P0X-18-tGr" secondAttribute="height" multiplier="117:80" id="pRU-sd-cQS"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="aDi-Os-ZCb"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-xw-t5i">
+                    <rect key="frame" x="0.0" y="288" width="600" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="0Hk-gK-n0p"/>
+                    </constraints>
+                    <string key="text">Travel back in time with rock 
+music, Facebook and news</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="RYT-Hu-reE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="04p-5e-3lc"/>
-                <constraint firstAttribute="trailing" secondItem="jR9-y7-keN" secondAttribute="trailing" id="APQ-M3-PB8"/>
-                <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="jR9-y7-keN" secondAttribute="bottom" id="M1N-Sd-Nhr"/>
+                <constraint firstAttribute="centerX" secondItem="jJa-xw-t5i" secondAttribute="centerX" id="LX8-94-WjX"/>
                 <constraint firstAttribute="trailing" secondItem="RYT-Hu-reE" secondAttribute="trailing" id="QHI-8s-OLK"/>
+                <constraint firstItem="ysj-ah-1ob" firstAttribute="leading" secondItem="P0X-18-tGr" secondAttribute="trailing" constant="-8" id="R6v-kj-vFf"/>
+                <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="P0X-18-tGr" secondAttribute="bottom" id="WWT-1i-GOa"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="ysj-ah-1ob" secondAttribute="bottom" constant="25" id="YYH-vG-I3Q"/>
-                <constraint firstItem="jR9-y7-keN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Yhf-mq-mP4"/>
                 <constraint firstAttribute="bottom" secondItem="lSR-Zk-dH9" secondAttribute="bottom" constant="41" id="ekv-yu-nvw"/>
+                <constraint firstAttribute="centerY" secondItem="jJa-xw-t5i" secondAttribute="centerY" constant="-11" id="h1f-Er-pV3"/>
                 <constraint firstItem="lSR-Zk-dH9" firstAttribute="top" secondItem="BuK-Aa-zec" secondAttribute="bottom" constant="12" id="jDN-cA-Yhk"/>
                 <constraint firstAttribute="centerX" secondItem="lSR-Zk-dH9" secondAttribute="centerX" id="jft-Mb-n7v"/>
                 <constraint firstItem="RYT-Hu-reE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mpy-FL-gsF"/>
                 <constraint firstItem="jJa-xw-t5i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nvV-Vn-xCC"/>
                 <constraint firstAttribute="trailing" secondItem="BuK-Aa-zec" secondAttribute="trailing" id="p5z-ty-xit"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="top" secondItem="RYT-Hu-reE" secondAttribute="bottom" id="s45-AQ-OSR"/>
+                <constraint firstItem="P0X-18-tGr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ue8-Af-ed0"/>
                 <constraint firstAttribute="trailing" secondItem="jJa-xw-t5i" secondAttribute="trailing" id="xjL-E2-UZd"/>
-                <constraint firstAttribute="centerX" secondItem="lSR-Zk-dH9" secondAttribute="centerX" constant="211" id="xsP-kB-Mu1"/>
-                <constraint firstItem="ysj-ah-1ob" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="107" id="y9X-WN-iK3"/>
-                <constraint firstItem="ysj-ah-1ob" firstAttribute="top" secondItem="jJa-xw-t5i" secondAttribute="bottom" constant="70" id="yMC-F4-8K1"/>
                 <constraint firstItem="BuK-Aa-zec" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zKF-2G-Ryw"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="xsP-kB-Mu1"/>
-                </mask>
-            </variation>
         </view>
     </objects>
     <resources>
-        <image name="City" width="320" height="80"/>
-        <image name="background-top" width="320" height="448"/>
-        <image name="facebook icon" width="20" height="20"/>
+        <image name="login-house" width="117" height="80"/>
+        <image name="login-mountain-bg" width="320" height="449"/>
     </resources>
 </document>

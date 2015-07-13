@@ -11,6 +11,7 @@
 
 static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
+static NSInteger const kNumberOfSectionsInYearCollection = 1;
 
 @interface NMAYearCollectionViewController ()
 
@@ -59,7 +60,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 #pragma mark UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return kNumberOfSectionsInYearCollection;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
@@ -71,18 +72,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(CGRectGetWidth(self.view.frame)/4, 30);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewLayout *)collectionViewLayout
-minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView
-                        layout:(UICollectionViewLayout *)collectionViewLayout
-        insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -110,9 +99,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
 #pragma mark - Getters and Setters
 
 - (void) getLatestYear {
-    NSDateFormatter *DateFormatter = [[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [DateFormatter stringFromDate:[NSDate date]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     self.latestYear = pastyear;
 }

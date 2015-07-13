@@ -14,12 +14,14 @@
 #import "UIColor+NMAColors.h"
 #import <AVFoundation/AVFoundation.h>
 
-static NSString * const kPlayImageName = @"play-circle-icon";
-static NSString * const kPauseImageName = @"pause-circle-icon";
+static NSString * const kPlayImageName = @"play-circle-button";
+static NSString * const kPauseImageName = @"pause-circle-button";
 
 @interface NMATodaysSongTableViewCell ()
 
 @property (strong, nonatomic) NMASong *song;
+
+@property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
 
 @end
 
@@ -36,9 +38,9 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
     self.artistLabel.text = song.artistAsAppearsOnLabel;
     self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
     self.artistLabel.textColor = [UIColor NMA_darkGray];
-    self.albumImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
-    self.albumImage.layer.cornerRadius = CGRectGetHeight(self.albumImage.frame) /2;
-    self.albumImage.layer.masksToBounds = YES;
+    self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
+    self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
+    self.albumImageView.layer.masksToBounds = YES;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     }
@@ -58,8 +60,6 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
 - (IBAction)iTunesButtonPressed:(UIButton *)sender {
     [[UIApplication sharedApplication] openURL:self.song.trackViewUrl];
 }
-
-#pragma mark - NMATodaysSongCellDelegate Methods
 
 - (void)changePlayButtonImage {
     [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];

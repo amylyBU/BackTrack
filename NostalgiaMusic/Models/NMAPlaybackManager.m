@@ -60,7 +60,7 @@ static NMAPlaybackManager *sharedPlayer;
 
 - (void)itemDidFinishPlaying:(NSNotification *)notification {
     [sharedPlayer setUpWithURL:sharedPlayer.audioAsset.URL];
-    [self.delegate changePlayButtonImage];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:self];
 }
 
 @end
