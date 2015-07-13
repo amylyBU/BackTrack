@@ -49,7 +49,9 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
-    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 30.0;
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
     
@@ -60,8 +62,8 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
-    self.day = [[NMADay alloc] initWithYear:self.year dayDelgate:self];
-    
+    self.day = [[NMADay alloc] initWithYear:self.year];
+    [self.day populateFBActivities:self];
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs addObject:song];
@@ -136,11 +138,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         case NMASectionTypeBillboardSong:
             return kBillboardSongHeightForRow;
         case NMASectionTypeFacebookActivity: {
-            static UITableViewCell *prototypeFBCell = nil;
-            prototypeFBCell = [self setAppropriateFBCellAtIndexPath:indexPath];
-            [prototypeFBCell layoutIfNeeded];
-            CGSize size = [prototypeFBCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-            return size.height + 1;
+            return UITableViewAutomaticDimension;
         }
         case NMASectionTypeNYTimesNews: {
             return kBillboardSongHeightForRow;
@@ -151,9 +149,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)setYear:(NSString *)year {
-    self.year = year;
-    self.day = [[NMADay alloc] initWithYear:self.year dayDelgate:self];
-    self.day.delegate = self;
+    _year = year;
+    self.day = [[NMADay alloc] initWithYear:self.year];
+    [self.day populateFBActivities:self];
     [self.tableView reloadData];
 }
 
@@ -174,19 +172,6 @@ titleForHeaderInSection:(NSInteger)section {
         default:
             return @"";
     }
-}
-
-#pragma mark - Table Cell Utility
-//@discussion while this returns UITableViewCell, it is a FB cell (either NoActivity or not)
-- (UITableViewCell *)setAppropriateFBCellAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *prototypeFBCell;
-    if(self.day.FBActivities.count) {
-        prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMAFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
-        [(NMAFBActivityTableViewCell*)prototypeFBCell configureCellForFBActivity:_day.FBActivities[indexPath.row]];
-    } else {
-        prototypeFBCell = [[[NSBundle mainBundle] loadNibNamed:@"NMANoFBActivityTableViewCell" owner:self options:nil] objectAtIndex:0];
-    }
-    return prototypeFBCell;
 }
 
 @end

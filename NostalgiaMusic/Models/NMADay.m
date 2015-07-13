@@ -23,15 +23,11 @@
 
 #pragma mark - Initializer
 
-- (instancetype) initWithYear:(NSString *)year dayDelgate:(id<NMADayDelegate>)dayDelegate {
+- (instancetype)initWithYear:(NSString *)year {
     self = [super init];
     
-    if(self) {
+    if (self) {
         _year = year; //TODO: check for valid years
-        _delegate = dayDelegate;
-        //TODO: initialize song
-        [self collectFBActivities];
-        //TODO: collect stories
     }
     
     return self;
@@ -39,12 +35,12 @@
 
 #pragma mark - Facebook Post Utility
 
-- (void)collectFBActivities {
+- (void)populateFBActivities:(id<NMADayDelegate>)dayDelegate {
     [[NMARequestManager sharedManager] requestFBActivitiesFromDate:self.year
-                                                       dayDelegate:self.delegate
+                                                       dayDelegate:dayDelegate
                                                            success:^(NSArray *FBActivities) {
                                                                self.FBActivities = FBActivities;
-                                                               [self.delegate updatedFBActivity];
+                                                               [dayDelegate updatedFBActivity];
                                                            }
                                                            failure:nil];
 }

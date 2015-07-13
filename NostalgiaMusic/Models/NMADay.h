@@ -17,9 +17,9 @@
 @interface NMADay : NSObject
 @property (strong, nonatomic, readonly) NMASong *song;
 @property (strong, nonatomic, readonly) NSString *year;
-@property (weak, nonatomic) id <NMADayDelegate> delegate;
 @property (strong, nonatomic, readonly) NSArray *FBActivities;
 
-- (instancetype)initWithYear:(NSString *)year dayDelgate:(id<NMADayDelegate>)dayDelegate;
+- (instancetype)initWithYear:(NSString *)year;
+- (void)populateFBActivities:(id<NMADayDelegate>)dayDelegate;
 
 @end

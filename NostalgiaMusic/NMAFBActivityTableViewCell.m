@@ -18,7 +18,7 @@
     self.collapseImageConstraint.priority = 1;
     
     //check for image
-    if(FBActivity.imagePath) {
+    if (FBActivity.imagePath) {
         NSURL *imageURL = [NSURL URLWithString:FBActivity.imagePath];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
@@ -32,7 +32,7 @@
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
     float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
-    float newViewHeight = heightToWidthRatio * _postImageView.frame.size.width;
+    float newViewHeight = heightToWidthRatio * CGRectGetWidth(self.postImageView.frame);
     self.imageHeightConstraint.constant = newViewHeight;
 }
 

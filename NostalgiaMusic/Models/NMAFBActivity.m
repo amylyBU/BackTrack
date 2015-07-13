@@ -27,7 +27,7 @@
     
     if(self) {
         //we are only interested in status and photo updates for now
-        if(post) {
+        if (post) {
             _message = post[@"message"];
             _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
             [self formatTimeString:post[@"created_time"]];
@@ -59,7 +59,7 @@
     
     //convert it into a date we can spit back out
     NSDate *date = [dateFormatter dateFromString:createdTime];
-    dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    dateFormatter.timeZone = [NSTimeZone localTimeZone];
     dateFormatter.dateFormat = @"h:mm a";
     
     self.timeString = [dateFormatter stringFromDate:date];
@@ -69,7 +69,7 @@
     int likeCount = 0;
     id likesObject = post[@"likes"];
     
-    if(likesObject) {
+    if (likesObject) {
         NSArray *likes = likesObject[@"data"];
         for(id like in likes) {
             NSString *likerName = like[@"name"];
