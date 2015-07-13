@@ -77,7 +77,8 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"ddMM"];
-    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
+    NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
+
     NMARequestManager *manager = [[NMARequestManager alloc] init];
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story){
@@ -85,7 +86,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
                               [self.tableView reloadData];
                           }
                           failure:^(NSError *error) {
-
                           }];
 
     __weak NMAContentTableViewController *weakSelf = self;

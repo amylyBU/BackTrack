@@ -38,7 +38,17 @@
     [self.notNowButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.notNowButton.titleLabel setFont:[UIFont NMA_proximaNovaLightWithSize:15.0]];
 
-    // TODO: change background color of facebook button / format it.
+    [self.loginButton setBackgroundImage:nil forState:UIControlStateNormal];
+    self.loginButton.backgroundColor = [UIColor whiteColor];
+
+    for (id obj in self.loginButton.subviews) {
+        [obj removeFromSuperview];
+    }
+
+    [self.loginButton addSubview:self.facebookSignInLabel];
+    [self.loginButton addSubview:self.facebookIcon];
+    self.facebookSignInLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:18.0f];
+    self.facebookSignInLabel.textColor = [UIColor NMA_facebookBlue];
 }
 
 - (IBAction)notNowButton:(UIButton *)sender {

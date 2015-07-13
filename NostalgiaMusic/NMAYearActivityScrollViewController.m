@@ -96,11 +96,11 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)scrollingDidEnd {
-    self.scrollView.contentOffset.x == self.view.frame.size.width * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
+    self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
 }
 
 - (void)setContentOffsetToCenter {
-    CGPoint scrollPoint = CGPointMake(self.view.frame.size.width, 0);
+    CGPoint scrollPoint = CGPointMake(CGRectGetWidth(self.view.frame), 0);
     [self.scrollView setContentOffset:scrollPoint animated:NO];
 }
 

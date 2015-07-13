@@ -16,5 +16,6 @@
 + (UIColor *)NMA_tealGreen;
 + (UIColor *)NMA_almostBlack;
 + (UIColor *)NMA_darkGray;
++ (UIColor *)NMA_facebookBlue;
 
 @end

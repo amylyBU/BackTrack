@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *facebookDisclaimer;
 @property (weak, nonatomic) IBOutlet UILabel *appDescription;
 @property (weak, nonatomic) IBOutlet UIButton *notNowButton;
+@property (weak, nonatomic) IBOutlet UILabel *facebookSignInLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *facebookIcon;
 
 
 @end
