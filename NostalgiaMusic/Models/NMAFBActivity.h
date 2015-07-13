@@ -17,6 +17,7 @@
 @property (copy, nonatomic, readonly) NSString *imageId;
 @property (copy, nonatomic, readonly) NSString *timeString;
 
-- (instancetype)initWithPost:(id)post dayDelegate:(id<NMADayDelegate>)dayDelegate;
+- (instancetype)initWithPost:(id)post;
+- (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate;
 
 @end

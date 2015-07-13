@@ -16,13 +16,12 @@
 @property (nonatomic, copy, readwrite) NSString *message;
 @property (nonatomic, copy, readwrite) NSString *timeString;
 @property (nonatomic, copy, readwrite) NSString *imageObjectId;
-@property (strong, nonatomic) id <NMADayDelegate> dayDelegate;
 @end
 
 @implementation NMAFBActivity
 
 #pragma mark - Initializer
-- (instancetype) initWithPost:(id)post dayDelegate:(id)delegate{
+- (instancetype) initWithPost:(id)post {
     self = [super init];
     
     if(self) {
@@ -32,23 +31,23 @@
             _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
             [self formatTimeString:post[@"created_time"]];
             _imagePath = nil;
-            _dayDelegate = delegate;
-            
-            //We need to make a separate request to get a high res image for the FBActivity
-            [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
-                                                              success:^(NSString *imagePath) {
-                                                                  self.imagePath = imagePath;
-                                                                  //Then we need to reload with the image
-                                                                  [self.dayDelegate updatedFBActivity];
-                                                              }
-                                                              failure:nil];
-            
-            //We also need to make special paging requests for likes and comments
             _likeCount = [self countLikes:post];
         }
     }
     
     return self;
+}
+
+#pragma mark - Info fetching
+- (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate {
+    //We need to make a separate request to get a high res image for the FBActivity
+    [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
+                                                      success:^(NSString *imagePath) {
+                                                          self.imagePath = imagePath;
+                                                          //Then we need to reload with the image
+                                                          [dayDelegate updatedFBActivity];
+                                                      }
+                                                      failure:nil];
 }
 
 #pragma mark - Utility

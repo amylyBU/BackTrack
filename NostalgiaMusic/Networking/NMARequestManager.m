@@ -174,8 +174,8 @@
                 for(id post in posts) {
                     NSString *type = post[@"type"];
                     if([type isEqual:@"status"] || [type isEqual:@"photo"]) {
-                        NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post
-                                                                            dayDelegate:dayDelegate];
+                        NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post];
+                        [FBActivity populateActivityImagePath:dayDelegate];
                         [mutableFBActivities addObject:FBActivity];
                     }
                 }
