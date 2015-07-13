@@ -56,7 +56,7 @@
 }
 
 - (void)setUpHomeView {
-    self.yearScrollBarCollectionVC = [[NMAYearCollectionViewController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]];
+    self.yearScrollBarCollectionVC = [[NMAYearCollectionViewController alloc] init];
     self.yearScrollBarCollectionVC.delegate = self;
     [self displayContentController:self.yearScrollBarCollectionVC];
     
