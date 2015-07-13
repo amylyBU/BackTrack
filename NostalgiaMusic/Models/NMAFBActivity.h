@@ -19,5 +19,7 @@
 
 - (instancetype)initWithPost:(id)post;
 - (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate;
+- (void)populateActivityLikes:(id)likesContainer
+                  dayDelegate:(id<NMADayDelegate>)dayDelegate;
 
 @end

@@ -29,12 +29,17 @@
                      failure:(void (^)(NSError *error))failure;
 
 - (void)requestFBActivitiesFromDate:(NSString *)year
-                       dayDelegate:(id)dayDelegate
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate
                            success:(void (^)(NSArray *FBActivities))success
                            failure:(void (^)(NSError *error))failure;
 
 - (void)requestFBActivityImage:(NSString *)imageId
                        success:(void (^)(NSString *imagePath))success
+                       failure:(void (^)(NSError *error))failure;
+
+- (void)requestFBActivityLikes:(NSString *)nextPage
+                   dayDelegate:(id<NMADayDelegate>)dayDelegate
+                       success:(void (^)(id nextLikesContainer))success
                        failure:(void (^)(NSError *error))failure;
 
 @end

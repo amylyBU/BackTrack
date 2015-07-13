@@ -159,6 +159,8 @@
                     if([type isEqual:@"status"] || [type isEqual:@"photo"]) {
                         NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post];
                         [FBActivity populateActivityImagePath:dayDelegate];
+                        id likesContainer = post[@"likes"];
+                        [FBActivity populateActivityLikes:likesContainer dayDelegate:dayDelegate];
                         [mutableFBActivities addObject:FBActivity];
                     }
                 }
@@ -180,6 +182,24 @@
         if(imageVersions) {
             NSString *imagePath = [imageVersions[0] objectForKey:@"source"];
             success(imagePath);
+        }
+    }];
+}
+
+- (void)requestFBActivityLikes:(NSString *)nextLink
+                   dayDelegate:(id<NMADayDelegate>)dayDelegate
+                       success:(void (^)(id nextLikesContainer))success
+                       failure:(void (^)(NSError *error))failure {
+    //https://graph.facebook.com/endpoint
+    NSString *startPoint = @"https://graph.facebook.com";
+    NSString *endPoint = [nextLink substringFromIndex:NSMaxRange([nextLink rangeOfString:startPoint])];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:endPoint
+                                                                   parameters:nil
+                                                                   HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if(result[@"data"] && result[@"paging"]) {
+            success(result);
         }
     }];
 }
