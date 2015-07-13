@@ -37,9 +37,9 @@
                        success:(void (^)(NSString *imagePath))success
                        failure:(void (^)(NSError *error))failure;
 
-- (void)requestFBActivityLikes:(NSString *)nextPage
-                   dayDelegate:(id<NMADayDelegate>)dayDelegate
-                       success:(void (^)(id nextLikesContainer))success
-                       failure:(void (^)(NSError *error))failure;
+- (void)requestFBActivityResponses:(NSString *)nextPage
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate
+                           success:(void (^)(id nextResponseContainer))success
+                           failure:(void (^)(NSError *error))failure;
 
 @end

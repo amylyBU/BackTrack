@@ -161,6 +161,8 @@
                         [FBActivity populateActivityImagePath:dayDelegate];
                         id likesContainer = post[@"likes"];
                         [FBActivity populateActivityLikes:likesContainer dayDelegate:dayDelegate];
+                        id commentsContainer = post[@"comments"];
+                        [FBActivity populateActivityComments:commentsContainer dayDelegate:dayDelegate];
                         [mutableFBActivities addObject:FBActivity];
                     }
                 }
@@ -186,12 +188,12 @@
     }];
 }
 
-- (void)requestFBActivityLikes:(NSString *)nextLink
-                   dayDelegate:(id<NMADayDelegate>)dayDelegate
-                       success:(void (^)(id nextLikesContainer))success
-                       failure:(void (^)(NSError *error))failure {
+- (void)requestFBActivityResponses:(NSString *)nextLink
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate
+                           success:(void (^)(id nextLikesContainer))success
+                           failure:(void (^)(NSError *error))failure {
     //https://graph.facebook.com/endpoint
-    NSString *startPoint = @"https://graph.facebook.com";
+    NSString *startPoint = @"https://graph.facebook.com"; //TODO: this is not a good way to do this
     NSString *endPoint = [nextLink substringFromIndex:NSMaxRange([nextLink rangeOfString:startPoint])];
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:endPoint
                                                                    parameters:nil

@@ -21,5 +21,7 @@
 - (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate;
 - (void)populateActivityLikes:(id)likesContainer
                   dayDelegate:(id<NMADayDelegate>)dayDelegate;
+- (void)populateActivityComments:(id)commentsContainer
+                     dayDelegate:(id<NMADayDelegate>)dayDelegate;
 
 @end

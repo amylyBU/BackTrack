@@ -32,6 +32,7 @@
             [self formatTimeString:post[@"created_time"]];
             _imagePath = nil;
             _likeCount = 0;
+            _commentCount = 0;
         }
     }
     
@@ -52,7 +53,12 @@
 
 - (void)populateActivityLikes:(id)likesContainer
                   dayDelegate:(id<NMADayDelegate>)dayDelegate {
-    [self populateLikesWithStart:&_likeCount likesContainer:likesContainer dayDelegate:dayDelegate];
+    [self populateResponsesWithStart:&_likeCount responseContainer:likesContainer dayDelegate:dayDelegate];
+}
+
+- (void)populateActivityComments:(id)commentsContainer
+                     dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    [self populateResponsesWithStart:&_commentCount responseContainer:commentsContainer dayDelegate:dayDelegate];
 }
 
 #pragma mark - Utility
@@ -69,31 +75,30 @@
     self.timeString = [dateFormatter stringFromDate:date];
 }
 
-- (void)populateLikesWithStart:(int *)count
-                likesContainer:(id)likesContainer
-                   dayDelegate:(id<NMADayDelegate>)dayDelegate {
-    NSArray *likes = likesContainer[@"data"];
-    id paging = likesContainer[@"paging"];
+///@discussion responses are likes or comments
+- (void)populateResponsesWithStart:(int *)count
+                 responseContainer:(id)responseContainer
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    NSArray *responses = responseContainer[@"data"];
+    id paging = responseContainer[@"paging"];
     NSString *nextLink = paging[@"next"];
     
-    for(id like in likes) {
-        NSString *likerName = like[@"name"];
-        NSLog(@"%@ likes this post", likerName);
+    for(id response in responses) {
         (*count)++;
     }
     
     //paginate for more like if we must
     if(nextLink) {
-        [[NMARequestManager sharedManager] requestFBActivityLikes:nextLink
-                                                      dayDelegate:dayDelegate
-                                                          success:^(id nextLikeContainer) {
-                                                              [self populateLikesWithStart:count
-                                                                            likesContainer:nextLikeContainer
-                                                                               dayDelegate:dayDelegate];
-                                                          }
-                                                          failure:nil];
+        [[NMARequestManager sharedManager] requestFBActivityResponses:nextLink
+                                                          dayDelegate:dayDelegate
+                                                              success:^(id nextResponseContainer) {
+                                                                  [self populateResponsesWithStart:count
+                                                                                  responseContainer:nextResponseContainer
+                                                                                       dayDelegate:dayDelegate];
+                                                              }
+                                                              failure:nil];
     } else {
-        NSLog(@"%i total people like this post", *count);
+        NSLog(@"%i total people (something) this post", *count);
         [dayDelegate updatedFBActivity];
     }
 }
