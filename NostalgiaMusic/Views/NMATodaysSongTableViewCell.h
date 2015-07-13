@@ -11,10 +11,10 @@
 
 @interface NMATodaysSongTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *albumImage;
+@property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImage;
 
 - (void)configureCellForSong:(NMASong *)song;
 

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NMADay.h"
 
-@interface NMAContentTableViewController : UITableViewController
-
+@interface NMAContentTableViewController : UITableViewController <NMADayDelegate>
 @property (copy, nonatomic) NSString *year;
-
+@property (strong, nonatomic, readonly) NMADay *day;
 @end

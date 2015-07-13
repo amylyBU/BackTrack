@@ -10,6 +10,9 @@
 #import "NMAYearTableViewCell.h"
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
+#import "NMAFBActivityTableViewCell.h"
+#import "NMANoFBActivityTableViewCell.h"
+#import "NMAFBActivity.h"
 #import <SVPullToRefresh.h>
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
@@ -26,13 +29,14 @@ static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
 static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
+static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCell";
 
 @interface NMAContentTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *billboardSongs;
 @property (strong, nonatomic) NSMutableArray *facebookActivities;
 @property (strong, nonatomic) NSMutableArray *NYTimesNews;
-
+@property (strong, nonatomic, readwrite) NMADay *day;
 @end
 
 @implementation NMAContentTableViewController
@@ -43,6 +47,14 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
     
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 30.0;
+
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
 
@@ -50,6 +62,8 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
+    self.day = [[NMADay alloc] initWithYear:self.year];
+    [self.day populateFBActivities:self];
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs addObject:song];
@@ -59,21 +73,6 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"ddMM"];
-    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
-    NMARequestManager *manager = [[NMARequestManager alloc] init];
-    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
-                          success:^(NMANewsStory *story){
-                              [self.NYTimesNews addObject:story];
-                              [self.tableView reloadData];
-                          }
-                          failure:^(NSError *error) {
-                              
-                          }];
-
-
 
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -92,8 +91,10 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
     switch (section) {
         case NMASectionTypeBillboardSong:
             return self.billboardSongs.count;
-        case NMASectionTypeFacebookActivity:
-            return self.facebookActivities.count;
+        case NMASectionTypeFacebookActivity: {
+            NSUInteger activityCount = self.day.FBActivities.count;
+            return activityCount > 0 ? activityCount : 1;
+        }
         case NMASectionTypeNYTimesNews:
             return self.NYTimesNews.count;
         default:
@@ -109,14 +110,23 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             return cell;
         }
-        case NMASectionTypeFacebookActivity:
-
-        case NMASectionTypeNYTimesNews: {
-                NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
-                [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
-                return cell;
+        case NMASectionTypeFacebookActivity: {
+            UITableViewCell *cell;
+            if(_day.FBActivities.count) {
+                cell = [tableView dequeueReusableCellWithIdentifier:kNMAFacebookActivityCellIdentifier forIndexPath:indexPath];
+                [(NMAFBActivityTableViewCell*)cell configureCellForFBActivity:self.day.FBActivities[indexPath.row]];
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFacebookActivityCellIdentifier forIndexPath:indexPath];
+            }
+            [cell layoutIfNeeded];
+            return cell;
         }
 
+        case NMASectionTypeNYTimesNews: {
+            NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
+            [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
+            return cell;
+        }
         default:
             return nil;
     }
@@ -124,7 +134,30 @@ static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kBillboardSongHeightForRow;
+    switch (indexPath.section) {
+        case NMASectionTypeBillboardSong:
+            return kBillboardSongHeightForRow;
+        case NMASectionTypeFacebookActivity: {
+            return UITableViewAutomaticDimension;
+        }
+        case NMASectionTypeNYTimesNews: {
+            return kBillboardSongHeightForRow;
+        }
+        default:
+            return 0;
+    }
+}
+
+- (void)setYear:(NSString *)year {
+    _year = year;
+    self.day = [[NMADay alloc] initWithYear:self.year];
+    [self.day populateFBActivities:self];
+    [self.tableView reloadData];
+}
+
+#pragma mark - NMADayDelegate
+- (void)updatedFBActivity {
+    [self.tableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView
