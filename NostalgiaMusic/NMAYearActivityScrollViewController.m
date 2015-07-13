@@ -79,7 +79,6 @@ BOOL isMostRecentYearVisible;
     [self configureNMAContentTableViewController:self.rightTableViewController
                                         withYear:[self incrementStringValue:self.year]
                                       atPosition:NMAScrollViewPositionNextYear];
-    
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
     [self setUpMusicPlayer];
 }
@@ -110,8 +109,10 @@ BOOL isMostRecentYearVisible;
 - (void)didSwipeToPastYear {
     if ([self.leftTableViewController.year isEqualToString:self.earliestYear]) {
         isEarliestYearVisble = YES;
+        [self.delegate updateScrollYear:[self decrementStringValue:self.year]];
     } else if ([self.middleTableViewController.year isEqualToString:[self decrementStringValue:self.latestYear]] && isMostRecentYearVisible) {
         isMostRecentYearVisible = NO;
+        [self.delegate updateScrollYear:self.year];
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
@@ -122,8 +123,10 @@ BOOL isMostRecentYearVisible;
 - (void)didSwipeToNextYear {
     if ([self.rightTableViewController.year isEqualToString:self.latestYear]) {
         isMostRecentYearVisible = YES;
-    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear] && isEarliestYearVisble) {
+        [self.delegate updateScrollYear:[self incrementStringValue:self.year]];
+    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear ] && isEarliestYearVisble) {
         isEarliestYearVisble = NO;
+        [self.delegate updateScrollYear:self.year];
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
@@ -198,9 +201,9 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)getLatestYear {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     NSString *pastYearString = [NSString stringWithFormat:@"%li", (long)pastyear];
     self.latestYear = pastYearString;

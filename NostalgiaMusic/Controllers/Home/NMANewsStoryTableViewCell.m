@@ -23,7 +23,7 @@
     if(story.snippet) {
         self.summaryTextView.text = story.snippet;
     }
-
+    
 }
 
 @end

@@ -50,7 +50,7 @@
 }
 
 - (NSString *)configureQueryString:(NSString *)date withYear:(NSString *)year{
-    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name.contains%3A%22Front+Page%22+OR+%22World%22";
+    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk%3A%22Foreign%22";
     NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
     NSString *dateWithYear = [year stringByAppendingString:date];
     NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", dateWithYear]];

@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bylineLabel;
 @property (weak, nonatomic) IBOutlet UITextView *summaryTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *newsStoryImageView;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 
 - (void)configureCellForStory:(NMANewsStory *)story;

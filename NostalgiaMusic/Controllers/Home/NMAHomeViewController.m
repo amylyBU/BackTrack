@@ -71,6 +71,12 @@
     
     [self.view constrainView:self.yearActivityScrollVC.view belowView:self.yearScrollBarCollectionVC.view];
     [self.view constrainView:self.yearActivityScrollVC.view top:NSNotFound left:0 bottom:0 right:0];
+    
+    UIView *test = [[UIView alloc] initWithFrame:CGRectMake(0,0,100,100)];
+    //[self.yearActivityScrollVC.view addSubview:test];
+    //[self.yearActivityScrollVC.view constrainViewToBottom:test];
+    test.backgroundColor = [UIColor redColor];
+    
 }
 
 - (void)displayContentController:(UIViewController*)content {
