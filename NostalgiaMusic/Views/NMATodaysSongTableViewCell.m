@@ -17,12 +17,19 @@
 static NSString * const kPlayImageName = @"play-circle-icon";
 static NSString * const kPauseImageName = @"pause-circle-icon";
 
+@interface NMATodaysSongTableViewCell ()
+
+@property (strong, nonatomic) NMASong *song;
+
+@end
+
 @implementation NMATodaysSongTableViewCell
 
 #pragma mark - Public Methods
 
 - (void)configureCellForSong:(NMASong *)song {
     [self layoutIfNeeded];
+    self.song = song;
     self.songTitleLabel.text = song.title;
     self.songTitleLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:24.0f];
     self.songTitleLabel.textColor = [UIColor NMA_almostBlack];
@@ -47,6 +54,9 @@ static NSString * const kPauseImageName = @"pause-circle-icon";
         [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     }
+}
+- (IBAction)iTunesButtonPressed:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL:self.song.trackViewUrl];
 }
 
 #pragma mark - NMATodaysSongCellDelegate Methods

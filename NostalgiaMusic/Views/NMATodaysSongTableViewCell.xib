@@ -38,6 +38,9 @@
                         <state key="normal" backgroundImage="itunes-icon">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="iTunesButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1oJ-gN-v4R"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-gG-QGC">
                         <rect key="frame" x="8" y="365" width="364" height="20"/>

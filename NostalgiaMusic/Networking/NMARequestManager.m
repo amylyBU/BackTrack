@@ -94,7 +94,7 @@
                       failure:(void (^)(NSError *error))failure {
 
     NSString *searchTerm = [NSString stringWithFormat:@"%@ %@", song.title, song.artistAsAppearsOnLabel];
-    NSDictionary *parameters = @{ @"term":searchTerm, @"media":@"music" };
+    NSDictionary *parameters = @{ @"term":searchTerm, @"media":@"music", @"entity":@"song" };
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -107,11 +107,10 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSArray *resultsArray = [responseObject objectForKey:@"results"];
              for (NSDictionary *result in resultsArray) {
-                 if ([[result valueForKey:@"kind"] isEqualToString:@"song"]) {
-                     song.previewURL = [result objectForKey:@"previewUrl"];
-                     song.albumImageUrl600x600 = [NSURL URLWithString:[(NSString *)[result objectForKey:@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"600x600"]];
-                     break;
-                 }
+                 song.previewURL = [result objectForKey:@"previewUrl"];
+                 song.albumImageUrl600x600 = [NSURL URLWithString:[[result objectForKey:@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"600x600"]];
+                 song.trackViewUrl = [NSURL URLWithString:[result objectForKey:@"trackViewUrl"]];
+                 break;
              }
              if (success) {
                  success(song);
