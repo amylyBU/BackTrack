@@ -16,8 +16,7 @@ static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCe
 static NSInteger const kNumberOfSectionsInYearCollection = 1;
 static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASelectedYearCollectionViewCell";
 
-@interface NMAYearCollectionViewController ()
-
+@interface NMAYearCollectionViewController () <UIScrollViewDelegate>
 @property (strong, nonatomic) NSMutableArray *years;
 @property (nonatomic) NSInteger latestYear;
 
@@ -66,14 +65,37 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    for (int i = 0; i < [self.scrollBarCollectionView visibleCells].count; i++) {
-        CGPoint t = CGPointMake(self.scrollBarCollectionView.center.x, self.scrollBarCollectionView.center.y);
-        NSIndexPath *test = [self.scrollBarCollectionView indexPathForItemAtPoint:t];
-    }
-}
+
 
 #pragma mark UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView
+  didEndDisplayingCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor clearColor];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"SCROLL");
+    NSArray *visible = [self.scrollBarCollectionView visibleCells];
+    for (NMAYearCollectionViewCell *cell in visible) {
+        CGRect cellRect = cell.frame;
+         NSLog(@"cell x - %f", cellRect.origin.x);
+        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
+        NSLog(@"x - %f", cellFrameInView.origin.x);
+        if ( cellFrameInView.origin.x > 70 && cellFrameInView.origin.x < 180) {
+            cell.year.backgroundColor = [UIColor whiteColor];
+            [cell.year.layer masksToBounds];
+            cell.year.layer.cornerRadius = 20;
+            cell.year.clipsToBounds = YES;
+            [cell.year setFont:[UIFont systemFontOfSize:30]];
+        } else {
+            cell.year.backgroundColor = [UIColor clearColor];
+             [cell.year setFont:[UIFont systemFontOfSize:17]];
+        }
+    }
+    
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return kNumberOfSectionsInYearCollection;
@@ -88,28 +110,23 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     return CGSizeMake(111, 42);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *year = self.years[indexPath.row];
     if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
-        NMASelectedYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMASelectedYearcollectionViewCellIdentifier forIndexPath:indexPath];
-        cell.yearLabel.text = year;
-        [cell.yearLabel.layer masksToBounds];
-        cell.yearLabel.layer.cornerRadius = 20;
-        cell.yearLabel.clipsToBounds = YES;
-        cell.dateLabel.text = [self getDate];
+        NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
+        cell.year.text = year;
+        [cell.year.layer masksToBounds];
+        cell.year.layer.cornerRadius = 20;
+        cell.year.clipsToBounds = YES;
+        cell.year.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor clearColor];
+         [cell.year setFont:[UIFont systemFontOfSize:30]];
+       
         return cell;
     } else {
         NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
         cell.year.text = year;
+         [cell.year setFont:[UIFont systemFontOfSize:17]];
         return cell;
     }
 }
@@ -159,7 +176,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)setYear:(NSString *)year {
     _year = year;
-    [self.scrollBarCollectionView reloadData];
+   // [self.scrollBarCollectionView reloadData];
     [self positionYear];
 }
 @end

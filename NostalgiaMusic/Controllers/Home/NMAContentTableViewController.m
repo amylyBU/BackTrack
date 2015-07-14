@@ -81,9 +81,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [self.day populateFBActivities:self];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"ddMM"];
-    NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
-
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
     NMARequestManager *manager = [[NMARequestManager alloc] init];
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story){

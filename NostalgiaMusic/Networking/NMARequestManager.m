@@ -50,7 +50,7 @@
 }
 
 - (NSString *)configureQueryString:(NSString *)date withYear:(NSString *)year{
-    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk%3A%22Foreign%22";
+    NSString *urlQueryDefault = @"http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk('Foreign')&sort=oldest";
     NSString *apiKey = @"dcea47d59f7c08951bc83252867d596d:1:72360000";
     NSString *dateWithYear = [year stringByAppendingString:date];
     NSString *urlWithStartYear = [urlQueryDefault stringByAppendingString:[NSString stringWithFormat:@"&begin_date=%@", dateWithYear]];
@@ -64,6 +64,7 @@
     NMANewsStory *story = [[NMANewsStory alloc] init];
     NSDictionary *response = [json objectForKey:@"response"];
     NSDictionary *docs = [response objectForKey:@"docs"];
+    if (docs.count > 3) {
     for (NSDictionary *item in docs) {
         NSMutableArray *images = [item valueForKey:@"multimedia"];
         story.imageLinks = images;
@@ -80,8 +81,15 @@
         }
         [stories addObject:story];
     }
+    }
+    if (stories.count) {
     return stories;
-}
+    } else {
+    story.headline = @"no news found";
+        [stories addObject:story];
+        return stories;
+    }
+  }
 
 - (id)resolveNSNullToNil:(id)objectForKey {
     return [NSNull null] == objectForKey ? nil : objectForKey;

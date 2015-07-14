@@ -13,10 +13,6 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N4n-dk-BXy" id="ax9-eI-hlT">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WBW-ny-0s4">
-                        <rect key="frame" x="8" y="7" width="300" height="257"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7d-3c-DqA">
                         <rect key="frame" x="8" y="54" width="304" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -36,27 +32,14 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sD-nO-q7d">
-                        <rect key="frame" x="231" y="209" width="26" height="22"/>
-                        <state key="normal" backgroundImage="share-icon">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-9Z-iBg">
                         <rect key="frame" x="2" y="28" width="63" height="18"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7x-dL-E2q">
-                        <rect key="frame" x="16" y="25" width="42" height="19"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="HK3-1A-87S" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leadingMargin" constant="20" id="0VF-fs-kXa"/>
                     <constraint firstItem="HK3-1A-87S" firstAttribute="top" secondItem="v7d-3c-DqA" secondAttribute="bottom" constant="4" id="91o-hD-4et"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tI7-66-cal" secondAttribute="trailing" constant="20" id="F7g-VJ-yTa"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9sD-nO-q7d" secondAttribute="trailing" constant="21" id="PTa-ob-6tb"/>
                     <constraint firstItem="v7d-3c-DqA" firstAttribute="top" secondItem="ax9-eI-hlT" secondAttribute="topMargin" constant="46" id="Wyz-2X-s4g"/>
                     <constraint firstItem="eGG-9Z-iBg" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leadingMargin" constant="6" id="XVr-Zh-L5X"/>
                     <constraint firstItem="v7d-3c-DqA" firstAttribute="trailing" secondItem="ax9-eI-hlT" secondAttribute="trailingMargin" constant="20" id="eeu-Qn-uWA"/>
@@ -68,14 +51,12 @@
             <connections>
                 <outlet property="bylineLabel" destination="HK3-1A-87S" id="JvK-pA-Zvd"/>
                 <outlet property="headlineLabel" destination="v7d-3c-DqA" id="e4Z-Mx-aTy"/>
-                <outlet property="shareButton" destination="9sD-nO-q7d" id="oC8-1m-HG0"/>
                 <outlet property="summaryTextView" destination="tI7-66-cal" id="RqG-sf-vy4"/>
             </connections>
-            <point key="canvasLocation" x="368" y="213.5"/>
+            <point key="canvasLocation" x="368" y="206.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="facebook-time-ribbon" width="70" height="27"/>
-        <image name="share-icon" width="26" height="23"/>
     </resources>
 </document>
