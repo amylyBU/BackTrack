@@ -8,8 +8,17 @@
 
 #import "NMAFBActivityTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UIColor+NMAColors.h"
+#import "UIFont+NMAFonts.h"
 
 @implementation NMAFBActivityTableViewCell
+
+- (void)awakeFromNib {
+    self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.postMessage.textColor = [UIColor NMA_almostBlack];
+    [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
+    [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
+}
 
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBActivity {
     self.timeLabel.text = FBActivity.timeString;

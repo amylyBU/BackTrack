@@ -10,5 +10,5 @@
 
 @interface NMANoFBActivityTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *messageView;
-
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @end

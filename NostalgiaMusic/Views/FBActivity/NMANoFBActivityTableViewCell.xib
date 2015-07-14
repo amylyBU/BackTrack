@@ -4,54 +4,50 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ProximaNova-Regular.otf">
+            <string>ProximaNova-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMANoFacebookCell" rowHeight="70" id="KGk-i7-Jjw" customClass="NMANoFBActivityTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMANoFacebookCell" rowHeight="83" id="KGk-i7-Jjw" customClass="NMANoFBActivityTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFR-7f-bWh">
-                        <rect key="frame" x="8" y="8" width="304" height="54"/>
+                        <rect key="frame" x="8" y="8" width="304" height="65"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No activity to show from this day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7Z-jD-7su">
-                                <rect key="frame" x="26" y="17" width="252" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Facebook activities were found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7Z-jD-7su">
+                                <rect key="frame" x="40" y="25" width="229" height="15"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="D7Z-jD-7su" firstAttribute="top" secondItem="GFR-7f-bWh" secondAttribute="top" constant="17" id="Jld-u9-xgX"/>
-                            <constraint firstItem="D7Z-jD-7su" firstAttribute="leading" secondItem="GFR-7f-bWh" secondAttribute="leading" constant="26" id="Oc6-7T-Lwq"/>
-                            <constraint firstAttribute="height" constant="54" id="T8T-DE-qCe"/>
-                            <constraint firstAttribute="trailing" secondItem="D7Z-jD-7su" secondAttribute="trailing" constant="26" id="Zas-Fs-bLJ"/>
-                            <constraint firstAttribute="bottom" secondItem="D7Z-jD-7su" secondAttribute="bottom" constant="16" id="c5h-bf-9nf"/>
+                            <constraint firstAttribute="centerX" secondItem="D7Z-jD-7su" secondAttribute="centerX" constant="-1.5" id="X9i-NI-tbg"/>
+                            <constraint firstAttribute="centerY" secondItem="D7Z-jD-7su" secondAttribute="centerY" id="i8S-PR-1bp"/>
+                            <constraint firstAttribute="height" constant="65" id="o5R-ff-k2k"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="T8T-DE-qCe"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="centerY" secondItem="GFR-7f-bWh" secondAttribute="centerY" id="Atm-Nd-uRK"/>
-                    <constraint firstAttribute="centerX" secondItem="GFR-7f-bWh" secondAttribute="centerX" id="Knp-NS-Ziz"/>
-                    <constraint firstItem="GFR-7f-bWh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TZ1-As-lAr"/>
-                    <constraint firstItem="GFR-7f-bWh" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="cLz-gP-C0G"/>
-                    <constraint firstItem="GFR-7f-bWh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ehW-aA-ODj"/>
-                    <constraint firstItem="GFR-7f-bWh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xr8-lB-cNa"/>
+                    <constraint firstAttribute="centerY" secondItem="GFR-7f-bWh" secondAttribute="centerY" constant="1" id="EB4-QW-7ld"/>
+                    <constraint firstItem="GFR-7f-bWh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="HYC-mx-eIU"/>
+                    <constraint firstItem="GFR-7f-bWh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="xao-N5-Cvt"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="messageLabel" destination="D7Z-jD-7su" id="rvH-MQ-EVL"/>
                 <outlet property="messageView" destination="GFR-7f-bWh" id="Vve-Tq-Dgh"/>
             </connections>
-            <point key="canvasLocation" x="202" y="455"/>
+            <point key="canvasLocation" x="202" y="461.5"/>
         </tableViewCell>
     </objects>
 </document>
