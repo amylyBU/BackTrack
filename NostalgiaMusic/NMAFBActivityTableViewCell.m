@@ -14,8 +14,10 @@
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBActivity {
     self.timeLabel.text = FBActivity.timeString;
     self.postMessage.text = FBActivity.message;
-    self.likesButton.titleLabel.text = [@(FBActivity.likes.count) stringValue];
-    self.commentsButton.titleLabel.text = [@(FBActivity.comments.count) stringValue];
+    NSString* likeCountText = [@(FBActivity.likes.count) stringValue];
+    [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
+    NSString* commentCountText = [@(FBActivity.comments.count) stringValue];
+    [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
     [self.postMessage sizeToFit];
     self.collapseImageConstraint.priority = 1;
     

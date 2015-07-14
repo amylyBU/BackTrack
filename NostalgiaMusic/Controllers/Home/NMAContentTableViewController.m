@@ -10,6 +10,7 @@
 #import "NMAYearTableViewCell.h"
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
+#import "NMASectionHeader.h"
 #import "NMAFBActivityTableViewCell.h"
 #import "NMANoFBActivityTableViewCell.h"
 #import "NMAFBActivity.h"
@@ -27,6 +28,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
 
 static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNumberOfSections = 3;
+static NSString * const kNMASectionHeaderIdentifier = @"NMASectionHeader";
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
 static NSString * const kNMAFacebookActivityCellIdentifier = @"NMAFacebookCell";
@@ -44,10 +46,18 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
+    //Song cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
-
+    
+    //FB cells
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASectionHeader class]) bundle:nil]
+         forCellReuseIdentifier:kNMASectionHeaderIdentifier];
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+    self.tableView.sectionHeaderHeight = 75.0;
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -55,7 +65,8 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
-
+    
+    //Story cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
 
@@ -166,6 +177,33 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         }
         default:
             return 0;
+    }
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case NMASectionTypeFacebookActivity: {
+            NMASectionHeader *FBSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
+            FBSectionHeaderCell.headerLabel.text = @"Facebook Activities";
+            [FBSectionHeaderCell.headerImageView setImage:[UIImage imageNamed:@"facebook-label"]];
+            [FBSectionHeaderCell.upperBackgroundView setBackgroundColor:[UIColor whiteColor]];
+            [FBSectionHeaderCell setBackgroundColor:[UIColor lightGrayColor]];
+            [FBSectionHeaderCell sizeToFit];
+            return FBSectionHeaderCell;
+        }
+        case NMASectionTypeNYTimesNews: {
+            NMASectionHeader *NewsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
+            NewsSectionHeaderCell.headerLabel.text = @"News";
+            [NewsSectionHeaderCell.headerImageView setImage:[UIImage imageNamed:@"news-label"]];
+            [NewsSectionHeaderCell.upperBackgroundView setBackgroundColor:[UIColor lightGrayColor]];
+            [NewsSectionHeaderCell setBackgroundColor:[UIColor lightGrayColor]];
+            [NewsSectionHeaderCell sizeToFit];
+            return NewsSectionHeaderCell;
+        }
+        default:
+            return nil;
+            break;
     }
 }
 

@@ -99,7 +99,7 @@
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="top" secondItem="TNV-oX-VcU" secondAttribute="top" constant="10" id="zLh-ux-PnG"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="collapseImageConstraint" destination="wvr-ZO-fJL" id="YCG-8m-lqy"/>
                 <outlet property="commentsButton" destination="gqF-ui-9Bj" id="PkT-ta-1V5"/>

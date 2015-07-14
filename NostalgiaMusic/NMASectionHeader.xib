@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMASectionHeader" rowHeight="62" id="KGk-i7-Jjw" customClass="NMASectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTK-a6-ILP">
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="47"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.84705882349999995" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-label" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-Gp-7WD">
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="lGe-Gp-7WD" secondAttribute="height" multiplier="321:62" id="4DT-9h-nE9"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="74" y="18" width="239" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="239" id="SCM-RO-if0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerX" secondItem="hTK-a6-ILP" secondAttribute="centerX" id="0Dr-9z-iO2"/>
+                    <constraint firstAttribute="trailing" secondItem="lGe-Gp-7WD" secondAttribute="trailing" id="76a-k7-2DL"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="7h2-vb-Rhh"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="bottom" secondItem="XfO-5y-ZwR" secondAttribute="bottom" id="AP5-gd-o3M"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="width" secondItem="lGe-Gp-7WD" secondAttribute="width" id="DiZ-er-wsv"/>
+                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KL2-tS-3ps"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lGe-Gp-7WD" secondAttribute="bottom" constant="-8.5" id="jXk-rh-YNc"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="top" secondItem="lGe-Gp-7WD" secondAttribute="bottom" constant="-44" id="kUo-PK-w4g"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="66" id="lHB-S7-Ope"/>
+                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zPa-rm-1hb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headerImageView" destination="lGe-Gp-7WD" id="WvH-1T-Miq"/>
+                <outlet property="headerLabel" destination="XfO-5y-ZwR" id="8IF-4J-yV4"/>
+                <outlet property="upperBackgroundView" destination="hTK-a6-ILP" id="VMP-uz-xBJ"/>
+            </connections>
+            <point key="canvasLocation" x="136.5" y="234"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="facebook-label" width="321" height="62"/>
+    </resources>
+</document>
