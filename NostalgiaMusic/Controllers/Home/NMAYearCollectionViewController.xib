@@ -15,11 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qeq-Sr-NDh">
-                    <rect key="frame" x="0.0" y="37" width="600" height="42"/>
-                    <color key="backgroundColor" red="0.19986993040000001" green="0.70401278410000001" blue="0.68985742480000001" alpha="1" colorSpace="calibratedRGB"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qeq-Sr-NDh">
+                    <rect key="frame" x="0.0" y="84" width="320" height="42"/>
+                    <color key="backgroundColor" red="0.45882352939999999" green="0.84705882349999995" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="42" id="cCy-gH-UXa"/>
+                        <constraint firstAttribute="width" constant="320" id="yYt-N6-lbS"/>
+                        <constraint firstAttribute="height" constant="60" id="zW5-YD-LtY"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1of-Wu-lfk">
                         <size key="itemSize" width="50" height="50"/>
@@ -32,9 +33,28 @@
                         <outlet property="delegate" destination="-1" id="cZZ-c7-SSh"/>
                     </connections>
                 </collectionView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
+                    <rect key="frame" x="0.0" y="472" width="320" height="66"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj7-g8-p3B">
+                    <rect key="frame" x="139" y="484" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="619" y="225"/>
+            <color key="backgroundColor" red="0.45882352941176469" green="0.84705882352941175" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Mj7-g8-p3B" firstAttribute="centerX" secondItem="Zab-nY-3iC" secondAttribute="centerX" id="QFr-34-Ypz"/>
+                <constraint firstItem="Qeq-Sr-NDh" firstAttribute="top" secondItem="eRj-vt-gSf" secondAttribute="top" constant="64" id="cJA-bi-MTz"/>
+                <constraint firstItem="Qeq-Sr-NDh" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="kj4-4t-SLS"/>
+                <constraint firstItem="Zab-nY-3iC" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="tnw-Kw-2QL"/>
+                <constraint firstAttribute="bottom" secondItem="Zab-nY-3iC" secondAttribute="bottom" id="wPr-lP-nD7"/>
+            </constraints>
+            <point key="canvasLocation" x="619" y="133"/>
         </view>
     </objects>
+    <resources>
+        <image name="Illustration-header" width="321" height="51"/>
+    </resources>
 </document>

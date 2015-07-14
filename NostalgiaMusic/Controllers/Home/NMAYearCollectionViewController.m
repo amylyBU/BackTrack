@@ -34,7 +34,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self.scrollBarCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASelectedYearCollectionViewCell class]) bundle:nil]
           forCellWithReuseIdentifier:kNMASelectedYearcollectionViewCellIdentifier];
-    self.view.backgroundColor = [UIColor colorWithRed:133/255 green:222/255 blue:218/255 alpha:1];
     [self getLatestYear];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
@@ -56,7 +55,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     [self.flowLayout setSectionInset:UIEdgeInsetsMake(0, self.scrollBarCollectionView.frame.size.width / 2, 0, self.scrollBarCollectionView.frame.size.width/ 2)];
     self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.scrollBarCollectionView.backgroundColor = [UIColor whiteColor];
     [self.scrollBarCollectionView setCollectionViewLayout:self.flowLayout];
 }
 
@@ -65,6 +63,13 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     for ( int i = 0; i < (self.latestYear - earliestYear + 1); i++ ){
         NSString *yearForCell = [NSString stringWithFormat:@"%li", (long)(earliestYear + i)];
         [self.years addObject:yearForCell];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    for (int i = 0; i < [self.scrollBarCollectionView visibleCells].count; i++) {
+        CGPoint t = CGPointMake(self.scrollBarCollectionView.center.x, self.scrollBarCollectionView.center.y);
+        NSIndexPath *test = [self.scrollBarCollectionView indexPathForItemAtPoint:t];
     }
 }
 
@@ -104,7 +109,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
         return cell;
     } else {
         NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
         cell.year.text = year;
         return cell;
     }

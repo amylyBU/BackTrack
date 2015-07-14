@@ -7,25 +7,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NMASelectedYearCollectionViewCell" id="gTV-IL-0wX" customClass="NMASelectedYearCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="111" height="66"/>
+            <rect key="frame" x="0.0" y="0.0" width="111" height="42"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="111" height="66"/>
+                <rect key="frame" x="0.0" y="0.0" width="111" height="42"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVi-5z-vZF">
-                        <rect key="frame" x="8" y="8" width="95" height="28"/>
-                        <color key="backgroundColor" red="0.98431378602981567" green="0.25490197539329529" blue="0.11764706671237946" alpha="1" colorSpace="deviceRGB"/>
+                        <rect key="frame" x="8" y="8" width="111" height="42"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="hHj-EA-rPy"/>
-                            <constraint firstAttribute="width" constant="111" id="qmL-SC-NHh"/>
+                            <constraint firstAttribute="height" constant="42" id="OHf-Vl-guy"/>
+                            <constraint firstAttribute="width" constant="111" id="WXI-Wl-CbC"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoz-zC-n37">
-                        <rect key="frame" x="39" y="37" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -33,16 +27,14 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="xVi-5z-vZF" secondAttribute="centerX" id="1Nm-sA-aQc"/>
-                <constraint firstItem="qoz-zC-n37" firstAttribute="top" secondItem="xVi-5z-vZF" secondAttribute="bottom" constant="1" id="EHC-5F-0By"/>
-                <constraint firstAttribute="centerY" secondItem="xVi-5z-vZF" secondAttribute="centerY" constant="11" id="OQy-st-gme"/>
-                <constraint firstAttribute="centerX" secondItem="xVi-5z-vZF" secondAttribute="centerX" id="i1K-rq-eYo"/>
+                <constraint firstAttribute="centerX" secondItem="xVi-5z-vZF" secondAttribute="centerX" id="oVb-JS-ZkZ"/>
+                <constraint firstAttribute="centerY" secondItem="xVi-5z-vZF" secondAttribute="centerY" constant="-1" id="pqq-Pb-hFc"/>
             </constraints>
+            <size key="customSize" width="111" height="47"/>
             <connections>
-                <outlet property="dateLabel" destination="qoz-zC-n37" id="eQh-XK-A9q"/>
                 <outlet property="yearLabel" destination="xVi-5z-vZF" id="DeU-Em-gF6"/>
             </connections>
-            <point key="canvasLocation" x="410.5" y="410"/>
+            <point key="canvasLocation" x="410.5" y="400"/>
         </collectionViewCell>
     </objects>
 </document>
