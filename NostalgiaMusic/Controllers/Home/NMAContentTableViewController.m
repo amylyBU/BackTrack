@@ -19,6 +19,8 @@
 #import "NMAAppSettings.h"
 #import "NMANewsStoryTableViewCell.h"
 #import "NMAPlaybackManager.h"
+#import "UIColor+NMAColors.h"
+#import "UIFont+NMAFonts.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -151,12 +153,14 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFacebookActivityCellIdentifier forIndexPath:indexPath];
             }
+            [cell setBackgroundColor:[UIColor NMA_lightGray]];
             [cell layoutIfNeeded];
             return cell;
         }
         case NMASectionTypeNYTimesNews: {
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
+            [cell setBackgroundColor:[UIColor NMA_lightGray]];
             return cell;
         }
         default:
@@ -188,7 +192,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             FBSectionHeaderCell.headerLabel.text = @"Facebook Activities";
             [FBSectionHeaderCell.headerImageView setImage:[UIImage imageNamed:@"facebook-label"]];
             [FBSectionHeaderCell.upperBackgroundView setBackgroundColor:[UIColor whiteColor]];
-            [FBSectionHeaderCell setBackgroundColor:[UIColor lightGrayColor]];
+            [FBSectionHeaderCell setBackgroundColor:[UIColor NMA_lightGray]];
             [FBSectionHeaderCell sizeToFit];
             return FBSectionHeaderCell;
         }
@@ -196,8 +200,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             NMASectionHeader *NewsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             NewsSectionHeaderCell.headerLabel.text = @"News";
             [NewsSectionHeaderCell.headerImageView setImage:[UIImage imageNamed:@"news-label"]];
-            [NewsSectionHeaderCell.upperBackgroundView setBackgroundColor:[UIColor lightGrayColor]];
-            [NewsSectionHeaderCell setBackgroundColor:[UIColor lightGrayColor]];
+            [NewsSectionHeaderCell.upperBackgroundView setBackgroundColor:[UIColor NMA_lightGray]];
+            [NewsSectionHeaderCell setBackgroundColor:[UIColor NMA_lightGray]];
             [NewsSectionHeaderCell sizeToFit];
             return NewsSectionHeaderCell;
         }
