@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
-@property (weak, nonatomic) id <AVAudioPlayerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 - (void)configureCellForSong:(NMASong *)song;

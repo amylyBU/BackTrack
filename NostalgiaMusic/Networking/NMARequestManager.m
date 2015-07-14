@@ -125,6 +125,7 @@
 }
 
 #pragma mark - Facebook Requests
+
 - (void)requestFBActivitiesFromDate:(NSString *)year
                         dayDelegate:(id)dayDelegate
                             success:(void (^)(NSArray *FBActivities))success
@@ -202,6 +203,7 @@
     NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 
     return [gregorianCal dateFromComponents:targetDateComponents];
+}
 
 - (void)getSongFromYear:(NSString *)year
                 success:(void (^)(NMASong *song))success

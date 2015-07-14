@@ -143,7 +143,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
             [cell layoutIfNeeded];
             return cell;
         }
-
         case NMASectionTypeNYTimesNews: {
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
@@ -178,6 +177,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark - NMADayDelegate
+
 - (void)updatedFBActivity {
     [self.tableView reloadData];
 }

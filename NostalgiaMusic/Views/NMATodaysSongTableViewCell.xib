@@ -52,7 +52,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjN-tD-hC8">
-                        <rect key="frame" x="131.5" y="119.5" width="118" height="118"/>
+                        <rect key="frame" x="131" y="119" width="118" height="118"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="WjN-tD-hC8" secondAttribute="height" multiplier="1:1" id="tTQ-f3-5TX"/>
                         </constraints>
@@ -64,7 +64,7 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handle-music" translatesAutoresizingMaskIntoConstraints="NO" id="GyY-Cf-5zV">
-                        <rect key="frame" x="290" y="34" width="107.5" height="144"/>
+                        <rect key="frame" x="290" y="34" width="108" height="144"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="83:144" id="4me-WR-75L"/>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="95:127" id="TMy-Uf-FWG"/>

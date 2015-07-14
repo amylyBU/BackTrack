@@ -57,6 +57,7 @@ static NSString * const kPauseImageName = @"pause-circle-button";
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     }
 }
+
 - (IBAction)iTunesButtonPressed:(UIButton *)sender {
     [[UIApplication sharedApplication] openURL:self.song.trackViewUrl];
 }

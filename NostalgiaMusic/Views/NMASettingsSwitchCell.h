@@ -14,6 +14,7 @@
 @end
 
 @interface NMASettingsSwitchCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *settingsCategoryLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *settingsSwitch;
 @property (weak, nonatomic) id <NMASettingsSwitchCellDelegate> delegate;
