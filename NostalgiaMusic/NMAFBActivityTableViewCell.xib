@@ -105,12 +105,13 @@
                 <outlet property="commentsButton" destination="gqF-ui-9Bj" id="PkT-ta-1V5"/>
                 <outlet property="imageHeightConstraint" destination="enc-gl-jgB" id="ZGl-fo-oQA"/>
                 <outlet property="likesButton" destination="sVC-Cw-gzF" id="Kpk-gP-qIh"/>
+                <outlet property="messageView" destination="6Hu-Bj-SX0" id="f25-VT-AAA"/>
                 <outlet property="postContainerView" destination="6Hu-Bj-SX0" id="inc-vt-91a"/>
                 <outlet property="postImageView" destination="kIy-YX-jjK" id="RSB-Li-NUe"/>
                 <outlet property="postMessage" destination="Y78-Sd-aWd" id="fPt-gi-Zn3"/>
                 <outlet property="shareButton" destination="ta0-eL-YRP" id="h9K-Jc-AKa"/>
                 <outlet property="timeLabel" destination="pyN-Pl-1gA" id="Dmw-Ba-xD0"/>
-                <outlet property="timeView" destination="TNV-oX-VcU" id="aMS-yh-D3b"/>
+                <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="Z89-F6-vQW"/>
             </connections>
             <point key="canvasLocation" x="685" y="529.5"/>
         </tableViewCell>

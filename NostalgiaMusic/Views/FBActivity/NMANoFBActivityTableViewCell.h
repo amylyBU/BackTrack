@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NMANoFBActivityTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *messageView;
 
 @end

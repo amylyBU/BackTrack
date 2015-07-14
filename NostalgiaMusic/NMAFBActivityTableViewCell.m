@@ -30,6 +30,14 @@
     } else {
         self.collapseImageConstraint.priority = 999;
     }
+    
+    //Add a shadow to the bottom of the message view
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.messageView.bounds];
+    self.messageView.layer.masksToBounds = NO;
+    self.messageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    self.messageView.layer.shadowOpacity = 0.5f;
+    self.messageView.layer.shadowPath = shadowPath.CGPath;
 }
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
