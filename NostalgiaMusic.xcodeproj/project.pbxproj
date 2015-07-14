@@ -23,6 +23,8 @@
 		07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFE1B4B12830089D042 /* NMADay.m */; };
 		07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */; };
 		07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */; };
+		07ED93221B54867C004879C0 /* NMAFBLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93211B54867C004879C0 /* NMAFBLike.m */; };
+		07ED93251B548828004879C0 /* NMAFBComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93241B548828004879C0 /* NMAFBComment.m */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE411B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m */; };
 		612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE421B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib */; };
@@ -97,6 +99,10 @@
 		07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAFBActivityTableViewCell.h; sourceTree = "<group>"; };
 		07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAFBActivityTableViewCell.m; sourceTree = "<group>"; };
 		07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAFBActivityTableViewCell.xib; sourceTree = "<group>"; };
+		07ED93201B54867C004879C0 /* NMAFBLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBLike.h; path = Models/FBActivity/NMAFBLike.h; sourceTree = "<group>"; };
+		07ED93211B54867C004879C0 /* NMAFBLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBLike.m; path = Models/FBActivity/NMAFBLike.m; sourceTree = "<group>"; };
+		07ED93231B548828004879C0 /* NMAFBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBComment.h; path = Models/FBActivity/NMAFBComment.h; sourceTree = "<group>"; };
+		07ED93241B548828004879C0 /* NMAFBComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBComment.m; path = Models/FBActivity/NMAFBComment.m; sourceTree = "<group>"; };
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearActivityScrollViewController.h; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 		072A085D1B3975C00068EEF0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07ED931F1B54863E004879C0 /* FBActivity */,
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
 				E50E34881B44461E00F10A5A /* NMASong.h */,
@@ -355,6 +362,17 @@
 				07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */,
 				07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */,
 				07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */,
+			);
+			name = FBActivity;
+			sourceTree = "<group>";
+		};
+		07ED931F1B54863E004879C0 /* FBActivity */ = {
+			isa = PBXGroup;
+			children = (
+				07ED93201B54867C004879C0 /* NMAFBLike.h */,
+				07ED93211B54867C004879C0 /* NMAFBLike.m */,
+				07ED93231B548828004879C0 /* NMAFBComment.h */,
+				07ED93241B548828004879C0 /* NMAFBComment.m */,
 			);
 			name = FBActivity;
 			sourceTree = "<group>";
@@ -586,6 +604,7 @@
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */,
 				E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */,
+				07ED93251B548828004879C0 /* NMAFBComment.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */,
 				E50E348A1B44461E00F10A5A /* NMASong.m in Sources */,
@@ -600,6 +619,7 @@
 				07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */,
 				611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */,
 				615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */,
+				07ED93221B54867C004879C0 /* NMAFBLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

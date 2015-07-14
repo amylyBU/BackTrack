@@ -10,8 +10,8 @@
 @protocol NMADayDelegate;
 
 @interface NMAFBActivity : NSObject
-@property (nonatomic, readonly) int likeCount;
-@property (nonatomic, readonly) int commentCount;
+@property (strong, nonatomic, readonly) NSArray *likes; //of NMAFBLikes
+@property (strong, nonatomic, readonly) NSArray *comments; //of NMAFBComments
 @property (copy, nonatomic) NSString *imagePath;
 @property (copy, nonatomic, readonly) NSString *message;
 @property (copy, nonatomic, readonly) NSString *imageId;

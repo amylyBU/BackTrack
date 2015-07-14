@@ -9,10 +9,17 @@
 #import "NMAFBActivity.h"
 #import "NMARequestManager.h"
 #import "NMADay.h"
+#import "NMAFBLike.h"
+#import "NMAFBComment.h"
+
+typedef NS_ENUM(NSInteger, NMAResponseType) {
+    FBLike,
+    FBComment
+};
 
 @interface NMAFBActivity()
-@property (nonatomic, readwrite) int likeCount;
-@property (nonatomic, readwrite) int commentCount;
+@property (strong, nonatomic, readwrite) NSArray *likes;
+@property (strong, nonatomic, readwrite) NSArray *comments;
 @property (nonatomic, copy, readwrite) NSString *message;
 @property (nonatomic, copy, readwrite) NSString *timeString;
 @property (nonatomic, copy, readwrite) NSString *imageObjectId;
@@ -31,8 +38,8 @@
             _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
             [self formatTimeString:post[@"created_time"]];
             _imagePath = nil;
-            _likeCount = 0;
-            _commentCount = 0;
+            _likes = nil;
+            _comments = nil;
         }
     }
     
@@ -53,12 +60,20 @@
 
 - (void)populateActivityLikes:(id)likesContainer
                   dayDelegate:(id<NMADayDelegate>)dayDelegate {
-    [self populateResponsesWithStart:&_likeCount responseContainer:likesContainer dayDelegate:dayDelegate];
+    NSMutableArray *mutableLikeArray = [NSMutableArray new];
+    [self populateResponsesWithStart:mutableLikeArray
+                   responseContainer:likesContainer
+                        responseType:FBLike
+                         dayDelegate:dayDelegate];
 }
 
 - (void)populateActivityComments:(id)commentsContainer
                      dayDelegate:(id<NMADayDelegate>)dayDelegate {
-    [self populateResponsesWithStart:&_commentCount responseContainer:commentsContainer dayDelegate:dayDelegate];
+    NSMutableArray *mutableCommentArray = [NSMutableArray new];
+    [self populateResponsesWithStart:mutableCommentArray
+                   responseContainer:commentsContainer
+                        responseType:FBComment
+                         dayDelegate:dayDelegate];
 }
 
 #pragma mark - Utility
@@ -76,29 +91,64 @@
 }
 
 ///@discussion responses are likes or comments
-- (void)populateResponsesWithStart:(int *)count
+- (void)populateResponsesWithStart:(NSMutableArray *)mutableResponseArray
                  responseContainer:(id)responseContainer
+                      responseType:(NMAResponseType)responseType
                        dayDelegate:(id<NMADayDelegate>)dayDelegate {
     NSArray *responses = responseContainer[@"data"];
     id paging = responseContainer[@"paging"];
     NSString *nextLink = paging[@"next"];
     
     for(id response in responses) {
-        (*count)++;
+        switch (responseType) {
+            case FBLike: {
+                NSString *likerName = response[@"name"];
+                NMAFBLike *FBLike = [[NMAFBLike alloc] initWithName:likerName];
+                [mutableResponseArray addObject:FBLike];
+                break;
+            }
+            case FBComment: {
+                NSString *commenterName = (response[@"from"])[@"name"];
+                NSString *message = response[@"message"];
+                NSInteger likeCount = [response[@"like_count"] integerValue];
+                if (![message isEqualToString:@""]) {
+                    NMAFBComment *FBComment = [[NMAFBComment alloc] initWithName:commenterName
+                                                                         message:message
+                                                                       likeCount:likeCount];
+                    [mutableResponseArray addObject:FBComment];
+                }
+                break;
+            }
+            default:
+                break;
+        }
     }
     
-    //paginate for more like if we must
+    //paginate for more like if we have more pagest to go
     if(nextLink) {
         [[NMARequestManager sharedManager] requestFBActivityResponses:nextLink
                                                           dayDelegate:dayDelegate
                                                               success:^(id nextResponseContainer) {
-                                                                  [self populateResponsesWithStart:count
+                                                                  [self populateResponsesWithStart:mutableResponseArray
                                                                                   responseContainer:nextResponseContainer
+                                                                                      responseType:responseType
                                                                                        dayDelegate:dayDelegate];
                                                               }
                                                               failure:nil];
     } else {
-        NSLog(@"%i total people (something) this post", *count);
+        switch (responseType) {
+            case FBLike: {
+                self.likes = [mutableResponseArray copy];
+                NSLog(@"%tu total people like this post", self.likes.count);
+            }
+                break;
+            case FBComment: {
+                self.comments = [mutableResponseArray copy];
+                NSLog(@"%tu total people commented on this post", self.comments.count);
+            }
+            default:
+                break;
+        }
         [dayDelegate updatedFBActivity];
     }
 }
