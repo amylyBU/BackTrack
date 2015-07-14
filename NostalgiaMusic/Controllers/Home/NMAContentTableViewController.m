@@ -65,15 +65,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     self.day = [[NMADay alloc] initWithYear:self.year];
     [self.day populateFBActivities:self];
-    [[NMARequestManager sharedManager] getSongFromYear:self.year
-                                               success:^(NMASong *song) {
-                                                   [self.billboardSongs addObject:song];
-
-                                                   [self.tableView reloadData];
-                                               }
-                                               failure:^(NSError *error) {
-                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
-                                               }];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"ddMM"];
@@ -179,7 +170,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - NMADayDelegate
 
 - (void)updatedFBActivity {
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 - (NSString *)tableView:(UITableView *)tableView
@@ -200,6 +191,7 @@ titleForHeaderInSection:(NSInteger)section {
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs removeAllObjects];
+                                                   
                                                    [self.billboardSongs addObject:song];
 
                                                    [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
