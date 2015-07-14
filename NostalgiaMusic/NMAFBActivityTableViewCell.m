@@ -14,6 +14,8 @@
 - (void)configureCellForFBActivity:(NMAFBActivity *)FBActivity {
     self.timeLabel.text = FBActivity.timeString;
     self.postMessage.text = FBActivity.message;
+    self.likesButton.titleLabel.text = [@(FBActivity.likes.count) stringValue];
+    self.commentsButton.titleLabel.text = [@(FBActivity.comments.count) stringValue];
     [self.postMessage sizeToFit];
     self.collapseImageConstraint.priority = 1;
     
