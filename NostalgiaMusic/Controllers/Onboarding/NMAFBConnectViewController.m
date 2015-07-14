@@ -9,6 +9,7 @@
 #import "NMAFBConnectViewController.h"
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
+#import "NMAAppSettings.h"
 
 @implementation NMAFBConnectViewController
 
@@ -34,41 +35,32 @@
     [self.notNowButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.notNowButton.titleLabel setFont:[UIFont NMA_proximaNovaLightWithSize:15.0]];
 
-    [self.loginButton setBackgroundImage:nil forState:UIControlStateNormal];
-    self.loginButton.backgroundColor = [UIColor whiteColor];
+    self.facebookBackgroundView.backgroundColor = [UIColor whiteColor];
+    [self.facebookSignInButton setTitleColor:[UIColor NMA_facebookBlue] forState:UIControlStateNormal];
+    [self.facebookSignInButton.titleLabel setFont:[UIFont NMA_proximaNovaSemiBoldWithSize:18.0f]];
+}
 
-    for (id obj in self.loginButton.subviews) {
-        [obj removeFromSuperview];
-    }
-
-    [self.loginButton addSubview:self.facebookSignInLabel];
-    [self.loginButton addSubview:self.facebookIcon];
-    self.facebookSignInLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:18.0f];
-    self.facebookSignInLabel.textColor = [UIColor NMA_facebookBlue];
+- (IBAction)signInButtonPressed:(UIButton *)sender {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            // TODO: handle error
+        } else if (result.isCancelled) {
+            // TODO: handle cancellations
+        } else {
+            // TODO: check if specific permissions are missing
+            if ([result.grantedPermissions containsObject:@"email"]) {
+                [[NMAAppSettings sharedSettings] setAccessToken:result.token];
+            }
+        }
+        [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+        [self.delegate userDidFinishOnboarding];
+    }];
+    //TODO: notifications for profile changes, access token changes/expirations etc.
 }
 
 - (IBAction)notNowButton:(UIButton *)sender {
     [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
-    [self.delegate userDidFinishOnboarding];
-}
-
-#pragma mark - FBSDKLoginButtonDelegate
-
-- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
-    if (error) {
-        //TODO: handle error
-        return;
-    } else if (result.isCancelled) {
-        //TODO: handle cancellation
-    } else {
-        [[NMAAppSettings sharedSettings] setAccessToken:result.token];
-    }
-    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
-    [self.delegate userDidFinishOnboarding];
-}
-
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [[NMAAppSettings sharedSettings] setAccessToken:nil];
     [self.delegate userDidFinishOnboarding];
 }
 

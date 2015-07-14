@@ -8,8 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAFBConnectViewController">
             <connections>
                 <outlet property="appDescriptionLabel" destination="jJa-xw-t5i" id="9dP-I0-u7r"/>
+                <outlet property="facebookBackgroundView" destination="BuK-Aa-zec" id="AV6-Fj-B1m"/>
                 <outlet property="facebookDisclaimerLabel" destination="ysj-ah-1ob" id="vPM-Oj-O2M"/>
-                <outlet property="loginButton" destination="BuK-Aa-zec" id="gHb-Gi-HaY"/>
+                <outlet property="facebookLogoImageView" destination="ZOz-fJ-JFA" id="0nR-9O-xlY"/>
+                <outlet property="facebookSignInButton" destination="obG-fu-Xnh" id="KbP-4i-ixT"/>
                 <outlet property="notNowButton" destination="lSR-Zk-dH9" id="rsV-el-cdG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="aID-56-iFE"/>
             </connections>
@@ -46,11 +48,37 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuK-Aa-zec" customClass="FBSDKLoginButton">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuK-Aa-zec">
                     <rect key="frame" x="0.0" y="474" width="600" height="55"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obG-fu-Xnh">
+                            <rect key="frame" x="220" y="17" width="178" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="Rfc-NE-0Q0"/>
+                                <constraint firstAttribute="width" constant="178" id="sIc-Tg-zow"/>
+                            </constraints>
+                            <state key="normal" title="Sign in with Facebook">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="signInButtonPressed:" destination="-1" eventType="touchUpInside" id="hWO-Kf-mYV"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-fJ-JFA">
+                            <rect key="frame" x="194" y="19" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="1WJ-Ka-hWF"/>
+                                <constraint firstAttribute="width" constant="20" id="ybY-ZV-Bye"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.705648626" green="0.43148072700000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="centerY" secondItem="obG-fu-Xnh" secondAttribute="centerY" constant="-0.5" id="C6P-bo-kBB"/>
                         <constraint firstAttribute="height" constant="55" id="Cco-hU-L7L"/>
+                        <constraint firstAttribute="centerX" secondItem="obG-fu-Xnh" secondAttribute="centerX" constant="-9" id="ZX4-1z-rIp"/>
+                        <constraint firstItem="obG-fu-Xnh" firstAttribute="leading" secondItem="ZOz-fJ-JFA" secondAttribute="trailing" constant="6" id="qIX-1u-bKe"/>
+                        <constraint firstItem="ZOz-fJ-JFA" firstAttribute="centerY" secondItem="obG-fu-Xnh" secondAttribute="centerY" constant="1" id="yjJ-qD-w7Y"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-house" translatesAutoresizingMaskIntoConstraints="NO" id="P0X-18-tGr">
@@ -100,6 +128,7 @@ music, Facebook and news</string>
         </view>
     </objects>
     <resources>
+        <image name="facebook icon" width="20" height="20"/>
         <image name="login-house" width="117" height="80"/>
         <image name="login-mountain-bg" width="320" height="449"/>
     </resources>

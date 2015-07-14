@@ -25,7 +25,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeNYTimesNews
 };
 
-static const NSInteger kBillboardSongHeightForRow = 380;
+static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
@@ -128,7 +128,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
-            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
+           NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             return cell;
         }

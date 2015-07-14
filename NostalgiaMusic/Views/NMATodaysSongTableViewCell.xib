@@ -117,12 +117,6 @@
             </connections>
             <point key="canvasLocation" x="292" y="424.5"/>
         </tableViewCell>
-        <view contentMode="scaleToFill" id="tWI-e7-28x">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="644" y="174"/>
-        </view>
     </objects>
     <resources>
         <image name="handle-music" width="95" height="127"/>
