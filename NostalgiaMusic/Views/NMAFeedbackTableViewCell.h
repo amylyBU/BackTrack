@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NMAFeedbackTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
 
 @end

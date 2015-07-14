@@ -13,9 +13,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
-@property (weak, nonatomic) IBOutlet UIImageView *albumImage;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 - (void)configureCellForSong:(NMASong *)song;
+- (void)changePlayButtonImage;
 
 @end

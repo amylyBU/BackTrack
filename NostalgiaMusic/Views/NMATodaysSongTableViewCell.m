@@ -8,38 +8,63 @@
 
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
-#import <AVFoundation/AVFoundation.h>
 #import "NMAAppSettings.h"
+#import "NMAPlaybackManager.h"
+#import "UIFont+NMAFonts.h"
+#import "UIColor+NMAColors.h"
+#import <AVFoundation/AVFoundation.h>
+
+static NSString * const kPlayImageName = @"play-circle-button";
+static NSString * const kPauseImageName = @"pause-circle-button";
+
+@interface NMATodaysSongTableViewCell ()
+
+@property (strong, nonatomic) NMASong *song;
+
+@property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
+
+@end
 
 @implementation NMATodaysSongTableViewCell
 
-- (void)configureCellForSong:(NMASong *)song {
-    self.songTitleLabel.text = song.title;
-    self.artistLabel.text = song.artistAsAppearsOnLabel;
-    
-    NSURL *albumImageUrl = [NSURL URLWithString:song.albumImageUrlsArray[0]];
-    self.albumImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:albumImageUrl]];;
-    
-    self.albumImage.layer.cornerRadius = CGRectGetHeight(self.albumImage.frame) /2;
-    self.albumImage.layer.masksToBounds = YES;
-}
+#pragma mark - Public Methods
 
-- (void)setUpMusicPlayerWithUrl:(NSURL *)previewUrl { //TODO: this method is not done / not called anywhere. should be done within configureSongCell method.
-    
-    NSError *error = [[NSError alloc] init];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:previewUrl error:&error];
-    player.numberOfLoops = 1; //TODO: configure autoplay settings
-    
-    //TODO: initialize player.delegate when the home view controller is initialized
-    [player prepareToPlay];
-    
-    if (player) {
-        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-            [player play];
-        }
-    } else {
-        NSLog(@"%@",[error description]); //TODO: handle error
+- (void)configureCellForSong:(NMASong *)song {
+    [self layoutIfNeeded];
+    self.song = song;
+    self.songTitleLabel.text = song.title;
+    self.songTitleLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:24.0f];
+    self.songTitleLabel.textColor = [UIColor NMA_almostBlack];
+    self.artistLabel.text = song.artistAsAppearsOnLabel;
+    self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
+    self.artistLabel.textColor = [UIColor NMA_darkGray];
+    self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
+    self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
+    self.albumImageView.layer.masksToBounds = YES;
+    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     }
 }
+
+#pragma mark - Private Methods
+
+- (IBAction)playButtonPressed:(UIButton *)sender {
+    if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
+        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
+        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
+    } else {
+        [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
+        [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)iTunesButtonPressed:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL:self.song.trackViewUrl];
+}
+
+- (void)changePlayButtonImage {
+    [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
+}
+
 
 @end

@@ -40,7 +40,6 @@
 		615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */; };
 		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
 		E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */; };
-		E508FB1D1B41C1B80040AEF9 /* NMAFBConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E508FB1B1B41C1B80040AEF9 /* NMAFBConnectViewController.xib */; };
 		E50E347E1B43068100F10A5A /* NMADatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E347D1B43068100F10A5A /* NMADatabaseManager.m */; };
 		E50E34801B431D1000F10A5A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E50E347F1B431D1000F10A5A /* libsqlite3.dylib */; };
 		E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */; };
@@ -49,6 +48,14 @@
 		E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E348C1B44584E00F10A5A /* NMARequestManager.m */; };
 		E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */; };
 		E5141B651B4899D3002BC232 /* NMATodaysSongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */; };
+		E515FDCE1B4D7CB3000E47E3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */; };
+		E515FDD61B4DAD13000E47E3 /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */; };
+		E515FDD71B4DAD13000E47E3 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */; };
+		E515FDD81B4DAD13000E47E3 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */; };
+		E515FDDD1B4DB126000E47E3 /* UIFont+NMAFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */; };
+		E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */; };
+		E515FDE71B4F0C9F000E47E3 /* NMAPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */; };
+		E515FDE91B4F436C000E47E3 /* NMAFBConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E515FDE81B4F436C000E47E3 /* NMAFBConnectViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,7 +128,6 @@
 		9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E508FB191B41C1B80040AEF9 /* NMAFBConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBConnectViewController.h; path = Controllers/Onboarding/NMAFBConnectViewController.h; sourceTree = "<group>"; };
 		E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBConnectViewController.m; path = Controllers/Onboarding/NMAFBConnectViewController.m; sourceTree = "<group>"; };
-		E508FB1B1B41C1B80040AEF9 /* NMAFBConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAFBConnectViewController.xib; path = Controllers/Onboarding/NMAFBConnectViewController.xib; sourceTree = "<group>"; };
 		E508FB1E1B41DDC90040AEF9 /* NMAOnboardingCompletionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAOnboardingCompletionDelegate.h; path = Controllers/Onboarding/NMAOnboardingCompletionDelegate.h; sourceTree = "<group>"; };
 		E50E347C1B43068100F10A5A /* NMADatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMADatabaseManager.h; path = Models/NMADatabaseManager.h; sourceTree = "<group>"; };
 		E50E347D1B43068100F10A5A /* NMADatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMADatabaseManager.m; path = Models/NMADatabaseManager.m; sourceTree = "<group>"; };
@@ -134,6 +140,17 @@
 		E5141B611B4899D3002BC232 /* NMATodaysSongTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMATodaysSongTableViewCell.h; path = Views/NMATodaysSongTableViewCell.h; sourceTree = "<group>"; };
 		E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMATodaysSongTableViewCell.m; path = Views/NMATodaysSongTableViewCell.m; sourceTree = "<group>"; };
 		E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMATodaysSongTableViewCell.xib; path = Views/NMATodaysSongTableViewCell.xib; sourceTree = "<group>"; };
+		E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.otf"; sourceTree = "<group>"; };
+		E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
+		E515FDDB1B4DB126000E47E3 /* UIFont+NMAFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+NMAFonts.h"; path = "Proxima Nova/UIFont+NMAFonts.h"; sourceTree = "<group>"; };
+		E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+NMAFonts.m"; path = "Proxima Nova/UIFont+NMAFonts.m"; sourceTree = "<group>"; };
+		E515FDDE1B4DB7B0000E47E3 /* UIColor+NMAColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+NMAColors.h"; path = "Colors/UIColor+NMAColors.h"; sourceTree = "<group>"; };
+		E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+NMAColors.m"; path = "Colors/UIColor+NMAColors.m"; sourceTree = "<group>"; };
+		E515FDE51B4F0C9F000E47E3 /* NMAPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAPlaybackManager.h; path = Models/NMAPlaybackManager.h; sourceTree = "<group>"; };
+		E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAPlaybackManager.m; path = Models/NMAPlaybackManager.m; sourceTree = "<group>"; };
+		E515FDE81B4F436C000E47E3 /* NMAFBConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAFBConnectViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E515FDCE1B4D7CB3000E47E3 /* AVFoundation.framework in Frameworks */,
 				E50E34801B431D1000F10A5A /* libsqlite3.dylib in Frameworks */,
 				7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */,
 			);
@@ -163,14 +181,16 @@
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
 				E50E34881B44461E00F10A5A /* NMASong.h */,
 				E50E34891B44461E00F10A5A /* NMASong.m */,
-				E50E347C1B43068100F10A5A /* NMADatabaseManager.h */,
-				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
 				612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */,
 				612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */,
 				07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */,
 				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
 				07ECCBFD1B4B12830089D042 /* NMADay.h */,
 				07ECCBFE1B4B12830089D042 /* NMADay.m */,
+				E50E347C1B43068100F10A5A /* NMADatabaseManager.h */,
+				E50E347D1B43068100F10A5A /* NMADatabaseManager.m */,
+				E515FDE51B4F0C9F000E47E3 /* NMAPlaybackManager.h */,
+				E515FDE61B4F0C9F000E47E3 /* NMAPlaybackManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -188,6 +208,7 @@
 				E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */,
 				E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */,
 				07ECCC021B4C08920089D042 /* FBActivity */,
+				E515FDE41B4EE621000E47E3 /* NMATodaysSongTableViewCellDelegate.h */,
 				615911591B3D850A006B6779 /* Home */,
 			);
 			name = Views;
@@ -206,6 +227,8 @@
 		072A08601B3975D40068EEF0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				E515FDDA1B4DAD41000E47E3 /* Colors */,
+				E515FDCF1B4DAD13000E47E3 /* Fonts */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -222,18 +245,18 @@
 		072A08621B3976320068EEF0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */,
-				611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */,
-				611F6A4C1B42E18500091809 /* NMAYearActivityScrollDelegate.h */,
 				072A08631B3976660068EEF0 /* NMAHomeViewController.h */,
 				072A08641B3976660068EEF0 /* NMAHomeViewController.m */,
 				072A08651B3976660068EEF0 /* NMAHomeViewController.xib */,
-				6159114D1B3C89B3006B6779 /* NMAContentTableViewController.h */,
-				6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */,
-				6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */,
 				615911481B3C4B6B006B6779 /* NMAYearCollectionViewController.h */,
 				615911491B3C4B6B006B6779 /* NMAYearCollectionViewController.m */,
 				6159114A1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib */,
+				611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */,
+				611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */,
+				611F6A4C1B42E18500091809 /* NMAYearActivityScrollDelegate.h */,
+				6159114D1B3C89B3006B6779 /* NMAContentTableViewController.h */,
+				6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */,
+				6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -307,7 +330,7 @@
 			children = (
 				E508FB191B41C1B80040AEF9 /* NMAFBConnectViewController.h */,
 				E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */,
-				E508FB1B1B41C1B80040AEF9 /* NMAFBConnectViewController.xib */,
+				E515FDE81B4F436C000E47E3 /* NMAFBConnectViewController.xib */,
 				E508FB1E1B41DDC90040AEF9 /* NMAOnboardingCompletionDelegate.h */,
 			);
 			name = Onboarding;
@@ -339,6 +362,7 @@
 		401998C391C3064AD667AEC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */,
 				E50E347F1B431D1000F10A5A /* libsqlite3.dylib */,
 				486067421913674E7836A8E0 /* libPods.a */,
 			);
@@ -368,6 +392,35 @@
 				34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E515FDCF1B4DAD13000E47E3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E515FDD01B4DAD13000E47E3 /* Proxima Nova */,
+				E515FDDB1B4DB126000E47E3 /* UIFont+NMAFonts.h */,
+				E515FDDC1B4DB126000E47E3 /* UIFont+NMAFonts.m */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E515FDD01B4DAD13000E47E3 /* Proxima Nova */ = {
+			isa = PBXGroup;
+			children = (
+				E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */,
+				E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */,
+				E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */,
+			);
+			path = "Proxima Nova";
+			sourceTree = "<group>";
+		};
+		E515FDDA1B4DAD41000E47E3 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				E515FDDE1B4DB7B0000E47E3 /* UIColor+NMAColors.h */,
+				E515FDDF1B4DB7B0000E47E3 /* UIColor+NMAColors.m */,
+			);
+			name = Colors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,18 +507,21 @@
 			files = (
 				07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */,
 				E50E34861B43331900F10A5A /* tracks.db in Resources */,
+				E515FDD71B4DAD13000E47E3 /* ProximaNova-Regular.otf in Resources */,
 				E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */,
 				61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */,
 				612CDE4E1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib in Resources */,
 				612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */,
+				E515FDD61B4DAD13000E47E3 /* ProximaNova-Light.otf in Resources */,
 				072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */,
 				6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */,
+				E515FDD81B4DAD13000E47E3 /* ProximaNova-Semibold.otf in Resources */,
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
+				E515FDE91B4F436C000E47E3 /* NMAFBConnectViewController.xib in Resources */,
 				E5141B651B4899D3002BC232 /* NMATodaysSongTableViewCell.xib in Resources */,
 				07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */,
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
-				E508FB1D1B41C1B80040AEF9 /* NMAFBConnectViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 				614DB1341B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib in Resources */,
 			);
@@ -526,6 +582,7 @@
 				612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */,
 				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
 				07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */,
+				E515FDDD1B4DB126000E47E3 /* UIFont+NMAFonts.m in Sources */,
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */,
 				E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */,
@@ -536,7 +593,9 @@
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
 				07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
+				E515FDE71B4F0C9F000E47E3 /* NMAPlaybackManager.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
+				E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 				07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */,
 				611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */,

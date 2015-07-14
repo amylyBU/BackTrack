@@ -17,6 +17,7 @@
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
 #import "NMANewsStoryTableViewCell.h"
+#import "NMAPlaybackManager.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -24,7 +25,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeNYTimesNews
 };
 
-static const NSInteger kBillboardSongHeightForRow = 380;
+static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
@@ -46,7 +47,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAFacebookActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -54,7 +55,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFacebookActivityCellIdentifier];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
 
@@ -67,19 +68,40 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs addObject:song];
-                                                   
+
                                                    [self.tableView reloadData];
                                                }
                                                failure:^(NSError *error) {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"ddMM"];
+    NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
+
+    NMARequestManager *manager = [[NMARequestManager alloc] init];
+    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
+                          success:^(NMANewsStory *story){
+                              [self.NYTimesNews addObject:story];
+                              [self.tableView reloadData];
+                          }
+                          failure:^(NSError *error) {
+                          }];
+
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[NMAPlaybackManager sharedAudioPlayer].audioPlayerItem];
 }
 
+- (void)audioDidFinishPlaying:(NSNotification *)notification {
+    [(NMATodaysSongTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] changePlayButtonImage];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -106,7 +128,7 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
-            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
+           NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             return cell;
         }
@@ -121,7 +143,6 @@ static NSString * const kNMANoFacebookActivityCellIdentifier = @"NMANoFacebookCe
             [cell layoutIfNeeded];
             return cell;
         }
-
         case NMASectionTypeNYTimesNews: {
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
@@ -156,6 +177,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark - NMADayDelegate
+
 - (void)updatedFBActivity {
     [self.tableView reloadData];
 }
@@ -163,8 +185,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case NMASectionTypeBillboardSong:
-            return @"Top 100 Billboard Song"; //TODO: Remove this title, it is not in the design.
         case NMASectionTypeFacebookActivity:
             return @"Facebook Activities";
         case NMASectionTypeNYTimesNews:
@@ -172,6 +192,25 @@ titleForHeaderInSection:(NSInteger)section {
         default:
             return @"";
     }
+}
+
+#pragma mark - Public Methods
+
+- (void)setUpPlayerForTableCell {
+    [[NMARequestManager sharedManager] getSongFromYear:self.year
+                                               success:^(NMASong *song) {
+                                                   [self.billboardSongs removeAllObjects];
+                                                   [self.billboardSongs addObject:song];
+
+                                                   [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
+                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                                                       [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
+                                                   }
+                                                   [self.tableView reloadData];
+                                               }
+                                               failure:^(NSError *error) {
+                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
+                                               }];
 }
 
 @end

@@ -19,7 +19,7 @@
 - (void)setAccessToken:(FBSDKAccessToken *)token;
 - (NSString *)accessTokenString;
 - (BOOL)userIsLoggedIn;
-- (BOOL)userDidAutoplay; //TODO: must have set autoplay function in the Settings VC.
+- (BOOL)userDidAutoplay;
 - (void)setAutoplaySettingToOff;
 - (void)setAutoplaySettingToOn;
 
