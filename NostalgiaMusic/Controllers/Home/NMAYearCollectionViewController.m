@@ -76,13 +76,10 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"SCROLL");
     NSArray *visible = [self.scrollBarCollectionView visibleCells];
     for (NMAYearCollectionViewCell *cell in visible) {
         CGRect cellRect = cell.frame;
-         NSLog(@"cell x - %f", cellRect.origin.x);
         CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        NSLog(@"x - %f", cellFrameInView.origin.x);
         if ( cellFrameInView.origin.x > 70 && cellFrameInView.origin.x < 180) {
             cell.year.backgroundColor = [UIColor whiteColor];
             [cell.year.layer masksToBounds];
@@ -176,7 +173,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)setYear:(NSString *)year {
     _year = year;
-   // [self.scrollBarCollectionView reloadData];
     [self positionYear];
 }
 @end
