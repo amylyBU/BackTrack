@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,37 +14,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTK-a6-ILP">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTK-a6-ILP" userLabel="top color view">
                         <rect key="frame" x="0.0" y="0.0" width="321" height="47"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.84705882349999995" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-label" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-Gp-7WD">
                         <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="lGe-Gp-7WD" secondAttribute="height" multiplier="321:62" id="4DT-9h-nE9"/>
-                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
                         <rect key="frame" x="74" y="18" width="239" height="29"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="239" id="SCM-RO-if0"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="centerX" secondItem="hTK-a6-ILP" secondAttribute="centerX" id="0Dr-9z-iO2"/>
-                    <constraint firstAttribute="trailing" secondItem="lGe-Gp-7WD" secondAttribute="trailing" id="76a-k7-2DL"/>
-                    <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="7h2-vb-Rhh"/>
-                    <constraint firstItem="hTK-a6-ILP" firstAttribute="bottom" secondItem="XfO-5y-ZwR" secondAttribute="bottom" id="AP5-gd-o3M"/>
-                    <constraint firstItem="hTK-a6-ILP" firstAttribute="width" secondItem="lGe-Gp-7WD" secondAttribute="width" id="DiZ-er-wsv"/>
-                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KL2-tS-3ps"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="lGe-Gp-7WD" secondAttribute="bottom" constant="-8.5" id="jXk-rh-YNc"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="top" secondItem="lGe-Gp-7WD" secondAttribute="bottom" constant="-44" id="kUo-PK-w4g"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="66" id="lHB-S7-Ope"/>
-                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zPa-rm-1hb"/>
+                    <constraint firstAttribute="trailing" secondItem="lGe-Gp-7WD" secondAttribute="trailing" id="3cM-gW-yUS"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
+                    <constraint firstAttribute="bottom" secondItem="lGe-Gp-7WD" secondAttribute="bottom" id="8WE-1S-QxS"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="66" id="8tP-Rm-WQ6"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D4S-Tm-UYH"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="XfO-5y-ZwR" secondAttribute="bottom" constant="7" id="XFy-pt-tGr"/>
+                    <constraint firstItem="hTK-a6-ILP" firstAttribute="bottom" secondItem="XfO-5y-ZwR" secondAttribute="bottom" id="hau-OH-Uec"/>
+                    <constraint firstAttribute="trailing" secondItem="hTK-a6-ILP" secondAttribute="trailing" id="mdG-9z-Kjc"/>
+                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mhG-6B-Ikh"/>
+                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yra-2h-ILD"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
