@@ -19,6 +19,8 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 @interface NMAYearCollectionViewController () <UIScrollViewDelegate>
 @property (strong, nonatomic) NSMutableArray *years;
 @property (nonatomic) NSInteger latestYear;
+@property (weak, nonatomic) IBOutlet UIView *whiteYearBackgroundSquare;
+
 
 @end
 
@@ -26,13 +28,15 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollBarCollectionView.delegate = self;
-    self.scrollBarCollectionView.dataSource = self;
     self.scrollBarCollectionView.clipsToBounds = YES;
     [self.scrollBarCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
 forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self.scrollBarCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASelectedYearCollectionViewCell class]) bundle:nil]
           forCellWithReuseIdentifier:kNMASelectedYearcollectionViewCellIdentifier];
+    self.whiteYearBackgroundSquare.backgroundColor = [UIColor whiteColor];
+    [self.whiteYearBackgroundSquare.layer masksToBounds];
+    self.whiteYearBackgroundSquare.layer.cornerRadius = 18;
+    self.whiteYearBackgroundSquare.clipsToBounds = YES;
     [self getLatestYear];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
@@ -65,33 +69,76 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     }
 }
 
-
-
 #pragma mark UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView
   didEndDisplayingCell:(UICollectionViewCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [UIColor clearColor];
+    //cell.backgroundColor = [UIColor clearColor];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSArray *visible = [self.scrollBarCollectionView visibleCells];
     for (NMAYearCollectionViewCell *cell in visible) {
         CGRect cellRect = cell.frame;
+        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
         CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        if ( cellFrameInView.origin.x > 70 && cellFrameInView.origin.x < 180) {
-            cell.year.backgroundColor = [UIColor whiteColor];
-            [cell.year.layer masksToBounds];
-            cell.year.layer.cornerRadius = 20;
-            cell.year.clipsToBounds = YES;
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
+        //NSLog(@"cell origin - %@", [NSValue valueWithCGPoint:cellOrigin]);
+        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
             [cell.year setFont:[UIFont systemFontOfSize:30]];
+            NSLog(@"cell origin - %@", [NSValue valueWithCGPoint:cellOrigin]);
         } else {
-            cell.year.backgroundColor = [UIColor clearColor];
-             [cell.year setFont:[UIFont systemFontOfSize:17]];
+            [cell.year setFont:[UIFont systemFontOfSize:17]];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSArray *visible = [self.scrollBarCollectionView visibleCells];
+    for (NMAYearCollectionViewCell *cell in visible) {
+        CGRect cellRect = cell.frame;
+        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
+        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
+        
+        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
+            CGRect whiteBoxFrameToScroll = [self.view convertRect:whiteSquareRect toView:self.scrollBarCollectionView];
+            CGPoint offsetPoint = CGPointMake(whiteBoxFrameToScroll.origin.x, 0);
+            [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        } else {
+            [cell.year setFont:[UIFont systemFontOfSize:17]];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    NSArray *visible = [self.scrollBarCollectionView visibleCells];
+    for (NMAYearCollectionViewCell *cell in visible) {
+        CGRect cellRect = cell.frame;
+        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
+        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
+        
+        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
+            CGRect whiteBoxFrameToScroll = [self.view convertRect:whiteSquareRect toView:self.scrollBarCollectionView];
+            CGPoint offsetPoint = CGPointMake(whiteBoxFrameToScroll.origin.x, 0);
+            [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        } else {
+            [cell.year setFont:[UIFont systemFontOfSize:17]];
         }
     }
     
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, self.scrollBarCollectionView.frame.size.width/3, 0,self.scrollBarCollectionView.frame.size.width/3 );
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -104,7 +151,9 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(111, 42);
+    int width = self.view.frame.size.width;
+    int width2 = width/3;
+    return CGSizeMake(width2, 42);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,12 +161,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
         NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
         cell.year.text = year;
-        [cell.year.layer masksToBounds];
-        cell.year.layer.cornerRadius = 20;
-        cell.year.clipsToBounds = YES;
-        cell.year.backgroundColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor clearColor];
-         [cell.year setFont:[UIFont systemFontOfSize:30]];
+        [cell.year setFont:[UIFont systemFontOfSize:30]];
        
         return cell;
     } else {

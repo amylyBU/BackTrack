@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
 BOOL isEarliestYearVisble;
 BOOL isMostRecentYearVisible;
 
-@interface NMAYearActivityScrollViewController ()
+@interface NMAYearActivityScrollViewController () 
 
 @property (strong, nonatomic) NMAContentTableViewController *leftTableViewController;
 @property (strong, nonatomic) NMAContentTableViewController *middleTableViewController;
