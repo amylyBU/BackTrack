@@ -13,5 +13,6 @@
 /* Home */
 + (UIImage *)NMA_facebookLabel;
 + (UIImage *)NMA_newsLabel;
++ (UIImage *)NMA_settingsGear;
 
 @end

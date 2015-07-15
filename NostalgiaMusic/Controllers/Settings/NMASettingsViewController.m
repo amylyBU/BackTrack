@@ -52,10 +52,6 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 - (void)configureUI {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"Settings";
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor NMA_turquoise];
-    self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                                     NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
     self.staticTableView.separatorColor = [UIColor NMA_turquoise];
     self.view.backgroundColor = [UIColor NMA_backgroundGray];
 }

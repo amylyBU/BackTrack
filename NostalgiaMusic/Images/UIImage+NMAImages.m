@@ -19,4 +19,8 @@
     return [UIImage imageNamed:@"news-label"];
 }
 
++ (UIImage *)NMA_settingsGear {
+    return [UIImage imageNamed:@"setting-icon.png"];
+}
+
 @end
