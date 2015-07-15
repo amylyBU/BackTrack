@@ -13,6 +13,7 @@
 @implementation NMANoFBActivityTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_tealGreen];
 }

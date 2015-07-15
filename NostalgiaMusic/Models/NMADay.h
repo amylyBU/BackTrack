@@ -7,17 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NMAFBActivity.h"
+
 @class NMASong;
 
 //Delegate protocol
 @protocol NMADayDelegate
-- (void)updatedFBActivity;
+- (void)allFbActivityUpdate;
+- (void)fbActivityDidUpdate:(NMAFBActivity *)activity;
 @end
 
 @interface NMADay : NSObject
+
 @property (strong, nonatomic, readonly) NMASong *song;
 @property (strong, nonatomic, readonly) NSString *year;
-@property (strong, nonatomic, readonly) NSArray *FBActivities;
+@property (strong, nonatomic, readonly) NSArray *fbActivities;
 
 - (instancetype)initWithYear:(NSString *)year;
 - (void)populateFBActivities:(id<NMADayDelegate>)dayDelegate;

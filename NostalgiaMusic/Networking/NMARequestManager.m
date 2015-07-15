@@ -127,7 +127,7 @@
 #pragma mark - Facebook Requests
 
 - (void)requestFBActivitiesFromDate:(NSString *)year
-                        dayDelegate:(id)dayDelegate
+                        dayDelegate:(id<NMADayDelegate>)dayDelegate
                             success:(void (^)(NSArray *FBActivities))success
                             failure:(void (^)(NSError *error))failure {
     //Facebook wants its dates in UTC, so make sure we set local boundaries...
@@ -153,17 +153,17 @@
     NSMutableArray *mutableFBActivities = [[NSMutableArray alloc] init];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             NSArray *posts = result[@"data"];
-            if(posts) {
-                for(id post in posts) {
+            if (posts) {
+                for (NSDictionary *post in posts) {
                     NSString *type = post[@"type"];
-                    if([type isEqual:@"status"] || [type isEqual:@"photo"]) {
-                        NMAFBActivity *FBActivity = [[NMAFBActivity alloc] initWithPost:post];
-                        [FBActivity populateActivityImagePath:dayDelegate];
-                        id likesContainer = post[@"likes"];
-                        [FBActivity populateActivityLikes:likesContainer dayDelegate:dayDelegate];
-                        id commentsContainer = post[@"comments"];
-                        [FBActivity populateActivityComments:commentsContainer dayDelegate:dayDelegate];
-                        [mutableFBActivities addObject:FBActivity];
+                    if ([type isEqual:@"status"] || [type isEqual:@"photo"]) {
+                        NMAFBActivity *fbActivity = [[NMAFBActivity alloc] initWithPost:post];
+                        [fbActivity populateActivityImagePath:dayDelegate];
+                        NSDictionary *likesContainer = post[@"likes"];
+                        [fbActivity populateActivityLikes:likesContainer dayDelegate:dayDelegate];
+                        NSDictionary *commentsContainer = post[@"comments"];
+                        [fbActivity populateActivityComments:commentsContainer dayDelegate:dayDelegate];
+                        [mutableFBActivities addObject:fbActivity];
                     }
                 }
                 success([mutableFBActivities copy]);
@@ -181,7 +181,7 @@
 
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         NSArray *imageVersions = [result objectForKey:@"images"];
-        if(imageVersions) {
+        if (imageVersions) {
             NSString *imagePath = [imageVersions[0] objectForKey:@"source"];
             success(imagePath);
         }
@@ -190,7 +190,7 @@
 
 - (void)requestFBActivityResponses:(NSString *)nextLink
                        dayDelegate:(id<NMADayDelegate>)dayDelegate
-                           success:(void (^)(id nextLikesContainer))success
+                           success:(void (^)(NSDictionary *nextLikesContainer))success
                            failure:(void (^)(NSError *error))failure {
     //https://graph.facebook.com/endpoint
     NSString *startPoint = @"https://graph.facebook.com"; //TODO: this is not a good way to do this
@@ -200,7 +200,7 @@
                                                                    HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if(result[@"data"] && result[@"paging"]) {
+        if (result[@"data"] && result[@"paging"]) {
             success(result);
         }
     }];

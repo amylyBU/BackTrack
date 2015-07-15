@@ -8,14 +8,13 @@
 
 #import "NMADay.h"
 #import "NMASong.h"
-#import "NMAFBActivity.h"
 #import "FBSDKGraphRequest.h"
 #import "NMARequestManager.h"
 
 @interface NMADay()
 @property (strong, nonatomic, readwrite) NSString *year;
 @property (strong, nonatomic, readwrite) NMASong *song;
-@property (strong, nonatomic, readwrite) NSArray *FBActivities;
+@property (strong, nonatomic, readwrite) NSArray *fbActivities;
 //TODO: add news property
 @end
 
@@ -39,8 +38,8 @@
     [[NMARequestManager sharedManager] requestFBActivitiesFromDate:self.year
                                                        dayDelegate:dayDelegate
                                                            success:^(NSArray *FBActivities) {
-                                                               self.FBActivities = FBActivities;
-                                                               [dayDelegate updatedFBActivity];
+                                                               self.fbActivities = FBActivities;
+                                                               [dayDelegate allFbActivityUpdate];
                                                            }
                                                            failure:nil];
 }

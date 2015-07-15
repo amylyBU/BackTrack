@@ -39,7 +39,7 @@
 
 - (void)requestFBActivityResponses:(NSString *)nextPage
                        dayDelegate:(id<NMADayDelegate>)dayDelegate
-                           success:(void (^)(id nextResponseContainer))success
+                           success:(void (^)(NSDictionary *nextResponseContainer))success
                            failure:(void (^)(NSError *error))failure;
 
 @end

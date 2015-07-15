@@ -14,25 +14,26 @@
 @implementation NMAFBActivityTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.postMessage.textColor = [UIColor NMA_almostBlack];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
 }
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)FBActivity {
-    self.timeLabel.text = FBActivity.timeString;
-    self.postMessage.text = FBActivity.message;
-    NSString* likeCountText = [@(FBActivity.likes.count) stringValue];
+- (void)configureCellForFBActivity:(NMAFBActivity *)fbActivity {
+    self.timeLabel.text = fbActivity.timeString;
+    self.postMessage.text = fbActivity.message;
+    NSString *likeCountText = [@(fbActivity.likes.count) stringValue];
     [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
-    NSString* commentCountText = [@(FBActivity.comments.count) stringValue];
+    NSString *commentCountText = [@(fbActivity.comments.count) stringValue];
     [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
     [self.postMessage sizeToFit];
     self.collapseImageConstraint.priority = 1;
     
     //check for image
-    if (FBActivity.imagePath) {
-        NSURL *imageURL = [NSURL URLWithString:FBActivity.imagePath];
+    if (fbActivity.imagePath) {
+        NSURL *imageURL = [NSURL URLWithString:fbActivity.imagePath];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         [self setImageViewDimensions:postImage];

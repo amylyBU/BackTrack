@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NMAFBComment : NSObject
+
 @property (copy, nonatomic, readonly) NSString *commenterName;
 @property (copy, nonatomic, readonly) NSString *message;
 @property (nonatomic, readonly) NSInteger likeCount;

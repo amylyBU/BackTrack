@@ -13,8 +13,8 @@
 #import "NMAFBComment.h"
 
 typedef NS_ENUM(NSInteger, NMAResponseType) {
-    FBLike,
-    FBComment
+    NMAResponseTypeLike,
+    NMAResponseTypeComment
 };
 
 @interface NMAFBActivity()
@@ -28,10 +28,10 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
 @implementation NMAFBActivity
 
 #pragma mark - Initializer
-- (instancetype) initWithPost:(id)post {
+- (instancetype) initWithPost:(NSDictionary *)post {
     self = [super init];
     
-    if(self) {
+    if (self) {
         if (post) {
             _message = post[@"message"];
             _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
@@ -51,30 +51,28 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
         [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
                                                           success:^(NSString *imagePath) {
                                                               self.imagePath = imagePath;
-                                                              [dayDelegate updatedFBActivity];
+                                                              [dayDelegate fbActivityDidUpdate:self];
                                                           }
                                                           failure:nil];
     }
 }
 
-- (void)populateActivityLikes:(id)likesContainer
+- (void)populateActivityLikes:(NSDictionary *)likesContainer
                   dayDelegate:(id<NMADayDelegate>)dayDelegate {
-    if(!self.likes) {
-        NSMutableArray *mutableLikeArray = [NSMutableArray new];
-        [self populateResponsesWithStart:mutableLikeArray
+    if (!self.likes) {
+        [self populateResponsesWithStart:nil
                        responseContainer:likesContainer
-                            responseType:FBLike
+                            responseType:NMAResponseTypeLike
                              dayDelegate:dayDelegate];
     }
 }
 
-- (void)populateActivityComments:(id)commentsContainer
+- (void)populateActivityComments:(NSDictionary *)commentsContainer
                      dayDelegate:(id<NMADayDelegate>)dayDelegate {
     if (!self.comments) {
-        NSMutableArray *mutableCommentArray = [NSMutableArray new];
-        [self populateResponsesWithStart:mutableCommentArray
+        [self populateResponsesWithStart:nil
                        responseContainer:commentsContainer
-                            responseType:FBComment
+                            responseType:NMAResponseTypeComment
                              dayDelegate:dayDelegate];
     }
 }
@@ -95,22 +93,26 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
 
 ///@discussion responses are likes or comments
 - (void)populateResponsesWithStart:(NSMutableArray *)mutableResponseArray
-                 responseContainer:(id)responseContainer
+                 responseContainer:(NSDictionary *)responseContainer
                       responseType:(NMAResponseType)responseType
                        dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    if (!mutableResponseArray) {
+        mutableResponseArray = [NSMutableArray new];
+    }
+    
     NSArray *responses = responseContainer[@"data"];
-    id paging = responseContainer[@"paging"];
+    NSDictionary *paging = responseContainer[@"paging"];
     NSString *nextLink = paging[@"next"];
     
-    for(id response in responses) {
+    for (NSDictionary *response in responses) {
         switch (responseType) {
-            case FBLike: {
+            case NMAResponseTypeLike: {
                 NSString *likerName = response[@"name"];
                 NMAFBLike *FBLike = [[NMAFBLike alloc] initWithName:likerName];
                 [mutableResponseArray addObject:FBLike];
                 break;
             }
-            case FBComment: {
+            case NMAResponseTypeComment: {
                 NSString *commenterName = (response[@"from"])[@"name"];
                 NSString *message = response[@"message"];
                 NSInteger likeCount = [response[@"like_count"] integerValue];
@@ -129,10 +131,10 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
     }
     
     //paginate for more likes if we have nextLink exists
-    if(nextLink) {
+    if (nextLink) {
         [[NMARequestManager sharedManager] requestFBActivityResponses:nextLink
                                                           dayDelegate:dayDelegate
-                                                              success:^(id nextResponseContainer) {
+                                                              success:^(NSDictionary *nextResponseContainer) {
                                                                   [self populateResponsesWithStart:mutableResponseArray
                                                                                   responseContainer:nextResponseContainer
                                                                                       responseType:responseType
@@ -141,18 +143,18 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
                                                               failure:nil];
     } else {
         switch (responseType) {
-            case FBLike: {
+            case NMAResponseTypeLike: {
                 self.likes = [mutableResponseArray copy];
             }
                 break;
-            case FBComment: {
+            case NMAResponseTypeComment: {
                 self.comments = [mutableResponseArray copy];
             }
             default:
                 break;
         }
         //If we reach this case, we've captured all response so update delegate
-        [dayDelegate updatedFBActivity];
+        [dayDelegate fbActivityDidUpdate:self];
     }
 }
 

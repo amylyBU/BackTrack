@@ -10,6 +10,7 @@
 @protocol NMADayDelegate;
 
 @interface NMAFBActivity : NSObject
+
 @property (strong, nonatomic, readonly) NSArray *likes; //of NMAFBLikes
 @property (strong, nonatomic, readonly) NSArray *comments; //of NMAFBComments
 @property (copy, nonatomic) NSString *imagePath;
@@ -17,11 +18,11 @@
 @property (copy, nonatomic, readonly) NSString *imageId;
 @property (copy, nonatomic, readonly) NSString *timeString;
 
-- (instancetype)initWithPost:(id)post;
+- (instancetype)initWithPost:(NSDictionary *)post;
 - (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate;
-- (void)populateActivityLikes:(id)likesContainer
+- (void)populateActivityLikes:(NSDictionary *)likesContainer
                   dayDelegate:(id<NMADayDelegate>)dayDelegate;
-- (void)populateActivityComments:(id)commentsContainer
+- (void)populateActivityComments:(NSDictionary *)commentsContainer
                      dayDelegate:(id<NMADayDelegate>)dayDelegate;
 
 @end

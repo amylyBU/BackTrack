@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NMAFBLike : NSObject
+
 @property (copy, nonatomic, readonly) NSString *likerName;
 
 - (instancetype)initWithName:(NSString *)likerName;

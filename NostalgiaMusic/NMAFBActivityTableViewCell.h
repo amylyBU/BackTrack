@@ -22,6 +22,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)FBPost;
+- (void)configureCellForFBActivity:(NMAFBActivity *)fbPost;
 
 @end
