@@ -9,10 +9,17 @@
 #import "NMAFBActivity.h"
 #import "NMARequestManager.h"
 #import "NMADay.h"
+#import "NMAFBLike.h"
+#import "NMAFBComment.h"
+
+typedef NS_ENUM(NSInteger, NMAResponseType) {
+    NMAResponseTypeLike,
+    NMAResponseTypeComment
+};
 
 @interface NMAFBActivity()
-@property (nonatomic, readwrite) int likeCount;
-@property (nonatomic, readwrite) int commentCount;
+@property (strong, nonatomic, readwrite) NSArray *likes;
+@property (strong, nonatomic, readwrite) NSArray *comments;
 @property (nonatomic, copy, readwrite) NSString *message;
 @property (nonatomic, copy, readwrite) NSString *timeString;
 @property (nonatomic, copy, readwrite) NSString *imageObjectId;
@@ -21,17 +28,17 @@
 @implementation NMAFBActivity
 
 #pragma mark - Initializer
-- (instancetype) initWithPost:(id)post {
+- (instancetype) initWithPost:(NSDictionary *)post {
     self = [super init];
     
-    if(self) {
-        //we are only interested in status and photo updates for now
+    if (self) {
         if (post) {
             _message = post[@"message"];
             _imageObjectId = post[@"object_id"]; //if not a photo, this is nil
             [self formatTimeString:post[@"created_time"]];
             _imagePath = nil;
-            _likeCount = [self countLikes:post];
+            _likes = nil;
+            _comments = nil;
         }
     }
     
@@ -40,14 +47,34 @@
 
 #pragma mark - Info fetching
 - (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate {
-    //We need to make a separate request to get a high res image for the FBActivity
-    [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
-                                                      success:^(NSString *imagePath) {
-                                                          self.imagePath = imagePath;
-                                                          //Then we need to reload with the image
-                                                          [dayDelegate updatedFBActivity];
-                                                      }
-                                                      failure:nil];
+    if (!self.imagePath) {
+        [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
+                                                          success:^(NSString *imagePath) {
+                                                              self.imagePath = imagePath;
+                                                              [dayDelegate fbActivityDidUpdate:self];
+                                                          }
+                                                          failure:nil];
+    }
+}
+
+- (void)populateActivityLikes:(NSDictionary *)likesContainer
+                  dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    if (!self.likes) {
+        [self populateResponsesWithStart:nil
+                       responseContainer:likesContainer
+                            responseType:NMAResponseTypeLike
+                             dayDelegate:dayDelegate];
+    }
+}
+
+- (void)populateActivityComments:(NSDictionary *)commentsContainer
+                     dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    if (!self.comments) {
+        [self populateResponsesWithStart:nil
+                       responseContainer:commentsContainer
+                            responseType:NMAResponseTypeComment
+                             dayDelegate:dayDelegate];
+    }
 }
 
 #pragma mark - Utility
@@ -64,21 +91,71 @@
     self.timeString = [dateFormatter stringFromDate:date];
 }
 
-- (int)countLikes:(id)post {
-    int likeCount = 0;
-    id likesObject = post[@"likes"];
-    
-    if (likesObject) {
-        NSArray *likes = likesObject[@"data"];
-        for(id like in likes) {
-            NSString *likerName = like[@"name"];
-            NSLog(@"%@ likes this post", likerName);
-            likeCount++;
-        }
-        //TODO:page through the remaining lieks
+///@discussion responses are likes or comments
+- (void)populateResponsesWithStart:(NSMutableArray *)mutableResponseArray
+                 responseContainer:(NSDictionary *)responseContainer
+                      responseType:(NMAResponseType)responseType
+                       dayDelegate:(id<NMADayDelegate>)dayDelegate {
+    if (!mutableResponseArray) {
+        mutableResponseArray = [NSMutableArray new];
     }
-    return likeCount;
+    
+    NSArray *responses = responseContainer[@"data"];
+    NSDictionary *paging = responseContainer[@"paging"];
+    NSString *nextLink = paging[@"next"];
+    
+    for (NSDictionary *response in responses) {
+        switch (responseType) {
+            case NMAResponseTypeLike: {
+                NSString *likerName = response[@"name"];
+                NMAFBLike *FBLike = [[NMAFBLike alloc] initWithName:likerName];
+                [mutableResponseArray addObject:FBLike];
+                break;
+            }
+            case NMAResponseTypeComment: {
+                NSString *commenterName = (response[@"from"])[@"name"];
+                NSString *message = response[@"message"];
+                NSInteger likeCount = [response[@"like_count"] integerValue];
+                //sticker comments have an empty message, we ignore them
+                if (![message isEqualToString:@""]) {
+                    NMAFBComment *FBComment = [[NMAFBComment alloc] initWithName:commenterName
+                                                                         message:message
+                                                                       likeCount:likeCount];
+                    [mutableResponseArray addObject:FBComment];
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    //paginate for more likes if we have nextLink exists
+    if (nextLink) {
+        [[NMARequestManager sharedManager] requestFBActivityResponses:nextLink
+                                                          dayDelegate:dayDelegate
+                                                              success:^(NSDictionary *nextResponseContainer) {
+                                                                  [self populateResponsesWithStart:mutableResponseArray
+                                                                                  responseContainer:nextResponseContainer
+                                                                                      responseType:responseType
+                                                                                       dayDelegate:dayDelegate];
+                                                              }
+                                                              failure:nil];
+    } else {
+        switch (responseType) {
+            case NMAResponseTypeLike: {
+                self.likes = [mutableResponseArray copy];
+            }
+                break;
+            case NMAResponseTypeComment: {
+                self.comments = [mutableResponseArray copy];
+            }
+            default:
+                break;
+        }
+        //If we reach this case, we've captured all response so update delegate
+        [dayDelegate fbActivityDidUpdate:self];
+    }
 }
-
 
 @end

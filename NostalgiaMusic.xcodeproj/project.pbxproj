@@ -14,6 +14,7 @@
 		072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AA1B39739B000A1162 /* Images.xcassets */; };
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
+		075F632B1B568F1800B072FB /* UIImage+NMAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F632A1B568F1800B072FB /* UIImage+NMAImages.m */; };
 		07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */; };
 		07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */; };
 		07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBF31B3A0B730089D042 /* NMASettingsViewController.m */; };
@@ -23,6 +24,10 @@
 		07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFE1B4B12830089D042 /* NMADay.m */; };
 		07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */; };
 		07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */; };
+		07ED93221B54867C004879C0 /* NMAFBLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93211B54867C004879C0 /* NMAFBLike.m */; };
+		07ED93251B548828004879C0 /* NMAFBComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93241B548828004879C0 /* NMAFBComment.m */; };
+		07ED93291B54A5F4004879C0 /* NMASectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93271B54A5F4004879C0 /* NMASectionHeader.m */; };
+		07ED932A1B54A5F4004879C0 /* NMASectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ED93281B54A5F4004879C0 /* NMASectionHeader.xib */; };
 		611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611F6A4A1B41D9CA00091809 /* NMAYearActivityScrollViewController.m */; };
 		612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE411B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m */; };
 		612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE421B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib */; };
@@ -82,6 +87,8 @@
 		072DE7B31B39739B000A1162 /* NostalgiaMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NostalgiaMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		072DE7B81B39739B000A1162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NostalgiaMusicTests.m; sourceTree = "<group>"; };
+		075F63291B568F1800B072FB /* UIImage+NMAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+NMAImages.h"; path = "Images/UIImage+NMAImages.h"; sourceTree = "<group>"; };
+		075F632A1B568F1800B072FB /* UIImage+NMAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+NMAImages.m"; path = "Images/UIImage+NMAImages.m"; sourceTree = "<group>"; };
 		07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANoFBActivityTableViewCell.h; path = Views/FBActivity/NMANoFBActivityTableViewCell.h; sourceTree = "<group>"; };
 		07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMANoFBActivityTableViewCell.m; path = Views/FBActivity/NMANoFBActivityTableViewCell.m; sourceTree = "<group>"; };
 		07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMANoFBActivityTableViewCell.xib; path = Views/FBActivity/NMANoFBActivityTableViewCell.xib; sourceTree = "<group>"; };
@@ -97,6 +104,13 @@
 		07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAFBActivityTableViewCell.h; sourceTree = "<group>"; };
 		07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAFBActivityTableViewCell.m; sourceTree = "<group>"; };
 		07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAFBActivityTableViewCell.xib; sourceTree = "<group>"; };
+		07ED93201B54867C004879C0 /* NMAFBLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBLike.h; path = Models/FBActivity/NMAFBLike.h; sourceTree = "<group>"; };
+		07ED93211B54867C004879C0 /* NMAFBLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBLike.m; path = Models/FBActivity/NMAFBLike.m; sourceTree = "<group>"; };
+		07ED93231B548828004879C0 /* NMAFBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBComment.h; path = Models/FBActivity/NMAFBComment.h; sourceTree = "<group>"; };
+		07ED93241B548828004879C0 /* NMAFBComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBComment.m; path = Models/FBActivity/NMAFBComment.m; sourceTree = "<group>"; };
+		07ED93261B54A5F4004879C0 /* NMASectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMASectionHeader.h; sourceTree = "<group>"; };
+		07ED93271B54A5F4004879C0 /* NMASectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMASectionHeader.m; sourceTree = "<group>"; };
+		07ED93281B54A5F4004879C0 /* NMASectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMASectionHeader.xib; sourceTree = "<group>"; };
 		34F0AB6AF7E7AA5B13779A62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		486067421913674E7836A8E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		611F6A491B41D9CA00091809 /* NMAYearActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearActivityScrollViewController.h; sourceTree = "<group>"; };
@@ -177,14 +191,13 @@
 		072A085D1B3975C00068EEF0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07ED931F1B54863E004879C0 /* FBActivity */,
 				07ECCBF71B3A0F760089D042 /* NMAAppSettings.h */,
 				07ECCBF81B3A0F760089D042 /* NMAAppSettings.m */,
 				E50E34881B44461E00F10A5A /* NMASong.h */,
 				E50E34891B44461E00F10A5A /* NMASong.m */,
 				612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */,
 				612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */,
-				07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */,
-				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
 				07ECCBFD1B4B12830089D042 /* NMADay.h */,
 				07ECCBFE1B4B12830089D042 /* NMADay.m */,
 				E50E347C1B43068100F10A5A /* NMADatabaseManager.h */,
@@ -198,6 +211,9 @@
 		072A085E1B3975C70068EEF0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				07ED93261B54A5F4004879C0 /* NMASectionHeader.h */,
+				07ED93271B54A5F4004879C0 /* NMASectionHeader.m */,
+				07ED93281B54A5F4004879C0 /* NMASectionHeader.xib */,
 				612CDE4A1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.h */,
 				612CDE4B1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m */,
 				612CDE4C1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib */,
@@ -208,7 +224,6 @@
 				E5141B621B4899D3002BC232 /* NMATodaysSongTableViewCell.m */,
 				E5141B631B4899D3002BC232 /* NMATodaysSongTableViewCell.xib */,
 				07ECCC021B4C08920089D042 /* FBActivity */,
-				E515FDE41B4EE621000E47E3 /* NMATodaysSongTableViewCellDelegate.h */,
 				615911591B3D850A006B6779 /* Home */,
 			);
 			name = Views;
@@ -227,6 +242,7 @@
 		072A08601B3975D40068EEF0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				075F63281B568E6400B072FB /* Images */,
 				E515FDDA1B4DAD41000E47E3 /* Colors */,
 				E515FDCF1B4DAD13000E47E3 /* Fonts */,
 			);
@@ -325,6 +341,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		075F63281B568E6400B072FB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				075F63291B568F1800B072FB /* UIImage+NMAImages.h */,
+				075F632A1B568F1800B072FB /* UIImage+NMAImages.m */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		07ECCBEB1B39F4DC0089D042 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +380,19 @@
 				07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */,
 				07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */,
 				07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */,
+			);
+			name = FBActivity;
+			sourceTree = "<group>";
+		};
+		07ED931F1B54863E004879C0 /* FBActivity */ = {
+			isa = PBXGroup;
+			children = (
+				07ECCBFA1B4AEEB70089D042 /* NMAFBActivity.h */,
+				07ECCBFB1B4AEEB70089D042 /* NMAFBActivity.m */,
+				07ED93201B54867C004879C0 /* NMAFBLike.h */,
+				07ED93211B54867C004879C0 /* NMAFBLike.m */,
+				07ED93231B548828004879C0 /* NMAFBComment.h */,
+				07ED93241B548828004879C0 /* NMAFBComment.m */,
 			);
 			name = FBActivity;
 			sourceTree = "<group>";
@@ -519,6 +557,7 @@
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
 				E515FDE91B4F436C000E47E3 /* NMAFBConnectViewController.xib in Resources */,
 				E5141B651B4899D3002BC232 /* NMATodaysSongTableViewCell.xib in Resources */,
+				07ED932A1B54A5F4004879C0 /* NMASectionHeader.xib in Resources */,
 				07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */,
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
@@ -586,20 +625,24 @@
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */,
 				E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */,
+				07ED93251B548828004879C0 /* NMAFBComment.m in Sources */,
 				07ECCBF51B3A0B730089D042 /* NMASettingsViewController.m in Sources */,
 				612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */,
 				E50E348A1B44461E00F10A5A /* NMASong.m in Sources */,
 				07ECCBFC1B4AEEB70089D042 /* NMAFBActivity.m in Sources */,
 				072DE7A01B39739B000A1162 /* main.m in Sources */,
+				075F632B1B568F1800B072FB /* UIImage+NMAImages.m in Sources */,
 				07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */,
 				E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */,
 				E515FDE71B4F0C9F000E47E3 /* NMAPlaybackManager.m in Sources */,
+				07ED93291B54A5F4004879C0 /* NMASectionHeader.m in Sources */,
 				E50E348D1B44584E00F10A5A /* NMARequestManager.m in Sources */,
 				E515FDE01B4DB7B0000E47E3 /* UIColor+NMAColors.m in Sources */,
 				07ECCBF91B3A0F760089D042 /* NMAAppSettings.m in Sources */,
 				07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */,
 				611F6A4B1B41D9CA00091809 /* NMAYearActivityScrollViewController.m in Sources */,
 				615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */,
+				07ED93221B54867C004879C0 /* NMAFBLike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

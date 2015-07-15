@@ -10,7 +10,7 @@
 #import "NMAFBActivity.h"
 @interface NMAFBActivityTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *timeView;
+@property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postMessage;
@@ -18,9 +18,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *likesButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *timeRibbonView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)FBPost;
+- (void)configureCellForFBActivity:(NMAFBActivity *)fbPost;
 
 @end

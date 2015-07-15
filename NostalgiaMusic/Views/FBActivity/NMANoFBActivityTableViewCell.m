@@ -7,11 +7,15 @@
 //
 
 #import "NMANoFBActivityTableViewCell.h"
+#import "UIColor+NMAColors.h"
+#import "UIFont+NMAFonts.h"
 
 @implementation NMANoFBActivityTableViewCell
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.messageLabel.textColor = [UIColor NMA_tealGreen];
 }
 
 @end
