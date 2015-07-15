@@ -9,6 +9,7 @@
 #import "NMAFBComment.h"
 
 @interface NMAFBComment()
+
 @property (copy, nonatomic, readwrite) NSString *commenterName;
 @property (copy, nonatomic, readwrite) NSString *message;
 @property (nonatomic, readwrite) NSInteger likeCount;
