@@ -28,6 +28,8 @@ BOOL isMostRecentYearVisible;
 @property (copy, nonatomic) NSString *earliestYear;
 @property (copy, nonatomic) NSString *latestYear;
 @property (nonatomic) float swipeContentOffset;
+@property (strong, nonatomic) CABasicAnimation *rotation;
+
 @end
 
 
@@ -80,9 +82,27 @@ BOOL isMostRecentYearVisible;
                                         withYear:[self incrementStringValue:self.year]
                                       atPosition:NMAScrollViewPositionNextYear];
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
+    
+    // Observes when the user resumes the song
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidResumeAVPlayer:)
+                                                 name:@"resumeAVPlayerNotification"
+                                               object:[NMAPlaybackManager sharedPlayer]];
+    
+    // Observes when the user pauses song
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidPauseAVPlayer:)
+                                                 name:@"pauseAVPlayerNotification"
+                                               object:[NMAPlaybackManager sharedPlayer]];
+    
+    // Observes when the song finishes playing
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
+    
     [self setUpMusicPlayer];
 }
-
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -114,6 +134,7 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)didSwipeToPastYear {
+    [[self visibleSongCell].albumImageView.layer removeAllAnimations]; // remove animation
     if ([self.leftTableViewController.year isEqualToString:self.earliestYear]) {
         isEarliestYearVisble = YES;
         [self.delegate updateScrollYear:[self decrementStringValue:self.year]];
@@ -124,10 +145,11 @@ BOOL isMostRecentYearVisible;
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
     [self setUpMusicPlayer];
-    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
+    [[NMAPlaybackManager sharedPlayer] pausePlaying];
 }
 
 - (void)didSwipeToNextYear {
+    [[self visibleSongCell].albumImageView.layer removeAllAnimations]; // remove animation
     if ([self.rightTableViewController.year isEqualToString:self.latestYear]) {
         isMostRecentYearVisible = YES;
         [self.delegate updateScrollYear:[self incrementStringValue:self.year]];
@@ -138,7 +160,7 @@ BOOL isMostRecentYearVisible;
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
     [self setUpMusicPlayer];
-    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
+    [[NMAPlaybackManager sharedPlayer] pausePlaying];
 }
 
 - (void)updatePositioningForScrollPosition:(NMAScrollViewYearPosition)position {
@@ -195,7 +217,7 @@ BOOL isMostRecentYearVisible;
     [self addChildViewController:viewController];
 }
 
-#pragma mark - Helper
+#pragma mark - Year Mutator Methods
 
 - (NSString *)incrementStringValue:(NSString *)value {
     NSInteger nextyear = [value integerValue] + 1;
@@ -207,6 +229,8 @@ BOOL isMostRecentYearVisible;
     return [NSString stringWithFormat:@"%li", (long)pastyear];
 }
 
+#pragma mark - Year Getter Methods
+
 - (void)getLatestYear {
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy"];
@@ -216,26 +240,106 @@ BOOL isMostRecentYearVisible;
     self.latestYear = pastYearString;
 }
 
+- (NSString *)visibleYear {
+    if (isMostRecentYearVisible) {
+        return self.latestYear;
+    } else if (isEarliestYearVisble) {
+        return self.earliestYear;
+    } else {
+        return self.year;
+    }
+}
+
+- (NMAContentTableViewController *)visibleContentTableVC {
+    for (NMAContentTableViewController *tableVC in self.childViewControllers) {
+        NSString *visibleYear = [self visibleYear];
+        if ([tableVC.year isEqualToString:visibleYear]) {
+            return tableVC;
+        }
+    }
+    return nil;
+}
+
+- (NMATodaysSongTableViewCell *)visibleSongCell {
+    return (NMATodaysSongTableViewCell *)[[self visibleContentTableVC].tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+- (CALayer *)visibleAlbumImageViewLayer {
+    return [self visibleSongCell].albumImageView.layer;
+}
 #pragma mark - NMAPlaybackManager Initialization
 
 - (void)setUpMusicPlayer {
-    for (NMAContentTableViewController *tableVC in self.childViewControllers) {
-        NSString *visibleYear;
-        if (isMostRecentYearVisible) {
-            visibleYear = self.latestYear;
-        } else if (isEarliestYearVisble) {
-            visibleYear = self.earliestYear;
-        } else {
-            visibleYear = self.year;
-        }
-        if ([tableVC.year isEqualToString:visibleYear]) {
-            [tableVC setUpPlayerForTableCell];
-            if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
-            }
-            break;
-        }
+    [[self visibleContentTableVC] setUpPlayerForTableCell];
+    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+        [[NMAPlaybackManager sharedPlayer] startPlaying];
     }
 }
+
+#pragma mark - CAAnimation Delegate
+//
+//- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+//    NSLog(@"animation did stop");
+//}
+
+- (void)pauseAnimationLayer {
+    NSLog(@"child view controllers: %@", self.childViewControllers);
+    NSLog(@"pausing animation for year %@", self.year);
+    CALayer *layer = [self visibleSongCell].albumImageView.layer;
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+}
+
+- (void)resumeAnimationLayer {
+    NSLog(@"resuming animation for year %@", self.year);
+    CALayer *layer = [self visibleSongCell].albumImageView.layer;
+    CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    CFTimeInterval pausedTime = [layer timeOffset];
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = startTime - pausedTime;
+    layer.beginTime = timeSincePause;
+}
+
+
+- (void)userDidResumeAVPlayer:(NSNotification *)notification {
+    if (![self visibleAlbumImageViewLayer].animationKeys) {
+        [self configureAnimation];
+    }
+    else {
+        [self resumeAnimationLayer];
+    }
+}
+
+- (void)userDidPauseAVPlayer:(NSNotification *)notification { // this gets called before audioDidFinishPlaying
+    [self pauseAnimationLayer];
+}
+
+- (void)configureAnimation {
+    CABasicAnimation *rotationAnimation;
+    rotationAnimation = [[CABasicAnimation alloc] init];
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI*2];
+    rotationAnimation.duration = 10;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    rotationAnimation.removedOnCompletion = NO;
+    rotationAnimation.fillMode = kCAFillModeForwards;
+    //rotationAnimation.delegate = self; // year activity scroll is the delegate for rotation animation
+    NSLog(@"resetting/adding animation for album image in year %@", self.year);
+    [[self visibleAlbumImageViewLayer] addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+
+}
+
+#pragma mark - Notification Observation Handlers
+
+- (void)audioDidFinishPlaying:(NSNotification *)notification {
+    NSLog(@"audio finished playing for year %@, change play button", self.year);
+    [[self visibleSongCell] changePlayButtonImage];
+    //[[self visibleAlbumImageViewLayer] removeAllAnimations];
+}
+
 
 @end

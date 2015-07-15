@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) AVPlayerItem *audioPlayerItem;
 
-+ (instancetype)sharedAudioPlayer;
++ (instancetype)sharedPlayer;
 - (void)setUpWithURL:(NSURL *)url;
 - (void)startPlaying;
 - (void)pausePlaying;

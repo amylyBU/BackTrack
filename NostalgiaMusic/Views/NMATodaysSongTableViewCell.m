@@ -20,8 +20,8 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 @interface NMATodaysSongTableViewCell ()
 
 @property (strong, nonatomic) NMASong *song;
-
 @property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
+@property (strong, nonatomic) CABasicAnimation *rotationAnimation;
 
 @end
 
@@ -50,10 +50,11 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
     if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
-        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
+        [[NMAPlaybackManager sharedPlayer] startPlaying];
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
+
     } else {
-        [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
+        [[NMAPlaybackManager sharedPlayer] pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     }
 }
@@ -65,6 +66,5 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 - (void)changePlayButtonImage {
     [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
 }
-
 
 @end

@@ -23,4 +23,7 @@
     return [UIImage imageNamed:@"setting-icon.png"];
 }
 
++ (UIImage *)NMA_homeBackground {
+    return [UIImage imageNamed:@"body-illustration-bg"];
+}
 @end

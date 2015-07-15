@@ -10,7 +10,7 @@
 #import "NMAContentTableViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-static NMAPlaybackManager *sharedPlayer;
+static NMAPlaybackManager *sharedPlayerManagerInstance;
 
 @interface NMAPlaybackManager ()
 
@@ -23,44 +23,66 @@ static NMAPlaybackManager *sharedPlayer;
 
 #pragma mark - Singleton
 
-+ (instancetype)sharedAudioPlayer {
++ (instancetype)sharedPlayer {
     static dispatch_once_t onceToken;
-    if (!sharedPlayer) {
+    if (!sharedPlayerManagerInstance) {
         dispatch_once(&onceToken, ^{
-            sharedPlayer = [[NMAPlaybackManager alloc] init];
-            sharedPlayer.audioPlayer = [[AVPlayer alloc] init];
+            sharedPlayerManagerInstance = [[NMAPlaybackManager alloc] init];
+            sharedPlayerManagerInstance.audioPlayer = [[AVPlayer alloc] init];
+            
+            // self (the manager) observes avplayer rate property
+            [sharedPlayerManagerInstance.audioPlayer addObserver:sharedPlayerManagerInstance
+                                                      forKeyPath:@"rate"
+                                                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                                                         context:0];
         });
     }
-    return sharedPlayer;
+    return sharedPlayerManagerInstance;
 }
 
 #pragma mark - Public Methods
 
 - (void)setUpWithURL:(NSURL *)url {
-    sharedPlayer.audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
-    sharedPlayer.audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:sharedPlayer.audioAsset];
-    [sharedPlayer.audioPlayer replaceCurrentItemWithPlayerItem:sharedPlayer.audioPlayerItem];
-    NSLog(@"song url is now: %@", sharedPlayer.audioAsset.URL);
     
+    sharedPlayerManagerInstance.audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    sharedPlayerManagerInstance.audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:sharedPlayerManagerInstance.audioAsset];
+    [sharedPlayerManagerInstance.audioPlayer replaceCurrentItemWithPlayerItem:sharedPlayerManagerInstance.audioPlayerItem];
+    NSLog(@"song url is now: %@", sharedPlayerManagerInstance.audioAsset.URL);
+    
+    // self observes when player item finishes playing
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(itemDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:sharedPlayer.audioPlayerItem];
+                                               object:sharedPlayerManagerInstance.audioPlayerItem];
 }
 
 - (void)startPlaying {
-    [sharedPlayer.audioPlayer play];
+    [sharedPlayerManagerInstance.audioPlayer play];
 }
 
 - (void)pausePlaying {
-    [sharedPlayer.audioPlayer pause];
+    [sharedPlayerManagerInstance.audioPlayer pause];
 }
 
 #pragma mark- NMAtodaysSongCell Delegate
 
 - (void)itemDidFinishPlaying:(NSNotification *)notification {
-    [sharedPlayer setUpWithURL:sharedPlayer.audioAsset.URL];
+    [sharedPlayerManagerInstance setUpWithURL:sharedPlayerManagerInstance.audioAsset.URL];
     [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:self];
+}
+
+#pragma mark - Key-Value Observer Handling
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    if (sharedPlayerManagerInstance.audioPlayer.rate) { // rate = 1: playing
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeAVPlayerNotification" object:self];
+    } else { // rate = 0: paused
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pauseAVPlayerNotification" object:self];
+    }
 }
 
 @end

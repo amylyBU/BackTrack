@@ -14,5 +14,6 @@
 + (UIImage *)NMA_facebookLabel;
 + (UIImage *)NMA_newsLabel;
 + (UIImage *)NMA_settingsGear;
++ (UIImage *)NMA_homeBackground;
 
 @end

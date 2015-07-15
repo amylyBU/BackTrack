@@ -18,4 +18,7 @@
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
 
+- (NSString *)visibleYear;
+- (NMAContentTableViewController *)visibleContentTableVC;
+
 @end
