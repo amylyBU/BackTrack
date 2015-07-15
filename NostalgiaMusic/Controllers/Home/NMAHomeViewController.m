@@ -16,10 +16,13 @@
 #import "UIViewController+Containment.h"
 
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollDelegate>
+
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAYearActivityScrollViewController *yearActivityScrollVC;
 @property (strong, nonatomic) NMAYearCollectionViewController *yearScrollBarCollectionVC;
+
 @end
+
 
 @implementation NMAHomeViewController
 
@@ -31,11 +34,13 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpHomeView];
+    self.title = @"";
     
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                        style:UIBarButtonItemStyleDone
                                                                       target:self
                                                                       action:@selector(goToSettings:)];
+    settingsButton.image = [UIImage imageNamed:@"setting-icon"];
     [self.navigationItem setRightBarButtonItem:settingsButton];
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }

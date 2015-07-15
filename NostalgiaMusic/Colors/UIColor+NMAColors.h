@@ -24,5 +24,6 @@
 /* Settings Colors */
 + (UIColor *)NMA_turquoise;
 + (UIColor *)NMA_black;
++ (UIColor *)NMA_backgroundGray;
 
 @end

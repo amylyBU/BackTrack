@@ -10,6 +10,7 @@
 
 @implementation UIImage (NMAImages)
 
+/* Home */
 + (UIImage *)NMA_facebookLabel {
     return [UIImage imageNamed:@"facebook-label"];
 }

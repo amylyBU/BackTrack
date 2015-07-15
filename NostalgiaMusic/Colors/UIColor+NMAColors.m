@@ -52,4 +52,8 @@
     return [UIColor colorWithRed:20.0f/255.0f green:20.0f/255.0f blue:20.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)NMA_backgroundGray {
+    return [UIColor colorWithRed:229.0f/255.0f green:237.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
+}
+
 @end

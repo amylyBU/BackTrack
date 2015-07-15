@@ -11,6 +11,7 @@
 #import "NMASettingsSwitchCell.h"
 #import "NMAFeedbackTableViewCell.h"
 #import "UIColor+NMAColors.h"
+#import "UIFont+NMAFonts.h"
 
 static NSString * const kNMASettingsSwitchCellIdentifier = @"SettingsSwitchCell";
 static NSString * const kNMAFeedbackTableViewCellIdentifier = @"FeedbackTableViewCell";
@@ -45,11 +46,18 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
                forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
     self.staticTableView.delegate = self;
     self.staticTableView.dataSource = self;
+    [self configureUI];
 }
 
 - (void)configureUI {
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.title = @"Settings";
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor NMA_turquoise];
+    self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                                     NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
     self.staticTableView.separatorColor = [UIColor NMA_turquoise];
+    self.view.backgroundColor = [UIColor NMA_backgroundGray];
 }
 
 #pragma mark - UITableViewDelegate Methods

@@ -10,7 +10,7 @@
 
 @interface UIImage (NMAImages)
 
-//Home
+/* Home */
 + (UIImage *)NMA_facebookLabel;
 + (UIImage *)NMA_newsLabel;
 

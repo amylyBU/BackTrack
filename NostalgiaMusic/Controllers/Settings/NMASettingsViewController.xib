@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMASettingsViewController">
@@ -15,21 +16,46 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="-1" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-LN-A4s">
-                    <rect key="frame" x="0.0" y="35" width="600" height="200"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="-1" rowHeight="48" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-LN-A4s">
+                    <rect key="frame" x="0.0" y="35" width="600" height="141"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="yep-7w-T1A"/>
+                        <constraint firstAttribute="height" constant="141" id="yep-7w-T1A"/>
                     </constraints>
-                    <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                 </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plane-smoke" translatesAutoresizingMaskIntoConstraints="NO" id="fcp-nG-oS7">
+                    <rect key="frame" x="248" y="203" width="352" height="397"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="fcp-nG-oS7" secondAttribute="height" multiplier="134:151" id="RpD-Ub-tAP"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="fcp-nG-oS7" secondAttribute="trailing" id="0aE-uB-n1j"/>
+                <constraint firstAttribute="bottom" secondItem="fcp-nG-oS7" secondAttribute="bottom" id="BXZ-dZ-4cv"/>
+                <constraint firstItem="fcp-nG-oS7" firstAttribute="top" secondItem="tx4-LN-A4s" secondAttribute="bottom" constant="27" id="Eeu-wr-mkS"/>
+                <constraint firstItem="fcp-nG-oS7" firstAttribute="top" secondItem="tx4-LN-A4s" secondAttribute="bottom" constant="27" id="KVv-7N-Zav"/>
+                <constraint firstAttribute="trailing" secondItem="fcp-nG-oS7" secondAttribute="trailing" id="MrW-ii-GMF"/>
+                <constraint firstAttribute="bottom" secondItem="fcp-nG-oS7" secondAttribute="bottom" id="NgV-tE-zOb"/>
                 <constraint firstAttribute="trailing" secondItem="tx4-LN-A4s" secondAttribute="trailing" id="da9-26-dUx"/>
                 <constraint firstItem="tx4-LN-A4s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="idZ-ne-niz"/>
+                <constraint firstItem="fcp-nG-oS7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="lDt-sh-4RW"/>
                 <constraint firstItem="tx4-LN-A4s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sMw-vy-Zpf"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0aE-uB-n1j"/>
+                    <exclude reference="Eeu-wr-mkS"/>
+                    <exclude reference="NgV-tE-zOb"/>
+                    <exclude reference="lDt-sh-4RW"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="271" y="402"/>
         </view>
     </objects>
+    <resources>
+        <image name="plane-smoke" width="248" height="237"/>
+    </resources>
 </document>
