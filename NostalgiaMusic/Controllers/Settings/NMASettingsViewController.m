@@ -10,6 +10,7 @@
 #import "NMAAppSettings.h"
 #import "NMASettingsSwitchCell.h"
 #import "NMAFeedbackTableViewCell.h"
+#import "UIColor+NMAColors.h"
 
 static NSString * const kNMASettingsSwitchCellIdentifier = @"SettingsSwitchCell";
 static NSString * const kNMAFeedbackTableViewCellIdentifier = @"FeedbackTableViewCell";
@@ -38,13 +39,17 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASettingsSwitchCell class]) bundle:nil]
                forCellReuseIdentifier:kNMASettingsSwitchCellIdentifier];
     [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFeedbackTableViewCell class]) bundle:nil]
                forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
     self.staticTableView.delegate = self;
     self.staticTableView.dataSource = self;
+}
+
+- (void)configureUI {
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.staticTableView.separatorColor = [UIColor NMA_turquoise];
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -106,10 +111,27 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 
 - (void)didPressSwitch:(UISwitch *)sender {
     if (sender.tag == NMAFacebookConnectRowTag) {
-        NSLog(@"Facebook Settings Toggled. Settings are not saved.");
+        if (sender.on) {
+            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+            [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                if (error) {
+                    // TODO: handle error
+                } else if (result.isCancelled) {
+                    // TODO: handle cancellations
+                } else {
+                    // TODO: check if specific permissions are missing
+                    if ([result.grantedPermissions containsObject:@"email"]) {
+                        [[NMAAppSettings sharedSettings] setAccessToken:result.token];
+                    }
+                } //TODO: handle accesstoken expirations, etc
+            }];
+        } else {
+            [[NMAAppSettings sharedSettings] setAccessToken:nil];
+        }
     } else {
         sender.on ? [[NMAAppSettings sharedSettings] setAutoplaySettingToOn] : [[NMAAppSettings sharedSettings] setAutoplaySettingToOff];
     }
 }
+
 
 @end

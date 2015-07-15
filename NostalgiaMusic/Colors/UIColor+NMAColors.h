@@ -10,12 +10,19 @@
 
 @interface UIColor (NMAColors)
 
+/* FBConnect VC Colors */
 + (UIColor *)NMA_skyBlueBackground;
 + (UIColor *)NMA_boldOrange;
 + (UIColor *)NMA_lightGray;
 + (UIColor *)NMA_tealGreen;
++ (UIColor *)NMA_facebookBlue;
+
+/* Song Cell Colors */
 + (UIColor *)NMA_almostBlack;
 + (UIColor *)NMA_darkGray;
-+ (UIColor *)NMA_facebookBlue;
+
+/* Settings Colors */
++ (UIColor *)NMA_turquoise;
++ (UIColor *)NMA_black;
 
 @end

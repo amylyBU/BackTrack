@@ -42,4 +42,14 @@
     return [UIColor colorWithRed:126.0f/255.0f green:127.0f/255.0f blue:114.0f/255.0f alpha:1.0f];
 }
 
+/* Settings Colors */
+
++ (UIColor *)NMA_turquoise {
+    return [UIColor colorWithRed:131.0f/255.0f green:220.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)NMA_black {
+    return [UIColor colorWithRed:20.0f/255.0f green:20.0f/255.0f blue:20.0f/255.0f alpha:1.0f];
+}
+
 @end

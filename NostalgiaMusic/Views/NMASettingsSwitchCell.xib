@@ -30,7 +30,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="settingsCategoryLabel" destination="lJp-tX-kvp" id="vBt-zf-e7l"/>
-                <outlet property="settingsSwitch" destination="a60-Y4-8Sh" id="XM2-ha-4J7"/>
+                <outlet property="settingsSwitch" destination="a60-Y4-8Sh" id="owP-ec-Obj"/>
             </connections>
         </tableViewCell>
     </objects>

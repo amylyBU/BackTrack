@@ -15,17 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-LN-A4s">
-                    <rect key="frame" x="0.0" y="68" width="600" height="141"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="-1" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tx4-LN-A4s">
+                    <rect key="frame" x="0.0" y="35" width="600" height="200"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="141" id="aQj-Gh-BhQ"/>
+                        <constraint firstAttribute="height" constant="200" id="yep-7w-T1A"/>
                     </constraints>
+                    <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tx4-LN-A4s" secondAttribute="trailing" id="da9-26-dUx"/>
-                <constraint firstItem="tx4-LN-A4s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="idZ-ne-niz"/>
+                <constraint firstItem="tx4-LN-A4s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="idZ-ne-niz"/>
                 <constraint firstItem="tx4-LN-A4s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sMw-vy-Zpf"/>
             </constraints>
             <point key="canvasLocation" x="271" y="402"/>
