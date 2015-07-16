@@ -87,7 +87,7 @@
     [self.yearActivityScrollVC setUpScrollView:year];
 }
 
-#pragma mark - NMAActivityScrollDelegate
+#pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
 }

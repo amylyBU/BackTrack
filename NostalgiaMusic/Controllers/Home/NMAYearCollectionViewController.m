@@ -12,6 +12,12 @@
 #import <QuartzCore/CALayer.h>
 #import "UIColor+NMAColors.h"
 
+typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
+    NMAScrollViewDidScroll = 0,
+    NMAScrollViewDidEndDecelerating,
+    NMAScrollViewDidEndDragging,
+};
+
 static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
 static NSInteger const kNumberOfSectionsInYearCollection = 1;
@@ -34,11 +40,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self.scrollBarCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASelectedYearCollectionViewCell class]) bundle:nil]
           forCellWithReuseIdentifier:kNMASelectedYearcollectionViewCellIdentifier];
-    self.whiteYearBackgroundSquare.backgroundColor = [UIColor whiteColor];
-    [self.whiteYearBackgroundSquare.layer masksToBounds];
-    self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
-    self.whiteYearBackgroundSquare.clipsToBounds = YES;
-    self.view.backgroundColor = [UIColor NMA_lightTeal];
+    [self configureUIElements];
     [self getLatestYear];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
@@ -54,6 +56,14 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
     }
+}
+
+- (void)configureUIElements {
+    self.whiteYearBackgroundSquare.backgroundColor = [UIColor whiteColor];
+    [self.whiteYearBackgroundSquare.layer masksToBounds];
+    self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
+    self.whiteYearBackgroundSquare.clipsToBounds = YES;
+    self.view.backgroundColor = [UIColor NMA_lightTeal];
 }
 
 - (void)setUpCollectionViewWithLayout {
@@ -78,51 +88,16 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSArray *visible = [self.scrollBarCollectionView visibleCells];
-    for (NMAYearCollectionViewCell *cell in visible) {
-        CGRect cellRect = cell.frame;
-        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
-        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
-        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
-            [cell.year setFont:[UIFont systemFontOfSize:30]];
-            NSLog(@"cell origin - %@", [NSValue valueWithCGPoint:cellOrigin]);
-        } else {
-            [cell.year setFont:[UIFont systemFontOfSize:17]];
-        }
-    }
+    [self checkIfWhiteBoxContainsYear:NMAScrollViewDidScroll];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSArray *visible = [self.scrollBarCollectionView visibleCells];
-    for (NMAYearCollectionViewCell *cell in visible) {
-        CGRect cellRect = cell.frame;
-        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
-        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
-        
-        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
-            [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        } else {
-            [cell.year setFont:[UIFont systemFontOfSize:17]];
-        }
-    }
+    [self checkIfWhiteBoxContainsYear:NMAScrollViewDidEndDecelerating];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
-    NSArray *visible = [self.scrollBarCollectionView visibleCells];
-    for (NMAYearCollectionViewCell *cell in visible) {
-        CGRect cellRect = cell.frame;
-        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
-        CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
-        
-        if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
-            [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        }
-    }
-    
+    [self checkIfWhiteBoxContainsYear:NMAScrollViewDidEndDragging];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -147,16 +122,14 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *year = self.years[indexPath.row];
+    NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
+    cell.year.text = year;
     if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
-        NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
         cell.year.text = year;
-        [cell.year setFont:[UIFont systemFontOfSize:30]];
-       
+        [self formatMiddleCell:cell];
         return cell;
     } else {
-        NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
-        cell.year.text = year;
-         [cell.year setFont:[UIFont systemFontOfSize:17]];
+        [self formatNonMiddlecell:cell];
         return cell;
     }
 }
@@ -167,16 +140,69 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self.delegate didSelectYear:currentYear];
 }
 
-- (void)moveToYear:(NSString *)year {
-    if ([year integerValue] < 2015 && [year integerValue] > 1980) {
-    self.year = year;
-    NSInteger indexYear = [self.years indexOfObject:year];
-    NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
-    [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+#pragma mark - Helpers
+
+- (void)checkIfWhiteBoxContainsYear:(NSInteger)scroll {
+    NSArray *visible = [self.scrollBarCollectionView visibleCells];
+    BOOL didFindMiddleCell = NO;
+    for (NMAYearCollectionViewCell *cell in visible) {
+        CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
+        CGRect cellFrameInView = [self convertCellOriginToSuperview:cell];
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
+        CGPoint cellOriginMiddle = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
+        switch (scroll) {
+            case NMAScrollViewDidEndDragging:
+                if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
+                    [self snapYearOnGesture:cellOrigin cell:cell];
+                    didFindMiddleCell = YES;
+                } else if (didFindMiddleCell == NO && [visible indexOfObject:cell] == visible.count -1) {
+                    [self snapYearOnGesture:cellOrigin cell:[visible objectAtIndex:1]];
+                     NSLog(@"test3");
+                }
+                break;
+            case NMAScrollViewDidEndDecelerating:
+                if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
+                    [self snapYearOnGesture:cellOriginMiddle cell:cell];
+                    didFindMiddleCell = YES;
+                } else if (didFindMiddleCell == NO && [visible indexOfObject:cell] == visible.count -1) {
+                    [self snapYearOnGesture:cellOrigin cell:[visible objectAtIndex:1]];
+                    NSLog(@"test2");
+                }
+                break;
+            default:
+                if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
+                    [self formatMiddleCell:cell];
+                    didFindMiddleCell = YES;
+                } else {
+                    [self formatNonMiddlecell:cell];
+                }
+                break;
+        }
     }
+    
 }
 
-- (void)positionYear {
+- (CGRect)convertCellOriginToSuperview:(NMAYearCollectionViewCell *)cell {
+    CGRect cellRect = cell.frame;
+    CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
+    return cellFrameInView;
+}
+
+- (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell {
+    [cell.year setFont:[UIFont systemFontOfSize:30]];
+    cell.year.textColor = [UIColor NMA_sunYellow];
+}
+
+- (void)formatNonMiddlecell:(NMAYearCollectionViewCell *)cell {
+    [cell.year setFont:[UIFont systemFontOfSize:17]];
+    cell.year.textColor = [UIColor whiteColor];
+}
+
+- (void)snapYearOnGesture:(CGPoint)cellOrigin cell:(NMAYearCollectionViewCell*)cell {
+    [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+}
+
+- (void)positionYearAfterYearIsSet {
     NSInteger test = [self.year integerValue];
     NSInteger yearIndexPath = test - earliestYear;
     if (self.year) {
@@ -184,6 +210,17 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+}
+
+#pragma mark - Public delegate methods
+
+- (void)moveToYear:(NSString *)year {
+    if ([year integerValue] < 2015 && [year integerValue] > 1980) {
+        self.year = year;
+        NSInteger indexYear = [self.years indexOfObject:year];
+        NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
+        [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
 }
 
@@ -206,6 +243,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 - (void)setYear:(NSString *)year {
     _year = year;
-    [self positionYear];
+    [self positionYearAfterYearIsSet];
 }
 @end
