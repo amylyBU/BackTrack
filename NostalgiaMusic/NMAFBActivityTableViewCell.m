@@ -20,7 +20,7 @@
     self.collapsed = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
-    self.postMessage.textColor = [UIColor NMA_almostBlack];
+    self.messageLabel.textColor = [UIColor NMA_almostBlack];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
 }
@@ -28,7 +28,7 @@
 - (void)toggleCellState {
     self.collapsed = !self.collapsed;
     int messageLineCount = self.collapsed ? 2 : 0;
-    self.postMessage.numberOfLines = messageLineCount;
+    self.messageLabel.numberOfLines = messageLineCount;
     [self configureCell];
 }
 
@@ -42,12 +42,12 @@
     }
     
     if (self.fbActivity.message && self.fbActivity.likes && self.fbActivity.comments) {
-        self.postMessage.attributedText = [self constructFullPost:self.fbActivity collapsed:self.collapsed];
+        [self constructFullPost:self.fbActivity collapsed:self.collapsed];
         NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
         [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
         NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
         [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
-        [self.postMessage sizeToFit];
+        [self.messageLabel sizeToFit];
     }
     
     self.collapseImageConstraint.priority = 1;
@@ -79,45 +79,20 @@
     self.imageHeightConstraint.constant = newViewHeight;
 }
 
-- (NSAttributedString *)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
-
-    NSMutableAttributedString *fullPost = [[NSMutableAttributedString alloc] initWithString:@""];
-    
-    NSAttributedString *message = [[NSAttributedString alloc] initWithString:fbActivity.message];
-    NSAttributedString *likeList = [self constructLikeCredits:fbActivity];
-    NSAttributedString *commentList = [self constructCommentThread:fbActivity];
-    
-    NSAttributedString *attributedSpacer = [[NSAttributedString alloc] initWithString:@"\n\n"];
-    [fullPost appendAttributedString:message];
-    if (self.collapsed) {
-        NSAttributedString *attributedContinue = [[NSAttributedString alloc] initWithString:@" Continue Reading"];
-        [fullPost appendAttributedString:attributedContinue];
+- (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
+    self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
+    NSAttributedString *attributedEmpty = [[NSAttributedString alloc] initWithString:@""];
+    if (collapsed) {
+        self.continueLabel.text = @"...Continue Reading";
+        self.collapseContinueToToolsConstraint.priority = 999;
+        self.collapseMessageToCreditsConstraint.priority = 1;
     } else {
-        [fullPost appendAttributedString:attributedSpacer];
-        [fullPost appendAttributedString:likeList];
-        [fullPost appendAttributedString:attributedSpacer];
-        [fullPost appendAttributedString:commentList];
+        self.continueLabel.attributedText = attributedEmpty;
+        self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
+        self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+        self.collapseContinueToToolsConstraint.priority = 1;
+        self.collapseMessageToCreditsConstraint.priority = 999;
     }
-    
-    return fullPost;
-}
-
-
-- (NSAttributedString *)constructCommentThread:(NMAFBActivity *)fbActivity {
-    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""];
-    
-    for (NMAFBComment *comment in fbActivity.comments) {
-        NSAttributedString *attributedName = [self boldedString:comment.commenterName];
-        [commentThreadString appendAttributedString:attributedName];
-        NSAttributedString *attributedSpacer = [[NSAttributedString alloc] initWithString:@": "];
-        [commentThreadString appendAttributedString:attributedSpacer];
-        NSAttributedString *attribuedComment = [[NSAttributedString alloc] initWithString:comment.message];
-        [commentThreadString appendAttributedString:attribuedComment];
-        NSAttributedString *attributedNewline = [[NSAttributedString alloc] initWithString:@"\n"];
-        [commentThreadString appendAttributedString:attributedNewline];
-    }
-    
-    return commentThreadString;
 }
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
@@ -143,7 +118,7 @@
         NSString *creditEnd = [NSString stringWithFormat:@"and %td other %@ %@ this post.", remainingLikes, peopleOrPerson, likeOrLikes];
         NSAttributedString *attributedCreditEnd = [[NSAttributedString alloc] initWithString:creditEnd];
         [likeCreditString appendAttributedString:attributedCreditEnd];
-
+        
     } else {
         for (NSInteger likeIndex = 0; likeIndex < fbActivity.likes.count - 1; likeIndex++ ) {
             NMAFBLike *like = fbActivity.likes[likeIndex];
@@ -159,6 +134,23 @@
     }
     
     return likeCreditString;
+}
+
+- (NSAttributedString *)constructCommentThread:(NMAFBActivity *)fbActivity {
+    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    for (NMAFBComment *comment in fbActivity.comments) {
+        NSAttributedString *attributedName = [self boldedString:comment.commenterName];
+        [commentThreadString appendAttributedString:attributedName];
+        NSAttributedString *attributedSpacer = [[NSAttributedString alloc] initWithString:@": "];
+        [commentThreadString appendAttributedString:attributedSpacer];
+        NSAttributedString *attribuedComment = [[NSAttributedString alloc] initWithString:comment.message];
+        [commentThreadString appendAttributedString:attribuedComment];
+        NSAttributedString *attributedNewline = [[NSAttributedString alloc] initWithString:@"\n"];
+        [commentThreadString appendAttributedString:attributedNewline];
+    }
+    
+    return commentThreadString;
 }
 
 - (void)appendLike:(NMAFBLike *)like
@@ -178,7 +170,7 @@
     NSRange boldRange = NSMakeRange(0, stringToBold.length);
     
     [attributedName beginEditing];
-    [attributedName addAttribute:NSFontAttributeName value:[UIFont NMA_proximaNovaSemiBoldWithSize:15] range:boldRange];
+    [attributedName addAttribute:NSFontAttributeName value:[UIFont NMA_proximaNovaBoldWithSize:15] range:boldRange];
     [attributedName endEditing];
     
     return (NSAttributedString *)attributedName;

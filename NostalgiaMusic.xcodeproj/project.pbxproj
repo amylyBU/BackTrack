@@ -14,6 +14,7 @@
 		072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AA1B39739B000A1162 /* Images.xcassets */; };
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
+		0744B8421B583169002C5188 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0744B8411B583169002C5188 /* ProximaNova-Bold.otf */; };
 		075F632B1B568F1800B072FB /* UIImage+NMAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F632A1B568F1800B072FB /* UIImage+NMAImages.m */; };
 		07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */; };
 		07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */; };
@@ -90,6 +91,7 @@
 		072DE7B31B39739B000A1162 /* NostalgiaMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NostalgiaMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		072DE7B81B39739B000A1162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NostalgiaMusicTests.m; sourceTree = "<group>"; };
+		0744B8411B583169002C5188 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		075F63291B568F1800B072FB /* UIImage+NMAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+NMAImages.h"; path = "Images/UIImage+NMAImages.h"; sourceTree = "<group>"; };
 		075F632A1B568F1800B072FB /* UIImage+NMAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+NMAImages.m"; path = "Images/UIImage+NMAImages.m"; sourceTree = "<group>"; };
 		07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANoFBActivityTableViewCell.h; path = Views/FBActivity/NMANoFBActivityTableViewCell.h; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				6172FCA21B581EBA0053B3CE /* ProximaNova-Extrabold.otf */,
+				0744B8411B583169002C5188 /* ProximaNova-Bold.otf */,
 				E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */,
 				E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */,
 				E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */,
@@ -564,6 +567,7 @@
 				612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */,
 				E515FDD61B4DAD13000E47E3 /* ProximaNova-Light.otf in Resources */,
 				072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */,
+				0744B8421B583169002C5188 /* ProximaNova-Bold.otf in Resources */,
 				6159114C1B3C4B6B006B6779 /* NMAYearCollectionViewController.xib in Resources */,
 				E515FDD81B4DAD13000E47E3 /* ProximaNova-Semibold.otf in Resources */,
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,

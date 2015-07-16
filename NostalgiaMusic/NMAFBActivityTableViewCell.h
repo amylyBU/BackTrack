@@ -16,7 +16,11 @@
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *postMessage;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *continueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likeCreditsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentThreadLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewMoreLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UIButton *likesButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
@@ -24,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *timeRibbonView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseContinueToToolsConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseMessageToCreditsConstraint;
 
 - (void)configureCell;
 - (void)toggleCellState;
