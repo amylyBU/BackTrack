@@ -10,12 +10,17 @@
 
 @implementation UIImage (NMAImages)
 
+/* Home */
 + (UIImage *)NMA_facebookLabel {
     return [UIImage imageNamed:@"facebook-label"];
 }
 
 + (UIImage *)NMA_newsLabel {
     return [UIImage imageNamed:@"news-label"];
+}
+
++ (UIImage *)NMA_settingsGear {
+    return [UIImage imageNamed:@"setting-icon.png"];
 }
 
 @end

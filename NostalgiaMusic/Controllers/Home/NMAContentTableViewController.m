@@ -54,13 +54,13 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     //Song cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
-    
+
     //FB cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASectionHeader class]) bundle:nil]
          forCellReuseIdentifier:kNMASectionHeaderIdentifier];
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 75.0;
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -68,7 +68,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFBActivityCellIdentifier];
-    
+
     //Story cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
@@ -97,7 +97,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(audioDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
@@ -236,7 +236,7 @@ titleForHeaderInSection:(NSInteger)section {
     [[NMARequestManager sharedManager] getSongFromYear:self.year
                                                success:^(NMASong *song) {
                                                    [self.billboardSongs removeAllObjects];
-                                                   
+
                                                    [self.billboardSongs addObject:song];
 
                                                    [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];

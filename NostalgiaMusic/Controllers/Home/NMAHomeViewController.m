@@ -14,16 +14,22 @@
 #import "NMAYearActivityScrollDelegate.h"
 #import "UIView+Constraints.h"
 #import "UIViewController+Containment.h"
+#import "UIColor+NMAColors.h"
+#import "UIFont+NMAFonts.h"
+#import "UIImage+NMAImages.h"
 
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollDelegate>
+
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAYearActivityScrollViewController *yearActivityScrollVC;
 @property (strong, nonatomic) NMAYearCollectionViewController *yearScrollBarCollectionVC;
+
 @end
+
 
 @implementation NMAHomeViewController
 
-- (IBAction)goToSettings:(UIButton *)sender {
+- (void)goToSettings:(UIButton *)sender {
     NMASettingsViewController *settingsVC = [NMASettingsViewController new];
     [self.navigationController pushViewController:settingsVC animated:YES];
 }
@@ -31,13 +37,21 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpHomeView];
-    
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+    [self configureUI];
+}
+
+- (void)configureUI {
+    self.title = @"";
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage NMA_settingsGear]
                                                                        style:UIBarButtonItemStyleDone
                                                                       target:self
                                                                       action:@selector(goToSettings:)];
     [self.navigationItem setRightBarButtonItem:settingsButton];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor NMA_turquoise];
+    self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                                     NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
 }
 
 - (void)setUpHomeView {

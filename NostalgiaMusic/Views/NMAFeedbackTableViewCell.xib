@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,17 +14,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-f4-yJh">
-                        <rect key="frame" x="23" y="11" width="218" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swn-f4-yJh">
+                        <rect key="frame" x="8" y="12" width="218" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="218" id="DX3-5d-Eae"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feedback_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="qel-Ua-0oW">
+                        <rect key="frame" x="299" y="14" width="13" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="13" id="8SZ-bg-wq5"/>
+                            <constraint firstAttribute="height" constant="21" id="cQ7-47-CEF"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="qel-Ua-0oW" secondAttribute="centerY" constant="-3.25" id="D30-Ys-M1s"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qel-Ua-0oW" secondAttribute="trailing" id="FVi-9M-Di4"/>
+                    <constraint firstAttribute="centerY" secondItem="Swn-f4-yJh" secondAttribute="centerY" constant="0.25" id="aU5-4N-8vJ"/>
+                    <constraint firstItem="Swn-f4-yJh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eib-Vd-2Gf"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="feedbackLabel" destination="Swn-f4-yJh" id="rXD-sH-DUT"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="feedback_arrow" width="13" height="21"/>
+    </resources>
 </document>

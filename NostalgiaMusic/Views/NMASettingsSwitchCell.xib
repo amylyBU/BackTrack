@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,24 +14,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a60-Y4-8Sh">
-                        <rect key="frame" x="255" y="6" width="51" height="31"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a60-Y4-8Sh">
+                        <rect key="frame" x="263" y="6" width="51" height="31"/>
                         <color key="onTintColor" red="1" green="0.0" blue="0.010051519906341788" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <action selector="switchClicked:" destination="KGk-i7-Jjw" eventType="valueChanged" id="GfH-PM-Ay8"/>
                         </connections>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJp-tX-kvp">
-                        <rect key="frame" x="26" y="11" width="181" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJp-tX-kvp">
+                        <rect key="frame" x="8" y="12" width="181" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="181" id="08w-wp-Juy"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="a60-Y4-8Sh" secondAttribute="trailing" id="9mQ-we-KeG"/>
+                    <constraint firstAttribute="centerY" secondItem="lJp-tX-kvp" secondAttribute="centerY" constant="0.25" id="CTV-OK-jym"/>
+                    <constraint firstItem="lJp-tX-kvp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="XZQ-gz-eaj"/>
+                    <constraint firstAttribute="centerY" secondItem="a60-Y4-8Sh" secondAttribute="centerY" constant="0.25" id="zSk-Qp-xfJ"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="settingsCategoryLabel" destination="lJp-tX-kvp" id="vBt-zf-e7l"/>
-                <outlet property="settingsSwitch" destination="a60-Y4-8Sh" id="XM2-ha-4J7"/>
+                <outlet property="settingsSwitch" destination="a60-Y4-8Sh" id="owP-ec-Obj"/>
             </connections>
         </tableViewCell>
     </objects>
