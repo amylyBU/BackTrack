@@ -204,8 +204,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     NSInteger yearIndexPath = currentYearAsInt - earliestYear;
     if (self.year) {
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:yearIndexPath inSection:0];
-        NMAYearCollectionViewCell *cell = [self.scrollBarCollectionView cellForItemAtIndexPath:defaultYear];
-        [self formatMiddleCell:cell isSelected:YES];
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
@@ -221,8 +219,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
         NSInteger indexYear = [self.years indexOfObject:year];
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        NMAYearCollectionViewCell *cell = [self.scrollBarCollectionView cellForItemAtIndexPath:defaultYear];
-        [self formatMiddleCell:cell isSelected:YES];
     }
 }
 
