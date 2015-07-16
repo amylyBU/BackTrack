@@ -157,7 +157,11 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
                 }
                 break;
             default:
-                if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
+                if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle) && [self.year isEqualToString:cell.year.text]) {
+                    [self formatMiddleCell:cell isSelected:YES];
+                    didFindMiddleCell = YES;
+                    break;
+                } else if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
                     [self formatMiddleCell:cell isSelected:NO];
                     didFindMiddleCell = YES;
                 } else {
@@ -217,6 +221,8 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
         NSInteger indexYear = [self.years indexOfObject:year];
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        NMAYearCollectionViewCell *cell = [self.scrollBarCollectionView cellForItemAtIndexPath:defaultYear];
+        [self formatMiddleCell:cell isSelected:YES];
     }
 }
 
