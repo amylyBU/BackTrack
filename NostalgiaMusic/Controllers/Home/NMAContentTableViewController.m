@@ -141,7 +141,9 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             UITableViewCell *cell;
             if (self.day.fbActivities.count > 0) {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
-                [(NMAFBActivityTableViewCell*)cell configureCellForFBActivity:self.day.fbActivities[indexPath.row]];
+                NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
+                ((NMAFBActivityTableViewCell *)cell).fbActivity = fbActvity;
+                [(NMAFBActivityTableViewCell *)cell configureCell];
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
             }
@@ -157,6 +159,20 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         }
         default:
             return nil;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case NMASectionTypeFacebookActivity: {
+            NMAFBActivity *fbActivity = self.day.fbActivities[indexPath.row];
+            UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+            if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
+                [(NMAFBActivityTableViewCell *)selectedCell toggleCellState];
+                [tableView reloadData];
+            }
+        }
+        default: {}
     }
 }
 

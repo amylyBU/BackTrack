@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NMAFBActivity.h"
+
 @interface NMAFBActivityTableViewCell : UITableViewCell
 
+@property (nonatomic) BOOL collapsed;
+@property (strong, nonatomic) NMAFBActivity *fbActivity;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -22,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)fbPost;
+- (void)configureCell;
+- (void)toggleCellState;
 
 @end

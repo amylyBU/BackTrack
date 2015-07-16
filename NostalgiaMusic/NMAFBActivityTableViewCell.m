@@ -17,22 +17,35 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.collapsed = YES;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.postMessage.textColor = [UIColor NMA_almostBlack];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
 }
 
-- (void)configureCellForFBActivity:(NMAFBActivity *)fbActivity {
-    if (fbActivity.timeString) {
-        self.timeLabel.text = fbActivity.timeString;
+- (void)toggleCellState {
+    self.collapsed = !self.collapsed;
+    int messageLineCount = self.collapsed ? 2 : 0;
+    self.postMessage.numberOfLines = messageLineCount;
+    [self configureCell];
+}
+
+- (void)configureCell {
+    if (!self.fbActivity) {
+        return;
     }
     
-    if (fbActivity.message && fbActivity.likes && fbActivity.comments) {
-        self.postMessage.attributedText = [self constructFullPost:fbActivity];
-        NSString *likeCountText = [@(fbActivity.likes.count) stringValue];
+    if (self.fbActivity.timeString) {
+        self.timeLabel.text = self.fbActivity.timeString;
+    }
+    
+    if (self.fbActivity.message && self.fbActivity.likes && self.fbActivity.comments) {
+        self.postMessage.attributedText = [self constructFullPost:self.fbActivity collapsed:self.collapsed];
+        NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
         [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
-        NSString *commentCountText = [@(fbActivity.comments.count) stringValue];
+        NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
         [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
         [self.postMessage sizeToFit];
     }
@@ -40,8 +53,8 @@
     self.collapseImageConstraint.priority = 1;
     
     //check for image
-    if (fbActivity.imagePath) {
-        NSURL *imageURL = [NSURL URLWithString:fbActivity.imagePath];
+    if (self.fbActivity.imagePath) {
+        NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         [self setImageViewDimensions:postImage];
@@ -66,7 +79,7 @@
     self.imageHeightConstraint.constant = newViewHeight;
 }
 
-- (NSAttributedString *)constructFullPost:(NMAFBActivity *)fbActivity {
+- (NSAttributedString *)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
 
     NSMutableAttributedString *fullPost = [[NSMutableAttributedString alloc] initWithString:@""];
     
@@ -76,10 +89,15 @@
     
     NSAttributedString *attributedSpacer = [[NSAttributedString alloc] initWithString:@"\n\n"];
     [fullPost appendAttributedString:message];
-    [fullPost appendAttributedString:attributedSpacer];
-    [fullPost appendAttributedString:likeList];
-    [fullPost appendAttributedString:attributedSpacer];
-    [fullPost appendAttributedString:commentList];
+    if (self.collapsed) {
+        NSAttributedString *attributedContinue = [[NSAttributedString alloc] initWithString:@" Continue Reading"];
+        [fullPost appendAttributedString:attributedContinue];
+    } else {
+        [fullPost appendAttributedString:attributedSpacer];
+        [fullPost appendAttributedString:likeList];
+        [fullPost appendAttributedString:attributedSpacer];
+        [fullPost appendAttributedString:commentList];
+    }
     
     return fullPost;
 }
