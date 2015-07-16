@@ -45,6 +45,7 @@
 		615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */; };
 		615911571B3D83AA006B6779 /* NMAYearTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 615911551B3D83AA006B6779 /* NMAYearTableViewCell.m */; };
 		615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */; };
+		6172FCA31B5820B20053B3CE /* ProximaNova-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6172FCA21B581EBA0053B3CE /* ProximaNova-Extrabold.otf */; };
 		7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 486067421913674E7836A8E0 /* libPods.a */; };
 		E508FB1C1B41C1B80040AEF9 /* NMAFBConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */; };
 		E50E347E1B43068100F10A5A /* NMADatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50E347D1B43068100F10A5A /* NMADatabaseManager.m */; };
@@ -144,6 +145,7 @@
 		615911541B3D83AA006B6779 /* NMAYearTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAYearTableViewCell.h; sourceTree = "<group>"; };
 		615911551B3D83AA006B6779 /* NMAYearTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAYearTableViewCell.m; sourceTree = "<group>"; };
 		615911561B3D83AA006B6779 /* NMAYearTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAYearTableViewCell.xib; sourceTree = "<group>"; };
+		6172FCA21B581EBA0053B3CE /* ProximaNova-Extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Extrabold.otf"; sourceTree = "<group>"; };
 		9780E4F9B0D87DAFC65AC61C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E508FB191B41C1B80040AEF9 /* NMAFBConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBConnectViewController.h; path = Controllers/Onboarding/NMAFBConnectViewController.h; sourceTree = "<group>"; };
 		E508FB1A1B41C1B80040AEF9 /* NMAFBConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBConnectViewController.m; path = Controllers/Onboarding/NMAFBConnectViewController.m; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 		E515FDD01B4DAD13000E47E3 /* Proxima Nova */ = {
 			isa = PBXGroup;
 			children = (
+				6172FCA21B581EBA0053B3CE /* ProximaNova-Extrabold.otf */,
 				E515FDD11B4DAD13000E47E3 /* ProximaNova-Light.otf */,
 				E515FDD21B4DAD13000E47E3 /* ProximaNova-Regular.otf */,
 				E515FDD31B4DAD13000E47E3 /* ProximaNova-Semibold.otf */,
@@ -555,6 +558,7 @@
 				E50E34861B43331900F10A5A /* tracks.db in Resources */,
 				E515FDD71B4DAD13000E47E3 /* ProximaNova-Regular.otf in Resources */,
 				E50E34841B4332D700F10A5A /* NMAContentTableViewController.xib in Resources */,
+				6172FCA31B5820B20053B3CE /* ProximaNova-Extrabold.otf in Resources */,
 				61550BC31B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.xib in Resources */,
 				612CDE4E1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib in Resources */,
 				612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */,
@@ -570,7 +574,6 @@
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
 				612CDE531B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib in Resources */,
-				E508FB1D1B41C1B80040AEF9 /* NMAFBConnectViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 				614DB1341B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib in Resources */,
 			);

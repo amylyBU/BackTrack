@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMAYearCollectionViewController">
             <connections>
+                <outlet property="dateLabel" destination="bDd-dn-xoP" id="Ozn-09-J35"/>
                 <outlet property="scrollBarCollectionView" destination="Qeq-Sr-NDh" id="8qB-hY-Jwp"/>
                 <outlet property="view" destination="eRj-vt-gSf" id="Xjp-yo-F4A"/>
                 <outlet property="whiteYearBackgroundSquare" destination="4Rr-CK-pC5" id="pY4-t1-6o3"/>
@@ -25,7 +26,7 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
-                    <rect key="frame" x="0.0" y="549" width="321" height="51"/>
+                    <rect key="frame" x="0.0" y="549" width="600" height="51"/>
                 </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qeq-Sr-NDh">
                     <rect key="frame" x="0.0" y="19" width="600" height="60"/>
@@ -50,11 +51,20 @@
                         <outlet property="delegate" destination="-1" id="cZZ-c7-SSh"/>
                     </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-dn-xoP">
+                    <rect key="frame" x="279" y="549" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="4Rr-CK-pC5" firstAttribute="centerY" secondItem="Qeq-Sr-NDh" secondAttribute="centerY" id="4jX-b6-pwN"/>
+                <constraint firstItem="bDd-dn-xoP" firstAttribute="centerX" secondItem="Zab-nY-3iC" secondAttribute="centerX" id="BvJ-iu-MLX"/>
                 <constraint firstAttribute="trailing" secondItem="Qeq-Sr-NDh" secondAttribute="trailing" id="Pux-mT-xOX"/>
+                <constraint firstAttribute="trailing" secondItem="Zab-nY-3iC" secondAttribute="trailing" id="a6K-Sp-NKJ"/>
                 <constraint firstItem="Qeq-Sr-NDh" firstAttribute="top" secondItem="eRj-vt-gSf" secondAttribute="top" constant="19" id="cJA-bi-MTz"/>
+                <constraint firstItem="bDd-dn-xoP" firstAttribute="top" secondItem="Zab-nY-3iC" secondAttribute="top" id="e2b-QI-LjK"/>
                 <constraint firstItem="Qeq-Sr-NDh" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="kj4-4t-SLS"/>
                 <constraint firstAttribute="centerX" secondItem="4Rr-CK-pC5" secondAttribute="centerX" id="laA-Qk-HgJ"/>
                 <constraint firstItem="Zab-nY-3iC" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="tnw-Kw-2QL"/>

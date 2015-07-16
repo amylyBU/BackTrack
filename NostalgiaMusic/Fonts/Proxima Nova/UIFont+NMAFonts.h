@@ -13,5 +13,6 @@
 + (UIFont *)NMA_proximaNovaLightWithSize:(CGFloat)fontSize;
 + (UIFont *)NMA_proximaNovaRegularWithSize:(CGFloat)fontSize;
 + (UIFont *)NMA_proximaNovaSemiBoldWithSize:(CGFloat)fontSize;
++ (UIFont *)NMA_proximaNovaExtraBoldWithSize:(CGFloat)fontSize;
 
 @end

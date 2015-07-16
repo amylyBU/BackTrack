@@ -22,4 +22,8 @@
     return [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
 }
 
++ (UIFont *)NMA_proximaNovaExtraBoldWithSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Extrabld" size:fontSize];
+}
+
 @end
