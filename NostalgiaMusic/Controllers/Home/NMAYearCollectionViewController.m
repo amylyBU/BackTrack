@@ -71,7 +71,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 - (void)setUpCollectionViewWithLayout {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    [self.flowLayout setSectionInset:UIEdgeInsetsMake(0, self.scrollBarCollectionView.frame.size.width / 2, 0, self.scrollBarCollectionView.frame.size.width/ 2)];
+    [self.flowLayout setSectionInset:UIEdgeInsetsMake(0, CGRectGetWidth(self.scrollBarCollectionView.frame)/2, 0, CGRectGetWidth(self.scrollBarCollectionView.frame)/2)];
     self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     [self.scrollBarCollectionView setCollectionViewLayout:self.flowLayout];
 }
@@ -116,7 +116,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/3, 42);
+    return CGSizeMake(CGRectGetWidth(self.view.frame)/3, 42);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,7 +152,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
                 if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
                     [self snapYearOnGesture:cell];
                     didFindMiddleCell = YES;
-                } else if (didFindMiddleCell == NO && [visible indexOfObject:cell] == visible.count -1) {
+                } else if (!didFindMiddleCell && [visible indexOfObject:cell] == visible.count -1) {
                     [self snapYearOnGesture:[visible objectAtIndex:1]];
                 }
                 break;
@@ -182,7 +182,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 - (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell isSelected:(BOOL)isSelected {
     [cell.year setFont:[UIFont systemFontOfSize:30]];
     [cell.year setFont:[UIFont NMA_proximaNovaExtraBoldWithSize:30]];
-    if(isSelected) {
+    if (isSelected) {
         cell.year.textColor = [UIColor NMA_sunYellow];
     } else {
         cell.year.textColor = [UIColor NMA_aquaMarine];

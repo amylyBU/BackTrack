@@ -65,31 +65,31 @@
     NSDictionary *response = [json objectForKey:@"response"];
     NSDictionary *docs = [response objectForKey:@"docs"];
     if (docs.count > 3) {
-    for (NSDictionary *item in docs) {
-        NSMutableArray *images = [item valueForKey:@"multimedia"];
-        story.imageLinks = images;
-        story.abstract = [self resolveNSNullToNil:[item valueForKey:@"abstract"]];
-        NSMutableArray *headlines = [self resolveNSNullToNil:[item valueForKey:@"headline"]];
-        if (headlines.count) {
-            story.headline = [self resolveNSNullToNil:[headlines valueForKey:@"main"]];
+        for (NSDictionary *item in docs) {
+            NSMutableArray *images = [item valueForKey:@"multimedia"];
+            story.imageLinks = images;
+            story.abstract = [self resolveNSNullToNil:[item valueForKey:@"abstract"]];
+            NSMutableArray *headlines = [self resolveNSNullToNil:[item valueForKey:@"headline"]];
+            if (headlines.count) {
+                story.headline = [self resolveNSNullToNil:[headlines valueForKey:@"main"]];
+            }
+            story.snippet = [self resolveNSNullToNil:[item valueForKey:@"snippet"]];
+            story.articleURL = [self resolveNSNullToNil:[item valueForKey:@"web_url"]];
+            NSMutableArray *bylines = [self resolveNSNullToNil:[item valueForKey:@"byline"]];
+            if (bylines.count) {
+                story.byline = [self resolveNSNullToNil:[bylines valueForKey:@"original"]];
+            }
+            [stories addObject:story];
         }
-        story.snippet = [self resolveNSNullToNil:[item valueForKey:@"snippet"]];
-        story.articleURL = [self resolveNSNullToNil:[item valueForKey:@"web_url"]];
-        NSMutableArray *bylines = [self resolveNSNullToNil:[item valueForKey:@"byline"]];
-        if (bylines.count) {
-            story.byline = [self resolveNSNullToNil:[bylines valueForKey:@"original"]];
-        }
-        [stories addObject:story];
-    }
     }
     if (stories.count) {
-    return stories;
+        return stories;
     } else {
-    story.headline = @"no news found";
+        story.headline = @"no news found";
         [stories addObject:story];
         return stories;
     }
-  }
+}
 
 - (id)resolveNSNullToNil:(id)objectForKey {
     return [NSNull null] == objectForKey ? nil : objectForKey;
