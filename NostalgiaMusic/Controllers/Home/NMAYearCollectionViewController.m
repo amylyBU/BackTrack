@@ -35,7 +35,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
           forCellWithReuseIdentifier:kNMASelectedYearcollectionViewCellIdentifier];
     self.whiteYearBackgroundSquare.backgroundColor = [UIColor whiteColor];
     [self.whiteYearBackgroundSquare.layer masksToBounds];
-    self.whiteYearBackgroundSquare.layer.cornerRadius = 18;
+    self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
     self.whiteYearBackgroundSquare.clipsToBounds = YES;
     [self getLatestYear];
     [self setUpCollectionViewWithLayout];
@@ -71,12 +71,6 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 
 #pragma mark UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView
-  didEndDisplayingCell:(UICollectionViewCell *)cell
-    forItemAtIndexPath:(NSIndexPath *)indexPath {
-    //cell.backgroundColor = [UIColor clearColor];
-}
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
@@ -87,8 +81,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
         CGRect cellRect = cell.frame;
         CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
         CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
-        //NSLog(@"cell origin - %@", [NSValue valueWithCGPoint:cellOrigin]);
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
         if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
             [cell.year setFont:[UIFont systemFontOfSize:30]];
             NSLog(@"cell origin - %@", [NSValue valueWithCGPoint:cellOrigin]);
@@ -104,11 +97,9 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
         CGRect cellRect = cell.frame;
         CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
         CGRect cellFrameInView = [self.scrollBarCollectionView convertRect:cellRect toView:[self.scrollBarCollectionView superview]];
-        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
+        CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
         
         if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
-            CGRect whiteBoxFrameToScroll = [self.view convertRect:whiteSquareRect toView:self.scrollBarCollectionView];
-            CGPoint offsetPoint = CGPointMake(whiteBoxFrameToScroll.origin.x, 0);
             [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         } else {
             [cell.year setFont:[UIFont systemFontOfSize:17]];
@@ -126,11 +117,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
         CGPoint cellOrigin = CGPointMake (cellFrameInView.origin.x, cellFrameInView.origin.y);
         
         if (CGRectContainsPoint(whiteSquareRect, cellOrigin)) {
-            CGRect whiteBoxFrameToScroll = [self.view convertRect:whiteSquareRect toView:self.scrollBarCollectionView];
-            CGPoint offsetPoint = CGPointMake(whiteBoxFrameToScroll.origin.x, 0);
             [self.scrollBarCollectionView scrollToItemAtIndexPath:[self.scrollBarCollectionView indexPathForCell:cell] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        } else {
-            [cell.year setFont:[UIFont systemFontOfSize:17]];
         }
     }
     

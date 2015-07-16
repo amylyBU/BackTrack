@@ -61,7 +61,7 @@
     [self displayContentController:self.yearScrollBarCollectionVC];
     
     [self.view constrainView:self.yearScrollBarCollectionVC.view top:0 left:0 bottom:NSNotFound right:0];
-    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:151];
+    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:128];
 
     
     self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];

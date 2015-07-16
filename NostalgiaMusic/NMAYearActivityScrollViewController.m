@@ -98,7 +98,11 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)scrollingDidEnd {
+    if (isEarliestYearVisble) {
+        self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 1 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
+    } else {
     self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
+    }
 }
 
 - (void)setContentOffsetToCenter {
