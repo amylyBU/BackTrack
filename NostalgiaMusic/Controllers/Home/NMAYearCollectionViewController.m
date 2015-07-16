@@ -14,7 +14,7 @@
 #import "UIFont+NMAFonts.h"
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewDelegateAction) {
-    NMAScrollViewDidScroll = 0,
+    NMAScrollViewDidScroll,
     NMAScrollViewDidEndGesture,
 };
 
