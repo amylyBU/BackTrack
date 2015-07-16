@@ -39,9 +39,9 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     [super viewDidLoad];
     self.scrollBarCollectionView.clipsToBounds = YES;
     [self.scrollBarCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAYearCollectionViewCell class]) bundle:nil]
-forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
-    [self configureUIElements];
+                   forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self getLatestYear];
+    [self configureUIElements];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
 }
@@ -64,7 +64,9 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
     self.whiteYearBackgroundSquare.clipsToBounds = YES;
     self.view.backgroundColor = [UIColor NMA_lightTeal];
-    //self.dateLabel.text = [self getDate];
+    [self.dateLabel setFont:[UIFont NMA_proximaNovaRegularWithSize:14]];
+    self.dateLabel.textColor = [UIColor NMA_darkSkyBlue];
+    self.dateLabel.text = [self getDate];
 }
 
 - (void)setUpCollectionViewWithLayout {
@@ -122,7 +124,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.year.text = year;
     if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
-        [self formatMiddleCell:cell];
+        [self formatMiddleCell:cell isSelected:YES];
         return cell;
     } else {
         [self formatNonMiddlecell:cell];
@@ -156,7 +158,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
                 break;
             default:
                 if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
-                    [self formatMiddleCell:cell];
+                    [self formatMiddleCell:cell isSelected:NO];
                     didFindMiddleCell = YES;
                 } else {
                     [self formatNonMiddlecell:cell];
@@ -173,10 +175,14 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     return cellFrameInView;
 }
 
-- (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell {
+- (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell isSelected:(BOOL)isSelected {
     [cell.year setFont:[UIFont systemFontOfSize:30]];
     [cell.year setFont:[UIFont NMA_proximaNovaExtraBoldWithSize:30]];
-    cell.year.textColor = [UIColor NMA_sunYellow];
+    if(isSelected) {
+        cell.year.textColor = [UIColor NMA_sunYellow];
+    } else {
+        cell.year.textColor = [UIColor NMA_aquaMarine];
+    }
 }
 
 - (void)formatNonMiddlecell:(NMAYearCollectionViewCell *)cell {
@@ -194,10 +200,14 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     NSInteger yearIndexPath = test - earliestYear;
     if (self.year) {
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:yearIndexPath inSection:0];
+        NMAYearCollectionViewCell *cell = [self.scrollBarCollectionView cellForItemAtIndexPath:defaultYear];
+        [self formatMiddleCell:cell isSelected:YES];
+        
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
+    
 }
 
 #pragma mark - Public delegate methods
@@ -222,28 +232,38 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
 }
 
 - (NSString *)getDate {
-    NSDateFormatter *DateFormatter = [[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"LLLL dd"];
-    NSString *currentDate = [DateFormatter  stringFromDate:[NSDate date]];
     NSString *weekday;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"LLLL dd"];
+    NSString *displayDateWithMonthAsWord = [dateFormatter  stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSString *monthAndDay = [dateFormatter stringFromDate:[NSDate date]];
     if (self.year) {
-    NSString *currentDateWithSelectedYear = [currentDate stringByAppendingString:self.year];
-    [DateFormatter setDateFormat:@"LLLL dd yyyy"];
-    NSDate *testDate = [DateFormatter dateFromString:currentDateWithSelectedYear];
-    [DateFormatter setDateFormat:@"EEEE"];
-    weekday = [DateFormatter stringFromDate:testDate];
+        weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:self.year];
     } else {
-        NSString *currentDateWithSelectedYear = [currentDate stringByAppendingString:self.year];
-        [DateFormatter setDateFormat:@"LLLL dd yyyy"];
-        NSDate *testDate = [DateFormatter dateFromString:currentDateWithSelectedYear];
-        [DateFormatter setDateFormat:@"2014"];
-    weekday = [DateFormatter stringFromDate:testDate];
+        NSString *latestYearConverted = [NSString stringWithFormat:@"%i", self.latestYear];
+        weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:latestYearConverted];
     }
+
+    NSString *returnDate = [displayDateWithMonthAsWord stringByAppendingString:@" "];
+    returnDate = [returnDate stringByAppendingString:weekday];
+    return returnDate;
+}
+
+- (NSString *)calculateDayOfWeekWithDate:(NSString *)monthAndDay inYear:(NSString *)year {
+    NSString *weekday;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSString *currentDateWithSelectedYear = [monthAndDay stringByAppendingString:year];
+    [dateFormatter setDateFormat:@"MMddyyyy"];
+    NSDate *testDate = [dateFormatter dateFromString:currentDateWithSelectedYear];
+    [dateFormatter setDateFormat:@"EE"];
+    weekday = [[dateFormatter stringFromDate:testDate] uppercaseString];
     return weekday;
 }
 
 - (void)setYear:(NSString *)year {
     _year = year;
     [self positionYearAfterYearIsSet];
+    self.dateLabel.text = [self getDate];
 }
 @end

@@ -28,6 +28,8 @@
 + (UIColor *)NMA_facebookBlue;
 + (UIColor *)NMA_sunYellow;
 + (UIColor *)NMA_lightTeal;
++ (UIColor *)NMA_darkSkyBlue;
++ (UIColor *)NMA_aquaMarine;
 
 
 @end

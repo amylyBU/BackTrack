@@ -59,17 +59,23 @@
                 </label>
             </subviews>
             <constraints>
+                <constraint firstItem="4Rr-CK-pC5" firstAttribute="centerY" secondItem="Qeq-Sr-NDh" secondAttribute="centerY" id="4gu-IZ-vJC"/>
                 <constraint firstItem="4Rr-CK-pC5" firstAttribute="centerY" secondItem="Qeq-Sr-NDh" secondAttribute="centerY" id="4jX-b6-pwN"/>
                 <constraint firstItem="bDd-dn-xoP" firstAttribute="centerX" secondItem="Zab-nY-3iC" secondAttribute="centerX" id="BvJ-iu-MLX"/>
                 <constraint firstAttribute="trailing" secondItem="Qeq-Sr-NDh" secondAttribute="trailing" id="Pux-mT-xOX"/>
                 <constraint firstAttribute="trailing" secondItem="Zab-nY-3iC" secondAttribute="trailing" id="a6K-Sp-NKJ"/>
-                <constraint firstItem="Qeq-Sr-NDh" firstAttribute="top" secondItem="eRj-vt-gSf" secondAttribute="top" constant="19" id="cJA-bi-MTz"/>
                 <constraint firstItem="bDd-dn-xoP" firstAttribute="top" secondItem="Zab-nY-3iC" secondAttribute="top" id="e2b-QI-LjK"/>
+                <constraint firstItem="Qeq-Sr-NDh" firstAttribute="top" secondItem="eRj-vt-gSf" secondAttribute="top" constant="19" id="fMW-Av-U5T"/>
                 <constraint firstItem="Qeq-Sr-NDh" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="kj4-4t-SLS"/>
                 <constraint firstAttribute="centerX" secondItem="4Rr-CK-pC5" secondAttribute="centerX" id="laA-Qk-HgJ"/>
                 <constraint firstItem="Zab-nY-3iC" firstAttribute="leading" secondItem="eRj-vt-gSf" secondAttribute="leading" id="tnw-Kw-2QL"/>
                 <constraint firstAttribute="bottom" secondItem="Zab-nY-3iC" secondAttribute="bottom" id="wPr-lP-nD7"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="4jX-b6-pwN"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="619" y="133"/>
         </view>
     </objects>

@@ -48,6 +48,7 @@
                                                                       target:self
                                                                       action:@selector(goToSettings:)];
     [self.navigationItem setRightBarButtonItem:settingsButton];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor NMA_lightTeal]];
     [self.navigationController.navigationBar setTranslucent:NO];
     self.edgesForExtendedLayout = UIRectEdgeNone;
