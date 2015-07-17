@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *headlineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bylineLabel;
-@property (weak, nonatomic) IBOutlet UITextView *summaryTextView;
+@property (weak, nonatomic) IBOutlet UILabel *summaryTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 

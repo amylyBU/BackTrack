@@ -79,6 +79,7 @@
             if (bylines.count) {
                 story.byline = [self resolveNSNullToNil:[bylines valueForKey:@"original"]];
             }
+            story.articleURL = [self resolveNSNullToNil:[item valueForKey:@"web_url"]];
             [stories addObject:story];
         }
     }
