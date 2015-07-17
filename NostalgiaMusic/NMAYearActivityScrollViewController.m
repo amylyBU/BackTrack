@@ -62,6 +62,9 @@ BOOL isMostRecentYearVisible;
         [self setContentOffsetToCenter];
     }
     
+    [self destroyViewController:self.leftTableViewController];
+    [self destroyViewController:self.middleTableViewController];
+    [self destroyViewController:self.rightTableViewController];
     self.leftTableViewController = [[NMAContentTableViewController alloc] init];
     [self configureNMAContentTableViewController:self.leftTableViewController
                                         withYear:[self decrementStringValue:self.year]
@@ -133,6 +136,7 @@ BOOL isMostRecentYearVisible;
     isMostRecentYearVisible = NO;
     
     if (position == NMAScrollViewPositionNextYear) {
+        [self destroyViewController:self.leftTableViewController];
         self.leftTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.rightTableViewController;
         NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
@@ -142,6 +146,7 @@ BOOL isMostRecentYearVisible;
         self.rightTableViewController = newYear;
         self.year = self.middleTableViewController.year;
     } else {
+        [self destroyViewController:self.rightTableViewController];
         self.rightTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.leftTableViewController;
         NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
@@ -155,6 +160,11 @@ BOOL isMostRecentYearVisible;
     [self.delegate updateScrollYear:self.year];
     [self adjustFrameView];
     [self setContentOffsetToCenter];
+}
+
+- (void)destroyViewController:(NMAContentTableViewController *)tableView {
+    [tableView.view removeFromSuperview];
+    [tableView removeFromParentViewController];
 }
 
 - (void)adjustFrameView {
