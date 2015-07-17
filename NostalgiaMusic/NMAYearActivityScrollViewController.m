@@ -136,8 +136,7 @@ BOOL isMostRecentYearVisible;
     isMostRecentYearVisible = NO;
     
     if (position == NMAScrollViewPositionNextYear) {
-        [self.leftTableViewController.view removeFromSuperview];
-        [self.leftTableViewController removeFromParentViewController];
+        [self destroyViewController:self.leftTableViewController];
         self.leftTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.rightTableViewController;
         NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
@@ -147,8 +146,7 @@ BOOL isMostRecentYearVisible;
         self.rightTableViewController = newYear;
         self.year = self.middleTableViewController.year;
     } else {
-       [self.rightTableViewController.view removeFromSuperview];
-         [self.rightTableViewController removeFromParentViewController];
+        [self destroyViewController:self.rightTableViewController];
         self.rightTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.leftTableViewController;
         NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
