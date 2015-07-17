@@ -29,8 +29,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 @property (weak, nonatomic) IBOutlet UIView *whiteYearBackgroundSquare;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
-
-
 @end
 
 @implementation NMAYearCollectionViewController

@@ -67,7 +67,6 @@
 
 + (UIColor *)NMA_darkSkyBlue {
     return [UIColor colorWithRed:73.0f/255.0f green:164.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
-    
 }
 
 + (UIColor *)NMA_aquaMarine {
