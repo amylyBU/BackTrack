@@ -51,7 +51,6 @@
                                              selector:@selector(itemDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-    
 }
 
 - (void)startPlaying {
@@ -75,6 +74,8 @@
     
     // set up the av player with a new player item
     [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NMAPlaybackManager sharedPlayer].audioAsset.URL];
+    
+    // after setting it up, return to audioDidFinishPlaying in YearActivityScroll and change the image, and re-add the notification for the new player item.
 }
 
 #pragma mark - Key-Value Observer Handling

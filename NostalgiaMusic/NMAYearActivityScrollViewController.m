@@ -152,7 +152,7 @@ BOOL isMostRecentYearVisible;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
-    
+
 
     [self setUpPlayerForTableCell]; // set up the music player with previewURL
 
@@ -282,23 +282,35 @@ BOOL isMostRecentYearVisible;
 #pragma mark - Animation Methods
 
 - (void)pauseAnimationLayer {
+    // if previously added animation keys, resume the animation
     NSLog(@"pausing animation for year %@", self.year);
     CALayer *layer = [self visibleAlbumImageViewLayer];
     CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
     layer.speed = 0.0;
     layer.timeOffset = pausedTime;
+
 }
 
 - (void)resumeAnimationLayer {
-    NSLog(@"resuming animation for year %@", self.year);
-    CALayer *layer = [self visibleAlbumImageViewLayer];
-    CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    CFTimeInterval pausedTime = [layer timeOffset];
-    layer.speed = 1.0;
-    layer.timeOffset = 0.0;
-    layer.beginTime = 0.0;
-    CFTimeInterval timeSincePause = startTime - pausedTime;
-    layer.beginTime = timeSincePause;
+    if ([self visibleAlbumImageViewLayer]) {
+        NSLog(@"visible album image is: %@", [self visibleAlbumImageViewLayer]);
+        NSLog(@"the visible album image layer has %i animations", [[self visibleAlbumImageViewLayer].animationKeys count]);
+        if (![[self visibleAlbumImageViewLayer].animationKeys count]) { // if no previously added animation keys, add an animation
+            NSLog(@"ADD animation at resume");
+            [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"];
+            NSLog(@"should NOW have %i animation", [[self visibleAlbumImageViewLayer].animationKeys count]);
+        } else {
+            NSLog(@"resuming animation for year %@", self.year);
+            CALayer *layer = [self visibleAlbumImageViewLayer];
+            CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+            CFTimeInterval pausedTime = [layer timeOffset];
+            layer.speed = 1.0;
+            layer.timeOffset = 0.0;
+            layer.beginTime = 0.0;
+            CFTimeInterval timeSincePause = startTime - pausedTime;
+            layer.beginTime = timeSincePause;
+        }
+    }
 }
 
 - (void)makeAnimation {
@@ -314,8 +326,7 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)setUpPlayerForTableCell {
-    NSLog(@"get song for visible year: %@", [self visibleYear]);
-    NSLog(@"but self.year is: %@", self.year);
+    NSLog(@"get song for visible year: %@ and self.year: %@", [self visibleYear], self.year);
     [[NMARequestManager sharedManager] getSongFromYear:[self visibleYear]
                                                success:^(NMASong *song) {
                                                    [[self visibleContentTableVC].billboardSongs removeAllObjects];
@@ -324,7 +335,6 @@ BOOL isMostRecentYearVisible;
                                                    [[self visibleContentTableVC].tableView reloadData]; // this would reload the table view with the new song cell. must be done before adding the animation to the album view in the song cell.
 
                                                    [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
-
 
                                                    NSLog(@"set up did end notification");
                                                    // Observes when the song finishes playing
@@ -335,10 +345,13 @@ BOOL isMostRecentYearVisible;
 
                                                    [self makeAnimation];
 
-                                                   NSLog(@"add the animation here");
-                                                   [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"]; // album image is nil
-
                                                    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                                                      NSLog(@"ADD the animation here");
+                                                       NSLog(@"if after adding anim, and autoplay, then start playing");
+
+                                                       [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"]; // album image is nil
+
+
                                                        [[NMAPlaybackManager sharedPlayer] startPlaying];
                                                    }
                                                }
@@ -353,6 +366,13 @@ BOOL isMostRecentYearVisible;
     // this gets called twice - when the audio finishes playing, and because it has finished playing, the rate is zero and it is "paused"
     NSLog(@"audio finished playing for year %@, change play button", self.year);
     [[self visibleSongCell] changePlayButtonImage]; // this just changes the button image
+    NSLog(@"set up did end notification for latter times");
+
+    // Observes when the song finishes playing
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
 }
 
 @end

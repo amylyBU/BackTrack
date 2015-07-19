@@ -54,7 +54,7 @@
 }
 
 - (IBAction)goToNewYorkTimes {
-    NSString *url = [NSString stringWithFormat:(NSString *)self.story.articleURL];
+    NSString *url = [NSString stringWithFormat:@"%@", self.story.articleURL];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

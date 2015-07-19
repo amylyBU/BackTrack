@@ -24,6 +24,7 @@
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
 #import "NMAYearActivityScrollViewController.h"
+#import "NMATodaysSongTableViewCell.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -99,24 +100,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
-
-    // Observes when the song finishes playing
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(audioDidFinishPlaying:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-
-    // Observes when the user resumes song
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidResumeAVPlayer:)
-                                                 name:@"resumeAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
-
-    // Observes when the user pauses song
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidPauseAVPlayer:)
-                                                 name:@"pauseAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
 }
 
 - (void)configureUI {
@@ -124,27 +107,21 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage NMA_homeBackground]];
 }
 
-#pragma mark - Notification Observation Handlers
-
-- (void)audioDidFinishPlaying:(NSNotification *)notification {
-    NMATodaysSongTableViewCell *cell = (NMATodaysSongTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell changePlayButtonImage];
-}
-
-- (void)userDidResumeAVPlayer:(NSNotification *)notification {
-    NSLog(@"USER DID RESUME");
-    [(NMATodaysSongTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] resumeLayer];
-}
-
 #pragma mark - Table view data source
 
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-  // because the song cell will be deallocated, you want to resume the animation once it is back in view
+    // because the song cell will be deallocated, you want to resume the animation once it is back in view
     // get super view
-    NMAYearActivityScrollViewController *parentVC = self.parentViewController;
-    [[parentVC visibleAlbumImageViewLayer] addAnimation:parentVC.rotation forKey:@"rotationAnimation"];
+    NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
+
+    if ([cell isKindOfClass:[NMATodaysSongTableViewCell class]]) {
+        NSLog(@"cell is: %@", cell);
+        NSLog(@"visible cell is: %@", [parentVC visibleSongCell]);
+//            NSLog(@"resuming the animation when the visible cell is displayed");
+//            [parentVC resumeAnimationLayer];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -266,7 +243,7 @@ viewForHeaderInSection:(NSInteger)section {
 heightForHeaderInSection:(NSInteger)section {
     switch (section) {
         case (NMASectionTypeBillboardSong):
-            return 0.0;
+            return 1.0;
         default:
             return 62.0;
     }
@@ -311,7 +288,7 @@ titleForHeaderInSection:(NSInteger)section {
                                                    [self.billboardSongs removeAllObjects];
                                                    [self.billboardSongs addObject:song];
 
-                                                   [[NMAPlaybackManager sharedPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
+                                                   [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
                                                    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
                                                        [[NMAPlaybackManager sharedPlayer] startPlaying];
                                                    }

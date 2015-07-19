@@ -15,11 +15,14 @@
 
 @end
 
+
 @interface NMAYearCollectionViewController : UIViewController
+
 @property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;
 @property (weak, nonatomic) id <NMAYearCollectionViewControllerDelegate> delegate;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) IBOutlet UICollectionView *scrollBarCollectionView;
 
 - (void)moveToYear:(NSString *)year;
+
 @end

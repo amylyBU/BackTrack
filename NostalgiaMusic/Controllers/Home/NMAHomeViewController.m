@@ -17,6 +17,7 @@
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
+#import "NMAPlaybackManager.h"
 
 static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
@@ -88,13 +89,15 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
     [self.yearActivityScrollVC setUpScrollView:year];
-    [self.yearActivityScrollVC setUpPlayerForTableCell];
+    
+    // upon selecting year, you want to
+    [[NMAPlaybackManager sharedPlayer] pausePlaying]; // pause the current song
+    [self.yearActivityScrollVC setUpPlayerForTableCell]; // set it up for the other song
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
-    [self.yearActivityScrollVC setUpPlayerForTableCell];
     
 }
 
