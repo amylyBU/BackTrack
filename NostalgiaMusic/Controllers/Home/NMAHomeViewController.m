@@ -88,11 +88,14 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
     [self.yearActivityScrollVC setUpScrollView:year];
+    [self.yearActivityScrollVC setUpPlayerForTableCell];
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
+    [self.yearActivityScrollVC setUpPlayerForTableCell];
+    
 }
 
 @end

@@ -13,9 +13,11 @@
 @interface NMAPlaybackManager : NSObject
 
 @property (strong, nonatomic) AVPlayerItem *audioPlayerItem;
+@property (strong, nonatomic) AVPlayer *audioPlayer;
+@property (strong, nonatomic) AVURLAsset *audioAsset;
 
 + (instancetype)sharedPlayer;
-- (void)setUpWithURL:(NSURL *)url;
+- (void)setUpAVPlayerWithURL:(NSURL *)url;
 - (void)startPlaying;
 - (void)pausePlaying;
 

@@ -21,7 +21,6 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 
 @property (strong, nonatomic) NMASong *song;
 @property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
-@property (strong, nonatomic) CABasicAnimation *rotationAnimation;
 
 @end
 
@@ -52,7 +51,6 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
         [[NMAPlaybackManager sharedPlayer] startPlaying];
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
-
     } else {
         [[NMAPlaybackManager sharedPlayer] pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];

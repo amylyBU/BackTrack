@@ -224,7 +224,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 #pragma mark - Getters and Setters
 
-- (void) getLatestYear {
+- (void)getLatestYear {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy"];
     NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];

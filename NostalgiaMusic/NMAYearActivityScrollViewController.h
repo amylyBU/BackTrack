@@ -17,8 +17,13 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
+@property (strong, nonatomic) CABasicAnimation *rotation;
 
 - (NSString *)visibleYear;
 - (NMAContentTableViewController *)visibleContentTableVC;
+- (void)makeAnimation;
+- (CALayer *)visibleAlbumImageViewLayer;
+- (void)setUpPlayerForTableCell;
+
 
 @end

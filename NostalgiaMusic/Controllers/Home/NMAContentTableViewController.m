@@ -23,6 +23,7 @@
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
+#import "NMAYearActivityScrollViewController.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -41,9 +42,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 @interface NMAContentTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *billboardSongs;
-@property (strong, nonatomic) NSMutableArray *facebookActivities;
-@property (strong, nonatomic) NSMutableArray *NYTimesNews;
 @property (strong, nonatomic, readwrite) NMADay *day;
 @property (strong, nonatomic) NMAModalDetailTableViewController *modalDetailViewController;
 
@@ -143,8 +141,10 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-  // resume animation
-
+  // because the song cell will be deallocated, you want to resume the animation once it is back in view
+    // get super view
+    NMAYearActivityScrollViewController *parentVC = self.parentViewController;
+    [[parentVC visibleAlbumImageViewLayer] addAnimation:parentVC.rotation forKey:@"rotationAnimation"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
