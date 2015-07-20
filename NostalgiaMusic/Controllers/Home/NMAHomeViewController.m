@@ -55,7 +55,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     self.navigationController.navigationBar.translucent = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor NMA_turquoise];
+    self.navigationController.navigationBar.barTintColor = [UIColor NMA_lightTeal];
     self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                      NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
 }
