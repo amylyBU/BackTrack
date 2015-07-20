@@ -17,15 +17,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="512" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="512"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="528" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0" userLabel="message view">
-                        <rect key="frame" x="8" y="267" width="304" height="236"/>
+                        <rect key="frame" x="8" y="267" width="304" height="252"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
                                 <rect key="frame" x="10" y="51" width="284" height="18"/>
@@ -34,24 +34,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta0-eL-YRP">
-                                <rect key="frame" x="268" y="201" width="26" height="23"/>
+                                <rect key="frame" x="268" y="217" width="26" height="23"/>
                                 <state key="normal" image="share-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="pressedShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6w9-Mh-zB9"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqF-ui-9Bj">
-                                <rect key="frame" x="10" y="202" width="33" height="22"/>
+                                <rect key="frame" x="10" y="218" width="33" height="22"/>
                                 <state key="normal" title=" X" image="comment-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVC-Cw-gzF">
-                                <rect key="frame" x="51" y="202" width="32" height="22"/>
+                                <rect key="frame" x="51" y="218" width="32" height="22"/>
                                 <state key="normal" title=" X" image="like-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,40 +72,50 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="... View more comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zN-Fh-Om8">
-                                <rect key="frame" x="10" y="170" width="284" height="15"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h63-FB-4mx">
+                                <rect key="frame" x="10" y="172" width="158" height="27"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="... View more comments">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="viewMoreComments:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wjw-mC-0A1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Y78-Sd-aWd" secondAttribute="trailing" constant="10" id="0Vt-7H-xbm"/>
-                            <constraint firstItem="3zN-Fh-Om8" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="2J4-t2-1nw"/>
                             <constraint firstItem="shb-NU-ukr" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="2qb-Va-ggQ"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h63-FB-4mx" secondAttribute="trailing" id="3NJ-4H-OfB"/>
+                            <constraint firstItem="gqF-ui-9Bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="h63-FB-4mx" secondAttribute="bottom" priority="998" constant="12" id="3qM-pF-p9r"/>
                             <constraint firstItem="zTW-VF-5pA" firstAttribute="top" secondItem="Y78-Sd-aWd" secondAttribute="bottom" priority="1" constant="32" id="6TV-by-rFf"/>
+                            <constraint firstItem="h63-FB-4mx" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="71p-JI-v9e"/>
                             <constraint firstAttribute="trailing" secondItem="shb-NU-ukr" secondAttribute="trailing" constant="10" id="7iX-bP-FuW"/>
                             <constraint firstAttribute="trailing" secondItem="zTW-VF-5pA" secondAttribute="trailing" constant="10" id="8I0-ds-AWg"/>
                             <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="6Hu-Bj-SX0" secondAttribute="top" constant="51" id="Ff7-hy-eX1"/>
                             <constraint firstItem="Y78-Sd-aWd" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="GG3-X8-AaV"/>
                             <constraint firstItem="gqF-ui-9Bj" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="KUh-uO-0am"/>
+                            <constraint firstItem="h63-FB-4mx" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" constant="2" id="TG4-3V-28T"/>
                             <constraint firstItem="sVC-Cw-gzF" firstAttribute="leading" secondItem="gqF-ui-9Bj" secondAttribute="trailing" constant="8" id="UxB-bV-JId"/>
                             <constraint firstAttribute="bottom" secondItem="gqF-ui-9Bj" secondAttribute="bottom" constant="12" id="Vex-op-Lmr"/>
-                            <constraint firstItem="gqF-ui-9Bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3zN-Fh-Om8" secondAttribute="bottom" priority="998" constant="12" id="Xnq-ES-YLT"/>
                             <constraint firstAttribute="trailing" secondItem="ta0-eL-YRP" secondAttribute="trailing" constant="10" id="ZbN-MC-uWy"/>
+                            <constraint firstItem="h63-FB-4mx" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" priority="998" constant="10" id="dV6-wj-7oK"/>
                             <constraint firstItem="cgT-nU-I0a" firstAttribute="top" secondItem="zTW-VF-5pA" secondAttribute="bottom" constant="32" id="ig5-ni-6UU"/>
                             <constraint firstItem="shb-NU-ukr" firstAttribute="top" secondItem="Y78-Sd-aWd" secondAttribute="bottom" priority="998" constant="8" id="jX0-Qk-iK7"/>
                             <constraint firstAttribute="bottom" secondItem="sVC-Cw-gzF" secondAttribute="bottom" constant="12" id="krF-Hp-cgt"/>
                             <constraint firstAttribute="bottom" secondItem="ta0-eL-YRP" secondAttribute="bottom" constant="12" id="oNB-Sg-I3U"/>
                             <constraint firstItem="zTW-VF-5pA" firstAttribute="top" secondItem="shb-NU-ukr" secondAttribute="bottom" priority="998" constant="8" id="rqM-Og-qbs"/>
                             <constraint firstItem="zTW-VF-5pA" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="s5h-It-I9g"/>
-                            <constraint firstItem="3zN-Fh-Om8" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" priority="998" constant="8" id="sRS-xB-vnb"/>
                             <constraint firstAttribute="trailing" secondItem="cgT-nU-I0a" secondAttribute="trailing" constant="8" id="sts-dX-CaP"/>
                             <constraint firstItem="cgT-nU-I0a" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="xSJ-gr-iOc"/>
                             <constraint firstItem="gqF-ui-9Bj" firstAttribute="top" secondItem="shb-NU-ukr" secondAttribute="bottom" priority="1" constant="12" id="y10-SO-YJh"/>
-                            <constraint firstAttribute="trailing" secondItem="3zN-Fh-Om8" secondAttribute="trailing" constant="10" id="zK0-I9-7fj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TG4-3V-28T"/>
+                            </mask>
+                        </variation>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK">
                         <rect key="frame" x="8" y="8" width="304" height="300"/>
@@ -166,9 +173,9 @@
                 <outlet property="shareButton" destination="ta0-eL-YRP" id="h9K-Jc-AKa"/>
                 <outlet property="timeLabel" destination="pyN-Pl-1gA" id="Dmw-Ba-xD0"/>
                 <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="Z89-F6-vQW"/>
-                <outlet property="viewMoreLabel" destination="3zN-Fh-Om8" id="Oiu-r0-m34"/>
+                <outlet property="viewMoreButton" destination="h63-FB-4mx" id="ZxU-n0-VZe"/>
             </connections>
-            <point key="canvasLocation" x="151" y="609"/>
+            <point key="canvasLocation" x="151" y="617"/>
         </tableViewCell>
     </objects>
     <resources>

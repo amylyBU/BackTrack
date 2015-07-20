@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *continueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCreditsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentThreadLabel;
-@property (weak, nonatomic) IBOutlet UILabel *viewMoreLabel;
+@property (weak, nonatomic) IBOutlet UIButton *viewMoreButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UIButton *likesButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;

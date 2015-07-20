@@ -165,7 +165,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeFacebookActivity: {
-            NMAFBActivity *fbActivity = self.day.fbActivities[indexPath.row];
             UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
             if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
                 [(NMAFBActivityTableViewCell *)selectedCell toggleCellState];
