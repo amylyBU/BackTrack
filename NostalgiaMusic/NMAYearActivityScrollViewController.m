@@ -110,7 +110,7 @@ BOOL isMostRecentYearVisible;
 - (void)didSwipeToPastYear {
     if ([self.leftTableViewController.year isEqualToString:self.earliestYear]) {
         isEarliestYearVisble = YES;
-    } else if ([self.middleTableViewController.year isEqualToString:[self decrementStringValue:self.latestYear]] && isMostRecentYearVisible)  {
+    } else if ([self.middleTableViewController.year isEqualToString:[self decrementStringValue:self.latestYear]] && isMostRecentYearVisible) {
         isMostRecentYearVisible = NO;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];

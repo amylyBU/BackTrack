@@ -33,6 +33,8 @@
 		612CDE441B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE421B4EA5E100FDCEF9 /* NMASettingsSwitchCell.xib */; };
 		612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE4B1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m */; };
 		612CDE4E1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE4C1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib */; };
+		612CDE521B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 612CDE501B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.m */; };
+		612CDE531B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612CDE511B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib */; };
 		612D1F1D1B45BF8D004C7EBE /* NMANewsStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */; };
 		614DB1331B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 614DB1311B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.m */; };
 		614DB1341B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614DB1321B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib */; };
@@ -122,6 +124,9 @@
 		612CDE4A1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFeedbackTableViewCell.h; path = Views/NMAFeedbackTableViewCell.h; sourceTree = "<group>"; };
 		612CDE4B1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFeedbackTableViewCell.m; path = Views/NMAFeedbackTableViewCell.m; sourceTree = "<group>"; };
 		612CDE4C1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAFeedbackTableViewCell.xib; path = Views/NMAFeedbackTableViewCell.xib; sourceTree = "<group>"; };
+		612CDE4F1B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMASelectedYearCollectionViewCell.h; path = Views/NMASelectedYearCollectionViewCell.h; sourceTree = "<group>"; };
+		612CDE501B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMASelectedYearCollectionViewCell.m; path = Views/NMASelectedYearCollectionViewCell.m; sourceTree = "<group>"; };
+		612CDE511B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMASelectedYearCollectionViewCell.xib; path = Views/NMASelectedYearCollectionViewCell.xib; sourceTree = "<group>"; };
 		612D1F1B1B45BF8D004C7EBE /* NMANewsStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANewsStory.h; path = Models/NMANewsStory.h; sourceTree = "<group>"; };
 		612D1F1C1B45BF8D004C7EBE /* NMANewsStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMANewsStory.m; path = Models/NMANewsStory.m; sourceTree = "<group>"; };
 		614DB1301B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANewsStoryTableViewCell.h; path = Controllers/Home/NMANewsStoryTableViewCell.h; sourceTree = "<group>"; };
@@ -410,6 +415,9 @@
 		615911591B3D850A006B6779 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				612CDE4F1B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.h */,
+				612CDE501B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.m */,
+				612CDE511B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib */,
 				614DB1301B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.h */,
 				614DB1311B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.m */,
 				614DB1321B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib */,
@@ -561,6 +569,8 @@
 				07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */,
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
 				072A08671B3976660068EEF0 /* NMAHomeViewController.xib in Resources */,
+				612CDE531B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.xib in Resources */,
+				E508FB1D1B41C1B80040AEF9 /* NMAFBConnectViewController.xib in Resources */,
 				07ECCBF61B3A0B730089D042 /* NMASettingsViewController.xib in Resources */,
 				614DB1341B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.xib in Resources */,
 			);
@@ -622,6 +632,7 @@
 				6159114B1B3C4B6B006B6779 /* NMAYearCollectionViewController.m in Sources */,
 				07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */,
 				E515FDDD1B4DB126000E47E3 /* UIFont+NMAFonts.m in Sources */,
+				612CDE521B50179400FDCEF9 /* NMASelectedYearCollectionViewCell.m in Sources */,
 				615911501B3C89B3006B6779 /* NMAContentTableViewController.m in Sources */,
 				612CDE4D1B4EB8EB00FDCEF9 /* NMAFeedbackTableViewCell.m in Sources */,
 				E5141B641B4899D3002BC232 /* NMATodaysSongTableViewCell.m in Sources */,
@@ -767,6 +778,7 @@
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -779,6 +791,7 @@
 				INFOPLIST_FILE = NostalgiaMusic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -18,6 +18,7 @@
 @interface NMAYearCollectionViewController : UICollectionViewController
 @property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;
 @property (weak, nonatomic) id <NMAYearCollectionViewControllerDelegate> delegate;
+@property (copy, nonatomic) NSString *year;
 
 - (void)moveToYear:(NSString *)year;
 @end

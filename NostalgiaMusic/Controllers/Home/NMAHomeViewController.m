@@ -42,7 +42,8 @@
 
 - (void)configureUI {
     self.title = @"";
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage NMA_settingsGear]
+    UIImage *buttonImage = [UIImage imageNamed:@"setting-icon.png"];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:buttonImage
                                                                        style:UIBarButtonItemStyleDone
                                                                       target:self
                                                                       action:@selector(goToSettings:)];
@@ -60,7 +61,8 @@
     [self displayContentController:self.yearScrollBarCollectionVC];
     
     [self.view constrainView:self.yearScrollBarCollectionVC.view top:0 left:0 bottom:NSNotFound right:0];
-    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:48];
+    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:191];
+
     
     self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];
     self.yearActivityScrollVC.delegate = self;
