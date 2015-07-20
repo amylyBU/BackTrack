@@ -68,7 +68,6 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     
     [self.view constrainView:self.yearScrollBarCollectionVC.view top:0 left:0 bottom:NSNotFound right:0];
     [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:kYearScrollBarCollectionVCHeight];
-
     
     self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];
     self.yearActivityScrollVC.delegate = self;
@@ -87,15 +86,17 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)didSelectYear:(NSString *)year {
-    self.selectedYear = year;
-    [self.yearActivityScrollVC setUpScrollView:year];
-    [self.yearActivityScrollVC setUpPlayerForTableCell]; // set it up for the other song
+    if (![self.selectedYear isEqualToString:year]) { // to avoid loading the same year twice
+        [[NMAPlaybackManager sharedPlayer] pausePlaying]; // pause CURRENT song
+        self.selectedYear = year;
+        [self.yearActivityScrollVC setUpScrollView:year];
+        [self.yearActivityScrollVC setUpPlayerForTableCell]; // set up cell for NEW song
+    }
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
-    
 }
 
 @end

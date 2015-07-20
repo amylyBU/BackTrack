@@ -168,7 +168,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
                 break;
         }
     }
-    
 }
 
 - (CGRect)convertCellOriginToSuperview:(NMAYearCollectionViewCell *)cell {

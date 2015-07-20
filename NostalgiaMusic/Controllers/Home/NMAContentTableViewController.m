@@ -104,7 +104,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 - (void)configureUI {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage NMA_homeBackground]];
+    self.tableView.backgroundColor = [UIColor NMA_white];
+    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage NMA_homeBackground]];
+    self.tableView.backgroundView = childView;
+    [self.tableView sizeToFit];
+    self.tableView.allowsSelection = NO;
 }
 
 #pragma mark - Table view data source
@@ -112,12 +116,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[cell class] isEqual:[NMATodaysSongTableViewCell class]]) {
-        NSLog(@"Resuming animation for reallocated song cell");
-        NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
-        [parentVC resumeAnimationLayer];
-    }
-
+//    if ([[cell class] isEqual:[NMATodaysSongTableViewCell class]]) {
+//        NSLog(@"Resuming animation for reallocated song cell");
+//        NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
+//        [parentVC resumeAnimationLayer];
+//    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -146,6 +149,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         case NMASectionTypeBillboardSong: {
            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
+            cell.contentView.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = [UIColor whiteColor];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -168,8 +173,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         case NMASectionTypeNYTimesNews: {
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
-            cell.backgroundColor = [UIColor NMA_lightGray];
             cell.delegate = self;
+            cell.backgroundColor = [UIColor clearColor];
             return cell;
         }
         default:
@@ -214,8 +219,8 @@ viewForHeaderInSection:(NSInteger)section {
             fbSectionHeaderCell.headerLabel.font = [UIFont NMA_proximaNovaRegularWithSize:20.0f];
             fbSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
-            fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
-            fbSectionHeaderCell.backgroundColor = [UIColor NMA_lightGray];
+            fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor]; // so the space above the facebook label is white - blends in with the song cell background
+            fbSectionHeaderCell.backgroundColor = [UIColor clearColor];
             [fbSectionHeaderCell sizeToFit];
             return fbSectionHeaderCell;
         }
@@ -225,8 +230,8 @@ viewForHeaderInSection:(NSInteger)section {
             newsSectionHeaderCell.headerLabel.font = [UIFont NMA_proximaNovaRegularWithSize:20.0f];
             newsSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             newsSectionHeaderCell.headerImageView.image = [UIImage NMA_newsLabel];
-            newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor NMA_lightGray];
-            newsSectionHeaderCell.backgroundColor = [UIColor NMA_lightGray];
+            newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor clearColor];
+            newsSectionHeaderCell.backgroundColor = [UIColor clearColor];
             [newsSectionHeaderCell sizeToFit];
             return newsSectionHeaderCell;
         }
