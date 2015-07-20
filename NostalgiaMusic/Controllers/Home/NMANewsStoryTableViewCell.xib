@@ -18,7 +18,7 @@
                         <rect key="frame" x="18" y="58" width="284" height="191"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-9Z-iBg">
-                                <rect key="frame" x="-5" y="10" width="70" height="27"/>
+                                <rect key="frame" x="-4" y="10" width="70" height="27"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHE-gT-utI" userLabel="date">
                                 <rect key="frame" x="0.0" y="14" width="42" height="21"/>
@@ -77,7 +77,7 @@
                             <constraint firstItem="v7d-3c-DqA" firstAttribute="leading" secondItem="hHO-G8-cPk" secondAttribute="leading" constant="10" id="fTV-Ce-kpo"/>
                             <constraint firstAttribute="trailing" secondItem="oxg-PI-Cbc" secondAttribute="trailing" constant="11" id="mA6-VF-Y8T"/>
                             <constraint firstAttribute="bottom" secondItem="iR2-Rk-a5f" secondAttribute="bottom" constant="64" id="mKL-Hg-0Da"/>
-                            <constraint firstItem="eGG-9Z-iBg" firstAttribute="leading" secondItem="hHO-G8-cPk" secondAttribute="leading" constant="-5" id="oPM-PN-nhe"/>
+                            <constraint firstItem="eGG-9Z-iBg" firstAttribute="leading" secondItem="hHO-G8-cPk" secondAttribute="leading" constant="-4" id="oPM-PN-nhe"/>
                             <constraint firstItem="hzY-Uy-8mO" firstAttribute="top" secondItem="iR2-Rk-a5f" secondAttribute="bottom" id="ovj-ii-IeO"/>
                             <constraint firstItem="iR2-Rk-a5f" firstAttribute="leading" secondItem="hHO-G8-cPk" secondAttribute="leading" constant="10" id="rSp-lR-cot"/>
                             <constraint firstAttribute="trailing" secondItem="HK3-1A-87S" secondAttribute="trailing" constant="10" id="tTn-ll-sxm"/>
