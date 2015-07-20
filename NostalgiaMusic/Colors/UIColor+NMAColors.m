@@ -56,4 +56,13 @@
     return [UIColor colorWithRed:229.0f/255.0f green:237.0f/255.0f blue:239.0f/255.0f alpha:1.0f];
 }
 
+/* Navigation Bar Colors */
++ (UIColor *)NMA_sunYellow {
+     return [UIColor colorWithRed:255.0f/255.0f green:210.0f/255.0f blue:38.0f/255.0f alpha:1.0f];
+}
+
++ (UIColor *)NMA_lightTeal {
+    return [UIColor colorWithRed:133.0f/255.0f green:222.0f/255.0f blue:218.0f/255.0f alpha:1.0f];
+}
+
 @end

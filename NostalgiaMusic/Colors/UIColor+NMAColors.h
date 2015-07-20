@@ -25,5 +25,9 @@
 + (UIColor *)NMA_turquoise;
 + (UIColor *)NMA_black;
 + (UIColor *)NMA_backgroundGray;
++ (UIColor *)NMA_facebookBlue;
++ (UIColor *)NMA_sunYellow;
++ (UIColor *)NMA_lightTeal;
+
 
 @end

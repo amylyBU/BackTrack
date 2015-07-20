@@ -10,6 +10,7 @@
 #import "NMAYearCollectionViewCell.h"
 #import "NMASelectedYearCollectionViewCell.h"
 #import <QuartzCore/CALayer.h>
+#import "UIColor+NMAColors.h"
 
 static NSInteger const earliestYear = 1981;
 static NSString * const kNMAYearCollectionCellIdentifier = @"NMAYearCollectionCell";
@@ -37,6 +38,7 @@ forCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier];
     [self.whiteYearBackgroundSquare.layer masksToBounds];
     self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
     self.whiteYearBackgroundSquare.clipsToBounds = YES;
+    self.view.backgroundColor = [UIColor NMA_lightTeal];
     [self getLatestYear];
     [self setUpCollectionViewWithLayout];
     [self setUpYears];
