@@ -34,16 +34,32 @@ static const NSInteger kLikeLimit = 5;
     [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
+    self.viewMoreButton.hidden = YES;
 }
 
 - (void)setCollapsedCellState:(BOOL)isCollapsed {
     self.collapsed = isCollapsed;
     int messageLineCount = self.collapsed ? 2 : 0;
     self.messageLabel.numberOfLines = messageLineCount;
-    [self configureCell];
+    
+    self.closeButton.hidden = isCollapsed;
+    self.timeRibbonView.hidden = !isCollapsed;
+    self.commentsButton.hidden = !isCollapsed;
+    self.likesButton.hidden = !isCollapsed;
+    
+    NSAttributedString *attributedEmpty = [[NSAttributedString alloc] initWithString:@""];
+    if (isCollapsed) {
+        self.continueLabel.text = @"...Continue Reading";
+        self.collapseContinueToToolsConstraint.priority = 999;
+        self.collapseMessageToCreditsConstraint.priority = 1;
+    } else {
+        self.continueLabel.attributedText = attributedEmpty;
+        self.collapseContinueToToolsConstraint.priority = 1;
+        self.collapseMessageToCreditsConstraint.priority = 999;
+    }
 }
 
-- (IBAction)viewMoreComments:(id)sender {
+- (IBAction)viewMoreComments:(UIButton *)sender {
     NSMutableAttributedString *commentThread = [[NSMutableAttributedString alloc] initWithAttributedString:self.commentThreadLabel.attributedText];
     self.commentThreadLabel.attributedText = [self appendComments:self.fbActivity
                                                          toThread:commentThread
@@ -89,13 +105,12 @@ static const NSInteger kLikeLimit = 5;
         [self.messageLabel sizeToFit];
     }
     
-    self.collapseImageConstraint.priority = 1;
-    
     //check for image
     if (self.fbActivity.imagePath) {
         NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
+        self.collapseImageConstraint.priority = 1;
         [self setImageViewDimensions:postImage];
         [self.postImageView setImage:postImage];
         [self layoutIfNeeded];
@@ -120,25 +135,9 @@ static const NSInteger kLikeLimit = 5;
 
 - (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
     self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
-    NSAttributedString *attributedEmpty = [[NSAttributedString alloc] initWithString:@""];
-    
-    self.viewMoreButton.hidden = collapsed;
-    self.closeButton.hidden = collapsed;
-    self.timeRibbonView.hidden = !collapsed;
-    self.commentsButton.hidden = !collapsed;
-    self.likesButton.hidden = !collapsed;
-    
-    if (collapsed) {
-        self.continueLabel.text = @"...Continue Reading";
-        self.collapseContinueToToolsConstraint.priority = 999;
-        self.collapseMessageToCreditsConstraint.priority = 1;
-    } else {
-        self.continueLabel.attributedText = attributedEmpty;
-        self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
-        self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
-        self.collapseContinueToToolsConstraint.priority = 1;
-        self.collapseMessageToCreditsConstraint.priority = 999;
-    }
+    self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
+    self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+    [self setCollapsedCellState:collapsed];
 }
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
@@ -220,9 +219,7 @@ static const NSInteger kLikeLimit = 5;
     
     //todo: add more based on actual height of text box
     
-    if (finalComments) {
-        self.viewMoreButton.hidden = YES;
-    }
+    self.viewMoreButton.hidden = finalComments || self.collapsed;
     
     return commentThreadString;
 }
