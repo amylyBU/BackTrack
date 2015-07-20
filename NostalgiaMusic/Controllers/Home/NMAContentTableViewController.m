@@ -30,6 +30,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
 };
 
 static const NSInteger kBillboardSongHeightForRow = 400;
+static const NSInteger kNewsStoryHeightForRow = 257;
 static const NSInteger kNumberOfSections = 3;
 static NSString * const kNMASectionHeaderIdentifier = @"NMASectionHeader";
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
@@ -168,7 +169,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             return UITableViewAutomaticDimension;
         }
         case NMASectionTypeNYTimesNews: {
-            return kBillboardSongHeightForRow;
+            return kNewsStoryHeightForRow;
         }
         default:
             return 0;

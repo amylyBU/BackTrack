@@ -8,6 +8,7 @@
 
 #import "NMANewsStoryTableViewCell.h"
 #import "NMANewsStory.h"
+#import "UIColor+NMAColors.h"
 
 @implementation NMANewsStoryTableViewCell
 
@@ -23,6 +24,8 @@
     if(story.snippet) {
         self.summaryTextView.text = story.snippet;
     }
+    
+    self.backgroundColor = [UIColor NMA_white];
 }
 
 @end

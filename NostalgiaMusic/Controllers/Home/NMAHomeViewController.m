@@ -18,6 +18,8 @@
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
 
+static const NSInteger kYearScrollBarCollectionVCHeight = 128;
+
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollDelegate>
 
 @property (copy, nonatomic) NSString *selectedYear;
@@ -64,7 +66,7 @@
     [self displayContentController:self.yearScrollBarCollectionVC];
     
     [self.view constrainView:self.yearScrollBarCollectionVC.view top:0 left:0 bottom:NSNotFound right:0];
-    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:128];
+    [self.view constrainView:self.yearScrollBarCollectionVC.view toHeight:kYearScrollBarCollectionVCHeight];
 
     
     self.yearActivityScrollVC = [[NMAYearActivityScrollViewController alloc] init];

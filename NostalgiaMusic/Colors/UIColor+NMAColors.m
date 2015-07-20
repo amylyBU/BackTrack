@@ -73,4 +73,9 @@
     return [UIColor colorWithRed:67.0f/255.0f green:218.0f/255.0f blue:211.0f/255.0f alpha:1.0f];
 }
 
+/* News Story Cell */
++ (UIColor *)NMA_white {
+    return [UIColor colorWithRed:227.0f/255.0f green:227.0f/255.0f blue:227.0f/255.0f alpha:1.0f];
+}
+
 @end

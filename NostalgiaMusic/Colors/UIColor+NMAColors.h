@@ -30,6 +30,7 @@
 + (UIColor *)NMA_lightTeal;
 + (UIColor *)NMA_darkSkyBlue;
 + (UIColor *)NMA_aquaMarine;
++ (UIColor *)NMA_white;
 
 
 @end
