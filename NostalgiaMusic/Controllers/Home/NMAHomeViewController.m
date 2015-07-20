@@ -89,9 +89,6 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 - (void)didSelectYear:(NSString *)year {
     self.selectedYear = year;
     [self.yearActivityScrollVC setUpScrollView:year];
-    
-    // upon selecting year, you want to
-    [[NMAPlaybackManager sharedPlayer] pausePlaying]; // pause the current song
     [self.yearActivityScrollVC setUpPlayerForTableCell]; // set it up for the other song
 }
 

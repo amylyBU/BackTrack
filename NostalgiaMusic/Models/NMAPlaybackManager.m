@@ -44,7 +44,7 @@
     [NMAPlaybackManager sharedPlayer].audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
     [NMAPlaybackManager sharedPlayer].audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:[NMAPlaybackManager sharedPlayer].audioAsset];
     [[NMAPlaybackManager sharedPlayer].audioPlayer replaceCurrentItemWithPlayerItem:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-    NSLog(@"song url is now: %@", [NMAPlaybackManager sharedPlayer].audioAsset.URL);
+    NSLog(@"Song url is now: %@", [NMAPlaybackManager sharedPlayer].audioAsset.URL);
     
     // set up this manager instance to observe when player item finishes playing
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -92,10 +92,10 @@
     
   if (![newValue isEqual:oldValue]) {
         if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) { // rate = 1: playing
-            NSLog(@"resumed song");
+            NSLog(@"Resumed song");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeAVPlayerNotification" object:self];
         } else { // rate = 0: paused
-            NSLog(@"paused song");
+            NSLog(@"Paused song");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"pauseAVPlayerNotification" object:self];
         }
     }

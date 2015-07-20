@@ -112,16 +112,12 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // because the song cell will be deallocated, you want to resume the animation once it is back in view
-    // get super view
-    NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
-
-    if ([cell isKindOfClass:[NMATodaysSongTableViewCell class]]) {
-        NSLog(@"cell is: %@", cell);
-        NSLog(@"visible cell is: %@", [parentVC visibleSongCell]);
-//            NSLog(@"resuming the animation when the visible cell is displayed");
-//            [parentVC resumeAnimationLayer];
+    if ([[cell class] isEqual:[NMATodaysSongTableViewCell class]]) {
+        NSLog(@"Resuming animation for reallocated song cell");
+        NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
+        [parentVC resumeAnimationLayer];
     }
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -243,7 +239,7 @@ viewForHeaderInSection:(NSInteger)section {
 heightForHeaderInSection:(NSInteger)section {
     switch (section) {
         case (NMASectionTypeBillboardSong):
-            return 1.0;
+            return 0.0;
         default:
             return 62.0;
     }
@@ -280,25 +276,6 @@ titleForHeaderInSection:(NSInteger)section {
     }
 }
 
-#pragma mark - Public Methods
-
-- (void)setUpPlayerForTableCell {
-    [[NMARequestManager sharedManager] getSongFromYear:self.year
-                                               success:^(NMASong *song) {
-                                                   [self.billboardSongs removeAllObjects];
-                                                   [self.billboardSongs addObject:song];
-
-                                                   [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
-                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                                                       [[NMAPlaybackManager sharedPlayer] startPlaying];
-                                                   }
-
-                                                   [self.tableView reloadData];
-                                               }
-                                               failure:^(NSError *error) {
-                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
-                                               }];
-}
 
 #pragma mark - Private Utility
 

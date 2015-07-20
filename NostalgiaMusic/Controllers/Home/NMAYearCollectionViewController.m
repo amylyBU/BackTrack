@@ -208,7 +208,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
-    
 }
 
 #pragma mark - Public delegate methods
