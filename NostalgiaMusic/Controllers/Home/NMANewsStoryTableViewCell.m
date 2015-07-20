@@ -23,15 +23,32 @@
         
         self.bylineLabel.text = [story.byline uppercaseString];
         self.bylineLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
+        self.bylineLabel.textColor = [UIColor NMA_warmGray];
     }
     
     if(story.snippet) {
-       // NSString *test = [story.snippet substringToIndex:70];
         self.summaryTextLabel.text = story.snippet;
-         self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
+        self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
     self.backgroundColor = [UIColor NMA_white];
     
+    [self configureDateLabel:story];
+    
+    self.continueReadingLabel.text = @"continue reading";
+    self.continueReadingLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
+    self.continueReadingLabel.textColor = [UIColor NMA_warmGray];
+    
+    
+}
+
+- (void)configureDateLabel:(NMANewsStory *)story {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSDate *storyDate = [dateFormatter dateFromString:story.date];
+    [dateFormatter setDateFormat:@"LLLL dd"];
+    NSString *displayDate = [dateFormatter  stringFromDate:storyDate];
+    self.dateLabel.text = [displayDate uppercaseString];
+    self.dateLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
 }
 
 @end

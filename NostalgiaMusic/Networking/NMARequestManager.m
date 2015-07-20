@@ -39,6 +39,8 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *stories = [self parseNYTJSON:responseObject];
+        NMANewsStory *story = [stories objectAtIndex:0];
+        story.date = date;
         success([stories objectAtIndex:0]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get NYT information");

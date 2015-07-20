@@ -14,7 +14,7 @@
 @property (copy, nonatomic) NSString *snippet;
 @property (copy, nonatomic) NSString *articleURL;
 @property (copy, nonatomic) NSString *byline;
-@property (strong, nonatomic) NSMutableArray *keywords;
 @property (strong, nonatomic) NSMutableArray *imageLinks;
+@property (copy, nonatomic) NSString *date;
 
 @end
