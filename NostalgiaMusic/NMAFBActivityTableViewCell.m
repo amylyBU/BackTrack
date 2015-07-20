@@ -36,8 +36,8 @@ static const NSInteger kLikeLimit = 5;
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
 }
 
-- (void)toggleCellState {
-    self.collapsed = !self.collapsed;
+- (void)setCollapsedCellState:(BOOL)isCollapsed {
+    self.collapsed = isCollapsed;
     int messageLineCount = self.collapsed ? 2 : 0;
     self.messageLabel.numberOfLines = messageLineCount;
     [self configureCell];
@@ -57,6 +57,18 @@ static const NSInteger kLikeLimit = 5;
     
     [parentTable reloadData];
 
+}
+
+- (IBAction)closeFullPost:(UIButton *)sender {
+    [self setCollapsedCellState:YES];
+    
+    //TODO: I don't think this is the right way to do this? layoutIfNeeded doesnt work?
+    UITableView *parentTable = (UITableView *)self.superview;
+    if (![parentTable isKindOfClass:[UITableView class]]) {
+        parentTable = (UITableView *) parentTable.superview;
+    }
+    
+    [parentTable reloadData];
 }
 
 - (void)configureCell {
@@ -110,14 +122,18 @@ static const NSInteger kLikeLimit = 5;
     self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
     NSAttributedString *attributedEmpty = [[NSAttributedString alloc] initWithString:@""];
     
+    self.viewMoreButton.hidden = collapsed;
+    self.closeButton.hidden = collapsed;
+    self.timeRibbonView.hidden = !collapsed;
+    self.commentsButton.hidden = !collapsed;
+    self.likesButton.hidden = !collapsed;
+    
     if (collapsed) {
         self.continueLabel.text = @"...Continue Reading";
-        self.viewMoreButton.hidden = YES;
         self.collapseContinueToToolsConstraint.priority = 999;
         self.collapseMessageToCreditsConstraint.priority = 1;
     } else {
         self.continueLabel.attributedText = attributedEmpty;
-        self.viewMoreButton.hidden = NO;
         self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
         self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
         self.collapseContinueToToolsConstraint.priority = 1;

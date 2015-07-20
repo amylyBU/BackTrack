@@ -167,7 +167,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         case NMASectionTypeFacebookActivity: {
             UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
             if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
-                [(NMAFBActivityTableViewCell *)selectedCell toggleCellState];
+                [(NMAFBActivityTableViewCell *)selectedCell setCollapsedCellState:NO];
                 [tableView reloadData];
             }
         }

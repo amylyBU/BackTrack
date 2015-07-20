@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UIButton *likesButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *timeRibbonView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageConstraint;
@@ -32,6 +33,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseMessageToCreditsConstraint;
 
 - (void)configureCell;
-- (void)toggleCellState;
+- (void)setCollapsedCellState:(BOOL)isCollapsed;
 
 @end

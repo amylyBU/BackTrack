@@ -117,7 +117,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK" userLabel="post image">
                         <rect key="frame" x="8" y="8" width="304" height="300"/>
                         <constraints>
                             <constraint firstAttribute="height" priority="998" constant="300" id="enc-gl-jgB"/>
@@ -137,6 +137,20 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-OT-1kg">
+                        <rect key="frame" x="270" y="20" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="cId-qc-qmH"/>
+                            <constraint firstAttribute="height" constant="30" id="gQg-7F-NIO"/>
+                        </constraints>
+                        <state key="normal" title="X">
+                            <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="closeFullPost:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gs5-sE-JGq"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="1Iy-lb-5OG"/>
@@ -144,8 +158,10 @@
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="leading" secondItem="TNV-oX-VcU" secondAttribute="leading" constant="8" id="8hx-fK-6RG"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="GQH-Zl-cdI"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="J4b-2r-FDy"/>
+                    <constraint firstItem="uMY-OT-1kg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="KjS-zt-5Bo"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="MTl-lC-2mO"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PPj-q5-mhg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="uMY-OT-1kg" secondAttribute="trailing" constant="12" id="ReL-Cx-tLy"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" constant="0.5" id="XF9-ZX-YIZ"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dOB-fm-HsO"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="trailing" secondItem="TNV-oX-VcU" secondAttribute="trailing" constant="13" id="eik-5j-KUh"/>
@@ -157,6 +173,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="closeButton" destination="uMY-OT-1kg" id="VnI-Me-Hrd"/>
                 <outlet property="collapseContinueToToolsConstraint" destination="y10-SO-YJh" id="BsM-SH-is5"/>
                 <outlet property="collapseImageConstraint" destination="wvr-ZO-fJL" id="YCG-8m-lqy"/>
                 <outlet property="collapseMessageToCreditsConstraint" destination="6TV-by-rFf" id="BSV-th-9h9"/>
@@ -172,7 +189,7 @@
                 <outlet property="postImageView" destination="kIy-YX-jjK" id="RSB-Li-NUe"/>
                 <outlet property="shareButton" destination="ta0-eL-YRP" id="h9K-Jc-AKa"/>
                 <outlet property="timeLabel" destination="pyN-Pl-1gA" id="Dmw-Ba-xD0"/>
-                <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="Z89-F6-vQW"/>
+                <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="BOr-4X-hHU"/>
                 <outlet property="viewMoreButton" destination="h63-FB-4mx" id="ZxU-n0-VZe"/>
             </connections>
             <point key="canvasLocation" x="151" y="617"/>
