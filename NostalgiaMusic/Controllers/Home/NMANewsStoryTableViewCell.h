@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *summaryTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *continueReadingLabel;
-
+@property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
+@property (strong, nonatomic) NMANewsStory *story;
 
 - (void)configureCellForStory:(NMANewsStory *)story;
 
