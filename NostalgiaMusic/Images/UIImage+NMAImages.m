@@ -26,4 +26,8 @@
 + (UIImage *)NMA_homeBackground {
     return [UIImage imageNamed:@"body-illustration-bg"];
 }
+
++ (UIImage *)NMA_ufo {
+    return [UIImage imageNamed:@"ufo_2010"];
+}
 @end

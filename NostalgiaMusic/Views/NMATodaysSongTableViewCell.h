@@ -19,6 +19,6 @@
 @property (strong, nonatomic) CABasicAnimation *rotation;
 
 - (void)configureCellForSong:(NMASong *)song;
-- (void)changePlayButtonImage;
+- (void)changePlayButtonImageToPlay;
 
 @end

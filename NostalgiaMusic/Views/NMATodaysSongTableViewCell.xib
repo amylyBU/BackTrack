@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="songTitleLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-Zs-Rpu">
-                        <rect key="frame" x="8" y="358" width="364" height="29"/>
+                        <rect key="frame" x="8" y="362" width="364" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="29" id="hxL-X9-rg1"/>
                         </constraints>
@@ -25,13 +25,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eCa-cZ-6Yl">
-                        <rect key="frame" x="34" y="34" width="312" height="312"/>
+                        <rect key="frame" x="32" y="34" width="316" height="316"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="eCa-cZ-6Yl" secondAttribute="height" multiplier="1:1" id="V5i-FJ-nUe"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4J-Ik-dKI">
-                        <rect key="frame" x="146" y="417" width="89" height="32"/>
+                        <rect key="frame" x="146" y="421" width="89" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="n4J-Ik-dKI" secondAttribute="height" multiplier="89:32" id="ZUy-Nr-Olq"/>
                         </constraints>
@@ -43,7 +43,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-gG-QGC">
-                        <rect key="frame" x="8" y="389" width="364" height="20"/>
+                        <rect key="frame" x="8" y="393" width="364" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="deL-CX-CDe"/>
                         </constraints>
@@ -52,7 +52,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjN-tD-hC8">
-                        <rect key="frame" x="131" y="131" width="118" height="118"/>
+                        <rect key="frame" x="131" y="133" width="118" height="118"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="WjN-tD-hC8" secondAttribute="height" multiplier="1:1" id="tTQ-f3-5TX"/>
                         </constraints>
@@ -64,20 +64,10 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handle-music" translatesAutoresizingMaskIntoConstraints="NO" id="GyY-Cf-5zV">
-                        <rect key="frame" x="281" y="34" width="117" height="156"/>
+                        <rect key="frame" x="287" y="34" width="118" height="158"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="83:144" id="4me-WR-75L"/>
                             <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="95:127" id="TMy-Uf-FWG"/>
-                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="2:3" id="gMd-fh-VBA"/>
-                            <constraint firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="25:48" id="tjp-nE-902"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="4me-WR-75L"/>
-                                <exclude reference="gMd-fh-VBA"/>
-                                <exclude reference="tjp-nE-902"/>
-                            </mask>
-                        </variation>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -89,23 +79,15 @@
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="width" secondItem="GyY-Cf-5zV" secondAttribute="height" multiplier="2:1" id="MHy-Js-kqa"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="top" secondItem="eCa-cZ-6Yl" secondAttribute="bottom" constant="12" id="Qro-2W-3Nv"/>
                     <constraint firstItem="n4J-Ik-dKI" firstAttribute="centerX" secondItem="Gp6-gG-QGC" secondAttribute="centerX" constant="0.5" id="UiB-Fk-DDB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" constant="-8" id="Y2D-5B-4uz"/>
                     <constraint firstItem="eCa-cZ-6Yl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="Zbh-zF-xdF"/>
                     <constraint firstItem="WjN-tD-hC8" firstAttribute="centerY" secondItem="eCa-cZ-6Yl" secondAttribute="centerY" id="cF0-3D-x6N"/>
-                    <constraint firstItem="eCa-cZ-6Yl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="26" id="hHY-LH-KM3"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" constant="-25.5" id="qU8-hk-xyO"/>
+                    <constraint firstItem="eCa-cZ-6Yl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="24" id="hHY-LH-KM3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" constant="-33" id="qU8-hk-xyO"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qlh-X3-YL4"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="eCa-cZ-6Yl" secondAttribute="trailing" constant="26" id="tOr-D4-FFb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="eCa-cZ-6Yl" secondAttribute="trailing" constant="24" id="tOr-D4-FFb"/>
                     <constraint firstItem="Gp6-gG-QGC" firstAttribute="top" secondItem="L6W-Zs-Rpu" secondAttribute="bottom" constant="2" id="vWV-JH-iej"/>
                     <constraint firstItem="L6W-Zs-Rpu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xRx-Z6-aDE"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="GyY-Cf-5zV" secondAttribute="trailing" id="zAP-lo-yVa"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Y2D-5B-4uz"/>
-                        <exclude reference="zAP-lo-yVa"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="albumImageView" destination="eCa-cZ-6Yl" id="OqU-qU-uU4"/>

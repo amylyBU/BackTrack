@@ -12,6 +12,7 @@
 #import <QuartzCore/CALayer.h>
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
+#import "UIImage+NMAImages.h"
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewDelegateAction) {
     NMAScrollViewDidScroll,
@@ -28,6 +29,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 @property (nonatomic) NSInteger latestYear;
 @property (weak, nonatomic) IBOutlet UIView *whiteYearBackgroundSquare;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) UIView *blackoutView;
 
 @end
 

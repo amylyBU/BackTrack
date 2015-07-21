@@ -15,5 +15,6 @@
 + (UIImage *)NMA_newsLabel;
 + (UIImage *)NMA_settingsGear;
 + (UIImage *)NMA_homeBackground;
++ (UIImage *)NMA_ufo;
 
 @end

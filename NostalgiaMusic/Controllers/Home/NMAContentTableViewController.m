@@ -109,6 +109,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.tableView.backgroundView = childView;
     [self.tableView sizeToFit];
     self.tableView.allowsSelection = NO;
+    [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
 }
 
 #pragma mark - Table view data source
@@ -117,9 +118,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
   willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if ([[cell class] isEqual:[NMATodaysSongTableViewCell class]]) {
-//        NSLog(@"Resuming animation for reallocated song cell");
 //        NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
-//        [parentVC resumeAnimationLayer];
+//        if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
+//            NSLog(@"Resuming animation for reallocated song cell");
+//            [parentVC resumeAnimationLayer];
+//        }
 //    }
 }
 
@@ -243,10 +246,15 @@ viewForHeaderInSection:(NSInteger)section {
 heightForHeaderInSection:(NSInteger)section {
     switch (section) {
         case (NMASectionTypeBillboardSong):
-            return 0.0;
+            return CGFLOAT_MIN;
         default:
             return 62.0;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 #pragma mark - Setter Methods
@@ -276,7 +284,7 @@ titleForHeaderInSection:(NSInteger)section {
         case NMASectionTypeNYTimesNews:
             return @"News";
         default:
-            return @"";
+            return nil;
     }
 }
 
