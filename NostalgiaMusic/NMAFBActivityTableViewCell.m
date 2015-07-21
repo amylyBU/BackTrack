@@ -194,7 +194,11 @@ static const NSInteger kLikeLimit = 5;
 }
 
 - (NSMutableAttributedString *)constructCommentThread:(NMAFBActivity *)fbActivity {
-    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:15];
+    NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
+    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""
+                                                                                            attributes:commentAttributes];
     
     NSInteger currentDisplayed = self.displayedCommentCount > kCommentAddRate ? self.displayedCommentCount : kCommentAddRate;
     self.displayedCommentCount = 0;

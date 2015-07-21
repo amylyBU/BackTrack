@@ -38,9 +38,10 @@ static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 30.0;
-    self.tableView.sectionHeaderHeight = 50.0;
+    CGFloat tableViewInset = 56;
+    self.tableView.contentInset = UIEdgeInsetsMake(tableViewInset, 0, tableViewInset, 0);
     self.tableView.backgroundColor = [UIColor NMA_darkOverlay];
-    //self.tableView.backgroundView = nil;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 #pragma mark - Table view data source
@@ -73,6 +74,7 @@ static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 
