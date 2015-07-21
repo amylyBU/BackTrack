@@ -120,8 +120,6 @@ static const NSInteger kLikeLimit = 5;
         self.messageView.layer.shadowOpacity = 0.5f;
         self.messageView.layer.shadowPath = shadowPath.CGPath;
     }
-    
-    //[self reloadParentTable];
 }
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
@@ -140,7 +138,7 @@ static const NSInteger kLikeLimit = 5;
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
     NSMutableAttributedString *likeCreditString = [[NSMutableAttributedString alloc] initWithString:@""];
     if (fbActivity.likes.count == 0) {
-        //there are no likes, do we remind them
+        //likeCreditString stays empty on no likes
     } else if (fbActivity.likes.count == 1) {
         NMAFBLike *like = fbActivity.likes[0];
         [self appendLike:like to:likeCreditString index:0 limit:1 lastCommaSpacer:3];
@@ -153,6 +151,7 @@ static const NSInteger kLikeLimit = 5;
             NMAFBLike *like = fbActivity.likes[likeIndex];
             [self appendLike:like to:likeCreditString index:likeIndex limit:kLikeLimit lastCommaSpacer:1];
         }
+       
         NSInteger remainingLikes = fbActivity.likes.count - kLikeLimit;
         NSString *peopleOrPerson = remainingLikes > 1 ? @"people" : @"person";
         NSString *likeOrLikes = remainingLikes > 1 ? @"like" : @"likes";
@@ -169,6 +168,7 @@ static const NSInteger kLikeLimit = 5;
             NMAFBLike *like = fbActivity.likes[likeIndex];
             [self appendLike:like to:likeCreditString index:likeIndex limit:fbActivity.likes.count lastCommaSpacer:2];
         }
+        
         NSAttributedString *attributedAnd = [[NSAttributedString alloc] initWithString:@"and "];
         [likeCreditString appendAttributedString:attributedAnd];
         NMAFBLike *finalLike = fbActivity.likes[fbActivity.likes.count - 1];
@@ -212,14 +212,13 @@ static const NSInteger kLikeLimit = 5;
                                        amount:(NSInteger)amount {
     BOOL finalComments = self.displayedCommentCount + amount >= fbActivity.comments.count;
     NSInteger appendAmount = finalComments ? fbActivity.comments.count - self.displayedCommentCount : amount;
+    
     for (NSInteger appendIndex = 0; appendIndex < appendAmount; appendIndex++) {
         NMAFBComment *comment = fbActivity.comments[self.displayedCommentCount + appendIndex];
         [self appendComment:comment to:commentThreadString];
     }
+    
     self.displayedCommentCount += appendAmount;
-    
-    //todo: add more based on actual height of text box
-    
     self.viewMoreButton.hidden = finalComments || self.collapsed;
     
     return commentThreadString;
