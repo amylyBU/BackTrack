@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Intrepid Pursuits. All rights reserved.
 //
 
+#import "NMAModalDetailTableViewController.h"
 #import "NMAContentTableViewController.h"
 #import "NMAYearTableViewCell.h"
 #import "NMATodaysSongTableViewCell.h"
@@ -44,6 +45,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 @property (strong, nonatomic) NSMutableArray *facebookActivities;
 @property (strong, nonatomic) NSMutableArray *NYTimesNews;
 @property (strong, nonatomic, readwrite) NMADay *day;
+@property (strong, nonatomic) NMAModalDetailTableViewController *modalDetailViewController;
+
 @end
 
 @implementation NMAContentTableViewController
@@ -51,6 +54,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor NMA_lightGray];
 
     //Song cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
@@ -143,11 +147,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
                 ((NMAFBActivityTableViewCell *)cell).fbActivity = fbActvity;
-                [(NMAFBActivityTableViewCell *)cell configureCell];
+                [(NMAFBActivityTableViewCell *)cell configureCell:YES withShadow:YES];
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
             }
-            cell.backgroundColor = [UIColor NMA_lightGray];
+            cell.backgroundColor = [UIColor clearColor];
             [cell layoutIfNeeded];
             return cell;
         }
@@ -167,8 +171,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         case NMASectionTypeFacebookActivity: {
             UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
             if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
-                [(NMAFBActivityTableViewCell *)selectedCell setCollapsedCellState:NO];
-                [tableView reloadData];
+                NMAFBActivity *fbActivity = ((NMAFBActivityTableViewCell *)selectedCell).fbActivity;
+                [self addModalDetailForFBActivity:fbActivity];
             }
         }
         default: {}
@@ -264,5 +268,18 @@ titleForHeaderInSection:(NSInteger)section {
                                                    NSLog(@"something went horribly wrong"); //TODO: handle error
                                                }];
 }
+
+#pragma mark - Private Utility
+
+- (void)addModalDetailForFBActivity:(NMAFBActivity *)fbActivity {
+    self.modalDetailViewController = [[NMAModalDetailTableViewController alloc] initWithActivity:fbActivity];
+    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    [mainWindow addSubview:self.modalDetailViewController.view];
+    self.modalDetailViewController.view.frame = mainWindow.frame;
+    
+    [self addChildViewController:self.modalDetailViewController];
+}
+
 
 @end

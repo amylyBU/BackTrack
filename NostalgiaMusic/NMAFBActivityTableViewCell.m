@@ -26,7 +26,6 @@ static const NSInteger kLikeLimit = 5;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.collapsed = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_almostBlack];
@@ -34,7 +33,6 @@ static const NSInteger kLikeLimit = 5;
     [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
-    self.viewMoreButton.hidden = YES;
 }
 
 - (void)setCollapsedCellState:(BOOL)isCollapsed {
@@ -43,6 +41,7 @@ static const NSInteger kLikeLimit = 5;
     self.messageLabel.numberOfLines = messageLineCount;
     
     self.closeButton.hidden = isCollapsed;
+    self.timeLabel.hidden = !isCollapsed;
     self.timeRibbonView.hidden = !isCollapsed;
     self.commentsButton.hidden = !isCollapsed;
     self.likesButton.hidden = !isCollapsed;
@@ -64,20 +63,14 @@ static const NSInteger kLikeLimit = 5;
     self.commentThreadLabel.attributedText = [self appendComments:self.fbActivity
                                                          toThread:commentThread
                                                            amount:kCommentAddRate];
-    
-    //TODO: I don't think this is the right way to do this? layoutIfNeeded doesnt work?
-    UITableView *parentTable = (UITableView *)self.superview;
-    if (![parentTable isKindOfClass:[UITableView class]]) {
-        parentTable = (UITableView *) parentTable.superview;
-    }
-    
-    [parentTable reloadData];
-
+    [self reloadParentTable];
 }
 
 - (IBAction)closeFullPost:(UIButton *)sender {
-    [self setCollapsedCellState:YES];
-    
+    [self.delegate closeModalDialog];
+}
+
+- (void)reloadParentTable {
     //TODO: I don't think this is the right way to do this? layoutIfNeeded doesnt work?
     UITableView *parentTable = (UITableView *)self.superview;
     if (![parentTable isKindOfClass:[UITableView class]]) {
@@ -87,7 +80,7 @@ static const NSInteger kLikeLimit = 5;
     [parentTable reloadData];
 }
 
-- (void)configureCell {
+- (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow {
     if (!self.fbActivity) {
         return;
     }
@@ -97,7 +90,7 @@ static const NSInteger kLikeLimit = 5;
     }
     
     if (self.fbActivity.message && self.fbActivity.likes && self.fbActivity.comments) {
-        [self constructFullPost:self.fbActivity collapsed:self.collapsed];
+        [self constructFullPost:self.fbActivity collapsed:collapsed];
         NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
         [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
         NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
@@ -118,13 +111,17 @@ static const NSInteger kLikeLimit = 5;
         self.collapseImageConstraint.priority = 999;
     }
     
-    //Add a shadow to the bottom of the message view
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.messageView.bounds];
-    self.messageView.layer.masksToBounds = NO;
-    self.messageView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-    self.messageView.layer.shadowOpacity = 0.5f;
-    self.messageView.layer.shadowPath = shadowPath.CGPath;
+    if (shadow) {
+        //Add a shadow to the bottom of the message view
+        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.messageView.bounds];
+        self.messageView.layer.masksToBounds = NO;
+        self.messageView.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+        self.messageView.layer.shadowOpacity = 0.5f;
+        self.messageView.layer.shadowPath = shadowPath.CGPath;
+    }
+    
+    //[self reloadParentTable];
 }
 
 - (void)setImageViewDimensions:(UIImage *)targetImage {
@@ -134,10 +131,10 @@ static const NSInteger kLikeLimit = 5;
 }
 
 - (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
+    [self setCollapsedCellState:collapsed];
     self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
     self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
     self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
-    [self setCollapsedCellState:collapsed];
 }
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {

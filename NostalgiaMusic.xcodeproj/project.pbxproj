@@ -15,6 +15,8 @@
 		072DE7AE1B39739B000A1162 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072DE7AC1B39739B000A1162 /* LaunchScreen.xib */; };
 		072DE7BA1B39739B000A1162 /* NostalgiaMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */; };
 		0744B8421B583169002C5188 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0744B8411B583169002C5188 /* ProximaNova-Bold.otf */; };
+		0744B84B1B5D94A1002C5188 /* NMAModalDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744B8491B5D94A1002C5188 /* NMAModalDetailTableViewController.m */; };
+		0744B84C1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0744B84A1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib */; };
 		075F632B1B568F1800B072FB /* UIImage+NMAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F632A1B568F1800B072FB /* UIImage+NMAImages.m */; };
 		07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */; };
 		07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */; };
@@ -92,6 +94,9 @@
 		072DE7B81B39739B000A1162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		072DE7B91B39739B000A1162 /* NostalgiaMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NostalgiaMusicTests.m; sourceTree = "<group>"; };
 		0744B8411B583169002C5188 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		0744B8481B5D94A1002C5188 /* NMAModalDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAModalDetailTableViewController.h; path = Controllers/Home/NMAModalDetailTableViewController.h; sourceTree = "<group>"; };
+		0744B8491B5D94A1002C5188 /* NMAModalDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAModalDetailTableViewController.m; path = Controllers/Home/NMAModalDetailTableViewController.m; sourceTree = "<group>"; };
+		0744B84A1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAModalDetailTableViewController.xib; path = Controllers/Home/NMAModalDetailTableViewController.xib; sourceTree = "<group>"; };
 		075F63291B568F1800B072FB /* UIImage+NMAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+NMAImages.h"; path = "Images/UIImage+NMAImages.h"; sourceTree = "<group>"; };
 		075F632A1B568F1800B072FB /* UIImage+NMAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+NMAImages.m"; path = "Images/UIImage+NMAImages.m"; sourceTree = "<group>"; };
 		07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANoFBActivityTableViewCell.h; path = Views/FBActivity/NMANoFBActivityTableViewCell.h; sourceTree = "<group>"; };
@@ -282,6 +287,9 @@
 				6159114D1B3C89B3006B6779 /* NMAContentTableViewController.h */,
 				6159114E1B3C89B3006B6779 /* NMAContentTableViewController.m */,
 				6159114F1B3C89B3006B6779 /* NMAContentTableViewController.xib */,
+				0744B8481B5D94A1002C5188 /* NMAModalDetailTableViewController.h */,
+				0744B8491B5D94A1002C5188 /* NMAModalDetailTableViewController.m */,
+				0744B84A1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -573,6 +581,7 @@
 				072DE7AB1B39739B000A1162 /* Images.xcassets in Resources */,
 				E515FDE91B4F436C000E47E3 /* NMAFBConnectViewController.xib in Resources */,
 				E5141B651B4899D3002BC232 /* NMATodaysSongTableViewCell.xib in Resources */,
+				0744B84C1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib in Resources */,
 				07ED932A1B54A5F4004879C0 /* NMASectionHeader.xib in Resources */,
 				07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */,
 				615911581B3D83AA006B6779 /* NMAYearTableViewCell.xib in Resources */,
@@ -633,6 +642,7 @@
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
 				E50E347E1B43068100F10A5A /* NMADatabaseManager.m in Sources */,
 				61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */,
+				0744B84B1B5D94A1002C5188 /* NMAModalDetailTableViewController.m in Sources */,
 				614DB1331B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.m in Sources */,
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,
 				612CDE431B4EA5E100FDCEF9 /* NMASettingsSwitchCell.m in Sources */,

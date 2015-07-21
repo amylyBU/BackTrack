@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString *year;
 @property (strong, nonatomic, readonly) NMADay *day;
 
+
 - (void)setUpPlayerForTableCell;
 
 @end

@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "NMAFBActivity.h"
 
+//Delegate protocol
+@protocol NMAFBActivityCellDelegate
+
+- (void)closeModalDialog;
+
+@end
+
 @interface NMAFBActivityTableViewCell : UITableViewCell
 
 @property (nonatomic) BOOL collapsed;
 @property (strong, nonatomic) NMAFBActivity *fbActivity;
+@property (strong, nonatomic) id<NMAFBActivityCellDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -32,7 +41,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseContinueToToolsConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseMessageToCreditsConstraint;
 
-- (void)configureCell;
+- (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow;
 - (void)setCollapsedCellState:(BOOL)isCollapsed;
 
 @end
