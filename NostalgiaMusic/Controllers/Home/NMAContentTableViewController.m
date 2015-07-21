@@ -149,7 +149,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         case NMASectionTypeBillboardSong: {
            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            cell.contentView.backgroundColor = [UIColor clearColor];
             cell.backgroundColor = [UIColor whiteColor];
             return cell;
         }
