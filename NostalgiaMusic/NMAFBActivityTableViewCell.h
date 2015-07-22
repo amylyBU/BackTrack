@@ -12,6 +12,7 @@
 //Delegate protocol
 @protocol NMAFBActivityCellDelegate
 
+@optional
 - (void)closeModalDialog;
 
 @end
@@ -20,7 +21,7 @@
 
 @property (nonatomic) BOOL collapsed;
 @property (strong, nonatomic) NMAFBActivity *fbActivity;
-@property (strong, nonatomic) id<NMAFBActivityCellDelegate> delegate;
+@property (strong, nonatomic) UIViewController<NMAFBActivityCellDelegate> *delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;

@@ -17,6 +17,7 @@
 		0744B8421B583169002C5188 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0744B8411B583169002C5188 /* ProximaNova-Bold.otf */; };
 		0744B84B1B5D94A1002C5188 /* NMAModalDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744B8491B5D94A1002C5188 /* NMAModalDetailTableViewController.m */; };
 		0744B84C1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0744B84A1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib */; };
+		0744B8531B5EF8F7002C5188 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0744B8521B5EF8F7002C5188 /* Social.framework */; };
 		075F632B1B568F1800B072FB /* UIImage+NMAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F632A1B568F1800B072FB /* UIImage+NMAImages.m */; };
 		07CD48091B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CD48071B4DCF80005B8805 /* NMANoFBActivityTableViewCell.m */; };
 		07CD480A1B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */; };
@@ -97,6 +98,7 @@
 		0744B8481B5D94A1002C5188 /* NMAModalDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAModalDetailTableViewController.h; path = Controllers/Home/NMAModalDetailTableViewController.h; sourceTree = "<group>"; };
 		0744B8491B5D94A1002C5188 /* NMAModalDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAModalDetailTableViewController.m; path = Controllers/Home/NMAModalDetailTableViewController.m; sourceTree = "<group>"; };
 		0744B84A1B5D94A1002C5188 /* NMAModalDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NMAModalDetailTableViewController.xib; path = Controllers/Home/NMAModalDetailTableViewController.xib; sourceTree = "<group>"; };
+		0744B8521B5EF8F7002C5188 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		075F63291B568F1800B072FB /* UIImage+NMAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+NMAImages.h"; path = "Images/UIImage+NMAImages.h"; sourceTree = "<group>"; };
 		075F632A1B568F1800B072FB /* UIImage+NMAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+NMAImages.m"; path = "Images/UIImage+NMAImages.m"; sourceTree = "<group>"; };
 		07CD48061B4DCF80005B8805 /* NMANoFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMANoFBActivityTableViewCell.h; path = Views/FBActivity/NMANoFBActivityTableViewCell.h; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0744B8531B5EF8F7002C5188 /* Social.framework in Frameworks */,
 				E515FDCE1B4D7CB3000E47E3 /* AVFoundation.framework in Frameworks */,
 				E50E34801B431D1000F10A5A /* libsqlite3.dylib in Frameworks */,
 				7298F60D732AB73E39D96C00 /* libPods.a in Frameworks */,
@@ -417,6 +420,7 @@
 		401998C391C3064AD667AEC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0744B8521B5EF8F7002C5188 /* Social.framework */,
 				E515FDCD1B4D7CB3000E47E3 /* AVFoundation.framework */,
 				E50E347F1B431D1000F10A5A /* libsqlite3.dylib */,
 				486067421913674E7836A8E0 /* libPods.a */,

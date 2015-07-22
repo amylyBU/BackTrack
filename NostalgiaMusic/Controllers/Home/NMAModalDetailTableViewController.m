@@ -8,27 +8,23 @@
 
 #import "NMAModalDetailTableViewController.h"
 #import "UIColor+NMAColors.h"
-
-@interface NMAModalDetailTableViewController ()
-
-@end
+#import <Social/Social.h>
 
 @implementation NMAModalDetailTableViewController
 
 static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
+static CGFloat const kEstimatedRowHeight = 30;
+static CGFloat const kTableInset = 56;
 
 #pragma mark - Initializers
 
 - (instancetype)initWithActivity:(NMAFBActivity *)fbActivity {
     
     self = [super init];
-    
     if (self) {
         _fbActivity = fbActivity;
     }
-    
     return self;
-    
 }
 
 - (void)viewDidLoad {
@@ -37,9 +33,8 @@ static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 30.0;
-    CGFloat tableViewInset = 56;
-    self.tableView.contentInset = UIEdgeInsetsMake(tableViewInset, 0, tableViewInset, 0);
+    self.tableView.estimatedRowHeight = kEstimatedRowHeight;
+    self.tableView.contentInset = UIEdgeInsetsMake(kTableInset, 0, kTableInset, 0);
     self.tableView.backgroundColor = [UIColor NMA_darkOverlay];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
@@ -76,6 +71,5 @@ static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
     [self removeFromParentViewController];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
-
 
 @end

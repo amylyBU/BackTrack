@@ -12,10 +12,10 @@
 #import "NMATodaysSongTableViewCell.h"
 #import "NMASong.h"
 #import "NMASectionHeader.h"
-#import "NMAFBActivityTableViewCell.h"
 #import "NMANoFBActivityTableViewCell.h"
 #import "NMAFBActivity.h"
 #import <SVPullToRefresh.h>
+#import <Social/Social.h>
 #import "NMARequestManager.h"
 #import "NMAAppSettings.h"
 #import "NMANewsStoryTableViewCell.h"
@@ -147,7 +147,9 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
                 ((NMAFBActivityTableViewCell *)cell).fbActivity = fbActvity;
+                ((NMAFBActivityTableViewCell *)cell).delegate = self;
                 [(NMAFBActivityTableViewCell *)cell configureCell:YES withShadow:YES];
+                
             } else {
                 cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
             }
@@ -175,7 +177,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 [self addModalDetailForFBActivity:fbActivity];
             }
         }
-        default: {}
     }
 }
 
@@ -273,12 +274,12 @@ titleForHeaderInSection:(NSInteger)section {
 
 - (void)addModalDetailForFBActivity:(NMAFBActivity *)fbActivity {
     self.modalDetailViewController = [[NMAModalDetailTableViewController alloc] initWithActivity:fbActivity];
-    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     
-    [mainWindow addSubview:self.modalDetailViewController.view];
-    self.modalDetailViewController.view.frame = mainWindow.frame;
+    [rootViewController.view addSubview:self.modalDetailViewController.view];
+    self.modalDetailViewController.view.frame = rootViewController.view.frame;
     
-    [self addChildViewController:self.modalDetailViewController];
+    [rootViewController addChildViewController:self.modalDetailViewController];
 }
 
 

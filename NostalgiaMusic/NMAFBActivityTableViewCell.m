@@ -70,6 +70,21 @@ static const NSInteger kLikeLimit = 5;
     [self.delegate closeModalDialog];
 }
 
+- (IBAction)share:(UIButton *)sender {
+    NSMutableArray *sharingItems = [NSMutableArray new];
+    
+    if (self.messageLabel.text) {
+        [sharingItems addObject:self.messageLabel.text];
+    }
+    
+    if (self.imageView.image) {
+        [sharingItems addObject:self.imageView.image];
+    }
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    [self.delegate presentViewController:activityController animated:YES completion:nil];
+}
+
 - (void)reloadParentTable {
     //TODO: I don't think this is the right way to do this? layoutIfNeeded doesnt work?
     UITableView *parentTable = (UITableView *)self.superview;
