@@ -25,5 +25,10 @@
 + (UIFont *)NMA_proximaNovaExtraBoldWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Extrabld" size:fontSize];
 }
+    
++ (UIFont *)NMA_proximaNovaBoldWithSize:(CGFloat)fontSize {
+    return [UIFont fontWithName:@"ProximaNova-Bold" size:fontSize];
+
+}
 
 @end

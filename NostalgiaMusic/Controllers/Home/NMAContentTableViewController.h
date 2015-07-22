@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NMADay.h"
+#import "NMAFBActivityTableViewCell.h"
 
-@interface NMAContentTableViewController : UITableViewController <NMADayDelegate>
+@interface NMAContentTableViewController : UITableViewController <NMADayDelegate, NMAFBActivityCellDelegate>
 
 @property (copy, nonatomic) NSString *year;
 @property (strong, nonatomic, readonly) NMADay *day;
+
 
 - (void)setUpPlayerForTableCell;
 

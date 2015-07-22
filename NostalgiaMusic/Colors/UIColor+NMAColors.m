@@ -32,6 +32,10 @@
     return [UIColor colorWithRed:58.0f/255.0f green:86.0f/255.0f blue:149.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)NMA_darkOverlay {
+    return [UIColor colorWithRed:21.0f/255.0f green:27.0f/255.0f blue:27.0f/255.0f alpha:0.79f];
+}
+
 /* Song Cell Colors */
 
 + (UIColor *)NMA_almostBlack {

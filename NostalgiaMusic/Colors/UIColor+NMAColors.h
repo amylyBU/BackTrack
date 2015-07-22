@@ -16,6 +16,7 @@
 + (UIColor *)NMA_lightGray;
 + (UIColor *)NMA_tealGreen;
 + (UIColor *)NMA_facebookBlue;
++ (UIColor *)NMA_darkOverlay;
 
 /* Song Cell Colors */
 + (UIColor *)NMA_almostBlack;
@@ -33,6 +34,5 @@
 + (UIColor *)NMA_aquaMarine;
 + (UIColor *)NMA_white;
 + (UIColor *)NMA_warmGray;
-
 
 @end
