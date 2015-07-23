@@ -10,6 +10,12 @@
 #import "UIColor+NMAColors.h"
 #import <Social/Social.h>
 
+@interface NMAModalDetailTableViewController()
+
+@property (nonatomic) CGFloat pictureWidth;
+
+@end
+
 @implementation NMAModalDetailTableViewController
 
 static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
@@ -18,11 +24,12 @@ static CGFloat const kTableInset = 56;
 
 #pragma mark - Initializers
 
-- (instancetype)initWithActivity:(NMAFBActivity *)fbActivity {
+- (instancetype)initWithActivity:(NMAFBActivity *)fbActivity withWidth:(CGFloat)pictureWidth {
     
     self = [super init];
     if (self) {
         _fbActivity = fbActivity;
+        _pictureWidth = pictureWidth;
     }
     return self;
 }
@@ -57,6 +64,7 @@ static CGFloat const kTableInset = 56;
     cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
     [cell configureCell:NO withShadow:NO];
+    [cell setImageWidth:self.pictureWidth];
     [cell layoutIfNeeded];
     return cell;
 }

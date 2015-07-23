@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) NMAFBActivity *fbActivity;
 
-- (instancetype)initWithActivity:(NMAFBActivity *)fbActivity;
+- (instancetype)initWithActivity:(NMAFBActivity *)fbActivity withWidth:(CGFloat)pictureWidth;
 
 @end

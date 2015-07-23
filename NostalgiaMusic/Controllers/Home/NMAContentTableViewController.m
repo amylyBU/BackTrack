@@ -176,7 +176,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
             if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
                 NMAFBActivity *fbActivity = ((NMAFBActivityTableViewCell *)selectedCell).fbActivity;
-                [self addModalDetailForFBActivity:fbActivity];
+                CGFloat imageWidth = CGRectGetWidth(((NMAFBActivityTableViewCell *)selectedCell).postImageView.frame);
+                [self addModalDetailForFBActivity:fbActivity withWidth:imageWidth];
             }
         }
     }
@@ -266,13 +267,12 @@ titleForHeaderInSection:(NSInteger)section {
 
 #pragma mark - Private Utility
 
-- (void)addModalDetailForFBActivity:(NMAFBActivity *)fbActivity {
-    self.modalDetailViewController = [[NMAModalDetailTableViewController alloc] initWithActivity:fbActivity];
+- (void)addModalDetailForFBActivity:(NMAFBActivity *)fbActivity withWidth:(CGFloat)pictureWidth {
+    self.modalDetailViewController = [[NMAModalDetailTableViewController alloc] initWithActivity:fbActivity withWidth:pictureWidth];
     UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
 
     [rootViewController.view addSubview:self.modalDetailViewController.view];
-    self.modalDetailViewController.view.frame = rootViewController.view.frame;
-
+    self.modalDetailViewController.view.frame = rootViewController.view.bounds;
     [rootViewController addChildViewController:self.modalDetailViewController];
 }
 
