@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMASplashScreenViewController">
@@ -15,93 +14,46 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqJ-kq-Lx7" userLabel="bg">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-bottom" translatesAutoresizingMaskIntoConstraints="NO" id="LHU-b1-bO0">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="LHU-b1-bO0" secondAttribute="height" multiplier="200:171" id="3Bx-0X-Qrp"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="3Bx-0X-Qrp"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=compact">
-                                <mask key="constraints">
-                                    <include reference="3Bx-0X-Qrp"/>
-                                </mask>
-                            </variation>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-logo" translatesAutoresizingMaskIntoConstraints="NO" id="IY3-kH-dn5" userLabel="logo">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="IY3-kH-dn5" secondAttribute="height" multiplier="1:1" id="1dy-Pt-SYo"/>
-                                <constraint firstAttribute="height" constant="150" id="lkE-vR-0Cx"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="1dy-Pt-SYo"/>
-                                    <exclude reference="lkE-vR-0Cx"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=compact">
-                                <mask key="constraints">
-                                    <include reference="1dy-Pt-SYo"/>
-                                    <exclude reference="lkE-vR-0Cx"/>
-                                </mask>
-                            </variation>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.84313725490000002" green="0.93333333330000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="LHU-b1-bO0" firstAttribute="top" secondItem="IY3-kH-dn5" secondAttribute="bottom" constant="8" id="Bbk-QU-c0G"/>
-                        <constraint firstAttribute="centerX" secondItem="IY3-kH-dn5" secondAttribute="centerX" id="Zwe-Hk-VFv"/>
-                        <constraint firstAttribute="trailing" secondItem="LHU-b1-bO0" secondAttribute="trailing" id="iTs-Z5-qQb"/>
-                        <constraint firstAttribute="bottom" secondItem="LHU-b1-bO0" secondAttribute="bottom" id="ubf-jD-wTb"/>
-                        <constraint firstItem="LHU-b1-bO0" firstAttribute="leading" secondItem="tqJ-kq-Lx7" secondAttribute="leading" id="zF1-La-12m"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="subviews">
-                            <exclude reference="LHU-b1-bO0"/>
-                            <exclude reference="IY3-kH-dn5"/>
-                        </mask>
-                        <mask key="constraints">
-                            <exclude reference="Zwe-Hk-VFv"/>
-                            <exclude reference="Bbk-QU-c0G"/>
-                            <exclude reference="iTs-Z5-qQb"/>
-                            <exclude reference="ubf-jD-wTb"/>
-                            <exclude reference="zF1-La-12m"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact">
-                        <mask key="subviews">
-                            <include reference="LHU-b1-bO0"/>
-                            <include reference="IY3-kH-dn5"/>
-                        </mask>
-                        <mask key="constraints">
-                            <include reference="Zwe-Hk-VFv"/>
-                            <include reference="Bbk-QU-c0G"/>
-                            <include reference="iTs-Z5-qQb"/>
-                            <include reference="ubf-jD-wTb"/>
-                            <include reference="zF1-La-12m"/>
-                        </mask>
-                    </variation>
-                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-full" translatesAutoresizingMaskIntoConstraints="NO" id="2Pg-8J-w33">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="tqJ-kq-Lx7" secondAttribute="trailing" id="4HV-uR-Bde"/>
-                <constraint firstItem="tqJ-kq-Lx7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UwX-SR-WxG"/>
-                <constraint firstItem="tqJ-kq-Lx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZXu-dC-PFL"/>
-                <constraint firstAttribute="bottom" secondItem="tqJ-kq-Lx7" secondAttribute="bottom" id="jUe-Ld-gnY"/>
+                <constraint firstAttribute="centerX" secondItem="2Pg-8J-w33" secondAttribute="centerX" id="KSG-HV-3hN"/>
+                <constraint firstAttribute="trailing" secondItem="2Pg-8J-w33" secondAttribute="trailing" id="Odg-gT-IhP"/>
+                <constraint firstItem="2Pg-8J-w33" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Pi1-ZR-VnT"/>
+                <constraint firstItem="2Pg-8J-w33" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="g9U-fG-4VS"/>
+                <constraint firstAttribute="bottom" secondItem="2Pg-8J-w33" secondAttribute="bottom" id="zSY-bd-K0M"/>
             </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="2Pg-8J-w33"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="KSG-HV-3hN"/>
+                    <exclude reference="Odg-gT-IhP"/>
+                    <exclude reference="Pi1-ZR-VnT"/>
+                    <exclude reference="g9U-fG-4VS"/>
+                    <exclude reference="zSY-bd-K0M"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="2Pg-8J-w33"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="KSG-HV-3hN"/>
+                    <include reference="Odg-gT-IhP"/>
+                    <include reference="Pi1-ZR-VnT"/>
+                    <include reference="g9U-fG-4VS"/>
+                    <include reference="zSY-bd-K0M"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="428" y="339"/>
         </view>
     </objects>
     <resources>
-        <image name="splash-bottom" width="320" height="297"/>
-        <image name="splash-logo" width="178" height="178"/>
+        <image name="splash-full" width="375" height="667"/>
     </resources>
 </document>

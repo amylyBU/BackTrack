@@ -17,6 +17,8 @@
 
 @end
 
+static const NSTimeInterval kMinimumSplashScreenTime = 2;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -34,7 +36,7 @@
     } else {
         transitionMethod = @selector(goToOnboarding);
     }
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:transitionMethod userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:kMinimumSplashScreenTime target:self selector:transitionMethod userInfo:nil repeats:NO];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
