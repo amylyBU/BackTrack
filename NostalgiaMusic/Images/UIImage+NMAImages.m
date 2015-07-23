@@ -27,7 +27,18 @@
     return [UIImage imageNamed:@"body-illustration-bg"];
 }
 
+/* Loading Screen */
+
 + (UIImage *)NMA_ufo {
     return [UIImage imageNamed:@"ufo_2010"];
 }
+
++ (UIImage *)NMA_clouds {
+    return [UIImage imageNamed:@"clouds"];
+}
+
++ (UIImage *)NMA_ufoLight {
+    return [UIImage imageNamed:@"light"];
+}
+
 @end

@@ -18,6 +18,9 @@
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
 #import "NMAPlaybackManager.h"
+#import "UIView+NibInitable.h"
+#import "NMALoadingAnimationView.h"
+#import "UIView+Constraints.h"
 
 static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
@@ -89,84 +92,20 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     if (![self.selectedYear isEqualToString:year]) {
         self.selectedYear = year;
         [self.yearActivityScrollVC setUpScrollView:year];
-        [self configureLoadingAnimation];
+        [self configureLoadingAnimationView];
         [self.yearActivityScrollVC setUpPlayerForTableCell];
     }
 }
 
-- (void)configureLoadingAnimation {
-    
-    // an array of animations to perform sequentially
-    NSMutableArray *animationBlocks = [[NSMutableArray alloc] init];
-    
-    CGFloat x = self.view.bounds.origin.x;
-    CGFloat y = self.view.bounds.origin.y; // top left corner of activity scroll view (under scroll bar)
-    CGFloat width = CGRectGetWidth(self.view.frame);
-    CGFloat height = CGRectGetHeight(self.view.frame);
-    
-    UIView *blackoutView = [[UIView alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    blackoutView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.95];
-    
-    UIImage *ufoImage = [UIImage NMA_ufo];
-    
-    UIImageView *ufoImageView = [[UIImageView alloc] initWithImage:ufoImage];
-    ufoImageView.center = CGPointMake(width, height/2); // want this to be in the center
-    ufoImageView.alpha = 1.0;
-    [blackoutView addSubview:ufoImageView];
-    
-    [self.yearActivityScrollVC.view addSubview:blackoutView];
-    
-    typedef void (^animationBlock)(BOOL);
-    
-    animationBlock (^getNextAnimation)() = ^{
-        animationBlock block = (animationBlock)[animationBlocks firstObject];
-        if (block) {
-            [animationBlocks removeObjectAtIndex:0];
-            return block;
-        } else {
-            return ^(BOOL finished){};
-        }
-    };
-    
-    [animationBlocks addObject:^(BOOL finished) {
-        [UIView animateWithDuration:0.25
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             CGRect comeInFromRight = ufoImageView.frame;
-                             comeInFromRight.origin.x -= width/2; // fix magic number
-                             ufoImageView.frame = comeInFromRight;
-                         }
-                         completion:^(BOOL finished) {
-                             getNextAnimation()(YES);
-                         }
-         ];
-    }];
-    
-    [animationBlocks addObject:^(BOOL finished) {
-        [UIView animateWithDuration:1.0
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             CGRect upMovement = ufoImageView.frame;
-                             upMovement.origin.y -= 225; // fix magic number
-                             upMovement.origin.x -= 0;
-                             ufoImageView.frame = upMovement;
-                         }
-                         completion:^(BOOL finished){
-                             [ufoImageView removeFromSuperview];
-                             [blackoutView removeFromSuperview];
-                             getNextAnimation()(YES);
-                         }
-         ];
-    }];
-    
-    [animationBlocks addObject:^(BOOL finished) {
-        NSLog(@"Multi-step animation complete!");
-    }];
-    
-    getNextAnimation()(YES);
+- (void)configureLoadingAnimationView {
+    NMALoadingAnimationView *loadingAnimationView = [[NMALoadingAnimationView alloc] initWithNibNamed:nil];
+    [self.yearActivityScrollVC.view addSubview:loadingAnimationView];
+    [loadingAnimationView constrainView:loadingAnimationView.ufoLightsImageView toHeight:CGRectGetHeight(loadingAnimationView.frame)/3];
+    [loadingAnimationView constrainView:loadingAnimationView.cloudsImageView toWidth:CGRectGetWidth(loadingAnimationView.frame)];
+    [self.yearActivityScrollVC.view constrainView:loadingAnimationView toInsets:UIEdgeInsetsZero];
+    [loadingAnimationView animateLoadingOverlay];
 }
+
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
 - (void)updateScrollYear:(NSString *)year {

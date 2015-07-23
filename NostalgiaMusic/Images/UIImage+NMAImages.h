@@ -16,5 +16,7 @@
 + (UIImage *)NMA_settingsGear;
 + (UIImage *)NMA_homeBackground;
 + (UIImage *)NMA_ufo;
++ (UIImage *)NMA_clouds;
++ (UIImage *)NMA_ufoLight;
 
 @end

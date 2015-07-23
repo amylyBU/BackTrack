@@ -18,6 +18,4 @@
 @property (strong, nonatomic) NSMutableArray *facebookActivities;
 @property (strong, nonatomic) NSMutableArray *NYTimesNews;
 
-- (void)setUpPlayerForTableCell;
-
 @end
