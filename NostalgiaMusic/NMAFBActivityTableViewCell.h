@@ -41,6 +41,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseContinueToToolsConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseMessageToCreditsConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseCloseButtonConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseMessageTopToViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseImageAndMessageOverlapConstraint;
 
 - (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow;
 - (void)setCollapsedCellState:(BOOL)isCollapsed;

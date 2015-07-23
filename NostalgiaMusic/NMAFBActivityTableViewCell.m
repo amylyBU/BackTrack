@@ -52,10 +52,22 @@ static const NSInteger kLikeLimit = 5;
         self.continueLabel.text = @"...Continue Reading";
         self.collapseContinueToToolsConstraint.priority = 999;
         self.collapseMessageToCreditsConstraint.priority = 1;
+        self.collapseCloseButtonConstraint.priority = 999;
+        
+        if (!self.fbActivity.imagePath) {
+            self.collapseImageAndMessageOverlapConstraint.priority = 1;
+            self.collapseMessageTopToViewConstraint.priority = 1;
+        }
     } else {
         self.continueLabel.attributedText = attributedEmpty;
         self.collapseContinueToToolsConstraint.priority = 1;
         self.collapseMessageToCreditsConstraint.priority = 999;
+        self.collapseCloseButtonConstraint.priority = 1;
+        
+        if (!self.fbActivity.imagePath) {
+            self.collapseImageAndMessageOverlapConstraint.priority = 999;
+            self.collapseMessageTopToViewConstraint.priority = 999;
+        }
     }
 }
 
@@ -120,6 +132,7 @@ static const NSInteger kLikeLimit = 5;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         self.collapseImageConstraint.priority = 1;
+        [self layoutIfNeeded];
         [self setImageViewDimensions:postImage];
         [self.postImageView setImage:postImage];
         [self layoutIfNeeded];
