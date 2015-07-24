@@ -161,6 +161,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
             cell.backgroundColor = [UIColor NMA_lightGray];
+            cell.delegate = self;
             return cell;
         }
         default:

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NMANewsStory.h"
+@protocol NMANewsStoryTableViewCellDelegate
+@end
 
 @interface NMANewsStoryTableViewCell : UITableViewCell
 
@@ -18,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
 @property (strong, nonatomic) NMANewsStory *story;
+@property (strong, nonatomic) UIViewController<NMANewsStoryTableViewCellDelegate> *delegate;
 
 - (void)configureCellForStory:(NMANewsStory *)story;
 

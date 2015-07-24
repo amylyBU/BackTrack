@@ -57,4 +57,15 @@
     NSString *url = [NSString stringWithFormat:(NSString *)self.story.articleURL];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
+
+- (IBAction)share:(UIButton *)sender {
+    NSMutableArray *sharingItems = [NSMutableArray new];
+    
+    if (self.story.articleURL) {
+        [sharingItems addObject:self.story.articleURL];
+    }
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    [self.delegate presentViewController:activityController animated:YES completion:nil];
+}
 @end
