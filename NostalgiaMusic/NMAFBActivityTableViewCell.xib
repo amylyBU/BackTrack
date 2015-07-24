@@ -17,24 +17,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="560" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="560"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="635" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="635"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0" userLabel="message view">
-                        <rect key="frame" x="8" y="307" width="304" height="245"/>
+                        <rect key="frame" x="8" y="342" width="304" height="250"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
                                 <rect key="frame" x="10" y="51" width="284" height="18"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta0-eL-YRP">
-                                <rect key="frame" x="263" y="205" width="36" height="33"/>
+                                <rect key="frame" x="263" y="210" width="36" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="B2d-Fz-Yhu"/>
@@ -49,38 +49,38 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqF-ui-9Bj">
-                                <rect key="frame" x="10" y="211" width="33" height="22"/>
+                                <rect key="frame" x="10" y="216" width="33" height="22"/>
                                 <state key="normal" title=" X" image="comment-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVC-Cw-gzF">
-                                <rect key="frame" x="51" y="211" width="32" height="22"/>
+                                <rect key="frame" x="51" y="216" width="32" height="22"/>
                                 <state key="normal" title=" X" image="like-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="...Continue Reading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shb-NU-ukr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...Continue Reading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shb-NU-ukr">
                                 <rect key="frame" x="10" y="77" width="284" height="15"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Like Credits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-VF-5pA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Credits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-VF-5pA">
                                 <rect key="frame" x="10" y="100" width="284" height="15"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Comments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgT-nU-I0a">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgT-nU-I0a">
                                 <rect key="frame" x="10" y="147" width="286" height="15"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h63-FB-4mx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h63-FB-4mx">
                                 <rect key="frame" x="10" y="172" width="158" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="1" id="KVU-lD-NRd"/>
@@ -133,27 +133,27 @@
                         </variation>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK" userLabel="post image">
-                        <rect key="frame" x="8" y="48" width="304" height="300"/>
+                        <rect key="frame" x="8" y="83" width="304" height="300"/>
                         <constraints>
                             <constraint firstAttribute="height" priority="998" constant="300" id="enc-gl-jgB"/>
                             <constraint firstAttribute="height" priority="1" id="wvr-ZO-fJL"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-oX-VcU">
-                        <rect key="frame" x="4" y="9" width="70" height="50"/>
+                        <rect key="frame" x="4" y="43" width="70" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="lNu-hC-lOP"/>
                             <constraint firstAttribute="width" constant="70" id="rTt-re-zCP"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
-                        <rect key="frame" x="12" y="24" width="75" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
+                        <rect key="frame" x="12" y="58" width="75" height="13"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-OT-1kg" userLabel="close button">
-                        <rect key="frame" x="272" y="8" width="40" height="40"/>
+                        <rect key="frame" x="272" y="43" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="cId-qc-qmH"/>
                             <constraint firstAttribute="height" priority="998" constant="40" id="gQg-7F-NIO"/>
@@ -176,13 +176,15 @@
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" id="Ag4-XX-hkG"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="GQH-Zl-cdI"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="J4b-2r-FDy"/>
-                    <constraint firstItem="uMY-OT-1kg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="KjS-zt-5Bo"/>
+                    <constraint firstItem="uMY-OT-1kg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="35" id="KjS-zt-5Bo"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="MTl-lC-2mO"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PPj-q5-mhg"/>
+                    <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TNV-oX-VcU" secondAttribute="bottom" id="Pk3-T9-Czj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uMY-OT-1kg" secondAttribute="trailing" id="ReL-Cx-tLy"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" priority="1" id="Vgt-2L-bAM"/>
+                    <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="uMY-OT-1kg" secondAttribute="top" id="VtA-oV-9Sg"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="6Hu-Bj-SX0" secondAttribute="trailing" id="Wi4-j7-EcM"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" id="XF9-ZX-YIZ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" constant="35" id="XF9-ZX-YIZ"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dOB-fm-HsO"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="trailing" secondItem="TNV-oX-VcU" secondAttribute="trailing" constant="13" id="eik-5j-KUh"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="hp7-0D-CO8"/>
@@ -193,6 +195,7 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="hp7-0D-CO8"/>
                         <exclude reference="J4b-2r-FDy"/>
                         <exclude reference="MTl-lC-2mO"/>
                         <exclude reference="oAU-yO-AwC"/>
@@ -225,7 +228,7 @@
                 <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="BOr-4X-hHU"/>
                 <outlet property="viewMoreButton" destination="h63-FB-4mx" id="ZxU-n0-VZe"/>
             </connections>
-            <point key="canvasLocation" x="-377" y="682"/>
+            <point key="canvasLocation" x="-377" y="719.5"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -20,7 +20,6 @@
 
 static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
 static CGFloat const kEstimatedRowHeight = 30;
-static CGFloat const kTableInset = 56;
 
 #pragma mark - Initializers
 
@@ -41,7 +40,6 @@ static CGFloat const kTableInset = 56;
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = kEstimatedRowHeight;
-    self.tableView.contentInset = UIEdgeInsetsMake(kTableInset, 0, kTableInset, 0);
     self.tableView.backgroundColor = [UIColor NMA_darkOverlay];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
