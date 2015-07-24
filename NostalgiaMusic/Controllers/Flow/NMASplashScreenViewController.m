@@ -8,10 +8,6 @@
 
 #import "NMASplashScreenViewController.h"
 
-@interface NMASplashScreenViewController ()
-
-@end
-
 @implementation NMASplashScreenViewController
 
 @end
