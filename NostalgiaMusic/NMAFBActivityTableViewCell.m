@@ -21,6 +21,7 @@
 
 static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
+static const float kMainPageAspectRatio = 0.667f;
 
 @implementation NMAFBActivityTableViewCell
 
@@ -60,7 +61,7 @@ static const NSInteger kLikeLimit = 5;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         self.collapseImageConstraint.priority = 1;
-        [self setImageViewDimensions:postImage];
+        [self setImageViewDimensions:postImage trueAspectRatio:!self.collapsed];
         [self.postImageView setImage:postImage];
         [self layoutIfNeeded];
     } else {
@@ -113,13 +114,14 @@ static const NSInteger kLikeLimit = 5;
     }
 }
 
-- (void)setImageViewDimensions:(UIImage *)targetImage {
+- (void)setImageViewDimensions:(UIImage *)targetImage trueAspectRatio:(BOOL)useTrueAspectRatio {
     float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
-    float newViewHeight = heightToWidthRatio * CGRectGetWidth(self.postImageView.frame);
+    float imageAspectRatio = useTrueAspectRatio ? heightToWidthRatio : kMainPageAspectRatio;
+    float newViewHeight = imageAspectRatio * CGRectGetWidth(self.postImageView.frame);
     self.imageHeightConstraint.constant = newViewHeight;
 }
 
-- (void)setImageWidth:(CGFloat)imageWidth {
+- (void)setImageWidth:(CGFloat)imageWidth trueAspectRatio:(BOOL)useTrueAspectRatio {
     CGRect frame = CGRectMake(0, 0, imageWidth, self.postImageView.bounds.size.height);
     self.postImageView.frame = frame;
     
@@ -128,7 +130,7 @@ static const NSInteger kLikeLimit = 5;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *postImage = [UIImage imageWithData:imageData];
         self.collapseImageConstraint.priority = 1;
-        [self setImageViewDimensions:postImage];
+        [self setImageViewDimensions:postImage trueAspectRatio:useTrueAspectRatio];
     }
 }
 

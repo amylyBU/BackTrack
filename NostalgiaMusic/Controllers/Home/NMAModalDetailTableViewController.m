@@ -64,7 +64,7 @@ static CGFloat const kTableInset = 56;
     cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
     [cell configureCell:NO withShadow:NO];
-    [cell setImageWidth:self.pictureWidth];
+    [cell setImageWidth:self.pictureWidth trueAspectRatio:YES];
     [cell layoutIfNeeded];
     return cell;
 }

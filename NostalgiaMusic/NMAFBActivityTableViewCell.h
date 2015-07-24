@@ -47,6 +47,6 @@
 
 - (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow;
 - (void)setCollapsedCellState:(BOOL)isCollapsed;
-- (void)setImageWidth:(CGFloat)imageWidth;
+- (void)setImageWidth:(CGFloat)imageWidth trueAspectRatio:(BOOL)useTrueAspectRatio;
 
 @end
