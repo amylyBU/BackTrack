@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
 @property (strong, nonatomic) NMANewsStory *story;
+@property (strong, nonatomic) UIViewController<NSObject> *delegate;
 
 - (void)configureCellForStory:(NMANewsStory *)story;
 
