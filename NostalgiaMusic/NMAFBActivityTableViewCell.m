@@ -101,6 +101,7 @@ static const float kMainPageAspectRatio = 0.667f;
             self.collapseImageAndMessageOverlapConstraint.priority = 1;
             self.collapseMessageTopToViewConstraint.priority = 1;
         }
+        
     } else {
         self.continueLabel.attributedText = attributedEmpty;
         self.collapseContinueToToolsConstraint.priority = 1;
@@ -110,6 +111,14 @@ static const float kMainPageAspectRatio = 0.667f;
         if (!self.fbActivity.imagePath) {
             self.collapseImageAndMessageOverlapConstraint.priority = 999;
             self.collapseMessageTopToViewConstraint.priority = 999;
+        }
+        
+        if (self.fbActivity.likes.count == 0) {
+            self.collapseLikesToCommentsConstraint.priority = 999;
+        }
+        
+        if (self.fbActivity.comments.count == 0) {
+            self.collapseCommentsToToolsConstraint.priority = 999;
         }
     }
 }
@@ -263,6 +272,10 @@ static const float kMainPageAspectRatio = 0.667f;
     
     self.displayedCommentCount += appendAmount;
     self.viewMoreButton.hidden = finalComments || self.collapsed;
+    
+    if (self.viewMoreButton.hidden) {
+        self.collapseViewMoreHeightConstraint.priority = 999;
+    }
     
     return commentThreadString;
 }
