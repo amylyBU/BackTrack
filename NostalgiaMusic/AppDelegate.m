@@ -11,10 +11,13 @@
 #import "NMAHomeViewController.h"
 #import "NMAYearCollectionViewController.h"
 #import "NMAFBConnectViewController.h"
+#import "NMASplashScreenViewController.h"
 
 @interface AppDelegate () <NMAOnboardingCompletionDelegate>
 
 @end
+
+static const NSTimeInterval kMinimumSplashScreenTime = 2;
 
 @implementation AppDelegate
 
@@ -25,11 +28,16 @@
                                           barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [self goToSplashScreen];
+    
+    SEL transitionMethod;
     if ([[NMAAppSettings sharedSettings] userHasCompletedOnboarding]) {
-        [self goToHome];
+        transitionMethod = @selector(goToHome);
     } else {
-        [self goToOnboarding];
+        transitionMethod = @selector(goToOnboarding);
     }
+    [NSTimer scheduledTimerWithTimeInterval:kMinimumSplashScreenTime target:self selector:transitionMethod userInfo:nil repeats:NO];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }
@@ -46,6 +54,12 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)goToSplashScreen {
+    NMASplashScreenViewController *splashScreenVC = [[NMASplashScreenViewController alloc] init];
+    self.window.rootViewController = splashScreenVC;
+    [self.window makeKeyAndVisible];
+}
 
 - (void)goToOnboarding {
     NMAFBConnectViewController *FBConnectVC = [[NMAFBConnectViewController alloc] init];
