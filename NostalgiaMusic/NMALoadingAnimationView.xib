@@ -12,59 +12,40 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light" translatesAutoresizingMaskIntoConstraints="NO" id="xAm-Bs-FfG">
-                    <rect key="frame" x="146" y="159" width="308" height="228"/>
+                    <rect key="frame" x="214" y="157" width="172" height="172"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="xAm-Bs-FfG" secondAttribute="height" multiplier="77:57" id="Wmf-WV-sA4"/>
+                        <constraint firstAttribute="width" secondItem="xAm-Bs-FfG" secondAttribute="height" multiplier="1:1" id="11Y-R4-OuK"/>
                     </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="eNs-HX-KiW">
-                    <rect key="frame" x="0.0" y="251" width="600" height="97"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="eNs-HX-KiW" secondAttribute="height" multiplier="200:81" id="O3Y-yj-FEo"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="O3Y-yj-FEo"/>
-                        </mask>
-                    </variation>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ufo_2010" translatesAutoresizingMaskIntoConstraints="NO" id="v2p-Qd-46T">
-                    <rect key="frame" x="226" y="240" width="149" height="120"/>
+                    <rect key="frame" x="266" y="0.0" width="67" height="58"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="54:37" id="bIF-jf-qmH"/>
-                        <constraint firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="33:25" id="ed1-kU-6Z3"/>
-                        <constraint firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="149:120" id="jxF-b2-QDE"/>
+                        <constraint firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="15:13" id="X9O-e2-o3o"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="bIF-jf-qmH"/>
-                            <exclude reference="ed1-kU-6Z3"/>
-                        </mask>
-                    </variation>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="eNs-HX-KiW">
+                    <rect key="frame" x="175" y="252" width="250" height="97"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="Tmk-UL-x3e"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.20016870610000001" green="0.25977088279999999" blue="0.29292929290000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="eNs-HX-KiW" firstAttribute="top" secondItem="xAm-Bs-FfG" secondAttribute="bottom" constant="-136" id="Bx1-FR-vyE"/>
-                <constraint firstItem="eNs-HX-KiW" firstAttribute="top" secondItem="v2p-Qd-46T" secondAttribute="bottom" constant="69" id="FGF-S4-1yE"/>
-                <constraint firstAttribute="centerX" secondItem="xAm-Bs-FfG" secondAttribute="centerX" id="PMy-YP-TgO"/>
-                <constraint firstItem="eNs-HX-KiW" firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="5:1" id="So0-on-bkx"/>
-                <constraint firstAttribute="centerY" secondItem="v2p-Qd-46T" secondAttribute="centerY" id="YMt-Nn-W6i"/>
-                <constraint firstAttribute="trailing" secondItem="eNs-HX-KiW" secondAttribute="trailing" id="ZGc-US-mDi"/>
-                <constraint firstItem="eNs-HX-KiW" firstAttribute="leading" secondItem="V92-eN-RtU" secondAttribute="leading" id="dWp-7x-p9D"/>
-                <constraint firstItem="eNs-HX-KiW" firstAttribute="width" secondItem="xAm-Bs-FfG" secondAttribute="height" multiplier="50:19" id="eDp-f2-Ivq"/>
-                <constraint firstAttribute="centerY" secondItem="eNs-HX-KiW" secondAttribute="centerY" id="rvq-MX-MYK"/>
-                <constraint firstAttribute="centerX" secondItem="v2p-Qd-46T" secondAttribute="centerX" id="x8Q-ud-pDz"/>
+                <constraint firstAttribute="centerX" secondItem="v2p-Qd-46T" secondAttribute="centerX" id="Cud-PT-8Ux"/>
+                <constraint firstAttribute="centerX" secondItem="xAm-Bs-FfG" secondAttribute="centerX" id="Dd3-bY-6Bi"/>
+                <constraint firstItem="eNs-HX-KiW" firstAttribute="bottom" secondItem="xAm-Bs-FfG" secondAttribute="bottom" constant="20" id="JZf-k8-iGA"/>
+                <constraint firstItem="v2p-Qd-46T" firstAttribute="top" secondItem="V92-eN-RtU" secondAttribute="top" priority="999" id="XAN-Xf-X8Z"/>
+                <constraint firstAttribute="centerY" secondItem="eNs-HX-KiW" secondAttribute="centerY" constant="-0.5" id="dOw-oh-bss"/>
+                <constraint firstAttribute="centerX" secondItem="eNs-HX-KiW" secondAttribute="centerX" id="jPP-KG-7pM"/>
+                <constraint firstAttribute="centerY" secondItem="v2p-Qd-46T" secondAttribute="centerY" priority="1" id="mEM-OS-FYu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="FGF-S4-1yE"/>
-                </mask>
-            </variation>
             <connections>
+                <outlet property="centerVerticalUfoConstraint" destination="mEM-OS-FYu" id="yCf-3H-b0h"/>
                 <outlet property="cloudsImageView" destination="eNs-HX-KiW" id="gi1-G8-KQd"/>
+                <outlet property="topUfoConstraint" destination="XAN-Xf-X8Z" id="WR6-k1-rW3"/>
                 <outlet property="ufoImageView" destination="v2p-Qd-46T" id="3o9-D0-vgc"/>
                 <outlet property="ufoLightsImageView" destination="xAm-Bs-FfG" id="LSq-sF-8ab"/>
             </connections>

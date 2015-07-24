@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class NMAYearActivityScrollViewController;
 
 @interface NMALoadingAnimationView : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *ufoImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *ufoLightsImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *cloudsImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerVerticalUfoConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topUfoConstraint;
 
 - (void)animateLoadingOverlay;
 

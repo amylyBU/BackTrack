@@ -7,7 +7,6 @@
 //
 
 #import "NMALoadingAnimationView.h"
-#import "NMAYearActivityScrollViewController.h"
 #import "UIView+Constraints.h"
 
 @implementation NMALoadingAnimationView
@@ -46,11 +45,16 @@
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
+                             
                              CGRect comeInFromRight = self.ufoImageView.frame;
                              comeInFromRight.origin.x -= CGRectGetWidth(self.frame)/2;
                              self.ufoImageView.frame = comeInFromRight;
+                             
+                             self.centerVerticalUfoConstraint.priority = 999;
+                             self.topUfoConstraint.priority = 1;
                          }
                          completion:^(BOOL finished) {
+                             [self layoutIfNeeded]; // Ensures that all pending layout operations have been completed
                              getNextAnimation()(YES);
                          }
          ];
@@ -62,10 +66,15 @@
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
-                             CGRect upMovement = self.ufoImageView.frame;
-                             upMovement.origin.x -= 0;
-                             upMovement.origin.y -= CGRectGetHeight(self.frame)/2;
-                             self.ufoImageView.frame = upMovement;
+                             // Make all constraint changes here
+                             self.centerVerticalUfoConstraint.priority = 1;
+                             self.topUfoConstraint.priority = 999;
+                             [self layoutIfNeeded]; // Forces the layout of the subtree animation block then captures all of the frame changes
+                             
+//                             CGRect upMovement = self.ufoImageView.frame;
+//                             upMovement.origin.x -= 0;
+//                             upMovement.origin.y -= CGRectGetHeight(self.frame)/2;
+//                             self.ufoImageView.frame = upMovement;
                          }
                          completion:^(BOOL finished){
                              getNextAnimation()(YES);
@@ -93,7 +102,7 @@
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             self.cloudsImageView.alpha = 1.0f; // fade in clouds
+                             self.cloudsImageView.alpha = 1.0f;
                          }
                          completion:^(BOOL finished) {
                              getNextAnimation()(YES);
@@ -115,7 +124,7 @@
     [animationBlocks addObject:^(BOOL finished) {
         NSLog(@"Multi-step animation complete!");
     }];
-    
+    [self layoutIfNeeded]; // Ensures that all pending
     getNextAnimation()(YES);
 }
 

@@ -108,7 +108,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage NMA_homeBackground]];
     self.tableView.backgroundView = childView;
     [self.tableView sizeToFit];
-    self.tableView.allowsSelection = NO;
     [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
 }
 
@@ -153,6 +152,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             cell.backgroundColor = [UIColor whiteColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -168,6 +168,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                 temp.messageLabel.textColor = [UIColor NMA_turquoise];
                 cell = temp;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
             [cell layoutIfNeeded];
             return cell;
@@ -177,6 +178,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
             cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         default:
@@ -201,12 +203,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong:
             return kBillboardSongHeightForRow;
-        case NMASectionTypeFacebookActivity: {
+        case NMASectionTypeFacebookActivity:
             return UITableViewAutomaticDimension;
-        }
-        case NMASectionTypeNYTimesNews: {
+        case NMASectionTypeNYTimesNews:
             return kNewsStoryHeightForRow;
-        }
         default:
             return 0;
     }

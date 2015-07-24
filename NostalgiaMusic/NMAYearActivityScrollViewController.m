@@ -47,19 +47,14 @@ BOOL isMostRecentYearVisible;
     [self.view addSubview:self.scrollView];
 
     NSLog(@"Set up resume and pause notifications");
-
-    // Observes when the user resumes the song
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userDidResumeAVPlayer:)
                                                  name:@"resumeAVPlayerNotification"
                                                object:[NMAPlaybackManager sharedPlayer]];
-
-    // Observes when the user pauses song
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userDidPauseAVPlayer:)
                                                  name:@"pauseAVPlayerNotification"
                                                object:[NMAPlaybackManager sharedPlayer]];
-
 }
 
 #pragma mark - KVO Notification Handling
@@ -231,8 +226,6 @@ BOOL isMostRecentYearVisible;
     CGFloat origin = position * self.view.frame.size.width;
     viewController.year = year;
     [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
-    //viewController.view.layer.borderColor = [UIColor redColor].CGColor;
-    //viewController.view.layer.borderWidth = 10;
     [self.scrollView addSubview:viewController.view];
     [self addChildViewController:viewController];
 }
@@ -289,8 +282,7 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)setUpPlayerForTableCell {
-    [[NMAPlaybackManager sharedPlayer] pausePlaying]; // pause the current song before setting up for new year
-
+    [[NMAPlaybackManager sharedPlayer] pausePlaying];
     [[NMARequestManager sharedManager] getSongFromYear:[self visibleYear]
                                                success:^(NMASong *song) {
                                                    [[self visibleContentTableVC].billboardSongs removeAllObjects];
@@ -299,7 +291,6 @@ BOOL isMostRecentYearVisible;
 
                                                    [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
                                                    NSLog(@"Set up songDidEnd observation");
-                                                   // Observes when the song finishes playing
                                                    [[NSNotificationCenter defaultCenter] addObserver:self
                                                                                             selector:@selector(audioDidFinishPlaying:)
                                                                                                 name:AVPlayerItemDidPlayToEndTimeNotification
@@ -308,7 +299,7 @@ BOOL isMostRecentYearVisible;
                                                    [self resumeAnimationLayer];
                                                }
                                                failure:^(NSError *error) {
-                                                   NSLog(@"Something went horribly wrong"); //TODO: handle error
+                                                   NSLog(@"Something went horribly wrong");
                                                }];
 }
 
@@ -327,24 +318,21 @@ BOOL isMostRecentYearVisible;
     if ([self visibleAlbumImageViewLayer]) {
         NSLog(@"you called resumeAnimationLayer");
         if ([[NMAAppSettings sharedSettings] userDidAutoplay])  {
-            if (![NMAPlaybackManager sharedPlayer].audioPlayer.rate) { // if the song is NOT playing
+            if (![NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
                 NSLog(@"the song currently not playing, so play the song for year %@", [self visibleYear]);
-                [[NMAPlaybackManager sharedPlayer] startPlaying]; // when you resume the animation layer, you want to start playing the song. startplaying calls this method again, but next time, the rate will be > 0, (song is playing) so this if statement wont be executed the 2nd time
+                [[NMAPlaybackManager sharedPlayer] startPlaying];
                 return;
             }
         }
         if (![self visibleAlbumImageViewLayer].animationKeys) {
-            // if there is no animation key added to the visible layer, then you want to add it depending on whether the song is playing or not
             NSLog(@"animation is not present...");
             if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-                // the song is playing, and there wasn't any animations (like you checked before) so add the animation
                 NSLog(@"...and the song is playing, so ADD animation for year %@", [self visibleYear]);
                 [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"];
             } else {
                 NSLog(@"...and the song isn't playing, so don't add the animation for year %@", [self visibleYear]);
-                // else there is no animation, but the song is not playing yet. do not add the animation.
             }
-        } else { // there is an animation layer, you want to resume it at RESUMEANIMATIONLAYER
+        } else {
             NSLog(@"Animation present, RESUME ANIMATION for year %@.", [self visibleYear]);
             CALayer *layer = [self visibleAlbumImageViewLayer];
             CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
@@ -377,7 +365,6 @@ BOOL isMostRecentYearVisible;
     NSLog(@"Audio finished playing for year %@, change play button", self.year);
     [[self visibleSongCell] changePlayButtonImageToPlay];
     NSLog(@"Set up songDidEnd notification for latter times");
-    // Observes when the song finishes playing
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(audioDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
