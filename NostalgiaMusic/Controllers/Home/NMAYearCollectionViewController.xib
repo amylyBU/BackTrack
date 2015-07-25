@@ -22,9 +22,12 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-dn-xoP">
                     <rect key="frame" x="282" y="549" width="35.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
+                    <rect key="frame" x="0.0" y="549" width="600" height="51"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gze-WN-1yV">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,9 +40,6 @@
                         <constraint firstAttribute="height" constant="42" id="hX8-mw-h8n"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
-                    <rect key="frame" x="0.0" y="549" width="600" height="51"/>
-                </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qeq-Sr-NDh">
                     <rect key="frame" x="0.0" y="19" width="600" height="60"/>
                     <color key="backgroundColor" red="0.45882352939999999" green="0.84705882349999995" blue="0.81960784310000001" alpha="0.0" colorSpace="calibratedRGB"/>

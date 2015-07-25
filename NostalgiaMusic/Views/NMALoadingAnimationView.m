@@ -110,13 +110,8 @@
                          animations:^{}
                          completion:^(BOOL finished) {
                              [self removeFromSuperview];
-                             getNextAnimation()(YES);
+                             [self.delegate removeBlackoutFromScrollBar];
                          }];
-    }];
-    
-    [animationBlocks addObject:^(BOOL finished) {
-        [self.delegate removeBlackoutFromScrollBar];
-        NSLog(@"Multi-step animation complete!");
     }];
     
     [self layoutIfNeeded];

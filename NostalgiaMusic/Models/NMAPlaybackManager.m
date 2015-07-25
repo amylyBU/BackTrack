@@ -27,8 +27,6 @@
         dispatch_once(&onceToken, ^{
             sharedPlayerManagerInstance = [[NMAPlaybackManager alloc] init];
             sharedPlayerManagerInstance.audioPlayer = [[AVPlayer alloc] init];
-            
-            // set up this shared manager instance to observe rate of its audioplayer.
             [sharedPlayerManagerInstance.audioPlayer addObserver:sharedPlayerManagerInstance
                                                       forKeyPath:@"rate"
                                                          options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
@@ -44,9 +42,6 @@
     [NMAPlaybackManager sharedPlayer].audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
     [NMAPlaybackManager sharedPlayer].audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:[NMAPlaybackManager sharedPlayer].audioAsset];
     [[NMAPlaybackManager sharedPlayer].audioPlayer replaceCurrentItemWithPlayerItem:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-    NSLog(@"Song url is now: %@", [NMAPlaybackManager sharedPlayer].audioAsset.URL);
-    
-    // set up this manager instance to observe when player item finishes playing
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(itemDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
@@ -64,18 +59,11 @@
 #pragma mark - Song End Notification
 
 - (void)itemDidFinishPlaying:(NSNotification *)notification {
-    // stop observing previous player item
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-    
-    // post the notification that the previous player item has ended
     [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:self];
-    
-    // set up the av player with a new player item
     [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NMAPlaybackManager sharedPlayer].audioAsset.URL];
-    
-    // after setting it up, return to audioDidFinishPlaying in YearActivityScroll and change the image, and re-add the notification for the new player item.
 }
 
 #pragma mark - Key-Value Observer Handling
@@ -87,15 +75,10 @@
     
     NSNumber *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     NSNumber *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-    
-    //NSLog(@"new: %@, old: %@", newValue, oldValue);
-    
-  if (![newValue isEqual:oldValue]) {
-        if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) { // rate = 1: playing
-            NSLog(@"Resumed song");
+    if (![newValue isEqual:oldValue]) {
+        if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeAVPlayerNotification" object:self];
-        } else { // rate = 0: paused
-            NSLog(@"Paused song");
+        } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"pauseAVPlayerNotification" object:self];
         }
     }
