@@ -19,9 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
-                    <rect key="frame" x="0.0" y="549" width="600" height="51"/>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-dn-xoP">
                     <rect key="frame" x="282" y="549" width="35.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -66,12 +63,6 @@
                         <outlet property="delegate" destination="-1" id="cZZ-c7-SSh"/>
                     </connections>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDd-dn-xoP">
-                    <rect key="frame" x="283" y="549" width="36" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="4Rr-CK-pC5" firstAttribute="centerY" secondItem="Qeq-Sr-NDh" secondAttribute="centerY" id="4gu-IZ-vJC"/>
