@@ -29,6 +29,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 @property (copy, nonatomic) NSString *selectedYear;
 @property (strong, nonatomic) NMAYearActivityScrollViewController *yearActivityScrollVC;
 @property (strong, nonatomic) NMAYearCollectionViewController *yearScrollBarCollectionVC;
+@property (strong, nonatomic) UIView *blackoutActivityView;
 
 @end
 
@@ -48,6 +49,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
 - (void)configureUI {
     self.title = @"";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     UIImage *buttonImage = [UIImage imageNamed:@"setting-icon.png"];
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:buttonImage
                                                                        style:UIBarButtonItemStyleDone
@@ -57,9 +59,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor NMA_lightTeal];
     self.navigationController.navigationBar.translucent = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor NMA_lightTeal];
     self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                      NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
 }
@@ -86,8 +86,8 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     [self ip_addChildViewController:content];
 }
 
-
 #pragma mark - NMAYearCollectionViewControllerDelegate
+
 - (void)didSelectYear:(NSString *)year {
     if (![self.selectedYear isEqualToString:year]) {
         self.selectedYear = year;
@@ -98,16 +98,31 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 }
 
 - (void)configureLoadingAnimationView {
+    [self.blackoutActivityView removeFromSuperview];
     NMALoadingAnimationView *loadingAnimationView = [[NMALoadingAnimationView alloc] initWithNibNamed:nil];
+    loadingAnimationView.delegate = self;
     [self.yearActivityScrollVC.view addSubview:loadingAnimationView];
-    [loadingAnimationView constrainView:loadingAnimationView.ufoLightsImageView toHeight:CGRectGetHeight(loadingAnimationView.frame)/3];
-    [loadingAnimationView constrainView:loadingAnimationView.cloudsImageView toWidth:CGRectGetWidth(loadingAnimationView.frame)];
     [self.yearActivityScrollVC.view constrainView:loadingAnimationView toInsets:UIEdgeInsetsZero];
     [loadingAnimationView animateLoadingOverlay];
+    
 }
 
+- (void)blackoutActivity {
+    int numberOfActivityScrollSubviews = (int)self.yearActivityScrollVC.view.subviews.count;
+    if (!(numberOfActivityScrollSubviews == 2)) {
+        self.blackoutActivityView = [[UIView alloc] initWithFrame:self.yearActivityScrollVC.view.bounds];
+        self.blackoutActivityView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+        [self.yearActivityScrollVC.view addSubview:self.blackoutActivityView];
+    }
+}
 
-#pragma mark - NMAYearCollectionViewControllerDelegate
+- (void)removeBlackoutFromScrollBar {
+    self.navigationController.navigationBar.alpha = 1.0;
+    self.yearScrollBarCollectionVC.blackoutNavBarView.hidden = YES;
+}
+
+#pragma mark - NMAYearActivityScrollDelegate
+
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
 }

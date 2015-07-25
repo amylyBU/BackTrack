@@ -11,7 +11,9 @@
 
 @protocol NMAYearCollectionViewControllerDelegate <NSObject>
 
--(void)didSelectYear:(NSString *)year;
+- (void)didSelectYear:(NSString *)year;
+- (void)blackoutActivity;
+- (void)removeBlackoutFromScrollBar;
 
 @end
 
@@ -22,6 +24,9 @@
 @property (weak, nonatomic) id <NMAYearCollectionViewControllerDelegate> delegate;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) IBOutlet UICollectionView *scrollBarCollectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *navbarIllustration;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIView *blackoutNavBarView;
 
 - (void)moveToYear:(NSString *)year;
 

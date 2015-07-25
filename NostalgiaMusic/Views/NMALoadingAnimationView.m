@@ -12,9 +12,8 @@
 @implementation NMALoadingAnimationView
 
 - (void)animateLoadingOverlay {
-    
-    
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.80];
+    self.ufoImageView.alpha = 0.0;
     self.cloudsImageView.alpha = 0.0;
     self.ufoLightsImageView.hidden = YES;
     
@@ -39,64 +38,58 @@
         }
     };
     
-    // ufo coming in from the right
+    // Ufo fading in from the right
     [animationBlocks addObject:^(BOOL finished) {
-        [UIView animateWithDuration:0.2
+        [UIView animateWithDuration:0.25
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
-                             
+                             [self layoutIfNeeded];
+                             self.ufoImageView.alpha = 1.0;
                              CGRect comeInFromRight = self.ufoImageView.frame;
                              comeInFromRight.origin.x -= CGRectGetWidth(self.frame)/2;
                              self.ufoImageView.frame = comeInFromRight;
-                             
                              self.centerVerticalUfoConstraint.priority = 999;
                              self.topUfoConstraint.priority = 1;
                          }
                          completion:^(BOOL finished) {
-                             [self layoutIfNeeded]; // Ensures that all pending layout operations have been completed
+                             [self layoutIfNeeded];
                              getNextAnimation()(YES);
                          }
          ];
     }];
     
-    // move the ufo up
+    // Move ufo up
     [animationBlocks addObject:^(BOOL finished) {
-        [UIView animateWithDuration:0.7
+        [UIView animateWithDuration:0.75
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
-                             // Make all constraint changes here
                              self.centerVerticalUfoConstraint.priority = 1;
                              self.topUfoConstraint.priority = 999;
-                             [self layoutIfNeeded]; // Forces the layout of the subtree animation block then captures all of the frame changes
-                             
-//                             CGRect upMovement = self.ufoImageView.frame;
-//                             upMovement.origin.x -= 0;
-//                             upMovement.origin.y -= CGRectGetHeight(self.frame)/2;
-//                             self.ufoImageView.frame = upMovement;
+                             [self layoutIfNeeded];
                          }
-                         completion:^(BOOL finished){
+                         completion:^(BOOL finished) {
                              getNextAnimation()(YES);
                          }
          ];
     }];
     
-    // mask the ufo lights
+    // Mask ufo lights
     [animationBlocks addObject:^(BOOL finished) {
         [UIView animateWithDuration:2.0
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionAllowAnimatedContent
                          animations:^{
                              self.ufoLightsImageView.hidden = NO;
-                             maskView.frame = self.ufoLightsImageView.bounds; // mask the ufo lights
+                             maskView.frame = self.ufoLightsImageView.bounds;
                          }
                          completion:^(BOOL finished) {
                              getNextAnimation()(YES);
                          }];
     }];
     
-    // fade in the clouds
+    // Fade in clouds
     [animationBlocks addObject:^(BOOL finished) {
         [UIView animateWithDuration:1.0
                               delay:0.0
@@ -109,7 +102,7 @@
                          }];
     }];
     
-    //remove the superview
+    // Remove loadingview from superview
     [animationBlocks addObject:^(BOOL finished) {
         [UIView animateWithDuration:0.1
                               delay:0.0
@@ -122,9 +115,11 @@
     }];
     
     [animationBlocks addObject:^(BOOL finished) {
+        [self.delegate removeBlackoutFromScrollBar];
         NSLog(@"Multi-step animation complete!");
     }];
-    [self layoutIfNeeded]; // Ensures that all pending
+    
+    [self layoutIfNeeded];
     getNextAnimation()(YES);
 }
 

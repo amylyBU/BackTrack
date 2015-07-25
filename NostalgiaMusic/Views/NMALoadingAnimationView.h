@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NMAYearCollectionViewController.h"
 
 @interface NMALoadingAnimationView : UIView
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cloudsImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerVerticalUfoConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topUfoConstraint;
+@property (weak, nonatomic) id <NMAYearCollectionViewControllerDelegate> delegate;
 
 - (void)animateLoadingOverlay;
 

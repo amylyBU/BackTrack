@@ -113,18 +113,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 #pragma mark - Table view data source
 
-- (void)tableView:(UITableView *)tableView
-  willDisplayCell:(UITableViewCell *)cell
-forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([[cell class] isEqual:[NMATodaysSongTableViewCell class]]) {
-//        NMAYearActivityScrollViewController *parentVC = (NMAYearActivityScrollViewController *)self.parentViewController;
-//        if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-//            NSLog(@"Resuming animation for reallocated song cell");
-//            [parentVC resumeAnimationLayer];
-//        }
-//    }
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return kNumberOfSections;
 }
@@ -201,14 +189,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case NMASectionTypeBillboardSong:
-            return kBillboardSongHeightForRow;
         case NMASectionTypeFacebookActivity:
             return UITableViewAutomaticDimension;
         case NMASectionTypeNYTimesNews:
             return kNewsStoryHeightForRow;
         default:
-            return 0;
+            return kBillboardSongHeightForRow;
     }
 }
 
@@ -221,7 +207,7 @@ viewForHeaderInSection:(NSInteger)section {
             fbSectionHeaderCell.headerLabel.font = [UIFont NMA_proximaNovaRegularWithSize:20.0f];
             fbSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
-            fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor]; // so the space above the facebook label is white - blends in with the song cell background
+            fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
             fbSectionHeaderCell.backgroundColor = [UIColor clearColor];
             [fbSectionHeaderCell sizeToFit];
             return fbSectionHeaderCell;
@@ -287,7 +273,6 @@ titleForHeaderInSection:(NSInteger)section {
             return nil;
     }
 }
-
 
 #pragma mark - Private Utility
 

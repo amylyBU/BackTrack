@@ -25,10 +25,10 @@ static NSInteger const kNumberOfSectionsInYearCollection = 1;
 static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASelectedYearCollectionViewCell";
 
 @interface NMAYearCollectionViewController () <UIScrollViewDelegate>
+
 @property (strong, nonatomic) NSMutableArray *years;
 @property (nonatomic) NSInteger latestYear;
 @property (weak, nonatomic) IBOutlet UIView *whiteYearBackgroundSquare;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) UIView *blackoutView;
 
 @end
@@ -67,6 +67,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     [self.dateLabel setFont:[UIFont NMA_proximaNovaRegularWithSize:14]];
     self.dateLabel.textColor = [UIColor NMA_darkSkyBlue];
     self.dateLabel.text = [self getDate];
+    self.blackoutNavBarView.hidden = YES;
 }
 
 - (void)setUpCollectionViewWithLayout {
@@ -88,6 +89,13 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.parentViewController.navigationController.navigationBar.alpha = 0.2;
+    self.blackoutNavBarView.hidden = NO;
+    self.blackoutNavBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+    [self.delegate blackoutActivity];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -123,7 +131,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     NSString *year = self.years[indexPath.row];
     NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.year.text = year;
-    if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
+    if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%li", (long)self.latestYear]] && self.year == nil)) {
         [self formatMiddleCell:cell isSelected:YES];
         return cell;
     } else {
@@ -242,7 +250,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     if (self.year) {
         weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:self.year];
     } else {
-        NSString *latestYearConverted = [NSString stringWithFormat:@"%i", self.latestYear];
+        NSString *latestYearConverted = [NSString stringWithFormat:@"%li", (long)self.latestYear];
         weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:latestYearConverted];
     }
 
