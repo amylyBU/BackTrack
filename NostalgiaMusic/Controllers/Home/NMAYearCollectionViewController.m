@@ -92,6 +92,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.parentViewController.navigationItem.rightBarButtonItem.enabled = NO;
     self.parentViewController.navigationController.navigationBar.alpha = 0.2;
     self.blackoutNavBarView.hidden = NO;
     self.blackoutNavBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];

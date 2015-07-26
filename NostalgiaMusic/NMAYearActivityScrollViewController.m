@@ -45,24 +45,7 @@ BOOL isMostRecentYearVisible;
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     [self.view addSubview:self.scrollView];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidResumeAVPlayer:)
-                                                 name:@"resumeAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidPauseAVPlayer:)
-                                                 name:@"pauseAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
-}
-
-#pragma mark - KVO Notification Handling
-
-- (void)userDidResumeAVPlayer:(NSNotification *)notification {
-    [self resumeAnimationLayer];
-}
-
-- (void)userDidPauseAVPlayer:(NSNotification *)notification {
-    [self pauseAnimationLayer];
+    [self setUpPlayerForTableCellForYear:self.latestYear];
 }
 
 #pragma mark - Scroll View set up
@@ -73,6 +56,9 @@ BOOL isMostRecentYearVisible;
     NSInteger numberOfViews = 3;
     self.year = year;
 
+    CGFloat width = CGRectGetWidth(self.view.frame);
+    CGFloat height = CGRectGetHeight(self.view.frame);
+
     if ([self.year isEqualToString:self.earliestYear]) {
         self.year = [self incrementStringValue:self.earliestYear];
         isEarliestYearVisble = YES;
@@ -81,8 +67,9 @@ BOOL isMostRecentYearVisible;
     } else if ([self.year isEqualToString:self.latestYear]) {
         self.year = [self decrementStringValue:self.latestYear];
         isMostRecentYearVisible = YES;
-        CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 2, 0);
+        CGPoint scrollPoint = CGPointMake(width * 2, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
+
     } else {
         [self setContentOffsetToCenter];
     }
@@ -105,10 +92,7 @@ BOOL isMostRecentYearVisible;
     [self configureNMAContentTableViewController:self.rightTableViewController
                                         withYear:[self incrementStringValue:self.year]
                                       atPosition:NMAScrollViewPositionNextYear];
-
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
-
-    [self setUpPlayerForTableCell];
+    self.scrollView.contentSize = CGSizeMake(width * numberOfViews, height);
 }
 
 - (void)viewDidLayoutSubviews {
@@ -157,23 +141,18 @@ BOOL isMostRecentYearVisible;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
-    [[self visibleAlbumImageViewLayer] removeAllAnimations];
-    [self setUpPlayerForTableCell];
-
 }
 
 - (void)didSwipeToNextYear {
     if ([self.rightTableViewController.year isEqualToString:self.latestYear]) {
         isMostRecentYearVisible = YES;
         [self.delegate updateScrollYear:[self incrementStringValue:self.year]];
-    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear ] && isEarliestYearVisble) {
+    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear] && isEarliestYearVisble) {
         isEarliestYearVisble = NO;
         [self.delegate updateScrollYear:self.year];
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
-    [[self visibleAlbumImageViewLayer] removeAllAnimations];
-    [self setUpPlayerForTableCell];
 }
 
 - (void)updatePositioningForScrollPosition:(NMAScrollViewYearPosition)position {
@@ -222,9 +201,11 @@ BOOL isMostRecentYearVisible;
 - (void)configureNMAContentTableViewController:(NMAContentTableViewController *)viewController
                                       withYear:(NSString *)year
                                     atPosition:(NMAScrollViewYearPosition)position {
-    CGFloat origin = position * self.view.frame.size.width;
+    CGFloat width = CGRectGetWidth(self.view.frame);
+    CGFloat height = CGRectGetHeight(self.view.frame);
+    CGFloat origin = position * width;
     viewController.year = year;
-    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    [viewController.view setFrame:CGRectMake(origin, 0, width, height)];
     [self.scrollView addSubview:viewController.view];
     [self addChildViewController:viewController];
 }
@@ -244,9 +225,9 @@ BOOL isMostRecentYearVisible;
 #pragma mark - Year Getter Methods
 
 - (void)getLatestYear {
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     NSString *pastYearString = [NSString stringWithFormat:@"%li", (long)pastyear];
     self.latestYear = pastYearString;
@@ -280,9 +261,9 @@ BOOL isMostRecentYearVisible;
     return [self visibleSongCell].albumImageView.layer;
 }
 
-- (void)setUpPlayerForTableCell {
-    [[NMAPlaybackManager sharedPlayer] pausePlaying];
-    [[NMARequestManager sharedManager] getSongFromYear:[self visibleYear]
+- (void)setUpPlayerForTableCellForYear:(NSString *)year {
+    NSLog(@"setting up player for table cell");
+    [[NMARequestManager sharedManager] getSongFromYear:year
                                                success:^(NMASong *song) {
                                                    [[self visibleContentTableVC].billboardSongs removeAllObjects];
                                                    [[self visibleContentTableVC].billboardSongs addObject:song];
@@ -293,36 +274,32 @@ BOOL isMostRecentYearVisible;
                                                                                                 name:AVPlayerItemDidPlayToEndTimeNotification
                                                                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
                                                    [self makeAnimation];
-                                                   [self resumeAnimationLayer];
+                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                                                       [[NMAPlaybackManager sharedPlayer] startPlaying];
+                                                   }
                                                }
                                                failure:^(NSError *error) {}];
 }
 
-
 #pragma mark - Animation Methods
 
-- (void)pauseAnimationLayer {
+- (void)pauseSpinning {
+    NSLog(@"paused animation");
     CALayer *layer = [self visibleAlbumImageViewLayer];
     CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
     layer.speed = 0.0;
     layer.timeOffset = pausedTime;
 }
 
-- (void)resumeAnimationLayer {
+- (void)startSpinning {
     if ([self visibleAlbumImageViewLayer]) {
-        if ([[NMAAppSettings sharedSettings] userDidAutoplay])  {
-            if (![NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-                [[NMAPlaybackManager sharedPlayer] startPlaying];
-                return;
-            }
-        }
         if (![self visibleAlbumImageViewLayer].animationKeys) {
-            if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-                [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"];
-            }
+           NSLog(@"if no animations exist on layer yet, so ADD animation");
+            [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"];
         } else {
+           NSLog(@"animation layer exists, so RESUME animation");
             CALayer *layer = [self visibleAlbumImageViewLayer];
-            CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+            CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:layer];
             CFTimeInterval pausedTime = [layer timeOffset];
             layer.speed = 1.0;
             layer.timeOffset = 0.0;

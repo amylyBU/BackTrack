@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UIButton *iTunesButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (strong, nonatomic) CABasicAnimation *rotation;
 
 - (void)configureCellForSong:(NMASong *)song;
 - (void)changePlayButtonImageToPlay;

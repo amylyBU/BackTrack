@@ -7,25 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NMAContentTableViewController.h"
 #import "NMAYearActivityScrollDelegate.h"
-#import "NMATodaysSongTableViewCell.h"
+@class NMAContentTableViewController;
 
 @interface NMAYearActivityScrollViewController : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) CABasicAnimation *rotation;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
-@property (strong, nonatomic) CABasicAnimation *rotation;
 
 - (void)setUpScrollView:(NSString *)year;
-- (NSString *)visibleYear;
-- (CALayer *)visibleAlbumImageViewLayer;
-- (NMATodaysSongTableViewCell *)visibleSongCell;
-- (NMAContentTableViewController *)visibleContentTableVC;
-- (void)setUpPlayerForTableCell;
-- (void)makeAnimation;
-- (void)resumeAnimationLayer;
-- (void)pauseAnimationLayer;
+//- (void)setUpPlayerForTableCell;
+- (void)setUpPlayerForTableCellForYear:(NSString *)year;
+- (void)startSpinning;
+- (void)pauseSpinning;
 
 @end

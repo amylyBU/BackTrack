@@ -23,6 +23,7 @@
 #import "UIView+Constraints.h"
 
 static const NSInteger kYearScrollBarCollectionVCHeight = 128;
+static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView AND (blackoutView OR loadingAnimation)
 
 @interface NMAHomeViewController () <NMAYearCollectionViewControllerDelegate, NMAYearActivityScrollDelegate>
 
@@ -46,7 +47,6 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     [self setUpHomeView];
     [self configureUI];
 }
-
 - (void)configureUI {
     self.title = @"";
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -62,6 +62,10 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                      NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
+}
+
+- (void)displayContentController:(UIViewController *)content {
+    [self ip_addChildViewController:content];
 }
 
 - (void)setUpHomeView {
@@ -80,10 +84,27 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
     [self.view constrainView:self.yearActivityScrollVC.view belowView:self.yearScrollBarCollectionVC.view];
     [self.view constrainView:self.yearActivityScrollVC.view top:NSNotFound left:0 bottom:0 right:0];
     
+    NSLog(@"setting up notifications");
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidResumeAVPlayer:)
+                                                 name:@"resumeAVPlayerNotification"
+                                               object:[NMAPlaybackManager sharedPlayer]];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidPauseAVPlayer:)
+                                                 name:@"pauseAVPlayerNotification"
+                                               object:[NMAPlaybackManager sharedPlayer]];
+    
+}
+#pragma mark - KVO Notification Handling
+
+- (void)userDidResumeAVPlayer:(NSNotification *)notification {
+    NSLog(@"did resume song");
+    [self.yearActivityScrollVC startSpinning];
 }
 
-- (void)displayContentController:(UIViewController *)content {
-    [self ip_addChildViewController:content];
+- (void)userDidPauseAVPlayer:(NSNotification *)notification {
+    NSLog(@"did pause song");
+    [self.yearActivityScrollVC pauseSpinning];
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
@@ -93,7 +114,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
         self.selectedYear = year;
         [self.yearActivityScrollVC setUpScrollView:year];
         [self configureLoadingAnimationView];
-        [self.yearActivityScrollVC setUpPlayerForTableCell];
+        [self.yearActivityScrollVC setUpPlayerForTableCellForYear:year];
     }
 }
 
@@ -109,7 +130,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
 - (void)blackoutActivity {
     int numberOfActivityScrollSubviews = (int)self.yearActivityScrollVC.view.subviews.count;
-    if (!(numberOfActivityScrollSubviews == 2)) {
+    if (!(numberOfActivityScrollSubviews == kMaxNumberOfSubviewsForYearActivityScroll)) {
         self.blackoutActivityView = [[UIView alloc] initWithFrame:self.yearActivityScrollVC.view.bounds];
         self.blackoutActivityView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
         [self.yearActivityScrollVC.view addSubview:self.blackoutActivityView];
@@ -117,6 +138,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 }
 
 - (void)removeBlackoutFromScrollBar {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     self.navigationController.navigationBar.alpha = 1.0;
     self.yearScrollBarCollectionVC.blackoutNavBarView.hidden = YES;
 }
@@ -125,6 +147,7 @@ static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 
 - (void)updateScrollYear:(NSString *)year {
     [self.yearScrollBarCollectionVC moveToYear:year];
+    [self.yearActivityScrollVC setUpPlayerForTableCellForYear:year];
 }
 
 @end
