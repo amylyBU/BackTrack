@@ -12,6 +12,7 @@
 #import "NMAPlaybackManager.h"
 #import "UIFont+NMAFonts.h"
 #import "UIColor+NMAColors.h"
+#import "UIImage+NMAImages.h"
 #import <AVFoundation/AVFoundation.h>
 
 static NSString * const kPlayImageName = @"play-circle-button";
@@ -43,7 +44,11 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     self.artistLabel.text = song.artistAsAppearsOnLabel;
     self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
     self.artistLabel.textColor = [UIColor NMA_darkGray];
-    self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
+    if (song.albumImageUrl600x600) {
+            self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
+    } else {
+        self.albumImageView.image = [UIImage NMA_defaultRecord];
+    }
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
     self.albumImageView.layer.masksToBounds = YES;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {

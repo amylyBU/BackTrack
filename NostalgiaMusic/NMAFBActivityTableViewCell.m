@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
+#import "UIImage+NMAImages.h"
 
 @interface NMAFBActivityTableViewCell()
 
@@ -51,15 +52,15 @@ static const NSInteger kCommentParagraphSpacing = 7;
     
     [self constructFullPost:self.fbActivity collapsed:collapsed];
     
-    //check for image
-    if (self.fbActivity.imagePath) {
-        NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        UIImage *postImage = [UIImage imageWithData:imageData];
-        self.collapseImageConstraint.priority = 1;
-        [self setImageViewDimensions:postImage trueAspectRatio:!self.collapsed];
-        [self.postImageView setImage:postImage];
-        [self layoutIfNeeded];
+    if (self.fbActivity.hasImage) {
+        if (self.fbActivity.imagePath) {
+            NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            UIImage *postImage = [UIImage imageWithData:imageData];
+            [self setPostImage:postImage];
+        } else {
+            [self setPostImage:[UIImage NMA_defaultImage]];
+        }
     } else {
         self.collapseImageConstraint.priority = 999;
     }
@@ -149,6 +150,13 @@ static const NSInteger kCommentParagraphSpacing = 7;
         self.collapseImageConstraint.priority = 1;
         [self setImageViewDimensions:postImage trueAspectRatio:useTrueAspectRatio];
     }
+}
+
+- (void)setPostImage:(UIImage *)image {
+    self.collapseImageConstraint.priority = 1;
+    [self setImageViewDimensions:image trueAspectRatio:!self.collapsed];
+    [self.postImageView setImage:image];
+    [self layoutIfNeeded];
 }
 
 - (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
