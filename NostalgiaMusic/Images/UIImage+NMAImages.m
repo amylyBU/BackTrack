@@ -12,11 +12,11 @@
 
 /* Home */
 + (UIImage *)NMA_facebookLabel {
-    return [UIImage imageNamed:@"facebook-label"];
+    return [UIImage imageNamed:@"facebook_icon"];
 }
 
 + (UIImage *)NMA_newsLabel {
-    return [UIImage imageNamed:@"news-label"];
+    return [UIImage imageNamed:@"news_icon"];
 }
 
 + (UIImage *)NMA_settingsGear {
