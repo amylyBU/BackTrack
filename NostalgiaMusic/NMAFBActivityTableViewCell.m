@@ -49,14 +49,7 @@ static const NSInteger kCommentParagraphSpacing = 7;
         self.timeLabel.text = self.fbActivity.timeString;
     }
     
-    if (self.fbActivity.message && self.fbActivity.likes && self.fbActivity.comments) {
-        [self constructFullPost:self.fbActivity collapsed:collapsed];
-        NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
-        [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
-        NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
-        [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
-        [self.messageLabel sizeToFit];
-    }
+    [self constructFullPost:self.fbActivity collapsed:collapsed];
     
     //check for image
     if (self.fbActivity.imagePath) {
@@ -148,9 +141,21 @@ static const NSInteger kCommentParagraphSpacing = 7;
 
 - (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
     [self setCollapsedCellState:collapsed];
-    self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
+    
+    NSAttributedString *messageText = fbActivity.message ?
+    [[NSAttributedString alloc] initWithString:fbActivity.message] :
+    [[NSAttributedString alloc] initWithString:@""];
+    
+    self.messageLabel.attributedText = messageText;
     self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
     self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+    
+    NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
+    [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
+    NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
+    [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
+    [self.messageLabel sizeToFit];
+
 }
 
 - (IBAction)viewMoreComments:(UIButton *)sender {
@@ -279,7 +284,7 @@ static const NSInteger kCommentParagraphSpacing = 7;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setParagraphSpacing:kCommentParagraphSpacing];
     NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
-    [commentThreadString addAttributes:commentAttributes range:NSMakeRange(0, commentThreadString.length - 1)];
+    [commentThreadString addAttributes:commentAttributes range:NSMakeRange(0, commentThreadString.length)];
     
     return commentThreadString;
 }
