@@ -122,7 +122,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
  numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case NMASectionTypeBillboardSong:
-            return self.billboardSongs.count;
+            return 1;
         case NMASectionTypeFacebookActivity: {
             NSUInteger activityCount = self.day.fbActivities.count;
             return activityCount > 0 ? activityCount : 1;
@@ -139,7 +139,12 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
-            [cell configureCellForSong:self.billboardSongs[indexPath.row]];
+            if (self.billboardSongs.count > 0) {
+                [cell configureCellForSong:self.billboardSongs[indexPath.row]];
+            } else {
+                [cell configureEmptyCell];
+            }
+            cell.backgroundColor = [UIColor whiteColor];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
