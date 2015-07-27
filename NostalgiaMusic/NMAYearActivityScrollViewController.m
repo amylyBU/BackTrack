@@ -27,7 +27,7 @@ BOOL isMostRecentYearVisible;
 @property (strong, nonatomic) NMAContentTableViewController *rightTableViewController;
 @property (copy, nonatomic) NSString *earliestYear;
 @property (copy, nonatomic) NSString *latestYear;
-
+@property (nonatomic) float swipeContentOffset;
 @end
 
 
@@ -85,6 +85,9 @@ BOOL isMostRecentYearVisible;
 
 
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.swipeContentOffset = self.scrollView.contentOffset.x;
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self scrollingDidEnd];
@@ -100,7 +103,7 @@ BOOL isMostRecentYearVisible;
 - (void)scrollingDidEnd {
     if (isEarliestYearVisble) {
         self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 1 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
-    } else {
+    } else if (fabsf(self.swipeContentOffset - self.scrollView.contentOffset.x) == self.middleTableViewController.view.frame.size.width) {
     self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
     }
 }
