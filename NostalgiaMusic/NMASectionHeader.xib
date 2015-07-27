@@ -20,15 +20,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTK-a6-ILP" userLabel="top color view">
-                        <rect key="frame" x="0.0" y="0.0" width="321" height="42"/>
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="35"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.84705882349999995" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-label" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-Gp-7WD">
                         <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
-                        <rect key="frame" x="88" y="18" width="225" height="24"/>
-                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="83" y="18" width="230" height="24"/>
+                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,10 +37,10 @@
                     <constraint firstAttribute="trailing" secondItem="lGe-Gp-7WD" secondAttribute="trailing" id="3cM-gW-yUS"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
                     <constraint firstAttribute="bottom" secondItem="lGe-Gp-7WD" secondAttribute="bottom" id="8WE-1S-QxS"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="8tP-Rm-WQ6"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="75" id="8tP-Rm-WQ6"/>
                     <constraint firstItem="XfO-5y-ZwR" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D4S-Tm-UYH"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="XfO-5y-ZwR" secondAttribute="bottom" constant="12" id="XFy-pt-tGr"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="XfO-5y-ZwR" secondAttribute="bottom" constant="19" id="XFy-pt-tGr"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="bottom" secondItem="XfO-5y-ZwR" secondAttribute="bottom" id="hau-OH-Uec"/>
                     <constraint firstAttribute="trailing" secondItem="hTK-a6-ILP" secondAttribute="trailing" id="mdG-9z-Kjc"/>
                     <constraint firstItem="lGe-Gp-7WD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mhG-6B-Ikh"/>
