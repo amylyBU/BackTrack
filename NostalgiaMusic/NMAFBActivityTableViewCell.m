@@ -22,6 +22,7 @@
 static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
 static const float kMainPageAspectRatio = 0.667f;
+static const NSInteger kCommentParagraphSpacing = 7;
 
 @implementation NMAFBActivityTableViewCell
 
@@ -30,6 +31,8 @@ static const float kMainPageAspectRatio = 0.667f;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_almostBlack];
+    self.likeCreditsLabel.textColor = [UIColor NMA_almostBlack];
+    self.commentThreadLabel.textColor = [UIColor NMA_almostBlack];
     self.continueLabel.textColor = [UIColor NMA_lightGray];
     [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
@@ -246,11 +249,7 @@ static const float kMainPageAspectRatio = 0.667f;
 }
 
 - (NSMutableAttributedString *)constructCommentThread:(NMAFBActivity *)fbActivity {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:15];
-    NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
-    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""
-                                                                                            attributes:commentAttributes];
+    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     NSInteger currentDisplayed = self.displayedCommentCount > kCommentAddRate ? self.displayedCommentCount : kCommentAddRate;
     self.displayedCommentCount = 0;
@@ -276,6 +275,11 @@ static const float kMainPageAspectRatio = 0.667f;
     if (self.viewMoreButton.hidden) {
         self.collapseViewMoreHeightConstraint.priority = 999;
     }
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setParagraphSpacing:kCommentParagraphSpacing];
+    NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
+    [commentThreadString addAttributes:commentAttributes range:NSMakeRange(0, commentThreadString.length - 1)];
     
     return commentThreadString;
 }
