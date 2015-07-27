@@ -202,7 +202,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     NSInteger yearIndexPath = currentYearAsInt - earliestYear;
     if (self.year) {
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:yearIndexPath inSection:0];
-        [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
         NMAYearCollectionViewCell *cell = (NMAYearCollectionViewCell *)[self.scrollBarCollectionView cellForItemAtIndexPath:defaultYear];
         [self formatMiddleCell:cell isSelected:YES];
     } else {
