@@ -29,8 +29,6 @@ BOOL isMostRecentYearVisible;
 @property (copy, nonatomic) NSString *earliestYear;
 @property (copy, nonatomic) NSString *latestYear;
 @property (nonatomic) float swipeContentOffset;
-@property (strong, nonatomic) CABasicAnimation *rotation;
-
 
 @end
 
@@ -45,7 +43,7 @@ BOOL isMostRecentYearVisible;
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     [self.view addSubview:self.scrollView];
-    [self setUpPlayerForTableCellForYear:self.latestYear];
+    [self makeAnimation];
 }
 
 #pragma mark - Scroll View set up
@@ -121,7 +119,7 @@ BOOL isMostRecentYearVisible;
 - (void)scrollingDidEnd {
     if (isEarliestYearVisble) {
       self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 1 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
-    } else if (fabsf(self.swipeContentOffset - self.scrollView.contentOffset.x) == self.middleTableViewController.view.frame.size.width) {
+    } else if (fabs(self.swipeContentOffset - self.scrollView.contentOffset.x) == self.middleTableViewController.view.frame.size.width) {
       self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
     }
 }
@@ -262,9 +260,10 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)setUpPlayerForTableCellForYear:(NSString *)year {
-    NSLog(@"setting up player for table cell");
+    [[NMAPlaybackManager sharedPlayer] pausePlaying];
     [[NMARequestManager sharedManager] getSongFromYear:year
                                                success:^(NMASong *song) {
+                                                   NSLog(@"setting up player cell for %@", [self visibleContentTableVC].year);
                                                    [[self visibleContentTableVC].billboardSongs removeAllObjects];
                                                    [[self visibleContentTableVC].billboardSongs addObject:song];
                                                    [[self visibleContentTableVC].tableView reloadData];
@@ -273,7 +272,6 @@ BOOL isMostRecentYearVisible;
                                                                                             selector:@selector(audioDidFinishPlaying:)
                                                                                                 name:AVPlayerItemDidPlayToEndTimeNotification
                                                                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
-                                                   [self makeAnimation];
                                                    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
                                                        [[NMAPlaybackManager sharedPlayer] startPlaying];
                                                    }
@@ -284,7 +282,7 @@ BOOL isMostRecentYearVisible;
 #pragma mark - Animation Methods
 
 - (void)pauseSpinning {
-    NSLog(@"paused animation");
+    NSLog(@"paused animation, self: %@", self);
     CALayer *layer = [self visibleAlbumImageViewLayer];
     CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
     layer.speed = 0.0;
@@ -292,26 +290,32 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)startSpinning {
-    if ([self visibleAlbumImageViewLayer]) {
-        if (![self visibleAlbumImageViewLayer].animationKeys) {
-           NSLog(@"if no animations exist on layer yet, so ADD animation");
-            [[self visibleAlbumImageViewLayer] addAnimation:self.rotation forKey:@"rotationAnimation"];
+    CALayer *visibleAlbumImageViewLayer = [self visibleAlbumImageViewLayer];
+    if (visibleAlbumImageViewLayer) {
+        if (!visibleAlbumImageViewLayer.animationKeys) {
+           NSLog(@"if no animations exist on layer, ADD animation");
+            CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+            rotation.toValue = [NSNumber numberWithFloat:M_PI*2];
+            rotation.duration = 10;
+            rotation.cumulative = YES;
+            rotation.repeatCount = HUGE_VALF;
+            rotation.removedOnCompletion = NO;
+            rotation.fillMode = kCAFillModeForwards;
+            [visibleAlbumImageViewLayer addAnimation:rotation forKey:@"rotationAnimation"];
         } else {
            NSLog(@"animation layer exists, so RESUME animation");
-            CALayer *layer = [self visibleAlbumImageViewLayer];
-            CFTimeInterval startTime = [layer convertTime:CACurrentMediaTime() fromLayer:layer];
-            CFTimeInterval pausedTime = [layer timeOffset];
-            layer.speed = 1.0;
-            layer.timeOffset = 0.0;
-            layer.beginTime = 0.0;
+            CFTimeInterval startTime = [visibleAlbumImageViewLayer convertTime:CACurrentMediaTime() fromLayer:visibleAlbumImageViewLayer];
+            CFTimeInterval pausedTime = [visibleAlbumImageViewLayer timeOffset];
+            visibleAlbumImageViewLayer.speed = 1.0;
+            visibleAlbumImageViewLayer.timeOffset = 0.0;
+            visibleAlbumImageViewLayer.beginTime = 0.0;
             CFTimeInterval timeSincePause = startTime - pausedTime;
-            layer.beginTime = timeSincePause;
+            visibleAlbumImageViewLayer.beginTime = timeSincePause;
         }
     }
 }
 
 - (void)makeAnimation {
-    self.rotation = [[CABasicAnimation alloc] init];
     self.rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     self.rotation.toValue = [NSNumber numberWithFloat:M_PI*2];
     self.rotation.duration = 10;

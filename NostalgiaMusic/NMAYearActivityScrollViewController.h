@@ -18,7 +18,6 @@
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
 
 - (void)setUpScrollView:(NSString *)year;
-//- (void)setUpPlayerForTableCell;
 - (void)setUpPlayerForTableCellForYear:(NSString *)year;
 - (void)startSpinning;
 - (void)pauseSpinning;

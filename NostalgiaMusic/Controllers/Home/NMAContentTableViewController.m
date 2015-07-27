@@ -137,10 +137,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
-           NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
+            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSLog(@"getting cell: %@", cell);
             return cell;
         }
         case NMASectionTypeFacebookActivity: {

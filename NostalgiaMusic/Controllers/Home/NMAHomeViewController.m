@@ -94,7 +94,9 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
                                                  name:@"pauseAVPlayerNotification"
                                                object:[NMAPlaybackManager sharedPlayer]];
     
+    [self.yearActivityScrollVC setUpPlayerForTableCellForYear:@"2014"];
 }
+
 #pragma mark - KVO Notification Handling
 
 - (void)userDidResumeAVPlayer:(NSNotification *)notification {
