@@ -102,6 +102,8 @@ static const NSInteger kCommentParagraphSpacing = 7;
     NSAttributedString *attributedEmpty = [[NSAttributedString alloc] initWithString:@""];
     if (isCollapsed) {
         self.continueLabel.text = @"...Continue Reading";
+        self.likeCreditsLabel.hidden = YES;
+        self.viewMoreButton.hidden = YES;
         self.collapseContinueToToolsConstraint.priority = 999;
         self.collapseMessageToCreditsConstraint.priority = 1;
         self.collapseCloseButtonConstraint.priority = 999;
@@ -113,6 +115,7 @@ static const NSInteger kCommentParagraphSpacing = 7;
         
     } else {
         self.continueLabel.attributedText = attributedEmpty;
+        self.likeCreditsLabel.hidden = NO;
         self.collapseContinueToToolsConstraint.priority = 1;
         self.collapseMessageToCreditsConstraint.priority = 999;
         self.collapseCloseButtonConstraint.priority = 1;
@@ -167,13 +170,17 @@ static const NSInteger kCommentParagraphSpacing = 7;
     [[NSAttributedString alloc] initWithString:@""];
     
     self.messageLabel.attributedText = messageText;
-    self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
-    self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+    
+    if (!collapsed) {
+        self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
+        self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+    }
     
     NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
     [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
     NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
     [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
+    
     [self.messageLabel sizeToFit];
 
 }
@@ -217,9 +224,7 @@ static const NSInteger kCommentParagraphSpacing = 7;
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
     NSMutableAttributedString *likeCreditString = [[NSMutableAttributedString alloc] initWithString:@""];
-    if (fbActivity.likes.count == 0) {
-        //likeCreditString stays empty on no likes
-    } else if (fbActivity.likes.count == 1) {
+    if (fbActivity.likes.count == 1) {
         NMAFBLike *like = fbActivity.likes[0];
         [self appendLike:like to:likeCreditString index:0 limit:1 lastCommaSpacer:3];
         
