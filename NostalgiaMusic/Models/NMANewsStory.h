@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NMANewsStory : NSObject
+
 @property (copy, nonatomic) NSString *headline;
 @property (copy, nonatomic) NSString *abstract;
 @property (copy, nonatomic) NSString *snippet;

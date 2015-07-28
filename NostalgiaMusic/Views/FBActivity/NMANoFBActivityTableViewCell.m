@@ -18,7 +18,6 @@
     self.messageLabel.textColor = [UIColor NMA_tealGreen];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
-
 }
 
 @end

@@ -28,7 +28,7 @@
     if (self) {
         _year = year; //TODO: check for valid years
     }
-    
+
     return self;
 }
 

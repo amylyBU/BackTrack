@@ -8,11 +8,11 @@
 
 #import "NMAAppSettings.h"
 
-@implementation NMAAppSettings
-
 static NSString * const kHasOnboardedSettingKey = @"kHasOnboardedSettingKey";
 static NSString * const kAccessTokenSettingKey = @"kAccessTokenSettingKey";
 static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
+
+@implementation NMAAppSettings
 
 #pragma mark - Singleton
 

@@ -19,10 +19,7 @@ static NSString * const kPlayImageName = @"play-circle-button";
 static NSString * const kPauseImageName = @"pause-circle-button";
 
 @interface NMATodaysSongTableViewCell ()
-
 @property (strong, nonatomic) NMASong *song;
-@property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
-
 @end
 
 @implementation NMATodaysSongTableViewCell
@@ -31,6 +28,9 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     [super awakeFromNib];
     self.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.songTitleLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:24.0f];
+    self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
+    self.artistLabel.textColor = [UIColor NMA_darkGray];
 }
 
 #pragma mark - Public Methods
@@ -39,11 +39,8 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     [self layoutIfNeeded];
     self.song = song;
     self.songTitleLabel.text = song.title;
-    self.songTitleLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:24.0f];
     self.songTitleLabel.textColor = [UIColor NMA_almostBlack];
     self.artistLabel.text = song.artistAsAppearsOnLabel;
-    self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
-    self.artistLabel.textColor = [UIColor NMA_darkGray];
     UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage NMA_defaultRecord];
     self.albumImageView.image = albumImage;
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
