@@ -27,6 +27,14 @@
     return [UIImage imageNamed:@"body-illustration-bg"];
 }
 
++ (UIImage *)NMA_defaultRecord {
+    return [UIImage imageNamed:@"default-record"];
+}
+
++ (UIImage *)NMA_defaultImage {
+    return [UIImage imageNamed:@"default-image"];
+}
+
 /* Loading Screen */
 
 + (UIImage *)NMA_ufo {

@@ -17,6 +17,7 @@
 @property (copy, nonatomic, readonly) NSString *message;
 @property (copy, nonatomic, readonly) NSString *imageId;
 @property (copy, nonatomic, readonly) NSString *timeString;
+@property (nonatomic) BOOL hasImage;
 
 - (instancetype)initWithPost:(NSDictionary *)post;
 - (void)populateActivityImagePath:(id<NMADayDelegate>)dayDelegate;

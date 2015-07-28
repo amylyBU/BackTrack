@@ -12,6 +12,7 @@
 #import "NMAPlaybackManager.h"
 #import "UIFont+NMAFonts.h"
 #import "UIColor+NMAColors.h"
+#import "UIImage+NMAImages.h"
 #import <AVFoundation/AVFoundation.h>
 
 static NSString * const kPlayImageName = @"play-circle-button";
@@ -43,12 +44,21 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     self.artistLabel.text = song.artistAsAppearsOnLabel;
     self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
     self.artistLabel.textColor = [UIColor NMA_darkGray];
-    self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
+    UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage NMA_defaultRecord];
+    self.albumImageView.image = albumImage;
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
     self.albumImageView.layer.masksToBounds = YES;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     }
+}
+
+- (void)configureEmptyCell {
+    NMASong *dummySong = [NMASong new];
+    dummySong.title = @"Track Name";
+    dummySong.artistAsAppearsOnLabel = @"Artist Name";
+    dummySong.albumImageUrl600x600 = nil;
+    [self configureCellForSong:dummySong];
 }
 
 #pragma mark - Private Methods

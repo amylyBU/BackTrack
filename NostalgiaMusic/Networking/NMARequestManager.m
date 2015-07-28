@@ -164,6 +164,9 @@
                     NSString *type = post[@"type"];
                     if ([type isEqual:@"status"] || [type isEqual:@"photo"]) {
                         NMAFBActivity *fbActivity = [[NMAFBActivity alloc] initWithPost:post];
+                        if ([type isEqual:@"photo"]) {
+                            fbActivity.hasImage = YES;
+                        }
                         [fbActivity populateActivityImagePath:dayDelegate];
                         NSDictionary *likesContainer = post[@"likes"];
                         [fbActivity populateActivityLikes:likesContainer dayDelegate:dayDelegate];

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 - (void)configureCellForSong:(NMASong *)song;
+- (void)configureEmptyCell;
 - (void)changePlayButtonImageToPlay;
 
 @end
