@@ -21,6 +21,8 @@
 
 static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
+static const float kMainPageAspectRatio = 0.667f;
+static const NSInteger kCommentParagraphSpacing = 7;
 
 @implementation NMAFBActivityTableViewCell
 
@@ -29,11 +31,60 @@ static const NSInteger kLikeLimit = 5;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_almostBlack];
+    self.likeCreditsLabel.textColor = [UIColor NMA_almostBlack];
+    self.commentThreadLabel.textColor = [UIColor NMA_almostBlack];
     self.continueLabel.textColor = [UIColor NMA_lightGray];
     [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     self.backgroundColor = [UIColor clearColor];
+}
+
+- (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow {
+    if (!self.fbActivity) {
+        return;
+    }
+    
+    if (self.fbActivity.timeString) {
+        self.timeLabel.text = self.fbActivity.timeString;
+    }
+    
+    [self constructFullPost:self.fbActivity collapsed:collapsed];
+    
+    //check for image
+    if (self.fbActivity.imagePath) {
+        NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *postImage = [UIImage imageWithData:imageData];
+        self.collapseImageConstraint.priority = 1;
+        [self setImageViewDimensions:postImage trueAspectRatio:!self.collapsed];
+        [self.postImageView setImage:postImage];
+        [self layoutIfNeeded];
+    } else {
+        self.collapseImageConstraint.priority = 999;
+    }
+    
+    if (shadow) {
+        //Add a shadow to the bottom of the message view
+        CGFloat offset = 4;
+        CGFloat overlap = self.heightOfOverlapConstraint.constant;
+        CGRect templateRect = self.messageView.bounds;
+        
+        CGFloat rectHeight = self.postImageView.image ? templateRect.size.height + self.postImageView.bounds.size.height + overlap: templateRect.size.height;
+        CGFloat templateY = self.postImageView.image ?
+        self.messageView.bounds.origin.y - self.postImageView.bounds.size.height - overlap :
+            templateRect.origin.y;
+        
+        CGRect shadowRect = CGRectMake(templateRect.origin.x - offset, templateY, templateRect.size.width + offset, rectHeight);
+        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:shadowRect];
+        self.messageView.layer.masksToBounds = NO;
+        self.messageView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
+        self.messageView.layer.shadowRadius = offset;
+        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.messageView.layer.shadowOpacity = 0.7f;
+        [self setNeedsLayout];
+        self.messageView.layer.shadowPath = shadowPath.CGPath;
+    }
 }
 
 - (void)setCollapsedCellState:(BOOL)isCollapsed {
@@ -52,11 +103,71 @@ static const NSInteger kLikeLimit = 5;
         self.continueLabel.text = @"...Continue Reading";
         self.collapseContinueToToolsConstraint.priority = 999;
         self.collapseMessageToCreditsConstraint.priority = 1;
+        self.collapseCloseButtonConstraint.priority = 999;
+        
+        if (!self.fbActivity.imagePath) {
+            self.collapseImageAndMessageOverlapConstraint.priority = 1;
+            self.collapseMessageTopToViewConstraint.priority = 1;
+        }
+        
     } else {
         self.continueLabel.attributedText = attributedEmpty;
         self.collapseContinueToToolsConstraint.priority = 1;
         self.collapseMessageToCreditsConstraint.priority = 999;
+        self.collapseCloseButtonConstraint.priority = 1;
+        
+        if (!self.fbActivity.imagePath) {
+            self.collapseImageAndMessageOverlapConstraint.priority = 999;
+            self.collapseMessageTopToViewConstraint.priority = 999;
+        }
+        
+        if (self.fbActivity.likes.count == 0) {
+            self.collapseLikesToCommentsConstraint.priority = 999;
+        }
+        
+        if (self.fbActivity.comments.count == 0) {
+            self.collapseCommentsToToolsConstraint.priority = 999;
+        }
     }
+}
+
+- (void)setImageViewDimensions:(UIImage *)targetImage trueAspectRatio:(BOOL)useTrueAspectRatio {
+    float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
+    float imageAspectRatio = useTrueAspectRatio ? heightToWidthRatio : kMainPageAspectRatio;
+    float newViewHeight = imageAspectRatio * CGRectGetWidth(self.postImageView.frame);
+    self.imageHeightConstraint.constant = newViewHeight;
+}
+
+- (void)setImageWidth:(CGFloat)imageWidth trueAspectRatio:(BOOL)useTrueAspectRatio {
+    CGRect frame = CGRectMake(0, 0, imageWidth, self.postImageView.bounds.size.height);
+    self.postImageView.frame = frame;
+    
+    if (self.fbActivity.imagePath) {
+        NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *postImage = [UIImage imageWithData:imageData];
+        self.collapseImageConstraint.priority = 1;
+        [self setImageViewDimensions:postImage trueAspectRatio:useTrueAspectRatio];
+    }
+}
+
+- (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
+    [self setCollapsedCellState:collapsed];
+    
+    NSAttributedString *messageText = fbActivity.message ?
+    [[NSAttributedString alloc] initWithString:fbActivity.message] :
+    [[NSAttributedString alloc] initWithString:@""];
+    
+    self.messageLabel.attributedText = messageText;
+    self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
+    self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
+    
+    NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
+    [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
+    NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
+    [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
+    [self.messageLabel sizeToFit];
+
 }
 
 - (IBAction)viewMoreComments:(UIButton *)sender {
@@ -94,61 +205,6 @@ static const NSInteger kLikeLimit = 5;
     }
     
     [parentTable reloadData];
-}
-
-- (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow {
-    if (!self.fbActivity) {
-        return;
-    }
-    
-    if (self.fbActivity.timeString) {
-        self.timeLabel.text = self.fbActivity.timeString;
-    }
-    
-    if (self.fbActivity.message && self.fbActivity.likes && self.fbActivity.comments) {
-        [self constructFullPost:self.fbActivity collapsed:collapsed];
-        NSString *likeCountText = [@(self.fbActivity.likes.count) stringValue];
-        [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
-        NSString *commentCountText = [@(self.fbActivity.comments.count) stringValue];
-        [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
-        [self.messageLabel sizeToFit];
-    }
-    
-    //check for image
-    if (self.fbActivity.imagePath) {
-        NSURL *imageURL = [NSURL URLWithString:self.fbActivity.imagePath];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        UIImage *postImage = [UIImage imageWithData:imageData];
-        self.collapseImageConstraint.priority = 1;
-        [self setImageViewDimensions:postImage];
-        [self.postImageView setImage:postImage];
-        [self layoutIfNeeded];
-    } else {
-        self.collapseImageConstraint.priority = 999;
-    }
-    
-    if (shadow) {
-        //Add a shadow to the bottom of the message view
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.messageView.bounds];
-        self.messageView.layer.masksToBounds = NO;
-        self.messageView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-        self.messageView.layer.shadowOpacity = 0.5f;
-        self.messageView.layer.shadowPath = shadowPath.CGPath;
-    }
-}
-
-- (void)setImageViewDimensions:(UIImage *)targetImage {
-    float heightToWidthRatio = targetImage.size.height / targetImage.size.width;
-    float newViewHeight = heightToWidthRatio * CGRectGetWidth(self.postImageView.frame);
-    self.imageHeightConstraint.constant = newViewHeight;
-}
-
-- (void)constructFullPost:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed {
-    [self setCollapsedCellState:collapsed];
-    self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:fbActivity.message];
-    self.likeCreditsLabel.attributedText = [self constructLikeCredits:fbActivity];
-    self.commentThreadLabel.attributedText = [self constructCommentThread:fbActivity];
 }
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
@@ -210,11 +266,7 @@ static const NSInteger kLikeLimit = 5;
 }
 
 - (NSMutableAttributedString *)constructCommentThread:(NMAFBActivity *)fbActivity {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:15];
-    NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
-    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""
-                                                                                            attributes:commentAttributes];
+    NSMutableAttributedString *commentThreadString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     NSInteger currentDisplayed = self.displayedCommentCount > kCommentAddRate ? self.displayedCommentCount : kCommentAddRate;
     self.displayedCommentCount = 0;
@@ -236,6 +288,15 @@ static const NSInteger kLikeLimit = 5;
     
     self.displayedCommentCount += appendAmount;
     self.viewMoreButton.hidden = finalComments || self.collapsed;
+    
+    if (self.viewMoreButton.hidden) {
+        self.collapseViewMoreHeightConstraint.priority = 999;
+    }
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setParagraphSpacing:kCommentParagraphSpacing];
+    NSDictionary *commentAttributes = @{ NSParagraphStyleAttributeName : paragraphStyle};
+    [commentThreadString addAttributes:commentAttributes range:NSMakeRange(0, commentThreadString.length)];
     
     return commentThreadString;
 }

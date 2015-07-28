@@ -11,30 +11,23 @@
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
-            <string>ProximaNova-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="528" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMAFacebookCell" rowHeight="635" id="KGk-i7-Jjw" customClass="NMAFBActivityTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="635"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0" userLabel="message view">
-                        <rect key="frame" x="8" y="267" width="304" height="252"/>
+                        <rect key="frame" x="8" y="342" width="304" height="250"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
-                                <rect key="frame" x="10" y="51" width="284" height="18"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta0-eL-YRP">
-                                <rect key="frame" x="263" y="212" width="36" height="33"/>
+                                <rect key="frame" x="263" y="210" width="36" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="B2d-Fz-Yhu"/>
@@ -49,41 +42,49 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqF-ui-9Bj">
-                                <rect key="frame" x="10" y="218" width="33" height="22"/>
+                                <rect key="frame" x="10" y="216" width="33" height="22"/>
                                 <state key="normal" title=" X" image="comment-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVC-Cw-gzF">
-                                <rect key="frame" x="51" y="218" width="32" height="22"/>
+                                <rect key="frame" x="51" y="216" width="32" height="22"/>
                                 <state key="normal" title=" X" image="like-icon">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...Continue Reading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shb-NU-ukr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="...Continue Reading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shb-NU-ukr">
                                 <rect key="frame" x="10" y="77" width="284" height="15"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like Credits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-VF-5pA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Like Credits" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-VF-5pA">
                                 <rect key="frame" x="10" y="100" width="284" height="15"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgT-nU-I0a">
-                                <rect key="frame" x="10" y="147" width="286" height="15"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgT-nU-I0a">
+                                <rect key="frame" x="10" y="147" width="286" height="17"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Comments">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="15"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="70"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h63-FB-4mx">
-                                <rect key="frame" x="10" y="172" width="158" height="27"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h63-FB-4mx">
+                                <rect key="frame" x="10" y="174" width="158" height="27"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="wOy-3Q-MZC"/>
+                                    <constraint firstAttribute="height" priority="1" id="KVU-lD-NRd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="998" constant="20" id="wOy-3Q-MZC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                 <state key="normal" title="... View more comments">
@@ -93,6 +94,12 @@
                                     <action selector="viewMoreComments:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wjw-mC-0A1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Facebook message" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y78-Sd-aWd">
+                                <rect key="frame" x="10" y="51" width="284" height="18"/>
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -104,20 +111,23 @@
                             <constraint firstItem="h63-FB-4mx" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="71p-JI-v9e"/>
                             <constraint firstAttribute="trailing" secondItem="shb-NU-ukr" secondAttribute="trailing" constant="10" id="7iX-bP-FuW"/>
                             <constraint firstAttribute="trailing" secondItem="zTW-VF-5pA" secondAttribute="trailing" constant="10" id="8I0-ds-AWg"/>
-                            <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="6Hu-Bj-SX0" secondAttribute="top" constant="51" id="Ff7-hy-eX1"/>
+                            <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="6Hu-Bj-SX0" secondAttribute="top" priority="998" constant="51" id="Ff7-hy-eX1"/>
                             <constraint firstItem="Y78-Sd-aWd" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="GG3-X8-AaV"/>
                             <constraint firstItem="gqF-ui-9Bj" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="KUh-uO-0am"/>
                             <constraint firstItem="h63-FB-4mx" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" constant="2" id="TG4-3V-28T"/>
                             <constraint firstItem="sVC-Cw-gzF" firstAttribute="leading" secondItem="gqF-ui-9Bj" secondAttribute="trailing" constant="8" id="UxB-bV-JId"/>
                             <constraint firstAttribute="bottom" secondItem="gqF-ui-9Bj" secondAttribute="bottom" constant="12" id="Vex-op-Lmr"/>
+                            <constraint firstItem="cgT-nU-I0a" firstAttribute="top" secondItem="zTW-VF-5pA" secondAttribute="bottom" priority="1" id="ZaR-HG-7Qc"/>
                             <constraint firstAttribute="trailing" secondItem="ta0-eL-YRP" secondAttribute="trailing" constant="5" id="ZbN-MC-uWy"/>
                             <constraint firstItem="h63-FB-4mx" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" priority="998" constant="10" id="dV6-wj-7oK"/>
-                            <constraint firstItem="cgT-nU-I0a" firstAttribute="top" secondItem="zTW-VF-5pA" secondAttribute="bottom" constant="32" id="ig5-ni-6UU"/>
+                            <constraint firstItem="cgT-nU-I0a" firstAttribute="top" secondItem="zTW-VF-5pA" secondAttribute="bottom" priority="998" constant="32" id="ig5-ni-6UU"/>
                             <constraint firstItem="shb-NU-ukr" firstAttribute="top" secondItem="Y78-Sd-aWd" secondAttribute="bottom" priority="998" constant="8" id="jX0-Qk-iK7"/>
+                            <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="6Hu-Bj-SX0" secondAttribute="top" priority="1" constant="10" id="kfu-Z3-Y3H"/>
                             <constraint firstAttribute="bottom" secondItem="sVC-Cw-gzF" secondAttribute="bottom" constant="12" id="krF-Hp-cgt"/>
                             <constraint firstAttribute="bottom" secondItem="ta0-eL-YRP" secondAttribute="bottom" constant="7" id="oNB-Sg-I3U"/>
                             <constraint firstItem="zTW-VF-5pA" firstAttribute="top" secondItem="shb-NU-ukr" secondAttribute="bottom" priority="998" constant="8" id="rqM-Og-qbs"/>
                             <constraint firstItem="zTW-VF-5pA" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="s5h-It-I9g"/>
+                            <constraint firstItem="gqF-ui-9Bj" firstAttribute="top" secondItem="cgT-nU-I0a" secondAttribute="bottom" priority="1" constant="10" id="sAs-bx-NN8"/>
                             <constraint firstAttribute="trailing" secondItem="cgT-nU-I0a" secondAttribute="trailing" constant="8" id="sts-dX-CaP"/>
                             <constraint firstItem="cgT-nU-I0a" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" constant="10" id="xSJ-gr-iOc"/>
                             <constraint firstItem="gqF-ui-9Bj" firstAttribute="top" secondItem="shb-NU-ukr" secondAttribute="bottom" priority="1" constant="12" id="y10-SO-YJh"/>
@@ -129,30 +139,31 @@
                         </variation>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIy-YX-jjK" userLabel="post image">
-                        <rect key="frame" x="8" y="8" width="304" height="300"/>
+                        <rect key="frame" x="8" y="83" width="304" height="300"/>
                         <constraints>
                             <constraint firstAttribute="height" priority="998" constant="300" id="enc-gl-jgB"/>
                             <constraint firstAttribute="height" priority="1" id="wvr-ZO-fJL"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-oX-VcU">
-                        <rect key="frame" x="4" y="9" width="70" height="50"/>
+                        <rect key="frame" x="4" y="43" width="70" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="lNu-hC-lOP"/>
                             <constraint firstAttribute="width" constant="70" id="rTt-re-zCP"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
-                        <rect key="frame" x="12" y="24" width="75" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyN-Pl-1gA">
+                        <rect key="frame" x="12" y="58" width="75" height="13"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-OT-1kg">
-                        <rect key="frame" x="272" y="8" width="40" height="40"/>
+                    <button contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-OT-1kg" userLabel="close button">
+                        <rect key="frame" x="272" y="43" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="cId-qc-qmH"/>
-                            <constraint firstAttribute="height" constant="40" id="gQg-7F-NIO"/>
+                            <constraint firstAttribute="height" priority="998" constant="40" id="gQg-7F-NIO"/>
+                            <constraint firstAttribute="height" priority="1" id="qtg-sq-sZ0"/>
                         </constraints>
                         <inset key="contentEdgeInsets" minX="30" minY="30" maxX="30" maxY="30"/>
                         <inset key="imageEdgeInsets" minX="-30" minY="-30" maxX="-30" maxY="-30"/>
@@ -167,31 +178,51 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="1Iy-lb-5OG"/>
-                    <constraint firstItem="kIy-YX-jjK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3wv-Yp-0oA"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="leading" secondItem="TNV-oX-VcU" secondAttribute="leading" constant="8" id="8hx-fK-6RG"/>
+                    <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" id="Ag4-XX-hkG"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="GQH-Zl-cdI"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="J4b-2r-FDy"/>
-                    <constraint firstItem="uMY-OT-1kg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="KjS-zt-5Bo"/>
+                    <constraint firstItem="uMY-OT-1kg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="35" id="KjS-zt-5Bo"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="MTl-lC-2mO"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PPj-q5-mhg"/>
+                    <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TNV-oX-VcU" secondAttribute="bottom" id="Pk3-T9-Czj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uMY-OT-1kg" secondAttribute="trailing" id="ReL-Cx-tLy"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" id="XF9-ZX-YIZ"/>
+                    <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" priority="1" id="Vgt-2L-bAM"/>
+                    <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="uMY-OT-1kg" secondAttribute="top" id="VtA-oV-9Sg"/>
+                    <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="6Hu-Bj-SX0" secondAttribute="trailing" id="Wi4-j7-EcM"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" constant="35" id="XF9-ZX-YIZ"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dOB-fm-HsO"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="trailing" secondItem="TNV-oX-VcU" secondAttribute="trailing" constant="13" id="eik-5j-KUh"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="hp7-0D-CO8"/>
+                    <constraint firstItem="kIy-YX-jjK" firstAttribute="top" secondItem="uMY-OT-1kg" secondAttribute="bottom" id="iQq-SH-Dwe"/>
                     <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" constant="10" id="oAU-yO-AwC"/>
-                    <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" constant="-41" id="vXl-Zy-6L0"/>
+                    <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" priority="998" constant="-41" id="vXl-Zy-6L0"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="top" secondItem="TNV-oX-VcU" secondAttribute="top" constant="15" id="zLh-ux-PnG"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="hp7-0D-CO8"/>
+                        <exclude reference="J4b-2r-FDy"/>
+                        <exclude reference="MTl-lC-2mO"/>
+                        <exclude reference="oAU-yO-AwC"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="closeButton" destination="uMY-OT-1kg" id="VnI-Me-Hrd"/>
+                <outlet property="collapseCloseButtonConstraint" destination="qtg-sq-sZ0" id="8EV-P0-RpB"/>
+                <outlet property="collapseCommentsToToolsConstraint" destination="sAs-bx-NN8" id="Cpi-G6-oEO"/>
                 <outlet property="collapseContinueToToolsConstraint" destination="y10-SO-YJh" id="BsM-SH-is5"/>
+                <outlet property="collapseImageAndMessageOverlapConstraint" destination="Vgt-2L-bAM" id="BY9-fb-87M"/>
                 <outlet property="collapseImageConstraint" destination="wvr-ZO-fJL" id="YCG-8m-lqy"/>
+                <outlet property="collapseLikesToCommentsConstraint" destination="ZaR-HG-7Qc" id="UXQ-g6-3PZ"/>
                 <outlet property="collapseMessageToCreditsConstraint" destination="6TV-by-rFf" id="BSV-th-9h9"/>
+                <outlet property="collapseMessageTopToViewConstraint" destination="kfu-Z3-Y3H" id="2qf-IH-qFL"/>
+                <outlet property="collapseViewMoreHeightConstraint" destination="KVU-lD-NRd" id="j1b-ZL-sc3"/>
                 <outlet property="commentThreadLabel" destination="cgT-nU-I0a" id="7py-rG-yEE"/>
                 <outlet property="commentsButton" destination="gqF-ui-9Bj" id="PkT-ta-1V5"/>
                 <outlet property="continueLabel" destination="shb-NU-ukr" id="CSG-3x-hjw"/>
+                <outlet property="heightOfOverlapConstraint" destination="vXl-Zy-6L0" id="hnH-gz-628"/>
                 <outlet property="imageHeightConstraint" destination="enc-gl-jgB" id="ZGl-fo-oQA"/>
                 <outlet property="likeCreditsLabel" destination="zTW-VF-5pA" id="mR9-dG-TTQ"/>
                 <outlet property="likesButton" destination="sVC-Cw-gzF" id="Kpk-gP-qIh"/>
@@ -204,7 +235,7 @@
                 <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="BOr-4X-hHU"/>
                 <outlet property="viewMoreButton" destination="h63-FB-4mx" id="ZxU-n0-VZe"/>
             </connections>
-            <point key="canvasLocation" x="150" y="630"/>
+            <point key="canvasLocation" x="-377" y="719.5"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -212,6 +243,6 @@
         <image name="facebook-time-ribbon" width="70" height="27"/>
         <image name="like-icon" width="15" height="15"/>
         <image name="share-icon" width="26" height="23"/>
-        <image name="x-close" width="13" height="13"/>
+        <image name="x-close" width="15" height="15"/>
     </resources>
 </document>
