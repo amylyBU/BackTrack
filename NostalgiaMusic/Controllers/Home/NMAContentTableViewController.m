@@ -200,8 +200,6 @@ viewForHeaderInSection:(NSInteger)section {
         case NMASectionTypeFacebookActivity: {
             NMASectionHeader *fbSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             fbSectionHeaderCell.headerLabel.text = @"Facebook Activities";
-            fbSectionHeaderCell.headerLabel.font = [UIFont NMA_proximaNovaRegularWithSize:20.0f];
-            fbSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
             fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
             [fbSectionHeaderCell sizeToFit];
@@ -210,8 +208,6 @@ viewForHeaderInSection:(NSInteger)section {
         case NMASectionTypeNYTimesNews: {
             NMASectionHeader *newsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             newsSectionHeaderCell.headerLabel.text = @"News";
-            newsSectionHeaderCell.headerLabel.font = [UIFont NMA_proximaNovaRegularWithSize:20.0f];
-            newsSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             newsSectionHeaderCell.headerImageView.image = [UIImage NMA_newsLabel];
             newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor clearColor];
             [newsSectionHeaderCell sizeToFit];
