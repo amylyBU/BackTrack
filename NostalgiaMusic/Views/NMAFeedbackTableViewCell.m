@@ -13,6 +13,7 @@
 @implementation NMAFeedbackTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.feedbackLabel.textColor = [UIColor NMA_black];
     self.feedbackLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16.0f];
 }

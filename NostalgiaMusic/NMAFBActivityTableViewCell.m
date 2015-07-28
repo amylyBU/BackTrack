@@ -33,6 +33,7 @@ static const NSInteger kLikeLimit = 5;
     [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
     [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
     [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setCollapsedCellState:(BOOL)isCollapsed {

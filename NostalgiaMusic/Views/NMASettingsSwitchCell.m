@@ -13,6 +13,7 @@
 @implementation NMASettingsSwitchCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.settingsSwitch.onTintColor = [UIColor NMA_turquoise];
     self.settingsCategoryLabel.textColor = [UIColor NMA_black];
     self.settingsCategoryLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16.0f];
