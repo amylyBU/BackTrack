@@ -66,7 +66,6 @@ BOOL isMostRecentYearVisible;
         isMostRecentYearVisible = YES;
         CGPoint scrollPoint = CGPointMake(width * 2, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
-
     } else {
         [self setContentOffsetToCenter];
     }
@@ -259,20 +258,21 @@ BOOL isMostRecentYearVisible;
 }
 
 - (void)setUpPlayerForTableCellForYear:(NSString *)year {
-    [[NMAPlaybackManager sharedPlayer] pausePlaying];
+    NMAPlaybackManager *player = [NMAPlaybackManager sharedPlayer];
+    [player pausePlaying];
     [[NMARequestManager sharedManager] getSongFromYear:year
                                                success:^(NMASong *song) {
                                                    NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
                                                    [visibleTableVC.billboardSongs removeAllObjects];
                                                    [visibleTableVC.billboardSongs addObject:song];
                                                    [visibleTableVC.tableView reloadData];
-                                                   [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
+                                                   [player setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
                                                    [[NSNotificationCenter defaultCenter] addObserver:self
                                                                                             selector:@selector(audioDidFinishPlaying:)
                                                                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                                                                              object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
+                                                                                              object:player.audioPlayerItem];
                                                    if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                                                       [[NMAPlaybackManager sharedPlayer] startPlaying];
+                                                       [player startPlaying];
                                                    }
                                                }
                                                failure:^(NSError *error) {}];

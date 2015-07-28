@@ -7,7 +7,6 @@
 //
 
 #import "NMAPlaybackManager.h"
-#import "NMAContentTableViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface NMAPlaybackManager ()

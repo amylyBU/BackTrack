@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NMASelectedYearCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

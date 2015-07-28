@@ -42,10 +42,9 @@
         NMANewsStory *story = [stories objectAtIndex:0];
         story.date = date;
         success([stories objectAtIndex:0]);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(nil);
-     }];
-
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
+    
     [operation start];
 
 }
@@ -84,10 +83,10 @@
             [stories addObject:story];
         }
     }
-    if (stories.count) {
+    if (stories.count > 0) {
         return stories;
     } else {
-        story.headline = @"no news found";
+        story.headline = @"No News Found!";
         [stories addObject:story];
         return stories;
     }
@@ -148,10 +147,8 @@
     NSString *untilTime = [dateFormatter stringFromDate:targetDateEnd];
 
     NSString *path = @"/me/posts";
-    NSDictionary *params = @{
-                             @"since" : sinceTime,
-                             @"until" : untilTime
-                             };
+    NSDictionary *params = @{ @"since":sinceTime,
+                              @"until":untilTime };
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                                    parameters:params
                                                                    HTTPMethod:@"GET"];

@@ -35,7 +35,6 @@
         self.summaryTextLabel.text = story.snippet;
         self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
-   
     
     [self configureDateLabel:story];
     

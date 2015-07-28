@@ -11,10 +11,11 @@
 
 @class NMASong;
 
-//Delegate protocol
 @protocol NMADayDelegate
+
 - (void)allFbActivityUpdate;
 - (void)fbActivityDidUpdate:(NMAFBActivity *)activity;
+
 @end
 
 @interface NMADay : NSObject
