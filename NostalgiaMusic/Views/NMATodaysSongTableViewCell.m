@@ -44,11 +44,8 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     self.artistLabel.text = song.artistAsAppearsOnLabel;
     self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
     self.artistLabel.textColor = [UIColor NMA_darkGray];
-    if (song.albumImageUrl600x600) {
-            self.albumImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]];
-    } else {
-        self.albumImageView.image = [UIImage NMA_defaultRecord];
-    }
+    UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage NMA_defaultRecord];
+    self.albumImageView.image = albumImage;
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
     self.albumImageView.layer.masksToBounds = YES;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {

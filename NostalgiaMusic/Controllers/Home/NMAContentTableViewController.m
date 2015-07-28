@@ -144,7 +144,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             } else {
                 [cell configureEmptyCell];
             }
-            cell.backgroundColor = [UIColor whiteColor];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
