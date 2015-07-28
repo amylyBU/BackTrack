@@ -51,7 +51,7 @@
                 <constraints>
                     <constraint firstItem="Z3o-1e-ek0" firstAttribute="centerY" secondItem="bUz-g2-0t0" secondAttribute="centerY" constant="12" id="3f4-4v-hfg"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="14" id="7T7-RV-MGP"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="12" id="7T7-RV-MGP"/>
                     <constraint firstAttribute="bottom" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="7nd-mB-yi5"/>
                     <constraint firstItem="bUz-g2-0t0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BdZ-My-FHC"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
