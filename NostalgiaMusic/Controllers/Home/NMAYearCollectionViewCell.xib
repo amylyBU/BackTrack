@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="111" height="61"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8S-mi-Fdz">
-                        <rect key="frame" x="34.5" y="21" width="42" height="20.5"/>
+                        <rect key="frame" x="35" y="21" width="42" height="21"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" none="YES" button="YES" staticText="YES"/>
                         </accessibility>

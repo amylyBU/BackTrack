@@ -15,25 +15,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHO-G8-cPk">
-                        <rect key="frame" x="10" y="43" width="300" height="206"/>
+                        <rect key="frame" x="15" y="43" width="290" height="206"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-9Z-iBg">
                                 <rect key="frame" x="-4" y="10" width="70" height="27"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHE-gT-utI" userLabel="date">
-                                <rect key="frame" x="0.0" y="14" width="42" height="21"/>
+                                <rect key="frame" x="0.0" y="14" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headline" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7d-3c-DqA">
-                                <rect key="frame" x="10" y="46" width="280" height="24"/>
+                                <rect key="frame" x="10" y="46" width="270" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="byline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HK3-1A-87S">
-                                <rect key="frame" x="10" y="74" width="280" height="16"/>
+                                <rect key="frame" x="10" y="74" width="270" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxg-PI-Cbc">
-                                <rect key="frame" x="263" y="165" width="26" height="31"/>
+                                <rect key="frame" x="253" y="165" width="26" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oxg-PI-Cbc" secondAttribute="height" multiplier="11:13" id="7jh-kk-phv"/>
                                 </constraints>
@@ -99,10 +99,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="hHO-G8-cPk" secondAttribute="trailing" constant="10" id="Kcn-lO-3pL"/>
+                    <constraint firstAttribute="trailing" secondItem="hHO-G8-cPk" secondAttribute="trailing" constant="15" id="Kcn-lO-3pL"/>
                     <constraint firstItem="hHO-G8-cPk" firstAttribute="top" secondItem="ax9-eI-hlT" secondAttribute="topMargin" constant="35" id="MLV-4K-5Kt"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hHO-G8-cPk" secondAttribute="bottom" id="idV-xw-liq"/>
-                    <constraint firstItem="hHO-G8-cPk" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leading" constant="10" id="p5t-wb-zew"/>
+                    <constraint firstItem="hHO-G8-cPk" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leading" constant="15" id="p5t-wb-zew"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
