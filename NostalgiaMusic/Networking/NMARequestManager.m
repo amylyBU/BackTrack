@@ -43,7 +43,6 @@
         story.date = date;
         success([stories objectAtIndex:0]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Failed to get NYT information");
         failure(nil);
      }];
 
@@ -127,11 +126,7 @@
                  success(song);
              }
          }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             if (failure) {
-                 failure (error); //TODO: handle error
-             }
-         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {}
      ];
 }
 
@@ -203,7 +198,6 @@
                        dayDelegate:(id<NMADayDelegate>)dayDelegate
                            success:(void (^)(NSDictionary *nextLikesContainer))success
                            failure:(void (^)(NSError *error))failure {
-    //https://graph.facebook.com/endpoint
     NSString *startPoint = @"https://graph.facebook.com"; //TODO: this is not a good way to do this
     NSString *endPoint = [nextLink substringFromIndex:NSMaxRange([nextLink rangeOfString:startPoint])];
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:endPoint
@@ -219,7 +213,6 @@
 
 #pragma mark - Format Utility
 
-///@discussion if startOfDay, the time of the date is 00:00:00am, else its 11:59:59pm (the end of the day)
 - (NSDate *)getLocalDate:(NSString *)year
               startOfDay:(BOOL)start {
     NSDateComponents *presentDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
@@ -242,19 +235,11 @@
                 success:(void (^)(NMASong *song))success
                 failure:(void (^)(NSError *error))failure {
     NMASong *song = [[NMADatabaseManager sharedDatabaseManager] getSongFromYear:year];
-
     if (song) {
         if (success) {
             [self getiTunesMusicForSong:song
                                 success:success
-                                failure:^(NSError *error) {
-                                    NSLog(@"can't find song on itunes"); //TODO: handle error
-                                }];
-        }
-    } else {
-        if (failure) {
-            NSError *error = [[NSError alloc] init];
-            failure(error); //TODO: handle error
+                                failure:^(NSError *error) {}];
         }
     }
 }

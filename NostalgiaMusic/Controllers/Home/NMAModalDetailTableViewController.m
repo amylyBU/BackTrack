@@ -45,21 +45,19 @@ static CGFloat const kTableInset = 56;
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    
-    cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
-    ((NMAFBActivityTableViewCell *)cell).fbActivity = self.fbActivity;
-    ((NMAFBActivityTableViewCell *)cell).delegate = self;
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
+    cell.fbActivity = self.fbActivity;
+    cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
-    [(NMAFBActivityTableViewCell *)cell configureCell:NO withShadow:NO];
+    [cell configureCell:NO withShadow:NO];
     [cell layoutIfNeeded];
-    
     return cell;
 }
 

@@ -14,8 +14,8 @@
 
 @property (copy, nonatomic) NSString *year;
 @property (strong, nonatomic, readonly) NMADay *day;
-
-
-- (void)setUpPlayerForTableCell;
+@property (strong, nonatomic) NSMutableArray *billboardSongs;
+@property (strong, nonatomic) NSMutableArray *facebookActivities;
+@property (strong, nonatomic) NSMutableArray *NYTimesNews;
 
 @end

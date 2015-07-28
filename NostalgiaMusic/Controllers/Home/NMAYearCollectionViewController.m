@@ -12,6 +12,7 @@
 #import <QuartzCore/CALayer.h>
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
+#import "UIImage+NMAImages.h"
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewDelegateAction) {
     NMAScrollViewDidScroll,
@@ -24,10 +25,11 @@ static NSInteger const kNumberOfSectionsInYearCollection = 1;
 static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASelectedYearCollectionViewCell";
 
 @interface NMAYearCollectionViewController () <UIScrollViewDelegate>
+
 @property (strong, nonatomic) NSMutableArray *years;
 @property (nonatomic) NSInteger latestYear;
 @property (weak, nonatomic) IBOutlet UIView *whiteYearBackgroundSquare;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) UIView *blackoutView;
 
 @end
 
@@ -65,6 +67,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     [self.dateLabel setFont:[UIFont NMA_proximaNovaRegularWithSize:14]];
     self.dateLabel.textColor = [UIColor NMA_darkSkyBlue];
     self.dateLabel.text = [self getDate];
+    self.blackoutNavBarView.hidden = YES;
 }
 
 - (void)setUpCollectionViewWithLayout {
@@ -86,6 +89,14 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.parentViewController.navigationItem.rightBarButtonItem.enabled = NO;
+    self.parentViewController.navigationController.navigationBar.alpha = 0.2;
+    self.blackoutNavBarView.hidden = NO;
+    self.blackoutNavBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+    [self.delegate blackoutActivity];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -121,7 +132,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     NSString *year = self.years[indexPath.row];
     NMAYearCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kNMAYearCollectionCellIdentifier forIndexPath:indexPath];
     cell.year.text = year;
-    if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%i", self.latestYear]] && self.year == nil)) {
+    if ([year isEqualToString:self.year] || ([year isEqualToString:[NSString stringWithFormat:@"%li", (long)self.latestYear]] && self.year == nil)) {
         [self formatMiddleCell:cell isSelected:YES];
         return cell;
     } else {
@@ -144,7 +155,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     for (NMAYearCollectionViewCell *cell in visible) {
         CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
         CGRect cellFrameInView = [self convertCellOriginToSuperview:cell];
-        CGPoint cellOriginMiddle = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
+        CGPoint cellOriginMiddle = CGPointMake (cellFrameInView.origin.x + CGRectGetWidth(self.view.frame)/6, cellFrameInView.origin.y);
         switch (scroll) {
             case NMAScrollViewDidEndGesture:
                 if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
@@ -168,7 +179,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
                 break;
         }
     }
-    
 }
 
 - (CGRect)convertCellOriginToSuperview:(NMAYearCollectionViewCell *)cell {
@@ -180,11 +190,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 - (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell isSelected:(BOOL)isSelected {
     [cell.year setFont:[UIFont systemFontOfSize:30]];
     [cell.year setFont:[UIFont NMA_proximaNovaExtraBoldWithSize:30]];
-    if (isSelected) {
-        cell.year.textColor = [UIColor NMA_sunYellow];
-    } else {
-        cell.year.textColor = [UIColor NMA_aquaMarine];
-    }
+    cell.year.textColor = isSelected ? [UIColor NMA_sunYellow] : [UIColor NMA_aquaMarine];
 }
 
 - (void)formatNonMiddlecell:(NMAYearCollectionViewCell *)cell {
@@ -208,7 +214,6 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     } else {
         [self.scrollBarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.years.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
-    
 }
 
 #pragma mark - Public delegate methods
@@ -224,7 +229,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 #pragma mark - Getters and Setters
 
-- (void) getLatestYear {
+- (void)getLatestYear {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy"];
     NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];
@@ -242,7 +247,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     if (self.year) {
         weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:self.year];
     } else {
-        NSString *latestYearConverted = [NSString stringWithFormat:@"%i", self.latestYear];
+        NSString *latestYearConverted = [NSString stringWithFormat:@"%li", (long)self.latestYear];
         weekday = [self calculateDayOfWeekWithDate:monthAndDay inYear:latestYearConverted];
     }
 

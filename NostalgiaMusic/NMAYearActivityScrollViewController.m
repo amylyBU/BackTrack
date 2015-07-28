@@ -10,6 +10,7 @@
 #import "NMAContentTableViewController.h"
 #import "NMAAppSettings.h"
 #import "NMAPlaybackManager.h"
+#import "NMARequestManager.h"
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
     NMAScrollViewPositionPastYear = 0,
@@ -20,7 +21,7 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
 BOOL isEarliestYearVisble;
 BOOL isMostRecentYearVisible;
 
-@interface NMAYearActivityScrollViewController () 
+@interface NMAYearActivityScrollViewController ()
 
 @property (strong, nonatomic) NMAContentTableViewController *leftTableViewController;
 @property (strong, nonatomic) NMAContentTableViewController *middleTableViewController;
@@ -28,6 +29,7 @@ BOOL isMostRecentYearVisible;
 @property (copy, nonatomic) NSString *earliestYear;
 @property (copy, nonatomic) NSString *latestYear;
 @property (nonatomic) float swipeContentOffset;
+
 @end
 
 
@@ -40,14 +42,20 @@ BOOL isMostRecentYearVisible;
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
-    [self setUpScrollView:self.latestYear];
     [self.view addSubview:self.scrollView];
 }
 
+#pragma mark - Scroll View set up
+
 - (void)setUpScrollView:(NSString *)year {
+    isEarliestYearVisble = NO;
+    isMostRecentYearVisible = NO;
     NSInteger numberOfViews = 3;
     self.year = year;
-    
+
+    CGFloat width = CGRectGetWidth(self.view.frame);
+    CGFloat height = CGRectGetHeight(self.view.frame);
+
     if ([self.year isEqualToString:self.earliestYear]) {
         self.year = [self incrementStringValue:self.earliestYear];
         isEarliestYearVisble = YES;
@@ -56,33 +64,40 @@ BOOL isMostRecentYearVisible;
     } else if ([self.year isEqualToString:self.latestYear]) {
         self.year = [self decrementStringValue:self.latestYear];
         isMostRecentYearVisible = YES;
-        CGPoint scrollPoint = CGPointMake(self.view.frame.size.width * 2, 0);
+        CGPoint scrollPoint = CGPointMake(width * 2, 0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
+
     } else {
         [self setContentOffsetToCenter];
     }
-    
+
     [self destroyViewController:self.leftTableViewController];
     [self destroyViewController:self.middleTableViewController];
     [self destroyViewController:self.rightTableViewController];
-    self.leftTableViewController = [[NMAContentTableViewController alloc] init];
+
+    self.leftTableViewController = [[NMAContentTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self configureNMAContentTableViewController:self.leftTableViewController
                                         withYear:[self decrementStringValue:self.year]
                                       atPosition:NMAScrollViewPositionPastYear];
-    
-    self.middleTableViewController = [[NMAContentTableViewController alloc] init];
+
+    self.middleTableViewController = [[NMAContentTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self configureNMAContentTableViewController:self.middleTableViewController
                                         withYear:self.year
                                       atPosition:NMAScrollViewPositionCurrentYear];
-    
-    self.rightTableViewController = [[NMAContentTableViewController alloc] init];
+
+    self.rightTableViewController = [[NMAContentTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self configureNMAContentTableViewController:self.rightTableViewController
                                         withYear:[self incrementStringValue:self.year]
                                       atPosition:NMAScrollViewPositionNextYear];
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
-    [self setUpMusicPlayer];
+    self.scrollView.contentSize = CGSizeMake(width * numberOfViews, height);
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (!self.leftTableViewController) {
+        [self setUpScrollView:self.latestYear];
+    }
+}
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -102,9 +117,9 @@ BOOL isMostRecentYearVisible;
 
 - (void)scrollingDidEnd {
     if (isEarliestYearVisble) {
-        self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 1 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
-    } else if (fabsf(self.swipeContentOffset - self.scrollView.contentOffset.x) == self.middleTableViewController.view.frame.size.width) {
-    self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
+      self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 1 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
+    } else if (fabs(self.swipeContentOffset - self.scrollView.contentOffset.x) == self.middleTableViewController.view.frame.size.width) {
+      self.scrollView.contentOffset.x == CGRectGetWidth(self.view.frame) * 2 ? [self didSwipeToNextYear] : [self didSwipeToPastYear];
     }
 }
 
@@ -123,33 +138,29 @@ BOOL isMostRecentYearVisible;
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionPastYear];
     }
-    [self setUpMusicPlayer];
-    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
 }
 
 - (void)didSwipeToNextYear {
     if ([self.rightTableViewController.year isEqualToString:self.latestYear]) {
         isMostRecentYearVisible = YES;
         [self.delegate updateScrollYear:[self incrementStringValue:self.year]];
-    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear ] && isEarliestYearVisble) {
+    } else if ([self.leftTableViewController.year isEqualToString:self.earliestYear] && isEarliestYearVisble) {
         isEarliestYearVisble = NO;
         [self.delegate updateScrollYear:self.year];
     } else {
         [self updatePositioningForScrollPosition:NMAScrollViewPositionNextYear];
     }
-    [self setUpMusicPlayer];
-    [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
 }
 
 - (void)updatePositioningForScrollPosition:(NMAScrollViewYearPosition)position {
     isEarliestYearVisble = NO;
     isMostRecentYearVisible = NO;
-    
+
     if (position == NMAScrollViewPositionNextYear) {
         [self destroyViewController:self.leftTableViewController];
         self.leftTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.rightTableViewController;
-        NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
+        NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self configureNMAContentTableViewController:newYear
                                             withYear:[self incrementStringValue:self.middleTableViewController.year]
                                           atPosition:NMAScrollViewPositionNextYear];
@@ -159,14 +170,13 @@ BOOL isMostRecentYearVisible;
         [self destroyViewController:self.rightTableViewController];
         self.rightTableViewController = self.middleTableViewController;
         self.middleTableViewController = self.leftTableViewController;
-        NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] init];
+        NMAContentTableViewController *newYear = [[NMAContentTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self configureNMAContentTableViewController:newYear
                                             withYear:[self decrementStringValue:self.middleTableViewController.year]
                                           atPosition:NMAScrollViewPositionPastYear];
         self.leftTableViewController = newYear;
         self.year = self.middleTableViewController.year;
     }
-    
     [self.delegate updateScrollYear:self.year];
     [self adjustFrameView];
     [self setContentOffsetToCenter];
@@ -188,14 +198,16 @@ BOOL isMostRecentYearVisible;
 - (void)configureNMAContentTableViewController:(NMAContentTableViewController *)viewController
                                       withYear:(NSString *)year
                                     atPosition:(NMAScrollViewYearPosition)position {
-    CGFloat origin = position * self.view.frame.size.width;
+    CGFloat width = CGRectGetWidth(self.view.frame);
+    CGFloat height = CGRectGetHeight(self.view.frame);
+    CGFloat origin = position * width;
     viewController.year = year;
-    [viewController.view setFrame:CGRectMake(origin, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    [viewController.view setFrame:CGRectMake(origin, 0, width, height)];
     [self.scrollView addSubview:viewController.view];
     [self addChildViewController:viewController];
 }
 
-#pragma mark - Helper
+#pragma mark - Year Mutator Methods
 
 - (NSString *)incrementStringValue:(NSString *)value {
     NSInteger nextyear = [value integerValue] + 1;
@@ -207,35 +219,73 @@ BOOL isMostRecentYearVisible;
     return [NSString stringWithFormat:@"%li", (long)pastyear];
 }
 
+#pragma mark - Year Getter Methods
+
 - (void)getLatestYear {
-    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-    [DateFormatter setDateFormat:@"yyyy"];
-    NSString *currentYear = [DateFormatter  stringFromDate:[NSDate date]];
+    NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    NSString *currentYear = [dateFormatter stringFromDate:[NSDate date]];
     NSInteger pastyear = [currentYear integerValue] - 1;
     NSString *pastYearString = [NSString stringWithFormat:@"%li", (long)pastyear];
     self.latestYear = pastYearString;
 }
 
-#pragma mark - NMAPlaybackManager Initialization
+- (NSString *)visibleYear {
+    if (isMostRecentYearVisible) {
+        return self.latestYear;
+    } else if (isEarliestYearVisble) {
+        return self.earliestYear;
+    } else {
+        return self.year;
+    }
+}
 
-- (void)setUpMusicPlayer {
+- (NMAContentTableViewController *)visibleContentTableVC {
     for (NMAContentTableViewController *tableVC in self.childViewControllers) {
-        NSString *visibleYear;
-        if (isMostRecentYearVisible) {
-            visibleYear = self.latestYear;
-        } else if (isEarliestYearVisble) {
-            visibleYear = self.earliestYear;
-        } else {
-            visibleYear = self.year;
-        }
+        NSString *visibleYear = [self visibleYear];
         if ([tableVC.year isEqualToString:visibleYear]) {
-            [tableVC setUpPlayerForTableCell];
-            if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
-            }
-            break;
+            return tableVC;
         }
     }
+    return nil;
+}
+
+- (NMATodaysSongTableViewCell *)visibleSongCell {
+    return (NMATodaysSongTableViewCell *)[[self visibleContentTableVC].tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+- (CALayer *)visibleAlbumImageViewLayer {
+    return [self visibleSongCell].albumImageView.layer;
+}
+
+- (void)setUpPlayerForTableCellForYear:(NSString *)year {
+    [[NMAPlaybackManager sharedPlayer] pausePlaying];
+    [[NMARequestManager sharedManager] getSongFromYear:year
+                                               success:^(NMASong *song) {
+                                                   NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
+                                                   [visibleTableVC.billboardSongs removeAllObjects];
+                                                   [visibleTableVC.billboardSongs addObject:song];
+                                                   [visibleTableVC.tableView reloadData];
+                                                   [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
+                                                   [[NSNotificationCenter defaultCenter] addObserver:self
+                                                                                            selector:@selector(audioDidFinishPlaying:)
+                                                                                                name:AVPlayerItemDidPlayToEndTimeNotification
+                                                                                              object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
+                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                                                       [[NMAPlaybackManager sharedPlayer] startPlaying];
+                                                   }
+                                               }
+                                               failure:^(NSError *error) {}];
+}
+
+#pragma mark - Song End Notification Handler
+
+- (void)audioDidFinishPlaying:(NSNotification *)notification {
+    [[self visibleSongCell] changePlayButtonImageToPlay];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(audioDidFinishPlaying:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
 }
 
 @end

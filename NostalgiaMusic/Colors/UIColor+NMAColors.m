@@ -86,4 +86,9 @@
     return [UIColor colorWithRed:155.0f/255.0f green:155.0f/255.0f blue:155.0f/255.0f alpha:1.0f];
 }
 
+/* Home Colors */
+
++ (UIColor *)NMA_homeBackgroundGray {
+    return [UIColor colorWithRed:227.0f/255.0f green:227.0f/255.0f blue:227.0f/255.0f alpha:1.0f];
+}
 @end

@@ -27,8 +27,8 @@
                             <constraint firstAttribute="height" constant="35" id="eO9-u2-VOP"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="bUz-g2-0t0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="bUz-g2-0t0">
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="53"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="bUz-g2-0t0" secondAttribute="height" multiplier="320:53" id="20N-Lh-Rp8"/>
@@ -40,8 +40,8 @@
                             <constraint firstAttribute="width" secondItem="Z3o-1e-ek0" secondAttribute="height" multiplier="1:1" constant="1" id="Gew-vo-7hM"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
-                        <rect key="frame" x="86" y="28" width="66" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="88" y="26" width="66" height="20"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>

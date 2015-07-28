@@ -23,6 +23,8 @@
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
+#import "NMAYearActivityScrollViewController.h"
+#import "NMATodaysSongTableViewCell.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -33,6 +35,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
 static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNewsStoryHeightForRow = 307;
 static const NSInteger kNumberOfSections = 3;
+static const NSInteger kHeightOfHeaderBanners = 62;
 static NSString * const kNMASectionHeaderIdentifier = @"NMASectionHeader";
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
@@ -41,9 +44,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 @interface NMAContentTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *billboardSongs;
-@property (strong, nonatomic) NSMutableArray *facebookActivities;
-@property (strong, nonatomic) NSMutableArray *NYTimesNews;
 @property (strong, nonatomic, readwrite) NMADay *day;
 @property (strong, nonatomic) NMAModalDetailTableViewController *modalDetailViewController;
 
@@ -53,8 +53,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor NMA_lightGray];
+    [self configureUI];
 
     //Song cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
@@ -88,10 +87,10 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMdd"];
-    NSString *currentDayMonth = [dateFormatter  stringFromDate:[NSDate date]];
+    NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
     NMARequestManager *manager = [[NMARequestManager alloc] init];
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
-                          success:^(NMANewsStory *story){
+                          success:^(NMANewsStory *story) {
                               [self.NYTimesNews addObject:story];
                               [self.tableView reloadData];
                           }
@@ -102,16 +101,17 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     }];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(audioDidFinishPlaying:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[NMAPlaybackManager sharedAudioPlayer].audioPlayerItem];
 }
 
-- (void)audioDidFinishPlaying:(NSNotification *)notification {
-    [(NMATodaysSongTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] changePlayButtonImage];
+- (void)configureUI {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor NMA_white];
+    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage NMA_homeBackground]];
+    self.tableView.backgroundView = childView;
+    [self.tableView sizeToFit];
+    [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -138,30 +138,30 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
-           NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
+            NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
             UITableViewCell *cell;
             if (self.day.fbActivities.count > 0) {
-                cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
+                NMAFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
-                ((NMAFBActivityTableViewCell *)cell).fbActivity = fbActvity;
-                ((NMAFBActivityTableViewCell *)cell).delegate = self;
-                [(NMAFBActivityTableViewCell *)cell configureCell:YES withShadow:YES];
-                
+                temp.fbActivity = fbActvity;
+                temp.delegate = self;
+                [temp configureCell:YES withShadow:YES];
+                cell = temp;
             } else {
-                cell = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
+                NMANoFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
+                temp.messageLabel.textColor = [UIColor NMA_turquoise];
+                cell = temp;
             }
-            cell.backgroundColor = [UIColor clearColor];
             [cell layoutIfNeeded];
             return cell;
         }
         case NMASectionTypeNYTimesNews: {
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
-            cell.backgroundColor = [UIColor NMA_lightGray];
             cell.delegate = self;
             return cell;
         }
@@ -185,27 +185,23 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case NMASectionTypeBillboardSong:
-            return kBillboardSongHeightForRow;
-        case NMASectionTypeFacebookActivity: {
+        case NMASectionTypeFacebookActivity:
             return UITableViewAutomaticDimension;
-        }
-        case NMASectionTypeNYTimesNews: {
+        case NMASectionTypeNYTimesNews:
             return kNewsStoryHeightForRow;
-        }
         default:
-            return 0;
+            return kBillboardSongHeightForRow;
     }
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+-(UIView*)tableView:(UITableView *)tableView
+viewForHeaderInSection:(NSInteger)section {
     switch (section) {
         case NMASectionTypeFacebookActivity: {
             NMASectionHeader *fbSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             fbSectionHeaderCell.headerLabel.text = @"Facebook Activities";
             fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
             fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
-            fbSectionHeaderCell.backgroundColor = [UIColor NMA_lightGray];
             [fbSectionHeaderCell sizeToFit];
             return fbSectionHeaderCell;
         }
@@ -213,8 +209,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             NMASectionHeader *newsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             newsSectionHeaderCell.headerLabel.text = @"News";
             newsSectionHeaderCell.headerImageView.image = [UIImage NMA_newsLabel];
-            newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor NMA_lightGray];
-            newsSectionHeaderCell.backgroundColor = [UIColor NMA_lightGray];
+            newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor clearColor];
             [newsSectionHeaderCell sizeToFit];
             return newsSectionHeaderCell;
         }
@@ -222,6 +217,23 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             return nil;
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case (NMASectionTypeBillboardSong):
+            return CGFLOAT_MIN;
+        default:
+            return kHeightOfHeaderBanners;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
+}
+
+#pragma mark - Setter Methods
 
 - (void)setYear:(NSString *)year {
     _year = year;
@@ -248,28 +260,8 @@ titleForHeaderInSection:(NSInteger)section {
         case NMASectionTypeNYTimesNews:
             return @"News";
         default:
-            return @"";
+            return nil;
     }
-}
-
-#pragma mark - Public Methods
-
-- (void)setUpPlayerForTableCell {
-    [[NMARequestManager sharedManager] getSongFromYear:self.year
-                                               success:^(NMASong *song) {
-                                                   [self.billboardSongs removeAllObjects];
-
-                                                   [self.billboardSongs addObject:song];
-
-                                                   [[NMAPlaybackManager sharedAudioPlayer] setUpWithURL:[NSURL URLWithString:song.previewURL]];
-                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                                                       [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
-                                                   }
-                                                   [self.tableView reloadData];
-                                               }
-                                               failure:^(NSError *error) {
-                                                   NSLog(@"something went horribly wrong"); //TODO: handle error
-                                               }];
 }
 
 #pragma mark - Private Utility
@@ -277,12 +269,11 @@ titleForHeaderInSection:(NSInteger)section {
 - (void)addModalDetailForFBActivity:(NMAFBActivity *)fbActivity {
     self.modalDetailViewController = [[NMAModalDetailTableViewController alloc] initWithActivity:fbActivity];
     UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    
+
     [rootViewController.view addSubview:self.modalDetailViewController.view];
     self.modalDetailViewController.view.frame = rootViewController.view.frame;
-    
+
     [rootViewController addChildViewController:self.modalDetailViewController];
 }
-
 
 @end

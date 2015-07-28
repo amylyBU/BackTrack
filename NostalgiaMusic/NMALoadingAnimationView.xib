@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NMALoadingAnimationView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="V92-eN-RtU" customClass="NMALoadingAnimationView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" image="light" translatesAutoresizingMaskIntoConstraints="NO" id="xAm-Bs-FfG">
+                    <rect key="frame" x="241" y="40" width="117" height="279"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="ufo_2010" translatesAutoresizingMaskIntoConstraints="NO" id="v2p-Qd-46T">
+                    <rect key="frame" x="271" y="0.0" width="58" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="v2p-Qd-46T" secondAttribute="height" multiplier="29:20" id="i5i-9m-Q3M"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="5RZ-GV-U8q">
+                    <rect key="frame" x="229" y="271" width="142" height="58"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.20016870610000001" green="0.25977088279999999" blue="0.29292929290000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="v2p-Qd-46T" secondAttribute="centerX" id="Cud-PT-8Ux"/>
+                <constraint firstAttribute="centerX" secondItem="xAm-Bs-FfG" secondAttribute="centerX" id="Dd3-bY-6Bi"/>
+                <constraint firstItem="xAm-Bs-FfG" firstAttribute="bottom" secondItem="5RZ-GV-U8q" secondAttribute="bottom" constant="-10" id="V7j-jy-rtX"/>
+                <constraint firstItem="v2p-Qd-46T" firstAttribute="top" secondItem="V92-eN-RtU" secondAttribute="top" priority="999" id="XAN-Xf-X8Z"/>
+                <constraint firstAttribute="centerX" secondItem="5RZ-GV-U8q" secondAttribute="centerX" id="ayZ-HO-J9G"/>
+                <constraint firstItem="xAm-Bs-FfG" firstAttribute="top" secondItem="v2p-Qd-46T" secondAttribute="bottom" id="lZP-vs-D60"/>
+                <constraint firstAttribute="centerY" secondItem="v2p-Qd-46T" secondAttribute="centerY" priority="1" id="mEM-OS-FYu"/>
+                <constraint firstAttribute="centerY" secondItem="5RZ-GV-U8q" secondAttribute="centerY" id="ws1-w6-8xv"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="centerVerticalUfoConstraint" destination="mEM-OS-FYu" id="yCf-3H-b0h"/>
+                <outlet property="cloudsImageView" destination="5RZ-GV-U8q" id="ADj-Wx-TZA"/>
+                <outlet property="topUfoConstraint" destination="XAN-Xf-X8Z" id="WR6-k1-rW3"/>
+                <outlet property="ufoImageView" destination="v2p-Qd-46T" id="3o9-D0-vgc"/>
+                <outlet property="ufoLightsImageView" destination="xAm-Bs-FfG" id="LSq-sF-8ab"/>
+            </connections>
+            <point key="canvasLocation" x="892" y="324"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clouds" width="142" height="58"/>
+        <image name="light" width="117" height="172"/>
+        <image name="ufo_2010" width="58" height="40"/>
+    </resources>
+</document>

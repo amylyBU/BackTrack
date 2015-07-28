@@ -16,6 +16,8 @@
     [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_tealGreen];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 @end

@@ -35,4 +35,6 @@
 + (UIColor *)NMA_white;
 + (UIColor *)NMA_warmGray;
 
+/* Home Colors */
++ (UIColor *)NMA_homeBackgroundGray;
 @end

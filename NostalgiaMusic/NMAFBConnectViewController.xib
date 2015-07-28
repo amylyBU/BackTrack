@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-mountain-bg" translatesAutoresizingMaskIntoConstraints="NO" id="RYT-Hu-reE">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="RYT-Hu-reE">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="474"/>
                     <color key="backgroundColor" red="0.85882352939999995" green="0.72941176470000002" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
@@ -128,8 +128,8 @@ music, Facebook and news</string>
         </view>
     </objects>
     <resources>
+        <image name="Login_bg" width="320" height="449"/>
         <image name="facebook icon" width="20" height="20"/>
         <image name="login-house" width="117" height="80"/>
-        <image name="login-mountain-bg" width="320" height="449"/>
     </resources>
 </document>

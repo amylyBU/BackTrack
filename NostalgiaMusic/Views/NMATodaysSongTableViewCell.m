@@ -20,12 +20,16 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 @interface NMATodaysSongTableViewCell ()
 
 @property (strong, nonatomic) NMASong *song;
-
 @property (weak, nonatomic) IBOutlet UIImageView *musicHandleImage;
 
 @end
 
 @implementation NMATodaysSongTableViewCell
+
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor whiteColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
 
 #pragma mark - Public Methods
 
@@ -49,12 +53,12 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 #pragma mark - Private Methods
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
-    if ([sender.currentImage isEqual:[UIImage imageNamed:kPlayImageName]]) {
-        [[NMAPlaybackManager sharedAudioPlayer] startPlaying];
-        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
-    } else {
-        [[NMAPlaybackManager sharedAudioPlayer] pausePlaying];
+    if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
+        [[NMAPlaybackManager sharedPlayer] pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
+    } else {
+        [[NMAPlaybackManager sharedPlayer] startPlaying];
+        [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     }
 }
 
@@ -62,9 +66,8 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     [[UIApplication sharedApplication] openURL:self.song.trackViewUrl];
 }
 
-- (void)changePlayButtonImage {
+- (void)changePlayButtonImageToPlay {
     [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
 }
-
 
 @end

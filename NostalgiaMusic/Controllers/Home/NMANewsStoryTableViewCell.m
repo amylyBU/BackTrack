@@ -13,22 +13,24 @@
 
 @implementation NMANewsStoryTableViewCell
 
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
 - (void)configureCellForStory:(NMANewsStory *)story {
     self.story = story;
     
-    if(story.headline) {
+    if (story.headline) {
         self.headlineLabel.text = story.headline;
         self.headlineLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:20];
     }
-    
-    if(story.byline) {
-        
+    if (story.byline) {
         self.bylineLabel.text = [story.byline uppercaseString];
         self.bylineLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
         self.bylineLabel.textColor = [UIColor NMA_warmGray];
     }
-    
-    if(story.snippet) {
+    if (story.snippet) {
         self.summaryTextLabel.text = story.snippet;
         self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
@@ -54,7 +56,7 @@
 }
 
 - (IBAction)goToNewYorkTimes {
-    NSString *url = [NSString stringWithFormat:(NSString *)self.story.articleURL];
+    NSString *url = [NSString stringWithFormat:@"%@", self.story.articleURL];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

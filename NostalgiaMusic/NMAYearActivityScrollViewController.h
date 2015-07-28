@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NMAContentTableViewController.h"
 #import "NMAYearActivityScrollDelegate.h"
+@class NMAContentTableViewController;
 
 @interface NMAYearActivityScrollViewController : UIViewController <UIScrollViewDelegate>
-
-- (void)setUpScrollView:(NSString *)year;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
+
+- (void)setUpScrollView:(NSString *)year;
+- (void)setUpPlayerForTableCellForYear:(NSString *)year;
 
 @end

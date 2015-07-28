@@ -40,20 +40,21 @@
 
 - (IBAction)signInButtonPressed:(UIButton *)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-        if (error) {
-            // TODO: handle error
-        } else if (result.isCancelled) {
-            // TODO: handle cancellations
-        } else {
-            // TODO: check if specific permissions are missing
-            if ([result.grantedPermissions containsObject:@"email"]) {
-                [[NMAAppSettings sharedSettings] setAccessToken:result.token];
-            }
-        }
-        [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
-        [self.delegate userDidFinishOnboarding];
-    }];
+    NSArray *requestedPermissions = @[@"email", @"public_profile", @"user_photos", @"user_posts", @"user_status"];
+    [login logInWithReadPermissions:requestedPermissions
+                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                if (error) {
+                                    // TODO: handle error
+                                } else if (result.isCancelled) {
+                                    // TODO: handle cancellations
+                                } else {
+                                    if (result.grantedPermissions.count == requestedPermissions.count) {
+                                        [[NMAAppSettings sharedSettings] setAccessToken:result.token];
+                                    }
+                                }
+                                [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
+                                [self.delegate userDidFinishOnboarding];
+                            }];
     //TODO: notifications for profile changes, access token changes/expirations etc.
 }
 
