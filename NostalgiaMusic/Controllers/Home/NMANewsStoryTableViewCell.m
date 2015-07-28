@@ -36,6 +36,14 @@
     }
     if (story.snippet) {
         self.summaryTextLabel.text = story.snippet;
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        style.minimumLineHeight = 20.0f;
+        style.maximumLineHeight = 20.0f;
+        NSDictionary *attributtes = @{NSParagraphStyleAttributeName : style,};
+        self.summaryTextLabel.attributedText = [[NSAttributedString alloc] initWithString:story.snippet
+                                                                 attributes:attributtes];
+        [self.summaryTextLabel sizeToFit];
+        self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
     [self configureDateLabel:story];
     self.continueReadingButton.titleLabel.text = @"Continue Reading in The New York Times";

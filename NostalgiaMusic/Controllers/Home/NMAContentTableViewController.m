@@ -64,7 +64,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
          forCellReuseIdentifier:kNMASectionHeaderIdentifier];
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 100.0;
-;
 
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];

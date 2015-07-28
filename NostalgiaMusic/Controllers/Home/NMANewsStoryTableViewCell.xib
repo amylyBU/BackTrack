@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHO-G8-cPk">
-                        <rect key="frame" x="10" y="58" width="300" height="191"/>
+                        <rect key="frame" x="10" y="43" width="300" height="206"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-time-ribbon" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-9Z-iBg">
                                 <rect key="frame" x="-4" y="10" width="70" height="27"/>
@@ -38,14 +38,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="snippet text" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iR2-Rk-a5f">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="snippet text" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iR2-Rk-a5f">
                                 <rect key="frame" x="10" y="102" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzY-Uy-8mO">
-                                <rect key="frame" x="10" y="122" width="334" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzY-Uy-8mO">
+                                <rect key="frame" x="10" y="123" width="334" height="34"/>
                                 <state key="normal" title="Continue Reading in The New York Times">
                                     <color key="titleColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -54,7 +53,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxg-PI-Cbc">
-                                <rect key="frame" x="263" y="150" width="26" height="31"/>
+                                <rect key="frame" x="263" y="165" width="26" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oxg-PI-Cbc" secondAttribute="height" multiplier="11:13" id="7jh-kk-phv"/>
                                 </constraints>
@@ -101,18 +100,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="hHO-G8-cPk" secondAttribute="trailing" constant="10" id="Kcn-lO-3pL"/>
-                    <constraint firstItem="hHO-G8-cPk" firstAttribute="top" secondItem="ax9-eI-hlT" secondAttribute="topMargin" constant="50" id="MLV-4K-5Kt"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="hHO-G8-cPk" secondAttribute="trailing" constant="10" id="WzI-mk-8Ax"/>
-                    <constraint firstItem="hHO-G8-cPk" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leadingMargin" constant="10" id="c3c-1R-unS"/>
+                    <constraint firstItem="hHO-G8-cPk" firstAttribute="top" secondItem="ax9-eI-hlT" secondAttribute="topMargin" constant="35" id="MLV-4K-5Kt"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hHO-G8-cPk" secondAttribute="bottom" id="idV-xw-liq"/>
                     <constraint firstItem="hHO-G8-cPk" firstAttribute="leading" secondItem="ax9-eI-hlT" secondAttribute="leading" constant="10" id="p5t-wb-zew"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="WzI-mk-8Ax"/>
-                        <exclude reference="c3c-1R-unS"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
