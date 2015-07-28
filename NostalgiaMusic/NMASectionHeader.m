@@ -10,4 +10,8 @@
 
 @implementation NMASectionHeader
 
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor clearColor];
+}
+
 @end

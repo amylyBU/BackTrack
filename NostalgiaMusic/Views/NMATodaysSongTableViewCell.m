@@ -26,6 +26,11 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 
 @implementation NMATodaysSongTableViewCell
 
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor whiteColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
 #pragma mark - Public Methods
 
 - (void)configureCellForSong:(NMASong *)song {

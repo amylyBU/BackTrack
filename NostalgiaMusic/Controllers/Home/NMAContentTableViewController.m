@@ -140,8 +140,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            cell.backgroundColor = [UIColor whiteColor];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -158,8 +156,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 temp.messageLabel.textColor = [UIColor NMA_turquoise];
                 cell = temp;
             }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor clearColor];
             [cell layoutIfNeeded];
             return cell;
         }
@@ -167,8 +163,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             NMANewsStoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMANewsStoryCellIdentifier forIndexPath:indexPath];
             [cell configureCellForStory:self.NYTimesNews[indexPath.row]];
             cell.delegate = self;
-            cell.backgroundColor = [UIColor clearColor];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         default:
@@ -210,7 +204,6 @@ viewForHeaderInSection:(NSInteger)section {
             fbSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
             fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
-            fbSectionHeaderCell.backgroundColor = [UIColor clearColor];
             [fbSectionHeaderCell sizeToFit];
             return fbSectionHeaderCell;
         }
@@ -221,7 +214,6 @@ viewForHeaderInSection:(NSInteger)section {
             newsSectionHeaderCell.headerLabel.textColor = [UIColor whiteColor];
             newsSectionHeaderCell.headerImageView.image = [UIImage NMA_newsLabel];
             newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor clearColor];
-            newsSectionHeaderCell.backgroundColor = [UIColor clearColor];
             [newsSectionHeaderCell sizeToFit];
             return newsSectionHeaderCell;
         }
