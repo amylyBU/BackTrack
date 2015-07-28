@@ -43,7 +43,6 @@ BOOL isMostRecentYearVisible;
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     [self.view addSubview:self.scrollView];
-    [self makeAnimation];
 }
 
 #pragma mark - Scroll View set up
@@ -263,10 +262,10 @@ BOOL isMostRecentYearVisible;
     [[NMAPlaybackManager sharedPlayer] pausePlaying];
     [[NMARequestManager sharedManager] getSongFromYear:year
                                                success:^(NMASong *song) {
-                                                   NSLog(@"setting up player cell for %@", [self visibleContentTableVC].year);
-                                                   [[self visibleContentTableVC].billboardSongs removeAllObjects];
-                                                   [[self visibleContentTableVC].billboardSongs addObject:song];
-                                                   [[self visibleContentTableVC].tableView reloadData];
+                                                   NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
+                                                   [visibleTableVC.billboardSongs removeAllObjects];
+                                                   [visibleTableVC.billboardSongs addObject:song];
+                                                   [visibleTableVC.tableView reloadData];
                                                    [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
                                                    [[NSNotificationCenter defaultCenter] addObserver:self
                                                                                             selector:@selector(audioDidFinishPlaying:)
@@ -277,52 +276,6 @@ BOOL isMostRecentYearVisible;
                                                    }
                                                }
                                                failure:^(NSError *error) {}];
-}
-
-#pragma mark - Animation Methods
-
-- (void)pauseSpinning {
-    NSLog(@"paused animation, self: %@", self);
-    CALayer *layer = [self visibleAlbumImageViewLayer];
-    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    layer.speed = 0.0;
-    layer.timeOffset = pausedTime;
-}
-
-- (void)startSpinning {
-    CALayer *visibleAlbumImageViewLayer = [self visibleAlbumImageViewLayer];
-    if (visibleAlbumImageViewLayer) {
-        if (!visibleAlbumImageViewLayer.animationKeys) {
-           NSLog(@"if no animations exist on layer, ADD animation");
-            CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-            rotation.toValue = [NSNumber numberWithFloat:M_PI*2];
-            rotation.duration = 10;
-            rotation.cumulative = YES;
-            rotation.repeatCount = HUGE_VALF;
-            rotation.removedOnCompletion = NO;
-            rotation.fillMode = kCAFillModeForwards;
-            [visibleAlbumImageViewLayer addAnimation:rotation forKey:@"rotationAnimation"];
-        } else {
-           NSLog(@"animation layer exists, so RESUME animation");
-            CFTimeInterval startTime = [visibleAlbumImageViewLayer convertTime:CACurrentMediaTime() fromLayer:visibleAlbumImageViewLayer];
-            CFTimeInterval pausedTime = [visibleAlbumImageViewLayer timeOffset];
-            visibleAlbumImageViewLayer.speed = 1.0;
-            visibleAlbumImageViewLayer.timeOffset = 0.0;
-            visibleAlbumImageViewLayer.beginTime = 0.0;
-            CFTimeInterval timeSincePause = startTime - pausedTime;
-            visibleAlbumImageViewLayer.beginTime = timeSincePause;
-        }
-    }
-}
-
-- (void)makeAnimation {
-    self.rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    self.rotation.toValue = [NSNumber numberWithFloat:M_PI*2];
-    self.rotation.duration = 10;
-    self.rotation.cumulative = YES;
-    self.rotation.repeatCount = HUGE_VALF;
-    self.rotation.removedOnCompletion = NO;
-    self.rotation.fillMode = kCAFillModeForwards;
 }
 
 #pragma mark - Song End Notification Handler

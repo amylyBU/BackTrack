@@ -47,6 +47,7 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
     [self setUpHomeView];
     [self configureUI];
 }
+
 - (void)configureUI {
     self.title = @"";
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -84,29 +85,7 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
     [self.view constrainView:self.yearActivityScrollVC.view belowView:self.yearScrollBarCollectionVC.view];
     [self.view constrainView:self.yearActivityScrollVC.view top:NSNotFound left:0 bottom:0 right:0];
     
-    NSLog(@"setting up notifications");
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidResumeAVPlayer:)
-                                                 name:@"resumeAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidPauseAVPlayer:)
-                                                 name:@"pauseAVPlayerNotification"
-                                               object:[NMAPlaybackManager sharedPlayer]];
-    
     [self.yearActivityScrollVC setUpPlayerForTableCellForYear:@"2014"];
-}
-
-#pragma mark - KVO Notification Handling
-
-- (void)userDidResumeAVPlayer:(NSNotification *)notification {
-    NSLog(@"did resume song");
-    [self.yearActivityScrollVC startSpinning];
-}
-
-- (void)userDidPauseAVPlayer:(NSNotification *)notification {
-    NSLog(@"did pause song");
-    [self.yearActivityScrollVC pauseSpinning];
 }
 
 #pragma mark - NMAYearCollectionViewControllerDelegate
@@ -120,6 +99,8 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
     }
 }
 
+#pragma mark - Loading Animation Methods
+
 - (void)configureLoadingAnimationView {
     [self.blackoutActivityView removeFromSuperview];
     NMALoadingAnimationView *loadingAnimationView = [[NMALoadingAnimationView alloc] initWithNibNamed:nil];
@@ -127,7 +108,6 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
     [self.yearActivityScrollVC.view addSubview:loadingAnimationView];
     [self.yearActivityScrollVC.view constrainView:loadingAnimationView toInsets:UIEdgeInsetsZero];
     [loadingAnimationView animateLoadingOverlay];
-    
 }
 
 - (void)blackoutActivity {

@@ -13,13 +13,10 @@
 @interface NMAYearActivityScrollViewController : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) CABasicAnimation *rotation;
 @property (copy, nonatomic) NSString *year;
 @property (weak, nonatomic) id <NMAYearActivityScrollDelegate> delegate;
 
 - (void)setUpScrollView:(NSString *)year;
 - (void)setUpPlayerForTableCellForYear:(NSString *)year;
-- (void)startSpinning;
-- (void)pauseSpinning;
 
 @end

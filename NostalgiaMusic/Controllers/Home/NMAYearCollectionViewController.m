@@ -190,11 +190,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 - (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell isSelected:(BOOL)isSelected {
     [cell.year setFont:[UIFont systemFontOfSize:30]];
     [cell.year setFont:[UIFont NMA_proximaNovaExtraBoldWithSize:30]];
-    if (isSelected) {
-        cell.year.textColor = [UIColor NMA_sunYellow];
-    } else {
-        cell.year.textColor = [UIColor NMA_aquaMarine];
-    }
+    cell.year.textColor = isSelected ? [UIColor NMA_sunYellow] : [UIColor NMA_aquaMarine];
 }
 
 - (void)formatNonMiddlecell:(NMAYearCollectionViewCell *)cell {

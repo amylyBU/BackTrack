@@ -141,17 +141,17 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             [cell configureCellForSong:self.billboardSongs[indexPath.row]];
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            NSLog(@"getting cell: %@", cell);
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
             UITableViewCell *cell;
             if (self.day.fbActivities.count > 0) {
-                cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
+                NMAFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
-                ((NMAFBActivityTableViewCell *)cell).fbActivity = fbActvity;
-                ((NMAFBActivityTableViewCell *)cell).delegate = self;
-                [(NMAFBActivityTableViewCell *)cell configureCell:YES withShadow:YES];
+                temp.fbActivity = fbActvity;
+                temp.delegate = self;
+                [temp configureCell:YES withShadow:YES];
+                cell = temp;
             } else {
                 NMANoFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
                 temp.messageLabel.textColor = [UIColor NMA_turquoise];
@@ -286,6 +286,5 @@ titleForHeaderInSection:(NSInteger)section {
 
     [rootViewController addChildViewController:self.modalDetailViewController];
 }
-
 
 @end
