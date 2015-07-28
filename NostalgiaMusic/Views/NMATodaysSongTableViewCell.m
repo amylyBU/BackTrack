@@ -56,6 +56,14 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     }
 }
 
+- (void)configureEmptyCell {
+    NMASong *dummySong = [NMASong new];
+    dummySong.title = @"Track Name";
+    dummySong.artistAsAppearsOnLabel = @"Artist Name";
+    dummySong.albumImageUrl600x600 = nil;
+    [self configureCellForSong:dummySong];
+}
+
 #pragma mark - Private Methods
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
