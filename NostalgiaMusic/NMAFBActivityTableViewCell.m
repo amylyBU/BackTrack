@@ -88,6 +88,11 @@ static const NSInteger kCommentParagraphSpacing = 7;
     }
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.messageView.layer.shadowOpacity = 0.0f;
+}
+
 - (void)setCollapsedCellState:(BOOL)isCollapsed {
     self.collapsed = isCollapsed;
     int messageLineCount = self.collapsed ? 2 : 0;

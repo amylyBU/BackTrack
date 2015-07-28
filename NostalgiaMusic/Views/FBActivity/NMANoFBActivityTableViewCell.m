@@ -12,12 +12,26 @@
 
 @implementation NMANoFBActivityTableViewCell
 
+static CGFloat const kShadowOffset = 4;
+static CGFloat const kShadowOpacity = 0.7f;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.messageLabel.textColor = [UIColor NMA_tealGreen];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
+}
+
+- (void) addShadow {
+    //Add a shadow
+    [self setNeedsLayout];
+    
+    self.messageView.layer.masksToBounds = NO;
+    self.messageView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
+    self.messageView.layer.shadowRadius = kShadowOffset;
+    self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    self.messageView.layer.shadowOpacity = kShadowOpacity;
 }
 
 @end

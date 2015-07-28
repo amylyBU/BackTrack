@@ -159,9 +159,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             } else {
                 NMANoFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
                 temp.messageLabel.textColor = [UIColor NMA_turquoise];
+                [cell layoutIfNeeded];
+                [temp addShadow];
                 cell = temp;
             }
-            [cell layoutIfNeeded];
+            [self.view layoutSubviews];
             return cell;
         }
         case NMASectionTypeNYTimesNews: {
