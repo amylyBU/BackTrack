@@ -111,6 +111,7 @@
                          completion:^(BOOL finished) {
                              [self removeFromSuperview];
                              [self.delegate removeBlackoutFromScrollBar];
+                             [self.delegate allowSelectionAfterLoading];
                          }];
     }];
     

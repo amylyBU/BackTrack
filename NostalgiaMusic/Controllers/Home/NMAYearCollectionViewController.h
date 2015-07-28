@@ -14,6 +14,7 @@
 - (void)didSelectYear:(NSString *)year;
 - (void)blackoutActivity;
 - (void)removeBlackoutFromScrollBar;
+- (void)allowSelectionAfterLoading;
 
 @end
 

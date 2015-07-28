@@ -91,6 +91,7 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
 
 - (void)didSelectYear:(NSString *)year {
     if (![self.selectedYear isEqualToString:year]) {
+        self.yearScrollBarCollectionVC.scrollBarCollectionView.allowsSelection = NO;
         self.selectedYear = year;
         [self.yearActivityScrollVC setUpScrollView:year];
         [self configureLoadingAnimationView];
@@ -130,6 +131,10 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     self.navigationController.navigationBar.alpha = 1.0;
     self.yearScrollBarCollectionVC.blackoutNavBarView.hidden = YES;
+}
+
+- (void)allowSelectionAfterLoading {
+    self.yearScrollBarCollectionVC.scrollBarCollectionView.allowsSelection = YES;
 }
 
 #pragma mark - NMAYearActivityScrollDelegate
