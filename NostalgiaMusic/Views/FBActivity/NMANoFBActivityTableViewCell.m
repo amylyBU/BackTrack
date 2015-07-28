@@ -24,7 +24,6 @@ static CGFloat const kShadowOpacity = 0.7f;
 }
 
 - (void) addShadow {
-    //Add a shadow
     [self setNeedsLayout];
     
     self.messageView.layer.masksToBounds = NO;
