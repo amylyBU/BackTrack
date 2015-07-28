@@ -155,7 +155,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     for (NMAYearCollectionViewCell *cell in visible) {
         CGRect whiteSquareRect = self.whiteYearBackgroundSquare.frame;
         CGRect cellFrameInView = [self convertCellOriginToSuperview:cell];
-        CGPoint cellOriginMiddle = CGPointMake (cellFrameInView.origin.x + self.view.frame.size.width/6, cellFrameInView.origin.y);
+        CGPoint cellOriginMiddle = CGPointMake (cellFrameInView.origin.x + CGRectGetWidth(self.view.frame)/6, cellFrameInView.origin.y);
         switch (scroll) {
             case NMAScrollViewDidEndGesture:
                 if (CGRectContainsPoint(whiteSquareRect, cellOriginMiddle)) {
