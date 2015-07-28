@@ -35,7 +35,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
 static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNewsStoryHeightForRow = 307;
 static const NSInteger kNumberOfSections = 3;
-static const NSInteger kHeightOfHeaderBanners = 62;
+static const NSInteger kHeightOfHeaderBanners = 70;
 static NSString * const kNMASectionHeaderIdentifier = @"NMASectionHeader";
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
@@ -225,11 +225,12 @@ viewForHeaderInSection:(NSInteger)section {
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section {
+    NMASectionHeader *newsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
     switch (section) {
         case (NMASectionTypeBillboardSong):
             return CGFLOAT_MIN;
         default:
-            return kHeightOfHeaderBanners;
+            return kHeightOfHeaderBanners;  
     }
 }
 
