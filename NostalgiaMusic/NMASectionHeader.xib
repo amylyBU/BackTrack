@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Regular.otf">
@@ -35,13 +34,13 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Z3o-1e-ek0">
-                        <rect key="frame" x="12" y="7" width="64" height="63"/>
+                        <rect key="frame" x="12" y="10" width="61" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Z3o-1e-ek0" secondAttribute="height" multiplier="1:1" constant="1" id="Gew-vo-7hM"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
-                        <rect key="frame" x="88" y="26" width="66" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="85" y="25" width="66" height="20"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -49,22 +48,22 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="centerY" secondItem="bUz-g2-0t0" secondAttribute="centerY" constant="12" id="3f4-4v-hfg"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
                     <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="12" id="7T7-RV-MGP"/>
                     <constraint firstAttribute="bottom" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="7nd-mB-yi5"/>
                     <constraint firstItem="bUz-g2-0t0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BdZ-My-FHC"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="centerY" secondItem="Z3o-1e-ek0" secondAttribute="centerY" constant="-3" id="PWm-ft-pVd"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="Rxo-4y-mTT"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="eqf-CM-yTe"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="RQM-af-qrm"/>
+                    <constraint firstAttribute="bottom" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="Tbw-Wp-Pgt"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="centerY" secondItem="XfO-5y-ZwR" secondAttribute="centerY" constant="6" id="XqA-R0-dk4"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ZbM-kJ-AQM"/>
                     <constraint firstItem="bUz-g2-0t0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gNv-Sw-wCz"/>
                     <constraint firstAttribute="trailing" secondItem="hTK-a6-ILP" secondAttribute="trailing" id="mdG-9z-Kjc"/>
                     <constraint firstAttribute="trailing" secondItem="bUz-g2-0t0" secondAttribute="trailing" id="wKf-C4-JSK"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="eqf-CM-yTe"/>
+                        <exclude reference="7nd-mB-yi5"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

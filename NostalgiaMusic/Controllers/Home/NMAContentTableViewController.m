@@ -221,11 +221,12 @@ viewForHeaderInSection:(NSInteger)section {
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section {
+    NMASectionHeader *newsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
     switch (section) {
         case (NMASectionTypeBillboardSong):
             return CGFLOAT_MIN;
         default:
-            return kHeightOfHeaderBanners;
+            return 70;
     }
 }
 
