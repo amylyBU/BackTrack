@@ -33,16 +33,10 @@
                 <constraint firstAttribute="centerX" secondItem="5RZ-GV-U8q" secondAttribute="centerX" id="ayZ-HO-J9G"/>
                 <constraint firstItem="xAm-Bs-FfG" firstAttribute="top" secondItem="v2p-Qd-46T" secondAttribute="bottom" id="lZP-vs-D60"/>
                 <constraint firstAttribute="centerY" secondItem="v2p-Qd-46T" secondAttribute="centerY" priority="1" id="mEM-OS-FYu"/>
-                <constraint firstItem="xAm-Bs-FfG" firstAttribute="top" secondItem="v2p-Qd-46T" secondAttribute="bottom" id="uwK-yO-6pY"/>
                 <constraint firstAttribute="centerY" secondItem="5RZ-GV-U8q" secondAttribute="centerY" id="ws1-w6-8xv"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="uwK-yO-6pY"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="centerVerticalUfoConstraint" destination="mEM-OS-FYu" id="yCf-3H-b0h"/>
                 <outlet property="cloudsImageView" destination="5RZ-GV-U8q" id="ADj-Wx-TZA"/>
