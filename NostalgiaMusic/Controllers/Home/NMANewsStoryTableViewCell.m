@@ -35,15 +35,24 @@
         self.summaryTextLabel.text = story.snippet;
         self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
-    self.backgroundColor = [UIColor NMA_white];
+   
     
     [self configureDateLabel:story];
     
     self.continueReadingButton.titleLabel.text = @"Continue Reading in the New York Times";
     self.continueReadingButton.titleLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
     self.continueReadingButton.titleLabel.textColor = [UIColor NMA_warmGray];
+    [self.continueReadingButton setShowsTouchWhenHighlighted:NO];
     
-    
+    if (shadow) {
+        //Add a shadow to the bottom of the message view
+        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.containerView.bounds];
+        self.containerView.layer.masksToBounds = NO;
+        self.containerView.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.containerView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+        self.containerView.layer.shadowOpacity = 0.5f;
+        self.containerView.layer.shadowPath = shadowPath.CGPath;
+    }
 }
 
 - (void)configureDateLabel:(NMANewsStory *)story {
