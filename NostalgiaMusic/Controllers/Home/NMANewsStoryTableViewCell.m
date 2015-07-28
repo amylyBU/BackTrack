@@ -17,30 +17,28 @@
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.headlineLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:20];
+    self.bylineLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
+    self.bylineLabel.textColor = [UIColor NMA_warmGray];
+    self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
+    self.continueReadingButton.titleLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
+    self.continueReadingButton.titleLabel.textColor = [UIColor NMA_warmGray];
+    self.dateLabel.font = [UIFont NMA_proximaNovaRegularWithSize:12];
 }
 
 - (void)configureCellForStory:(NMANewsStory *)story {
     self.story = story;
-    
     if (story.headline) {
         self.headlineLabel.text = [story.headline capitalizedString];
-        self.headlineLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:20];
     }
     if (story.byline) {
         self.bylineLabel.text = [story.byline uppercaseString];
-        self.bylineLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
-        self.bylineLabel.textColor = [UIColor NMA_warmGray];
     }
     if (story.snippet) {
         self.summaryTextLabel.text = story.snippet;
-        self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
     }
-    
     [self configureDateLabel:story];
-    
-    self.continueReadingButton.titleLabel.text = @"Continue Reading in the New York Times";
-    self.continueReadingButton.titleLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
-    self.continueReadingButton.titleLabel.textColor = [UIColor NMA_warmGray];
+    self.continueReadingButton.titleLabel.text = @"Continue Reading in The New York Times";
     [self.continueReadingButton setShowsTouchWhenHighlighted:NO];
     
     if (shadow) {
@@ -61,7 +59,6 @@
     [dateFormatter setDateFormat:@"LLLL dd"];
     NSString *displayDate = [dateFormatter  stringFromDate:storyDate];
     self.dateLabel.text = [displayDate uppercaseString];
-    self.dateLabel.font = [UIFont NMA_proximaNovaRegularWithSize:12];
 }
 
 - (IBAction)goToNewYorkTimes {
