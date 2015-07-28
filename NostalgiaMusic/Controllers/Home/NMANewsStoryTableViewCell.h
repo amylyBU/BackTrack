@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
 @property (strong, nonatomic) NMANewsStory *story;
 @property (strong, nonatomic) UIViewController<NSObject> *delegate;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 - (void)configureCellForStory:(NMANewsStory *)story;
 
