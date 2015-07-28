@@ -20,7 +20,6 @@
 #import "NMAPlaybackManager.h"
 #import "UIView+NibInitable.h"
 #import "NMALoadingAnimationView.h"
-#import "UIView+Constraints.h"
 
 static const NSInteger kYearScrollBarCollectionVCHeight = 128;
 static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView AND (blackoutView OR loadingAnimation)
