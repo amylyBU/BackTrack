@@ -35,13 +35,13 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Z3o-1e-ek0">
-                        <rect key="frame" x="13" y="13" width="58" height="57"/>
+                        <rect key="frame" x="12" y="7" width="64" height="63"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Z3o-1e-ek0" secondAttribute="height" multiplier="1:1" constant="1" id="Gew-vo-7hM"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
-                        <rect key="frame" x="85" y="28" width="66" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="86" y="28" width="66" height="20"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -49,38 +49,22 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="centerY" secondItem="bUz-g2-0t0" secondAttribute="centerY" constant="12" id="3f4-4v-hfg"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
                     <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="14" id="7T7-RV-MGP"/>
                     <constraint firstAttribute="bottom" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="7nd-mB-yi5"/>
                     <constraint firstItem="bUz-g2-0t0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BdZ-My-FHC"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="Foc-GO-B4z"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Jre-yn-scn"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="LvO-0z-bFB"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Rxo-4y-mTT"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="Wxq-G3-IaN"/>
-                    <constraint firstAttribute="bottom" secondItem="bUz-g2-0t0" secondAttribute="bottom" id="Xv5-Ru-MZ0"/>
-                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="clM-FI-gFD"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="10" id="dA7-yR-k4p"/>
-                    <constraint firstItem="bUz-g2-0t0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dhv-cv-Cst"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="centerY" secondItem="Z3o-1e-ek0" secondAttribute="centerY" constant="-3" id="PWm-ft-pVd"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="Rxo-4y-mTT"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="eqf-CM-yTe"/>
                     <constraint firstItem="bUz-g2-0t0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gNv-Sw-wCz"/>
                     <constraint firstAttribute="trailing" secondItem="hTK-a6-ILP" secondAttribute="trailing" id="mdG-9z-Kjc"/>
-                    <constraint firstItem="bUz-g2-0t0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pFl-jk-6Rx"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="centerY" secondItem="Z3o-1e-ek0" secondAttribute="centerY" constant="-4" id="rgc-W7-2RC"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="XfO-5y-ZwR" secondAttribute="bottom" constant="18" id="vpW-Uo-g52"/>
                     <constraint firstAttribute="trailing" secondItem="bUz-g2-0t0" secondAttribute="trailing" id="wKf-C4-JSK"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="Xv5-Ru-MZ0"/>
-                        <exclude reference="dhv-cv-Cst"/>
-                        <exclude reference="pFl-jk-6Rx"/>
-                        <exclude reference="Foc-GO-B4z"/>
-                        <exclude reference="Jre-yn-scn"/>
-                        <exclude reference="LvO-0z-bFB"/>
-                        <exclude reference="Wxq-G3-IaN"/>
-                        <exclude reference="dA7-yR-k4p"/>
-                        <exclude reference="vpW-Uo-g52"/>
+                        <exclude reference="eqf-CM-yTe"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
