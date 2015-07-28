@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -12,50 +13,71 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMASectionHeader" rowHeight="62" id="KGk-i7-Jjw" customClass="NMASectionHeader">
-            <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NMASectionHeader" rowHeight="70" id="KGk-i7-Jjw" customClass="NMASectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="321" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTK-a6-ILP" userLabel="top color view">
-                        <rect key="frame" x="0.0" y="0.0" width="321" height="42"/>
-                        <color key="backgroundColor" red="0.93333333330000001" green="0.84705882349999995" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="35"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="eO9-u2-VOP"/>
+                        </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook-label" translatesAutoresizingMaskIntoConstraints="NO" id="lGe-Gp-7WD">
-                        <rect key="frame" x="0.0" y="0.0" width="321" height="62"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="bUz-g2-0t0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="bUz-g2-0t0" secondAttribute="height" multiplier="320:53" id="20N-Lh-Rp8"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
-                        <rect key="frame" x="88" y="18" width="225" height="24"/>
-                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="24"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Z3o-1e-ek0">
+                        <rect key="frame" x="12" y="7" width="64" height="63"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Z3o-1e-ek0" secondAttribute="height" multiplier="1:1" constant="1" id="Gew-vo-7hM"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-5y-ZwR">
+                        <rect key="frame" x="86" y="28" width="66" height="20"/>
+                        <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="lGe-Gp-7WD" secondAttribute="trailing" id="3cM-gW-yUS"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="centerY" secondItem="bUz-g2-0t0" secondAttribute="centerY" constant="12" id="3f4-4v-hfg"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6y3-bD-3mn"/>
-                    <constraint firstAttribute="bottom" secondItem="lGe-Gp-7WD" secondAttribute="bottom" id="8WE-1S-QxS"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="8tP-Rm-WQ6"/>
-                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D4S-Tm-UYH"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="leading" secondItem="Z3o-1e-ek0" secondAttribute="trailing" constant="12" id="7T7-RV-MGP"/>
+                    <constraint firstAttribute="bottom" secondItem="Z3o-1e-ek0" secondAttribute="bottom" id="7nd-mB-yi5"/>
+                    <constraint firstItem="bUz-g2-0t0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BdZ-My-FHC"/>
                     <constraint firstItem="hTK-a6-ILP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EGf-VY-ibc"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="XfO-5y-ZwR" secondAttribute="bottom" constant="12" id="XFy-pt-tGr"/>
-                    <constraint firstItem="hTK-a6-ILP" firstAttribute="bottom" secondItem="XfO-5y-ZwR" secondAttribute="bottom" id="hau-OH-Uec"/>
+                    <constraint firstItem="XfO-5y-ZwR" firstAttribute="centerY" secondItem="Z3o-1e-ek0" secondAttribute="centerY" constant="-3" id="PWm-ft-pVd"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="Rxo-4y-mTT"/>
+                    <constraint firstItem="Z3o-1e-ek0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="eqf-CM-yTe"/>
+                    <constraint firstItem="bUz-g2-0t0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gNv-Sw-wCz"/>
                     <constraint firstAttribute="trailing" secondItem="hTK-a6-ILP" secondAttribute="trailing" id="mdG-9z-Kjc"/>
-                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mhG-6B-Ikh"/>
-                    <constraint firstItem="lGe-Gp-7WD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yra-2h-ILD"/>
+                    <constraint firstAttribute="trailing" secondItem="bUz-g2-0t0" secondAttribute="trailing" id="wKf-C4-JSK"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="eqf-CM-yTe"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="headerImageView" destination="lGe-Gp-7WD" id="WvH-1T-Miq"/>
+                <outlet property="headerImageView" destination="Z3o-1e-ek0" id="1fa-aJ-9e0"/>
                 <outlet property="headerLabel" destination="XfO-5y-ZwR" id="8IF-4J-yV4"/>
                 <outlet property="upperBackgroundView" destination="hTK-a6-ILP" id="VMP-uz-xBJ"/>
             </connections>
-            <point key="canvasLocation" x="136.5" y="234"/>
+            <point key="canvasLocation" x="136.5" y="258"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="facebook-label" width="321" height="62"/>
+        <image name="facebook_icon" width="53" height="53"/>
+        <image name="tag" width="321" height="51"/>
     </resources>
 </document>
