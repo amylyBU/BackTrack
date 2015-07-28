@@ -23,7 +23,7 @@
     self.story = story;
     
     if (story.headline) {
-        self.headlineLabel.text = story.headline;
+        self.headlineLabel.text = [story.headline capitalizedString];
         self.headlineLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:20];
     }
     if (story.byline) {
