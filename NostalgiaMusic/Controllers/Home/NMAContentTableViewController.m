@@ -35,7 +35,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
 static const NSInteger kBillboardSongHeightForRow = 400;
 static const NSInteger kNewsStoryHeightForRow = 307;
 static const NSInteger kNumberOfSections = 3;
-static const NSInteger kHeightOfHeaderBanners = 62;
+static const NSInteger kHeightOfHeaderBanners = 70;
 static NSString * const kNMASectionHeaderIdentifier = @"NMASectionHeader";
 static NSString * const kNMATodaysSongCellIdentifier = @"NMATodaysSongCell";
 static NSString * const kNMANewsStoryCellIdentifier = @"NMANewsStoryCell";
@@ -226,7 +226,7 @@ heightForHeaderInSection:(NSInteger)section {
         case (NMASectionTypeBillboardSong):
             return CGFLOAT_MIN;
         default:
-            return 70;
+            return kHeightOfHeaderBanners;  
     }
 }
 
