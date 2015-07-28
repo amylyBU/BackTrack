@@ -14,7 +14,6 @@
 @protocol NMADayDelegate
 
 - (void)allFbActivityUpdate;
-- (void)fbActivityDidUpdate:(NMAFBActivity *)activity;
 
 @end
 

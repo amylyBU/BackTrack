@@ -83,9 +83,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
-    self.day = [[NMADay alloc] initWithYear:self.year];
-    [self.day populateFBActivities:self];
-
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMdd"];
     NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
@@ -93,7 +90,10 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story) {
                               [self.NYTimesNews addObject:story];
-                              [self.tableView reloadData];
+                              if (self.NYTimesNews.count > 0) {
+                                  NSLog(@"reloading news cell");
+                                  [self.tableView reloadData];
+                              }
                           }
                           failure:^(NSError *error) {
                           }];
@@ -141,8 +141,11 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
             if (self.billboardSongs.count > 0) {
+                NSLog(@"configuring song cell");
                 [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            } else {
+            }
+            else {
+                NSLog(@"EMPTY song cell");
                 [cell configureEmptyCell];
             }
             return cell;
@@ -246,16 +249,12 @@ heightForFooterInSection:(NSInteger)section {
     _year = year;
     self.day = [[NMADay alloc] initWithYear:self.year];
     [self.day populateFBActivities:self];
-    [self.tableView reloadData];
 }
 
 #pragma mark - NMADayDelegate
 
 - (void)allFbActivityUpdate {
-    [self.tableView reloadData];
-}
-
-- (void)fbActivityDidUpdate:(NMAFBActivity *)activity {
+    NSLog(@"all fb activity update called");
     [self.tableView reloadData];
 }
 

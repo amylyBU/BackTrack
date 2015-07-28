@@ -39,7 +39,6 @@
                                                        dayDelegate:dayDelegate
                                                            success:^(NSArray *FBActivities) {
                                                                self.fbActivities = FBActivities;
-                                                               [dayDelegate allFbActivityUpdate];
                                                            }
                                                            failure:nil];
 }
