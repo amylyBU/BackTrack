@@ -47,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseCommentsToToolsConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseLikesToCommentsConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseViewMoreHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightOfOverlapConstraint;
 
 - (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow;
 - (void)setCollapsedCellState:(BOOL)isCollapsed;

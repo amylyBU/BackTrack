@@ -66,11 +66,23 @@ static const NSInteger kCommentParagraphSpacing = 7;
     
     if (shadow) {
         //Add a shadow to the bottom of the message view
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.messageView.bounds];
+        CGFloat offset = 4;
+        CGFloat overlap = self.heightOfOverlapConstraint.constant;
+        CGRect templateRect = self.messageView.bounds;
+        
+        CGFloat rectHeight = self.postImageView.image ? templateRect.size.height + self.postImageView.bounds.size.height + overlap: templateRect.size.height;
+        CGFloat templateY = self.postImageView.image ?
+        self.messageView.bounds.origin.y - self.postImageView.bounds.size.height - overlap :
+            templateRect.origin.y;
+        
+        CGRect shadowRect = CGRectMake(templateRect.origin.x - offset, templateY, templateRect.size.width + offset, rectHeight);
+        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:shadowRect];
         self.messageView.layer.masksToBounds = NO;
-        self.messageView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-        self.messageView.layer.shadowOpacity = 0.5f;
+        self.messageView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
+        self.messageView.layer.shadowRadius = offset;
+        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.messageView.layer.shadowOpacity = 0.7f;
+        [self setNeedsLayout];
         self.messageView.layer.shadowPath = shadowPath.CGPath;
     }
 }
