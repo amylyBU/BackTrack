@@ -94,11 +94,19 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
         self.selectedYear = year;
         [self.yearActivityScrollVC setUpScrollView:year];
         [self configureLoadingAnimationView];
+        [self blackoutScrollBar];
         [self.yearActivityScrollVC setUpPlayerForTableCellForYear:year];
     }
 }
 
 #pragma mark - Loading Animation Methods
+
+- (void)blackoutScrollBar {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationController.navigationBar.alpha = 0.2;
+    self.yearScrollBarCollectionVC.blackoutNavBarView.hidden = NO;
+    self.yearScrollBarCollectionVC.blackoutNavBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+}
 
 - (void)configureLoadingAnimationView {
     [self.blackoutActivityView removeFromSuperview];
