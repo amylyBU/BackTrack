@@ -24,8 +24,8 @@ static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
 static const float kMainPageAspectRatio = 0.667f;
 static const NSInteger kCommentParagraphSpacing = 7;
-static CGFloat const kShadowRadius = 4;
-static CGFloat const kShadowOpacity = 0.7f;
+static const CGFloat kShadowRadius = 4;
+static const CGFloat kShadowOpacity = 0.7f;
 
 @implementation NMAFBActivityTableViewCell
 
