@@ -219,12 +219,10 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 #pragma mark - Public delegate methods
 
 - (void)moveToYear:(NSString *)year {
-    if ([year integerValue] < 2015 && [year integerValue] > 1980) {
         self.year = year;
         NSInteger indexYear = [self.years indexOfObject:year];
         NSIndexPath *defaultYear = [NSIndexPath indexPathForItem:indexYear inSection:0];
         [self.scrollBarCollectionView scrollToItemAtIndexPath:defaultYear atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    }
 }
 
 #pragma mark - Getters and Setters
