@@ -48,9 +48,7 @@
                                 } else if (result.isCancelled) {
                                     // TODO: handle cancellations
                                 } else {
-                                    if (result.grantedPermissions.count == requestedPermissions.count) {
                                         [[NMAAppSettings sharedSettings] setAccessToken:result.token];
-                                    }
                                 }
                                 [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
                                 [self.delegate userDidFinishOnboarding];

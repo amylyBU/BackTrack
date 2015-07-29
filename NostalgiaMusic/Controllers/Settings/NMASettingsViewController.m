@@ -125,9 +125,7 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
                                         } else if (result.isCancelled) {
                                             // TODO: handle cancellations
                                         } else {
-                                            if (result.grantedPermissions.count == requestedPermissions.count) {
                                                 [[NMAAppSettings sharedSettings] setAccessToken:result.token];
-                                            }
                                         } //TODO: handle accesstoken expirations, etc
                                     }];
         } else {
