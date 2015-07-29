@@ -25,6 +25,7 @@
 #import "UIImage+NMAImages.h"
 #import "NMAYearActivityScrollViewController.h"
 #import "NMATodaysSongTableViewCell.h"
+#import "NMAAppSettings.h"
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -251,7 +252,9 @@ heightForFooterInSection:(NSInteger)section {
 - (void)setYear:(NSString *)year {
     _year = year;
     self.day = [[NMADay alloc] initWithYear:self.year];
-    [self.day populateFBActivities:self];
+    if ([[NMAAppSettings sharedSettings] userIsLoggedIn]) {
+        [self.day populateFBActivities:self];
+    }
 }
 
 #pragma mark - NMADayDelegate
