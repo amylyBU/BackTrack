@@ -20,7 +20,7 @@
 
 @implementation NMADay
 
-static const NSInteger kNumberOfFBActivities;
+static const NSInteger kNumberOfFBActivities = 3;
 
 #pragma mark - Initializer
 
