@@ -20,6 +20,8 @@
 
 @implementation NMADay
 
+static const NSInteger kNumberOfFBActivities = 3;
+
 #pragma mark - Initializer
 
 - (instancetype)initWithYear:(NSString *)year {
@@ -35,10 +37,14 @@
 #pragma mark - Facebook Post Utility
 
 - (void)populateFBActivities:(id<NMADayDelegate>)dayDelegate {
-    [[NMARequestManager sharedManager] requestFBActivitiesFromDate:self.year
+    [[NMARequestManager sharedManager] requestFBActivitiesFromYear:self.year
+                                                            amount:kNumberOfFBActivities
                                                        dayDelegate:dayDelegate
-                                                           success:^(NSArray *FBActivities) {
-                                                               self.fbActivities = FBActivities;
+                                                           success:^(NSArray *fbActivities) {
+                                                               //We reverse the array because we get the acitvities from later in the day
+                                                               //to earlier, but we want earlier day posts to show up first
+                                                               NSArray *reversedActivities = [[fbActivities reverseObjectEnumerator] allObjects];
+                                                               self.fbActivities = reversedActivities;
                                                            }
                                                            failure:nil];
 }

@@ -214,6 +214,11 @@ static const CGFloat kShadowOpacity = 0.7f;
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {
     NSMutableAttributedString *likeCreditString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    if (fbActivity.likes.count == 0) {
+        return likeCreditString;
+    }
+    
     if (fbActivity.likes.count == 1) {
         NMAFBLike *like = fbActivity.likes[0];
         [self appendLike:like to:likeCreditString index:0 limit:1 lastCommaSpacer:3];
