@@ -25,13 +25,9 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration_header_v2" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
                     <rect key="frame" x="0.0" y="549" width="600" height="51"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gze-WN-1yV">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-CK-pC5">
                     <rect key="frame" x="247" y="28" width="106" height="42"/>
                     <color key="backgroundColor" red="1" green="1" blue="0.9960784912109375" alpha="1" colorSpace="deviceRGB"/>
@@ -63,6 +59,10 @@
                         <outlet property="delegate" destination="-1" id="cZZ-c7-SSh"/>
                     </connections>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gze-WN-1yV">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="4Rr-CK-pC5" firstAttribute="centerY" secondItem="Qeq-Sr-NDh" secondAttribute="centerY" id="4gu-IZ-vJC"/>
@@ -92,6 +92,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Illustration_header_v2" width="320" height="51"/>
+        <image name="Illustration-header" width="321" height="51"/>
     </resources>
 </document>
