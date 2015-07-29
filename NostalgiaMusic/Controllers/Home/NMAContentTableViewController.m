@@ -91,13 +91,14 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                           success:^(NMANewsStory *story) {
                               [self.NYTimesNews addObject:story];
                               if (self.NYTimesNews.count > 0) {
-                                  NSLog(@"reloading news cell");
                                   [self.tableView reloadData];
                               }
                           }
                           failure:^(NSError *error) {
                           }];
-
+    
+    [self getSongCellForTableVC:self.year];
+    
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
@@ -111,6 +112,15 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.tableView.backgroundView = childView;
     [self.tableView sizeToFit];
     [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
+}
+
+- (void)getSongCellForTableVC:(NSString *)year {
+    if (self.billboardSongs.count == 0) {
+        [[NMARequestManager sharedManager] getSongFromYear:year success:^(NMASong *song) {
+            [self.billboardSongs addObject:song];
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {}];
+    }
 }
 
 #pragma mark - Table view data source
@@ -140,14 +150,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
-            if (self.billboardSongs.count > 0) {
-                NSLog(@"configuring song cell");
-                [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            }
-            else {
-                NSLog(@"EMPTY song cell");
-                [cell configureEmptyCell];
-            }
+            self.billboardSongs.count > 0 ? [cell configureCellForSong:self.billboardSongs[indexPath.row]] : [cell configureEmptyCell];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -254,7 +257,6 @@ heightForFooterInSection:(NSInteger)section {
 #pragma mark - NMADayDelegate
 
 - (void)allFbActivityUpdate {
-    NSLog(@"all fb activity update called");
     [self.tableView reloadData];
 }
 

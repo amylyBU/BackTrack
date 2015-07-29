@@ -260,22 +260,32 @@ BOOL isMostRecentYearVisible;
 - (void)setUpPlayerForTableCellForYear:(NSString *)year {
     NMAPlaybackManager *player = [NMAPlaybackManager sharedPlayer];
     [player pausePlaying];
-    [[NMARequestManager sharedManager] getSongFromYear:year
-                                               success:^(NMASong *song) {
-                                                   NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
-                                                   [visibleTableVC.billboardSongs removeAllObjects];
-                                                   [visibleTableVC.billboardSongs addObject:song];
-                                                   [visibleTableVC.tableView reloadData];
-                                                   [player setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
-                                                   [[NSNotificationCenter defaultCenter] addObserver:self
-                                                                                            selector:@selector(audioDidFinishPlaying:)
-                                                                                                name:AVPlayerItemDidPlayToEndTimeNotification
-                                                                                              object:player.audioPlayerItem];
-                                                   if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
-                                                       [player startPlaying];
-                                                   }
-                                               }
-                                               failure:^(NSError *error) {}];
+    if ([self visibleContentTableVC].billboardSongs.count == 0) {
+        [[NMARequestManager sharedManager] getSongFromYear:year success:^(NMASong *song) {
+            NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
+            [visibleTableVC.billboardSongs addObject:song];
+            [visibleTableVC.tableView reloadData];
+            [player setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(audioDidFinishPlaying:)
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:player.audioPlayerItem];
+            if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+                [player startPlaying];
+            }
+        } failure:^(NSError *error) {}];
+    } else {
+        NMASong *song = [[self visibleContentTableVC].billboardSongs firstObject];
+        [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(audioDidFinishPlaying:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:player.audioPlayerItem];
+        [[self visibleContentTableVC].tableView reloadData];
+        if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
+            [[NMAPlaybackManager sharedPlayer] startPlaying];
+        }
+    }
 }
 
 #pragma mark - Song End Notification Handler
