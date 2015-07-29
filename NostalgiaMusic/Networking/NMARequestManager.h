@@ -28,10 +28,11 @@
                      success:(void (^)(NMANewsStory *story))success
                      failure:(void (^)(NSError *error))failure;
 
-- (void)requestFBActivitiesFromDate:(NSString *)year
-                       dayDelegate:(id<NMADayDelegate>)dayDelegate
-                           success:(void (^)(NSArray *FBActivities))success
-                           failure:(void (^)(NSError *error))failure;
+- (void)requestFBActivitiesFromYear:(NSString *)year
+                             amount:(NSInteger)postLimit
+                        dayDelegate:(id<NMADayDelegate>)dayDelegate
+                            success:(void (^)(NSArray *FBActivities))success
+                            failure:(void (^)(NSError *error))failure;
 
 - (void)requestFBActivityImage:(NSString *)imageId
                        success:(void (^)(NSString *imagePath))success

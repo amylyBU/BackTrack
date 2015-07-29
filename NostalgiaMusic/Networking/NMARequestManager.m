@@ -131,7 +131,8 @@
 
 #pragma mark - Facebook Requests
 
-- (void)requestFBActivitiesFromDate:(NSString *)year
+- (void)requestFBActivitiesFromYear:(NSString *)year
+                             amount:(NSInteger)postLimit
                         dayDelegate:(id<NMADayDelegate>)dayDelegate
                             success:(void (^)(NSArray *FBActivities))success
                             failure:(void (^)(NSError *error))failure {
@@ -170,6 +171,10 @@
                         NSDictionary *commentsContainer = post[@"comments"];
                         [fbActivity populateActivityComments:commentsContainer dayDelegate:dayDelegate];
                         [mutableFBActivities addObject:fbActivity];
+                        
+                        if (mutableFBActivities.count == postLimit) {
+                            break;
+                        }
                     }
                 }
                 success([mutableFBActivities copy]);
