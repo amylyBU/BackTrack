@@ -12,7 +12,7 @@
 
 @implementation NMANoFBActivityTableViewCell
 
-static CGFloat const kShadowOffset = 4;
+static CGFloat const kShadowRadius = 4;
 static CGFloat const kShadowOpacity = 0.7f;
 
 - (void)awakeFromNib {
@@ -28,7 +28,7 @@ static CGFloat const kShadowOpacity = 0.7f;
     
     self.messageView.layer.masksToBounds = NO;
     self.messageView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
-    self.messageView.layer.shadowRadius = kShadowOffset;
+    self.messageView.layer.shadowRadius = kShadowRadius;
     self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     self.messageView.layer.shadowOpacity = kShadowOpacity;
 }

@@ -13,6 +13,9 @@
 
 @implementation NMANewsStoryTableViewCell
 
+static CGFloat const kShadowRadius = 4;
+static CGFloat const kShadowOpacity = 0.7f;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
@@ -51,12 +54,11 @@
     
     if (shadow) {
         //Add a shadow to the bottom of the message view
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.containerView.bounds];
         self.containerView.layer.masksToBounds = NO;
-        self.containerView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.containerView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-        self.containerView.layer.shadowOpacity = 0.5f;
-        self.containerView.layer.shadowPath = shadowPath.CGPath;
+        self.containerView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
+        self.containerView.layer.shadowRadius = kShadowRadius;
+        self.containerView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.containerView.layer.shadowOpacity = kShadowOpacity;
     }
 }
 

@@ -24,7 +24,7 @@ static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
 static const float kMainPageAspectRatio = 0.667f;
 static const NSInteger kCommentParagraphSpacing = 7;
-static CGFloat const kShadowOffset = 4;
+static CGFloat const kShadowRadius = 4;
 static CGFloat const kShadowOpacity = 0.7f;
 
 @implementation NMAFBActivityTableViewCell
@@ -70,7 +70,7 @@ static CGFloat const kShadowOpacity = 0.7f;
     if (shadow) {
         self.shadowView.layer.masksToBounds = NO;
         self.shadowView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
-        self.shadowView.layer.shadowRadius = kShadowOffset;
+        self.shadowView.layer.shadowRadius = kShadowRadius;
         self.shadowView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         self.shadowView.layer.shadowOpacity = kShadowOpacity;
         [self setNeedsLayout];
