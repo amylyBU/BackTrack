@@ -83,9 +83,6 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.facebookActivities = [[NSMutableArray alloc] init];
     self.NYTimesNews = [[NSMutableArray alloc] init];
 
-    self.day = [[NMADay alloc] initWithYear:self.year];
-    [self.day populateFBActivities:self];
-
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMdd"];
     NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
@@ -93,11 +90,15 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story) {
                               [self.NYTimesNews addObject:story];
-                              [self.tableView reloadData];
+                              if (self.NYTimesNews.count > 0) {
+                                  [self.tableView reloadData];
+                              }
                           }
                           failure:^(NSError *error) {
                           }];
-
+    
+    [self getSongCellForTableVC:self.year];
+    
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
@@ -111,6 +112,15 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     self.tableView.backgroundView = childView;
     [self.tableView sizeToFit];
     [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
+}
+
+- (void)getSongCellForTableVC:(NSString *)year {
+    if (self.billboardSongs.count == 0) {
+        [[NMARequestManager sharedManager] getSongFromYear:year success:^(NMASong *song) {
+            [self.billboardSongs addObject:song];
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {}];
+    }
 }
 
 #pragma mark - Table view data source
@@ -140,11 +150,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
-            if (self.billboardSongs.count > 0) {
-                [cell configureCellForSong:self.billboardSongs[indexPath.row]];
-            } else {
-                [cell configureEmptyCell];
-            }
+            self.billboardSongs.count > 0 ? [cell configureCellForSong:self.billboardSongs[indexPath.row]] : [cell configureEmptyCell];
             return cell;
         }
         case NMASectionTypeFacebookActivity: {
@@ -246,16 +252,11 @@ heightForFooterInSection:(NSInteger)section {
     _year = year;
     self.day = [[NMADay alloc] initWithYear:self.year];
     [self.day populateFBActivities:self];
-    [self.tableView reloadData];
 }
 
 #pragma mark - NMADayDelegate
 
 - (void)allFbActivityUpdate {
-    [self.tableView reloadData];
-}
-
-- (void)fbActivityDidUpdate:(NMAFBActivity *)activity {
     [self.tableView reloadData];
 }
 

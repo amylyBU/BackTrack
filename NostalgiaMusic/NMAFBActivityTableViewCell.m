@@ -209,7 +209,6 @@ static const CGFloat kShadowOpacity = 0.7f;
     if (![parentTable isKindOfClass:[UITableView class]]) {
         parentTable = (UITableView *) parentTable.superview;
     }
-    
     [parentTable reloadData];
 }
 
