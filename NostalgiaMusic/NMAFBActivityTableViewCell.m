@@ -185,7 +185,7 @@ static const CGFloat kShadowOpacity = 0.7f;
 }
 
 - (IBAction)closeFullPost:(UIButton *)sender {
-    [self.delegate closeModalDialog];
+    [self.delegateTableVC closeModalDialog];
 }
 
 - (IBAction)share:(UIButton *)sender {
@@ -200,16 +200,11 @@ static const CGFloat kShadowOpacity = 0.7f;
     }
     
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
-    [self.delegate presentViewController:activityController animated:YES completion:nil];
+    [self.delegateTableVC presentViewController:activityController animated:YES completion:nil];
 }
 
 - (void)reloadParentTable {
-    //TODO: I don't think this is the right way to do this? layoutIfNeeded doesnt work?
-    UITableView *parentTable = (UITableView *)self.superview;
-    if (![parentTable isKindOfClass:[UITableView class]]) {
-        parentTable = (UITableView *) parentTable.superview;
-    }
-    [parentTable reloadData];
+    [self.delegateTableVC.tableView reloadData];
 }
 
 - (NSAttributedString *)constructLikeCredits:(NMAFBActivity *)fbActivity {

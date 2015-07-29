@@ -59,7 +59,7 @@ static CGFloat const kEstimatedRowHeight = 30;
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
     cell.fbActivity = self.fbActivity;
-    cell.delegate = self;
+    cell.delegateTableVC = self;
     cell.backgroundColor = [UIColor clearColor];
     [cell configureCell:NO withShadow:NO];
     [cell setImageWidth:self.pictureWidth trueAspectRatio:YES];

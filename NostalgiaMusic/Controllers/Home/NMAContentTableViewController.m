@@ -160,7 +160,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 NMAFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
                 temp.fbActivity = fbActvity;
-                temp.delegate = self;
+                temp.delegateTableVC = self;
                 [temp configureCell:YES withShadow:YES];
                 cell = temp;
             } else {

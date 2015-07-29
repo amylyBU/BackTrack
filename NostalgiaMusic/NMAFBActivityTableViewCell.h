@@ -21,7 +21,7 @@
 
 @property (nonatomic) BOOL collapsed;
 @property (strong, nonatomic) NMAFBActivity *fbActivity;
-@property (strong, nonatomic) UIViewController<NMAFBActivityCellDelegate> *delegate;
+@property (strong, nonatomic) UITableViewController<NMAFBActivityCellDelegate> *delegateTableVC;
 
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
