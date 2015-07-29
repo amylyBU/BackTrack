@@ -25,7 +25,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration-header" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration_header_v2" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-nY-3iC">
                     <rect key="frame" x="0.0" y="549" width="600" height="51"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gze-WN-1yV">
@@ -92,6 +92,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Illustration-header" width="321" height="51"/>
+        <image name="Illustration_header_v2" width="320" height="51"/>
     </resources>
 </document>
