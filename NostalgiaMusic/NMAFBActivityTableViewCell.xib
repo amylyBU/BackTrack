@@ -23,6 +23,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5Y-Nh-Mlx" userLabel="shadow view">
+                        <rect key="frame" x="8" y="43" width="304" height="636"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hu-Bj-SX0" userLabel="message view">
                         <rect key="frame" x="8" y="342" width="304" height="337"/>
                         <subviews>
@@ -181,6 +185,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="1Iy-lb-5OG"/>
+                    <constraint firstItem="P5Y-Nh-Mlx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="1kn-5j-uf5"/>
+                    <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="P5Y-Nh-Mlx" secondAttribute="top" id="3G8-zS-PHE"/>
+                    <constraint firstItem="P5Y-Nh-Mlx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="7b1-bF-LFt"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="leading" secondItem="TNV-oX-VcU" secondAttribute="leading" constant="8" id="8hx-fK-6RG"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="6Hu-Bj-SX0" secondAttribute="leading" id="Ag4-XX-hkG"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="GQH-Zl-cdI"/>
@@ -189,15 +196,18 @@
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="MTl-lC-2mO"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="PPj-q5-mhg"/>
                     <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TNV-oX-VcU" secondAttribute="bottom" id="Pk3-T9-Czj"/>
+                    <constraint firstItem="P5Y-Nh-Mlx" firstAttribute="top" secondItem="TNV-oX-VcU" secondAttribute="bottom" constant="-50" id="QcL-y6-6zE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uMY-OT-1kg" secondAttribute="trailing" id="ReL-Cx-tLy"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" priority="1" id="Vgt-2L-bAM"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="uMY-OT-1kg" secondAttribute="top" id="VtA-oV-9Sg"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="trailing" secondItem="6Hu-Bj-SX0" secondAttribute="trailing" id="Wi4-j7-EcM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6Hu-Bj-SX0" secondAttribute="bottom" constant="35" id="XF9-ZX-YIZ"/>
+                    <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="P5Y-Nh-Mlx" secondAttribute="bottom" constant="-337" id="Xp4-Gn-orw"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="dOB-fm-HsO"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="trailing" secondItem="TNV-oX-VcU" secondAttribute="trailing" constant="13" id="eik-5j-KUh"/>
                     <constraint firstItem="TNV-oX-VcU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="hp7-0D-CO8"/>
                     <constraint firstItem="kIy-YX-jjK" firstAttribute="top" secondItem="uMY-OT-1kg" secondAttribute="bottom" id="iQq-SH-Dwe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="P5Y-Nh-Mlx" secondAttribute="bottom" constant="35" id="lEY-uh-izY"/>
                     <constraint firstItem="Y78-Sd-aWd" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" constant="10" id="oAU-yO-AwC"/>
                     <constraint firstItem="6Hu-Bj-SX0" firstAttribute="top" secondItem="kIy-YX-jjK" secondAttribute="bottom" priority="998" constant="-41" id="vXl-Zy-6L0"/>
                     <constraint firstItem="pyN-Pl-1gA" firstAttribute="top" secondItem="TNV-oX-VcU" secondAttribute="top" constant="15" id="zLh-ux-PnG"/>
@@ -205,8 +215,10 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="hp7-0D-CO8"/>
+                        <exclude reference="QcL-y6-6zE"/>
                         <exclude reference="J4b-2r-FDy"/>
                         <exclude reference="MTl-lC-2mO"/>
+                        <exclude reference="Xp4-Gn-orw"/>
                         <exclude reference="oAU-yO-AwC"/>
                     </mask>
                 </variation>
@@ -233,6 +245,7 @@
                 <outlet property="messageView" destination="6Hu-Bj-SX0" id="f25-VT-AAA"/>
                 <outlet property="postContainerView" destination="6Hu-Bj-SX0" id="inc-vt-91a"/>
                 <outlet property="postImageView" destination="kIy-YX-jjK" id="RSB-Li-NUe"/>
+                <outlet property="shadowView" destination="P5Y-Nh-Mlx" id="iA6-ZK-g6o"/>
                 <outlet property="shareButton" destination="ta0-eL-YRP" id="h9K-Jc-AKa"/>
                 <outlet property="timeLabel" destination="pyN-Pl-1gA" id="Dmw-Ba-xD0"/>
                 <outlet property="timeRibbonView" destination="TNV-oX-VcU" id="BOr-4X-hHU"/>

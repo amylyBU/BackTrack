@@ -24,6 +24,8 @@ static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
 static const float kMainPageAspectRatio = 0.667f;
 static const NSInteger kCommentParagraphSpacing = 7;
+static const CGFloat kShadowRadius = 4;
+static const CGFloat kShadowOpacity = 0.7f;
 
 @implementation NMAFBActivityTableViewCell
 
@@ -66,25 +68,14 @@ static const NSInteger kCommentParagraphSpacing = 7;
     }
     
     if (shadow) {
-        //Add a shadow to the bottom of the message view
-        CGFloat offset = 4;
-        CGFloat overlap = self.heightOfOverlapConstraint.constant;
-        CGRect templateRect = self.messageView.bounds;
-        
-        CGFloat rectHeight = self.postImageView.image ? templateRect.size.height + self.postImageView.bounds.size.height + overlap: templateRect.size.height;
-        CGFloat templateY = self.postImageView.image ?
-        self.messageView.bounds.origin.y - self.postImageView.bounds.size.height - overlap :
-            templateRect.origin.y;
-        
-        CGRect shadowRect = CGRectMake(templateRect.origin.x - offset, templateY, templateRect.size.width + offset, rectHeight);
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:shadowRect];
-        self.messageView.layer.masksToBounds = NO;
-        self.messageView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
-        self.messageView.layer.shadowRadius = offset;
-        self.messageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-        self.messageView.layer.shadowOpacity = 0.7f;
+        self.shadowView.layer.masksToBounds = NO;
+        self.shadowView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
+        self.shadowView.layer.shadowRadius = kShadowRadius;
+        self.shadowView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.shadowView.layer.shadowOpacity = kShadowOpacity;
         [self setNeedsLayout];
-        self.messageView.layer.shadowPath = shadowPath.CGPath;
+    } else {
+        self.shadowView.hidden = YES;
     }
 }
 
