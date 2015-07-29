@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NMAFBActivity *fbActivity;
 @property (strong, nonatomic) UIViewController<NMAFBActivityCellDelegate> *delegate;
 
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *postContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
