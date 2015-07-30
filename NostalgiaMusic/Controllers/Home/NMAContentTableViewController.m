@@ -184,12 +184,14 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeFacebookActivity: {
-            UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-            if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
+            //If there are activities, we know its a FBActivity
+            if (self.day.fbActivities.count > 0) {
+                UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
                 NMAFBActivity *fbActivity = self.day.fbActivities[indexPath.row];
                 CGFloat imageWidth = CGRectGetWidth(((NMAFBActivityTableViewCell *)selectedCell).postImageView.frame);
                 [self addModalDetailForFBActivity:fbActivity withWidth:imageWidth];
             }
+            //If there are no acitivites, its a NoFBActivity cell and we ignore selection
         }
     }
 }
