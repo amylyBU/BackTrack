@@ -52,8 +52,8 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 - (void)configureUI {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"Settings";
-    self.staticTableView.separatorColor = [UIColor NMA_turquoise];
-    self.view.backgroundColor = [UIColor NMA_backgroundGray];
+    self.staticTableView.separatorColor = [UIColor nma_turquoise];
+    self.view.backgroundColor = [UIColor nma_backgroundGray];
 }
 
 #pragma mark - UITableViewDelegate Methods

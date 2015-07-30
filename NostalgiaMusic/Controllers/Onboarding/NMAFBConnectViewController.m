@@ -22,20 +22,20 @@
     self.navigationController.navigationBar.hidden = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
-    self.view.backgroundColor = [UIColor NMA_skyBlueBackground];
+    self.view.backgroundColor = [UIColor nma_skyBlueBackground];
 
-    self.appDescriptionLabel.textColor = [UIColor NMA_boldOrange];
-    self.appDescriptionLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:19.0];
+    self.appDescriptionLabel.textColor = [UIColor nma_boldOrange];
+    self.appDescriptionLabel.font = [UIFont nma_proximaNovaSemiBoldWithSize:19.0];
 
-    self.facebookDisclaimerLabel.textColor = [UIColor NMA_tealGreen];
-    self.facebookDisclaimerLabel.font = [UIFont NMA_proximaNovaLightWithSize:12.5];
+    self.facebookDisclaimerLabel.textColor = [UIColor nma_tealGreen];
+    self.facebookDisclaimerLabel.font = [UIFont nma_proximaNovaLightWithSize:12.5];
 
-    [self.notNowButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
-    [self.notNowButton.titleLabel setFont:[UIFont NMA_proximaNovaLightWithSize:15.0]];
+    [self.notNowButton setTitleColor:[UIColor nma_lightGray] forState:UIControlStateNormal];
+    [self.notNowButton.titleLabel setFont:[UIFont nma_proximaNovaLightWithSize:15.0]];
 
     self.facebookBackgroundView.backgroundColor = [UIColor whiteColor];
-    [self.facebookSignInButton setTitleColor:[UIColor NMA_facebookBlue] forState:UIControlStateNormal];
-    [self.facebookSignInButton.titleLabel setFont:[UIFont NMA_proximaNovaSemiBoldWithSize:18.0f]];
+    [self.facebookSignInButton setTitleColor:[UIColor nma_facebookBlue] forState:UIControlStateNormal];
+    [self.facebookSignInButton.titleLabel setFont:[UIFont nma_proximaNovaSemiBoldWithSize:18.0f]];
 }
 
 - (IBAction)signInButtonPressed:(UIButton *)sender {

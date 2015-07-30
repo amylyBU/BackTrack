@@ -14,8 +14,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.feedbackLabel.textColor = [UIColor NMA_black];
-    self.feedbackLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16.0f];
+    self.feedbackLabel.textColor = [UIColor nma_black];
+    self.feedbackLabel.font = [UIFont nma_proximaNovaRegularWithSize:16.0f];
 }
 
 @end

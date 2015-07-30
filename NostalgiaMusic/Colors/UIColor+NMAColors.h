@@ -11,30 +11,30 @@
 @interface UIColor (NMAColors)
 
 /* FBConnect VC Colors */
-+ (UIColor *)NMA_skyBlueBackground;
-+ (UIColor *)NMA_boldOrange;
-+ (UIColor *)NMA_lightGray;
-+ (UIColor *)NMA_tealGreen;
-+ (UIColor *)NMA_facebookBlue;
-+ (UIColor *)NMA_darkOverlay;
++ (UIColor *)nma_skyBlueBackground;
++ (UIColor *)nma_boldOrange;
++ (UIColor *)nma_lightGray;
++ (UIColor *)nma_tealGreen;
++ (UIColor *)nma_facebookBlue;
++ (UIColor *)nma_darkOverlay;
 
 /* Song Cell Colors */
-+ (UIColor *)NMA_almostBlack;
-+ (UIColor *)NMA_darkGray;
++ (UIColor *)nma_almostBlack;
++ (UIColor *)nma_darkGray;
 
 /* Settings Colors */
-+ (UIColor *)NMA_turquoise;
-+ (UIColor *)NMA_black;
-+ (UIColor *)NMA_backgroundGray;
++ (UIColor *)nma_turquoise;
++ (UIColor *)nma_black;
++ (UIColor *)nma_backgroundGray;
 
 /* Navigation Bar */
-+ (UIColor *)NMA_sunYellow;
-+ (UIColor *)NMA_lightTeal;
-+ (UIColor *)NMA_darkSkyBlue;
-+ (UIColor *)NMA_aquaMarine;
-+ (UIColor *)NMA_white;
-+ (UIColor *)NMA_warmGray;
++ (UIColor *)nma_sunYellow;
++ (UIColor *)nma_lightTeal;
++ (UIColor *)nma_darkSkyBlue;
++ (UIColor *)nma_aquaMarine;
++ (UIColor *)nma_white;
++ (UIColor *)nma_warmGray;
 
 /* Home Colors */
-+ (UIColor *)NMA_homeBackgroundGray;
++ (UIColor *)nma_homeBackgroundGray;
 @end

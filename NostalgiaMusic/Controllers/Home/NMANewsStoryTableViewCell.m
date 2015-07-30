@@ -10,23 +10,22 @@
 #import "NMANewsStory.h"
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
+#import "UIView+NMAView.h"
 
 @implementation NMANewsStoryTableViewCell
-
-static CGFloat const kShadowRadius = 4;
-static CGFloat const kShadowOpacity = 0.7f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.headlineLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:20];
-    self.bylineLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
-    self.bylineLabel.textColor = [UIColor NMA_warmGray];
-    self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
-    self.continueReadingButton.titleLabel.font = [UIFont NMA_proximaNovaRegularWithSize:13];
-    self.continueReadingButton.titleLabel.textColor = [UIColor NMA_warmGray];
-    self.dateLabel.font = [UIFont NMA_proximaNovaRegularWithSize:12];
+    self.headlineLabel.font = [UIFont nma_proximaNovaSemiBoldWithSize:20];
+    self.bylineLabel.font = [UIFont nma_proximaNovaRegularWithSize:13];
+    self.bylineLabel.textColor = [UIColor nma_warmGray];
+    self.summaryTextLabel.font = [UIFont nma_proximaNovaRegularWithSize:16];
+    self.continueReadingButton.titleLabel.font = [UIFont nma_proximaNovaRegularWithSize:13];
+    self.continueReadingButton.titleLabel.textColor = [UIColor nma_warmGray];
+    self.dateLabel.font = [UIFont nma_proximaNovaRegularWithSize:12];
+    [UIView nma_AddShadow:self.containerView];
 }
 
 - (void)configureCellForStory:(NMANewsStory *)story {
@@ -46,20 +45,11 @@ static CGFloat const kShadowOpacity = 0.7f;
         self.summaryTextLabel.attributedText = [[NSAttributedString alloc] initWithString:story.snippet
                                                                  attributes:attributtes];
         [self.summaryTextLabel sizeToFit];
-        self.summaryTextLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16];
+        self.summaryTextLabel.font = [UIFont nma_proximaNovaRegularWithSize:16];
     }
     [self configureDateLabel:story];
     self.continueReadingButton.titleLabel.text = @"Continue Reading in The New York Times";
     [self.continueReadingButton setShowsTouchWhenHighlighted:NO];
-    
-    if (shadow) {
-        //Add a shadow to the bottom of the message view
-        self.containerView.layer.masksToBounds = NO;
-        self.containerView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
-        self.containerView.layer.shadowRadius = kShadowRadius;
-        self.containerView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-        self.containerView.layer.shadowOpacity = kShadowOpacity;
-    }
 }
 
 - (void)configureDateLabel:(NMANewsStory *)story {

@@ -10,23 +10,23 @@
 
 @implementation UIFont (NMAFonts)
 
-+ (UIFont *)NMA_proximaNovaLightWithSize:(CGFloat)fontSize {
++ (UIFont *)nma_proximaNovaLightWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Light" size:fontSize];
 }
 
-+ (UIFont *)NMA_proximaNovaRegularWithSize:(CGFloat)fontSize {
++ (UIFont *)nma_proximaNovaRegularWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Regular" size:fontSize];
 }
 
-+ (UIFont *)NMA_proximaNovaSemiBoldWithSize:(CGFloat)fontSize {
++ (UIFont *)nma_proximaNovaSemiBoldWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Semibold" size:fontSize];
 }
 
-+ (UIFont *)NMA_proximaNovaExtraBoldWithSize:(CGFloat)fontSize {
++ (UIFont *)nma_proximaNovaExtraBoldWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Extrabld" size:fontSize];
 }
     
-+ (UIFont *)NMA_proximaNovaBoldWithSize:(CGFloat)fontSize {
++ (UIFont *)nma_proximaNovaBoldWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Bold" size:fontSize];
 
 }

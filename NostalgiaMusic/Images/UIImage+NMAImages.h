@@ -11,15 +11,14 @@
 @interface UIImage (NMAImages)
 
 /* Home */
-//TODO: "NMA" prefix should be lowercase on all categories
-+ (UIImage *)NMA_facebookLabel;
-+ (UIImage *)NMA_newsLabel;
-+ (UIImage *)NMA_settingsGear;
-+ (UIImage *)NMA_homeBackground;
-+ (UIImage *)NMA_ufo;
-+ (UIImage *)NMA_clouds;
-+ (UIImage *)NMA_ufoLight;
-+ (UIImage *)NMA_defaultRecord;
-+ (UIImage *)NMA_defaultImage;
++ (UIImage *)nma_facebookLabel;
++ (UIImage *)nma_newsLabel;
++ (UIImage *)nma_settingsGear;
++ (UIImage *)nma_homeBackground;
++ (UIImage *)nma_ufo;
++ (UIImage *)nma_clouds;
++ (UIImage *)nma_ufoLight;
++ (UIImage *)nma_defaultRecord;
++ (UIImage *)nma_defaultImage;
 
 @end

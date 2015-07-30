@@ -30,6 +30,7 @@
 		07ECCBFF1B4B12830089D042 /* NMADay.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCBFE1B4B12830089D042 /* NMADay.m */; };
 		07ECCC061B4C08E30089D042 /* NMAFBActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */; };
 		07ECCC071B4C08E30089D042 /* NMAFBActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */; };
+		07ED815E1B6A6BFC0074ABB8 /* UIView+NMAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED815D1B6A6BFC0074ABB8 /* UIView+NMAView.m */; };
 		07ED93221B54867C004879C0 /* NMAFBLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93211B54867C004879C0 /* NMAFBLike.m */; };
 		07ED93251B548828004879C0 /* NMAFBComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93241B548828004879C0 /* NMAFBComment.m */; };
 		07ED93291B54A5F4004879C0 /* NMASectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ED93271B54A5F4004879C0 /* NMASectionHeader.m */; };
@@ -123,6 +124,8 @@
 		07ECCC031B4C08E30089D042 /* NMAFBActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAFBActivityTableViewCell.h; sourceTree = "<group>"; };
 		07ECCC041B4C08E30089D042 /* NMAFBActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAFBActivityTableViewCell.m; sourceTree = "<group>"; };
 		07ECCC051B4C08E30089D042 /* NMAFBActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NMAFBActivityTableViewCell.xib; sourceTree = "<group>"; };
+		07ED815C1B6A6BFC0074ABB8 /* UIView+NMAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+NMAView.h"; path = "Categories/UIView/UIView+NMAView.h"; sourceTree = "<group>"; };
+		07ED815D1B6A6BFC0074ABB8 /* UIView+NMAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+NMAView.m"; path = "Categories/UIView/UIView+NMAView.m"; sourceTree = "<group>"; };
 		07ED93201B54867C004879C0 /* NMAFBLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBLike.h; path = Models/FBActivity/NMAFBLike.h; sourceTree = "<group>"; };
 		07ED93211B54867C004879C0 /* NMAFBLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NMAFBLike.m; path = Models/FBActivity/NMAFBLike.m; sourceTree = "<group>"; };
 		07ED93231B548828004879C0 /* NMAFBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NMAFBComment.h; path = Models/FBActivity/NMAFBComment.h; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 		072A08601B3975D40068EEF0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				07ED815B1B6A6B4E0074ABB8 /* UIView */,
 				075F63281B568E6400B072FB /* Images */,
 				E515FDDA1B4DAD41000E47E3 /* Colors */,
 				E515FDCF1B4DAD13000E47E3 /* Fonts */,
@@ -426,6 +430,15 @@
 				07CD48081B4DCF80005B8805 /* NMANoFBActivityTableViewCell.xib */,
 			);
 			name = FBActivity;
+			sourceTree = "<group>";
+		};
+		07ED815B1B6A6B4E0074ABB8 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				07ED815C1B6A6BFC0074ABB8 /* UIView+NMAView.h */,
+				07ED815D1B6A6BFC0074ABB8 /* UIView+NMAView.m */,
+			);
+			name = UIView;
 			sourceTree = "<group>";
 		};
 		07ED931F1B54863E004879C0 /* FBActivity */ = {
@@ -673,6 +686,7 @@
 				072DE7A31B39739B000A1162 /* AppDelegate.m in Sources */,
 				E50E347E1B43068100F10A5A /* NMADatabaseManager.m in Sources */,
 				61550BC21B3C4B1E00C1CDB3 /* NMAYearCollectionViewCell.m in Sources */,
+				07ED815E1B6A6BFC0074ABB8 /* UIView+NMAView.m in Sources */,
 				0744B84B1B5D94A1002C5188 /* NMAModalDetailTableViewController.m in Sources */,
 				614DB1331B4AD3AF003CAAA6 /* NMANewsStoryTableViewCell.m in Sources */,
 				072A08661B3976660068EEF0 /* NMAHomeViewController.m in Sources */,

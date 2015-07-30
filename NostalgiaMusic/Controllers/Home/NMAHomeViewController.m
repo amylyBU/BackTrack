@@ -57,11 +57,11 @@ static const int kMaxNumberOfSubviewsForYearActivityScroll = 2; // UIScrollView 
                                                                       action:@selector(goToSettings:)];
     [self.navigationItem setRightBarButtonItem:settingsButton];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor NMA_lightTeal];
+    self.navigationController.navigationBar.barTintColor = [UIColor nma_lightTeal];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                                     NSFontAttributeName:[UIFont NMA_proximaNovaRegularWithSize:20.0f] };
+                                                                     NSFontAttributeName:[UIFont nma_proximaNovaRegularWithSize:20.0f] };
 }
 
 - (void)displayContentController:(UIViewController *)content {
