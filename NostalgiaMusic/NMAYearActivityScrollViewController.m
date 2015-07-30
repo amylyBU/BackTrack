@@ -260,10 +260,10 @@ BOOL isMostRecentYearVisible;
 - (void)setUpPlayerForTableCellForYear:(NSString *)year {
     NMAPlaybackManager *player = [NMAPlaybackManager sharedPlayer];
     [player pausePlaying];
-    if ([self visibleContentTableVC].billboardSongs.count == 0) {
+    if (![self visibleContentTableVC].day.song) {
         [[NMARequestManager sharedManager] getSongFromYear:year success:^(NMASong *song) {
             NMAContentTableViewController *visibleTableVC = [self visibleContentTableVC];
-            [visibleTableVC.billboardSongs addObject:song];
+            visibleTableVC.day.song = song;
             [visibleTableVC.tableView reloadData];
             [player setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -275,7 +275,7 @@ BOOL isMostRecentYearVisible;
             }
         } failure:^(NSError *error) {}];
     } else {
-        NMASong *song = [[self visibleContentTableVC].billboardSongs firstObject];
+        NMASong *song = [self visibleContentTableVC].day.song;
         [[NMAPlaybackManager sharedPlayer] setUpAVPlayerWithURL:[NSURL URLWithString:song.previewURL]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(audioDidFinishPlaying:)

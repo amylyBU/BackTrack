@@ -12,10 +12,11 @@
 #import "NMARequestManager.h"
 
 @interface NMADay()
+
 @property (strong, nonatomic, readwrite) NSString *year;
-@property (strong, nonatomic, readwrite) NMASong *song;
 @property (strong, nonatomic, readwrite) NSArray *fbActivities;
-//TODO: add news property
+@property (strong, nonatomic, readwrite) NMANewsStory *nyTimesNews;
+
 @end
 
 @implementation NMADay
@@ -34,7 +35,14 @@ static const NSInteger kNumberOfFBActivities = 3;
     return self;
 }
 
-#pragma mark - Facebook Post Utility
+#pragma mark - Population Methods
+
+- (void)populateSong:(id<NMADayDelegate>)dayDelegate {
+    [[NMARequestManager sharedManager] getSongFromYear:self.year success:^(NMASong *song) {
+        self.song = song;
+        [dayDelegate allFbActivityUpdate];
+    } failure:^(NSError *error) {}];
+}
 
 - (void)populateFBActivities:(id<NMADayDelegate>)dayDelegate {
     [[NMARequestManager sharedManager] requestFBActivitiesFromYear:self.year
@@ -47,6 +55,20 @@ static const NSInteger kNumberOfFBActivities = 3;
                                                                self.fbActivities = reversedActivities;
                                                            }
                                                            failure:nil];
+}
+
+- (void)populateNews:(id<NMADayDelegate>)dayDelegate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMdd"];
+    NSString *currentDayMonth = [dateFormatter stringFromDate:[NSDate date]];
+    NMARequestManager *manager = [[NMARequestManager alloc] init];
+    [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
+                          success:^(NMANewsStory *story) {
+                              self.nyTimesNews = story;
+                              [dayDelegate allFbActivityUpdate];
+                          }
+                          failure:^(NSError *error) {
+                          }];
 }
 
 @end
