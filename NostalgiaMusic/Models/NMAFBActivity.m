@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
         [[NMARequestManager sharedManager] requestFBActivityImage:self.imageObjectId
                                                           success:^(NSString *imagePath) {
                                                               self.imagePath = imagePath;
-                                                              [dayDelegate allFbActivityUpdate];
+                                                              [dayDelegate dayUpdate];
                                                           }
                                                           failure:nil];
     }
@@ -139,7 +139,7 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
                                                                                   responseContainer:nextResponseContainer
                                                                                       responseType:responseType
                                                                                        dayDelegate:dayDelegate];
-                                                                  [dayDelegate allFbActivityUpdate];
+                                                                  [dayDelegate dayUpdate];
                                                               }
                                                               failure:nil];
     } else {
@@ -155,7 +155,7 @@ typedef NS_ENUM(NSInteger, NMAResponseType) {
                 break;
         }
         //If we reach this case, we've captured all response so update delegate
-        [dayDelegate allFbActivityUpdate];
+        [dayDelegate dayUpdate];
     }
 }
 

@@ -232,7 +232,7 @@ heightForFooterInSection:(NSInteger)section {
 
 #pragma mark - NMADayDelegate
 
-- (void)allFbActivityUpdate {
+- (void)dayUpdate {
     [self.tableView reloadData];
 }
 

@@ -40,7 +40,7 @@ static const NSInteger kNumberOfFBActivities = 3;
 - (void)populateSong:(id<NMADayDelegate>)dayDelegate {
     [[NMARequestManager sharedManager] getSongFromYear:self.year success:^(NMASong *song) {
         self.song = song;
-        [dayDelegate allFbActivityUpdate];
+        [dayDelegate dayUpdate];
     } failure:^(NSError *error) {}];
 }
 
@@ -65,7 +65,7 @@ static const NSInteger kNumberOfFBActivities = 3;
     [manager getNewYorkTimesStory:currentDayMonth onYear:self.year
                           success:^(NMANewsStory *story) {
                               self.nyTimesNews = story;
-                              [dayDelegate allFbActivityUpdate];
+                              [dayDelegate dayUpdate];
                           }
                           failure:^(NSError *error) {
                           }];
