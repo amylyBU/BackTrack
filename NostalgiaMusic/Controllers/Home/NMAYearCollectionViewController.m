@@ -63,9 +63,9 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     [self.whiteYearBackgroundSquare.layer masksToBounds];
     self.whiteYearBackgroundSquare.layer.cornerRadius = 20;
     self.whiteYearBackgroundSquare.clipsToBounds = YES;
-    self.view.backgroundColor = [UIColor NMA_lightTeal];
-    [self.dateLabel setFont:[UIFont NMA_proximaNovaRegularWithSize:14]];
-    self.dateLabel.textColor = [UIColor NMA_darkSkyBlue];
+    self.view.backgroundColor = [UIColor nma_lightTeal];
+    [self.dateLabel setFont:[UIFont nma_proximaNovaRegularWithSize:14]];
+    self.dateLabel.textColor = [UIColor nma_darkSkyBlue];
     self.dateLabel.text = [self getDate];
     self.blackoutNavBarView.hidden = YES;
 }
@@ -189,13 +189,13 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 
 - (void)formatMiddleCell:(NMAYearCollectionViewCell *)cell isSelected:(BOOL)isSelected {
     [cell.year setFont:[UIFont systemFontOfSize:30]];
-    [cell.year setFont:[UIFont NMA_proximaNovaExtraBoldWithSize:30]];
-    cell.year.textColor = isSelected ? [UIColor NMA_sunYellow] : [UIColor NMA_aquaMarine];
+    [cell.year setFont:[UIFont nma_proximaNovaExtraBoldWithSize:30]];
+    cell.year.textColor = isSelected ? [UIColor nma_sunYellow] : [UIColor nma_aquaMarine];
 }
 
 - (void)formatNonMiddlecell:(NMAYearCollectionViewCell *)cell {
     [cell.year setFont:[UIFont systemFontOfSize:17]];
-    [cell.year setFont:[UIFont NMA_proximaNovaSemiBoldWithSize:17]];
+    [cell.year setFont:[UIFont nma_proximaNovaSemiBoldWithSize:17]];
     cell.year.textColor = [UIColor whiteColor];
 }
 

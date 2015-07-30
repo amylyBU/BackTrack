@@ -40,7 +40,7 @@ static CGFloat const kEstimatedRowHeight = 30;
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = kEstimatedRowHeight;
-    self.tableView.backgroundColor = [UIColor NMA_darkOverlay];
+    self.tableView.backgroundColor = [UIColor nma_darkOverlay];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 

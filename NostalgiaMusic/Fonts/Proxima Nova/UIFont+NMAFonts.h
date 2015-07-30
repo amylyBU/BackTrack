@@ -10,10 +10,10 @@
 
 @interface UIFont (NMAFonts)
 
-+ (UIFont *)NMA_proximaNovaLightWithSize:(CGFloat)fontSize;
-+ (UIFont *)NMA_proximaNovaRegularWithSize:(CGFloat)fontSize;
-+ (UIFont *)NMA_proximaNovaSemiBoldWithSize:(CGFloat)fontSize;
-+ (UIFont *)NMA_proximaNovaExtraBoldWithSize:(CGFloat)fontSize;
-+ (UIFont *)NMA_proximaNovaBoldWithSize:(CGFloat)fontSize;
++ (UIFont *)nma_proximaNovaLightWithSize:(CGFloat)fontSize;
++ (UIFont *)nma_proximaNovaRegularWithSize:(CGFloat)fontSize;
++ (UIFont *)nma_proximaNovaSemiBoldWithSize:(CGFloat)fontSize;
++ (UIFont *)nma_proximaNovaExtraBoldWithSize:(CGFloat)fontSize;
++ (UIFont *)nma_proximaNovaBoldWithSize:(CGFloat)fontSize;
 
 @end

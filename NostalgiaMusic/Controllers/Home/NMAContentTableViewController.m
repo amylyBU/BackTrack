@@ -108,8 +108,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 - (void)configureUI {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor NMA_white];
-    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage NMA_homeBackground]];
+    self.tableView.backgroundColor = [UIColor nma_white];
+    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage nma_homeBackground]];
     self.tableView.backgroundView = childView;
     [self.tableView sizeToFit];
     [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
@@ -164,8 +164,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
                 cell = temp;
             } else {
                 NMANoFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
-                temp.messageLabel.textColor = [UIColor NMA_turquoise];
-                [temp addShadow];
+                temp.messageLabel.textColor = [UIColor nma_turquoise];
                 cell = temp;
             }
             [cell layoutIfNeeded];
@@ -213,7 +212,7 @@ viewForHeaderInSection:(NSInteger)section {
         case NMASectionTypeFacebookActivity: {
             NMASectionHeader *fbSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             fbSectionHeaderCell.headerLabel.text = @"Facebook Activities";
-            fbSectionHeaderCell.headerImageView.image = [UIImage NMA_facebookLabel];
+            fbSectionHeaderCell.headerImageView.image = [UIImage nma_facebookLabel];
             fbSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor whiteColor];
             [fbSectionHeaderCell sizeToFit];
             return fbSectionHeaderCell;
@@ -221,7 +220,7 @@ viewForHeaderInSection:(NSInteger)section {
         case NMASectionTypeNYTimesNews: {
             NMASectionHeader *newsSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
             newsSectionHeaderCell.headerLabel.text = @"News";
-            newsSectionHeaderCell.headerImageView.image = [UIImage NMA_newsLabel];
+            newsSectionHeaderCell.headerImageView.image = [UIImage nma_newsLabel];
             newsSectionHeaderCell.upperBackgroundView.backgroundColor = [UIColor clearColor];
             [newsSectionHeaderCell sizeToFit];
             return newsSectionHeaderCell;

@@ -28,9 +28,9 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     [super awakeFromNib];
     self.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.songTitleLabel.font = [UIFont NMA_proximaNovaSemiBoldWithSize:24.0f];
-    self.artistLabel.font = [UIFont NMA_proximaNovaLightWithSize:17.0f];
-    self.artistLabel.textColor = [UIColor NMA_darkGray];
+    self.songTitleLabel.font = [UIFont nma_proximaNovaSemiBoldWithSize:24.0f];
+    self.artistLabel.font = [UIFont nma_proximaNovaLightWithSize:17.0f];
+    self.artistLabel.textColor = [UIColor nma_darkGray];
 }
 
 #pragma mark - Public Methods
@@ -39,9 +39,9 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     [self layoutIfNeeded];
     self.song = song;
     self.songTitleLabel.text = song.title;
-    self.songTitleLabel.textColor = [UIColor NMA_almostBlack];
+    self.songTitleLabel.textColor = [UIColor nma_almostBlack];
     self.artistLabel.text = song.artistAsAppearsOnLabel;
-    UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage NMA_defaultRecord];
+    UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage nma_defaultRecord];
     self.albumImageView.image = albumImage;
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
     self.albumImageView.layer.masksToBounds = YES;

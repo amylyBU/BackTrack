@@ -13,6 +13,7 @@
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
+#import "UIView+NMAView.h"
 
 @interface NMAFBActivityTableViewCell()
 
@@ -24,8 +25,6 @@ static const NSInteger kCommentAddRate = 10;
 static const NSInteger kLikeLimit = 5;
 static const float kMainPageAspectRatio = 0.667f;
 static const NSInteger kCommentParagraphSpacing = 7;
-static const CGFloat kShadowRadius = 4;
-static const CGFloat kShadowOpacity = 0.7f;
 
 @implementation NMAFBActivityTableViewCell
 
@@ -35,13 +34,13 @@ static const CGFloat kShadowOpacity = 0.7f;
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
-    self.messageLabel.textColor = [UIColor NMA_almostBlack];
-    self.likeCreditsLabel.textColor = [UIColor NMA_almostBlack];
-    self.commentThreadLabel.textColor = [UIColor NMA_almostBlack];
-    self.continueLabel.textColor = [UIColor NMA_lightGray];
-    [self.viewMoreButton setTitleColor:[UIColor NMA_lightGray] forState:UIControlStateNormal];
-    [self.likesButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
-    [self.commentsButton setTitleColor:[UIColor NMA_darkGray] forState:UIControlStateNormal];
+    self.messageLabel.textColor = [UIColor nma_almostBlack];
+    self.likeCreditsLabel.textColor = [UIColor nma_almostBlack];
+    self.commentThreadLabel.textColor = [UIColor nma_almostBlack];
+    self.continueLabel.textColor = [UIColor nma_lightGray];
+    [self.viewMoreButton setTitleColor:[UIColor nma_lightGray] forState:UIControlStateNormal];
+    [self.likesButton setTitleColor:[UIColor nma_darkGray] forState:UIControlStateNormal];
+    [self.commentsButton setTitleColor:[UIColor nma_darkGray] forState:UIControlStateNormal];
     self.backgroundColor = [UIColor clearColor];
     self.displayedCommentCount = 0;
     self.commentThreadLabel.attributedText = [[NSAttributedString alloc] initWithString:@""];
@@ -91,19 +90,14 @@ static const CGFloat kShadowOpacity = 0.7f;
             UIImage *postImage = [UIImage imageWithData:imageData];
             [self setPostImage:postImage];
         } else {
-            [self setPostImage:[UIImage NMA_defaultImage]];
+            [self setPostImage:[UIImage nma_defaultImage]];
         }
     } else {
         self.collapseImageConstraint.priority = 999;
     }
     
     if (shadow) {
-        self.shadowView.layer.masksToBounds = NO;
-        self.shadowView.layer.shadowColor = [UIColor NMA_darkGray].CGColor;
-        self.shadowView.layer.shadowRadius = kShadowRadius;
-        self.shadowView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-        self.shadowView.layer.shadowOpacity = kShadowOpacity;
-        [self setNeedsLayout];
+        [UIView nma_AddShadow:self.shadowView];
     } else {
         self.shadowView.hidden = YES;
     }
@@ -311,8 +305,8 @@ static const CGFloat kShadowOpacity = 0.7f;
     }
     
     NSString *formattedRemainingLikes = [NSString stringWithFormat:@"%@%@",number, suffix];
-    NSDictionary *formattedRemainingLikesAttributes = @{ NSForegroundColorAttributeName : [UIColor NMA_lightGray],
-                                                         NSFontAttributeName : [UIFont NMA_proximaNovaBoldWithSize:15]};
+    NSDictionary *formattedRemainingLikesAttributes = @{ NSForegroundColorAttributeName : [UIColor nma_lightGray],
+                                                         NSFontAttributeName : [UIFont nma_proximaNovaBoldWithSize:15]};
     NSAttributedString *attributedRemainingLikes = [[NSAttributedString alloc] initWithString:formattedRemainingLikes
                                                                                    attributes:formattedRemainingLikesAttributes];
     
@@ -378,7 +372,7 @@ static const CGFloat kShadowOpacity = 0.7f;
 }
 
 - (NSAttributedString *)boldedString:(NSString *)stringToBold {
-    NSDictionary *nameAttributes = @{ NSFontAttributeName : [UIFont NMA_proximaNovaBoldWithSize:15]};
+    NSDictionary *nameAttributes = @{ NSFontAttributeName : [UIFont nma_proximaNovaBoldWithSize:15]};
     NSAttributedString *attributedName = [[NSAttributedString alloc] initWithString:stringToBold
                                                                          attributes:nameAttributes];
     

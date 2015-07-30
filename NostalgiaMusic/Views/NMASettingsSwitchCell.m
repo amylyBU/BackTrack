@@ -14,9 +14,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.settingsSwitch.onTintColor = [UIColor NMA_turquoise];
-    self.settingsCategoryLabel.textColor = [UIColor NMA_black];
-    self.settingsCategoryLabel.font = [UIFont NMA_proximaNovaRegularWithSize:16.0f];
+    self.settingsSwitch.onTintColor = [UIColor nma_turquoise];
+    self.settingsCategoryLabel.textColor = [UIColor nma_black];
+    self.settingsCategoryLabel.font = [UIFont nma_proximaNovaRegularWithSize:16.0f];
 }
 
 - (IBAction)switchClicked:(UISwitch *)sender {

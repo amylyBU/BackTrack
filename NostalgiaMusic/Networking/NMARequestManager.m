@@ -226,7 +226,7 @@
     NSDateComponents *targetDateComponents = [[NSDateComponents alloc] init];
     targetDateComponents.year = [year integerValue];
     targetDateComponents.month = presentDateComponents.month;
-    targetDateComponents.day = presentDateComponents.day - 1;
+    targetDateComponents.day = presentDateComponents.day;
     targetDateComponents.hour = (start ? 0 : 23);
     targetDateComponents.minute = (start ? 0 : 59);
     targetDateComponents.second = (start ? 0 : 59);
