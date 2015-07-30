@@ -58,22 +58,33 @@ static CGFloat const kEstimatedRowHeight = 30;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
-    cell.fbActivity = self.fbActivity;
-    cell.delegateTableVC = self;
+    cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
-    [cell configureCell:NO withShadow:NO];
-    [cell setImageWidth:self.pictureWidth trueAspectRatio:YES];
+    [cell configureCellWithActivity:self.fbActivity collapsed:NO withShadow:NO];
+    [cell setImageWidth:self.pictureWidth trueAspectRatio:YES withActivity:self.fbActivity];
     [cell layoutIfNeeded];
     return cell;
 }
 
 #pragma mark - NMAFBActivityCellDelegate
 
+- (void)shareItems:(NSMutableArray *)itemsToShare {
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    [self presentViewController:activityController animated:YES completion:nil];
+}
+
 - (void)closeModalDialog {
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+- (void)loadMoreComments:(NSInteger)addRate currentCount:(NSInteger)currentCount {
+    NSIndexPath *modalCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NMAFBActivityTableViewCell *fbCell = (NMAFBActivityTableViewCell *)[self.tableView cellForRowAtIndexPath:modalCellIndexPath];
+    [fbCell updateCommentThread:self.fbActivity];
+    [self.tableView reloadData];
 }
 
 @end

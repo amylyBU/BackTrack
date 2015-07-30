@@ -159,9 +159,8 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
             if (self.day.fbActivities.count > 0) {
                 NMAFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
                 NMAFBActivity *fbActvity = self.day.fbActivities[indexPath.row];
-                temp.fbActivity = fbActvity;
-                temp.delegateTableVC = self;
-                [temp configureCell:YES withShadow:YES];
+                temp.delegate = self;
+                [temp configureCellWithActivity:fbActvity collapsed:YES withShadow:YES];
                 cell = temp;
             } else {
                 NMANoFBActivityTableViewCell *temp = [tableView dequeueReusableCellWithIdentifier:kNMANoFBActivityCellIdentifier forIndexPath:indexPath];
@@ -188,7 +187,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
         case NMASectionTypeFacebookActivity: {
             UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
             if ([selectedCell isKindOfClass:[NMAFBActivityTableViewCell class]]) {
-                NMAFBActivity *fbActivity = ((NMAFBActivityTableViewCell *)selectedCell).fbActivity;
+                NMAFBActivity *fbActivity = self.day.fbActivities[indexPath.row];
                 CGFloat imageWidth = CGRectGetWidth(((NMAFBActivityTableViewCell *)selectedCell).postImageView.frame);
                 [self addModalDetailForFBActivity:fbActivity withWidth:imageWidth];
             }
@@ -273,6 +272,13 @@ titleForHeaderInSection:(NSInteger)section {
         default:
             return nil;
     }
+}
+
+#pragma mark - NMAFBActivityCellDelegate
+
+- (void)shareItems:(NSMutableArray *)itemsToShare {
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 #pragma mark - Private Utility

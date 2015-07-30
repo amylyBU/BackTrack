@@ -12,16 +12,19 @@
 //Delegate protocol
 @protocol NMAFBActivityCellDelegate
 
+@required
+- (void)shareItems:(NSMutableArray *)itemsToShare;
+
 @optional
 - (void)closeModalDialog;
+- (void)loadMoreComments:(NSInteger)addRate currentCount:(NSInteger)currentCount;
 
 @end
 
 @interface NMAFBActivityTableViewCell : UITableViewCell
 
-@property (nonatomic) BOOL collapsed;
-@property (strong, nonatomic) NMAFBActivity *fbActivity;
-@property (strong, nonatomic) UITableViewController<NMAFBActivityCellDelegate> *delegateTableVC;
+@property (nonatomic) BOOL isCollapsed;
+@property (strong, nonatomic) id<NMAFBActivityCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
@@ -50,8 +53,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collapseViewMoreHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightOfOverlapConstraint;
 
-- (void)configureCell:(BOOL)collapsed withShadow:(BOOL)shadow;
-- (void)setCollapsedCellState:(BOOL)isCollapsed;
-- (void)setImageWidth:(CGFloat)imageWidth trueAspectRatio:(BOOL)useTrueAspectRatio;
+- (void)configureCellWithActivity:(NMAFBActivity *)fbActivity collapsed:(BOOL)collapsed withShadow:(BOOL)shadow;
+- (void)setCollapsedCellState:(BOOL)isCollapsed withActivity:(NMAFBActivity *)fbActivity;
+- (void)setImageWidth:(CGFloat)imageWidth trueAspectRatio:(BOOL)useTrueAspectRatio withActivity:(NMAFBActivity *)fbActivity;
+- (void)updateCommentThread:(NMAFBActivity *)fbActivity;
 
 @end
