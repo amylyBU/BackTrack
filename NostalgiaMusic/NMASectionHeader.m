@@ -11,11 +11,4 @@
 
 @implementation NMASectionHeader
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.backgroundColor = [UIColor clearColor];
-    self.headerLabel.font = [UIFont nma_proximaNovaRegularWithSize:20.0f];
-    self.headerLabel.textColor = [UIColor whiteColor];
-}
-
 @end

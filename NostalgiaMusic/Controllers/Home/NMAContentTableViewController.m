@@ -8,24 +8,26 @@
 
 #import "NMAModalDetailTableViewController.h"
 #import "NMAContentTableViewController.h"
+#import "NMAYearActivityScrollViewController.h"
+
+#import "NMARequestManager.h"
+#import "NMAPlaybackManager.h"
+#import "NMAAppSettings.h"
+#import "NMASong.h"
+#import "NMAFBActivity.h"
+#import "NMASectionHeader.h"
+
 #import "NMAYearTableViewCell.h"
 #import "NMATodaysSongTableViewCell.h"
-#import "NMASong.h"
-#import "NMASectionHeader.h"
-#import "NMANoFBActivityTableViewCell.h"
-#import "NMAFBActivity.h"
-#import <SVPullToRefresh.h>
-#import <Social/Social.h>
-#import "NMARequestManager.h"
-#import "NMAAppSettings.h"
 #import "NMANewsStoryTableViewCell.h"
-#import "NMAPlaybackManager.h"
+#import "NMANoFBActivityTableViewCell.h"
+
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
-#import "NMAYearActivityScrollViewController.h"
-#import "NMATodaysSongTableViewCell.h"
-#import "NMAAppSettings.h"
+
+#import <SVPullToRefresh.h>
+#import <Social/Social.h>
 
 NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeBillboardSong,
@@ -33,7 +35,7 @@ NS_ENUM(NSInteger, NMAYearActivitySectionType) {
     NMASectionTypeNYTimesNews
 };
 
-static const NSInteger kBillboardSongHeightForRow = 400;
+static const NSInteger kBillboardSongHeightForRow = 415;
 static const NSInteger kNewsStoryHeightForRow = 307;
 static const NSInteger kNumberOfSections = 3;
 static const NSInteger kHeightOfHeaderBanners = 70;
@@ -54,31 +56,37 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureUI];
+    [self setUpTableView];
+}
 
-    //Song cells
+- (void)setUpTableView {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor nma_white];
+    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage nma_homeBackground]];
+    self.tableView.backgroundView = childView;
+    [self.tableView sizeToFit];
+    [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
+    
+    // Song cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMATodaysSongTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMATodaysSongCellIdentifier];
-
-    //FB cells
+    
+    // Facebook cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASectionHeader class]) bundle:nil]
          forCellReuseIdentifier:kNMASectionHeaderIdentifier];
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedSectionHeaderHeight = 100.0;
-
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 30.0;
-
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANoFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANoFBActivityCellIdentifier];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 135.0;
-
-    //Story cells
+    
+    // Story cells
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMANewsStoryTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMANewsStoryCellIdentifier];
+    
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = 100.0;
+    self.tableView.estimatedRowHeight = 135.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     __weak NMAContentTableViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -86,23 +94,13 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     }];
 }
 
-- (void)configureUI {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor nma_white];
-    UIImageView *childView = [[UIImageView alloc] initWithImage:[UIImage nma_homeBackground]];
-    self.tableView.backgroundView = childView;
-    [self.tableView sizeToFit];
-    [childView setContentMode:UIViewContentModeBottom|UIViewContentModeCenter];
-}
-
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return kNumberOfSections;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case NMASectionTypeBillboardSong:
             return 1;
@@ -117,8 +115,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeBillboardSong: {
             NMATodaysSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMATodaysSongCellIdentifier forIndexPath:indexPath];
@@ -167,8 +164,7 @@ static NSString * const kNMANoFBActivityCellIdentifier = @"NMANoFacebookCell";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case NMASectionTypeFacebookActivity:
             return UITableViewAutomaticDimension;
@@ -179,8 +175,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
--(UIView*)tableView:(UITableView *)tableView
-viewForHeaderInSection:(NSInteger)section {
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     switch (section) {
         case NMASectionTypeFacebookActivity: {
             NMASectionHeader *fbSectionHeaderCell = [tableView dequeueReusableCellWithIdentifier:kNMASectionHeaderIdentifier];
@@ -203,8 +198,7 @@ viewForHeaderInSection:(NSInteger)section {
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView
-heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     switch (section) {
         case (NMASectionTypeBillboardSong):
             return CGFLOAT_MIN;
@@ -213,8 +207,7 @@ heightForHeaderInSection:(NSInteger)section {
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView
-heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return CGFLOAT_MIN;
 }
 
@@ -236,8 +229,7 @@ heightForFooterInSection:(NSInteger)section {
     [self.tableView reloadData];
 }
 
-- (NSString *)tableView:(UITableView *)tableView
-titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case NMASectionTypeFacebookActivity:
             return @"Facebook Activities";

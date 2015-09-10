@@ -21,10 +21,9 @@
 static NSString * const kNMAHasFBActivityCellIdentifier = @"NMAFacebookCell";
 static CGFloat const kEstimatedRowHeight = 30;
 
-#pragma mark - Initializers
+#pragma mark - Init
 
 - (instancetype)initWithActivity:(NMAFBActivity *)fbActivity withWidth:(CGFloat)pictureWidth {
-    
     self = [super init];
     if (self) {
         _fbActivity = fbActivity;
@@ -35,28 +34,29 @@ static CGFloat const kEstimatedRowHeight = 30;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setUpTableView];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)setUpTableView {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFBActivityTableViewCell class]) bundle:nil]
          forCellReuseIdentifier:kNMAHasFBActivityCellIdentifier];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = kEstimatedRowHeight;
     self.tableView.backgroundColor = [UIColor nma_darkOverlay];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NMAFBActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNMAHasFBActivityCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];

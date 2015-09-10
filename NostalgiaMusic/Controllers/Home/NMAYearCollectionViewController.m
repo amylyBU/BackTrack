@@ -16,7 +16,7 @@
 
 typedef NS_ENUM(NSUInteger, NMAScrollViewDelegateAction) {
     NMAScrollViewDidScroll,
-    NMAScrollViewDidEndGesture,
+    NMAScrollViewDidEndGesture
 };
 
 static NSInteger const earliestYear = 1981;
@@ -32,6 +32,7 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
 @property (strong, nonatomic) UIView *blackoutView;
 
 @end
+
 
 @implementation NMAYearCollectionViewController
 
@@ -270,4 +271,5 @@ static NSString * const kNMASelectedYearcollectionViewCellIdentifier = @"NMASele
     [self positionYearAfterYearIsSet];
     self.dateLabel.text = [self getDate];
 }
+
 @end

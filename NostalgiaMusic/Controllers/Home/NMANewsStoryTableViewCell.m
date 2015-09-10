@@ -16,6 +16,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self configureUI];
+}
+
+- (void)configureUI {
     self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.headlineLabel.font = [UIFont nma_proximaNovaSemiBoldWithSize:20];
@@ -41,9 +45,8 @@
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.minimumLineHeight = 20.0f;
         style.maximumLineHeight = 20.0f;
-        NSDictionary *attributtes = @{NSParagraphStyleAttributeName : style,};
-        self.summaryTextLabel.attributedText = [[NSAttributedString alloc] initWithString:story.snippet
-                                                                 attributes:attributtes];
+        NSDictionary *attributtes = @{ NSParagraphStyleAttributeName : style };
+        self.summaryTextLabel.attributedText = [[NSAttributedString alloc] initWithString:story.snippet attributes:attributtes];
         [self.summaryTextLabel sizeToFit];
         self.summaryTextLabel.font = [UIFont nma_proximaNovaRegularWithSize:16];
     }
@@ -67,7 +70,7 @@
 }
 
 - (IBAction)share:(UIButton *)sender {
-    NSMutableArray *sharingItems = [NSMutableArray new];
+    NSMutableArray *sharingItems = [[NSMutableArray alloc] init];
     
     if (self.story.articleURL) {
         [sharingItems addObject:self.story.articleURL];

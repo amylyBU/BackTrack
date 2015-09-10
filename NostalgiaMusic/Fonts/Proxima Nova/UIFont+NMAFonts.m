@@ -28,7 +28,6 @@
     
 + (UIFont *)nma_proximaNovaBoldWithSize:(CGFloat)fontSize {
     return [UIFont fontWithName:@"ProximaNova-Bold" size:fontSize];
-
 }
 
 @end

@@ -40,20 +40,21 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASettingsSwitchCell class]) bundle:nil]
-               forCellReuseIdentifier:kNMASettingsSwitchCellIdentifier];
-    [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFeedbackTableViewCell class]) bundle:nil]
-               forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
+    [self setUpTableView];
+    [self configureUI];
+}
+
+- (void)setUpTableView {
+    [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMASettingsSwitchCell class]) bundle:nil] forCellReuseIdentifier:kNMASettingsSwitchCellIdentifier];
+    [self.staticTableView registerNib:[UINib nibWithNibName:NSStringFromClass([NMAFeedbackTableViewCell class]) bundle:nil] forCellReuseIdentifier:kNMAFeedbackTableViewCellIdentifier];
     self.staticTableView.delegate = self;
     self.staticTableView.dataSource = self;
-    [self configureUI];
 }
 
 - (void)configureUI {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"Settings";
     self.staticTableView.separatorColor = [UIColor nma_turquoise];
-    self.view.backgroundColor = [UIColor nma_backgroundGray];
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -114,6 +115,7 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
 #pragma mark - Switch statement delegate method
 
 - (void)didPressSwitch:(UISwitch *)sender {
+    NMAAppSettings *shared = [NMAAppSettings sharedSettings];
     if (sender.tag == NMAFacebookConnectRowTag) {
         if (sender.on) {
             FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
@@ -125,14 +127,14 @@ NS_ENUM(NSInteger, NMASwitchCellRowTagIdentifer) {
                                         } else if (result.isCancelled) {
                                             // TODO: handle cancellations
                                         } else {
-                                                [[NMAAppSettings sharedSettings] setAccessToken:result.token];
-                                        } //TODO: handle accesstoken expirations, etc
+                                            [shared setAccessToken:result.token];
+                                        }
                                     }];
         } else {
-            [[NMAAppSettings sharedSettings] setAccessToken:nil];
+            [shared setAccessToken:nil];
         }
     } else {
-        sender.on ? [[NMAAppSettings sharedSettings] setAutoplaySettingToOn] : [[NMAAppSettings sharedSettings] setAutoplaySettingToOff];
+        sender.on ? [shared setAutoplaySettingToOn] : [shared setAutoplaySettingToOff];
     }
 }
 

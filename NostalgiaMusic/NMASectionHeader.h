@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface NMASectionHeader : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UIView *upperBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+
 @end

@@ -46,7 +46,6 @@
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {}];
     
     [operation start];
-
 }
 
 - (NSString *)configureQueryString:(NSString *)date withYear:(NSString *)year{

@@ -9,11 +9,13 @@
 #import "NMAFBActivityTableViewCell.h"
 #import "NMAFBLike.h"
 #import "NMAFBComment.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "UIColor+NMAColors.h"
 #import "UIFont+NMAFonts.h"
 #import "UIImage+NMAImages.h"
 #import "UIView+NMAView.h"
+
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface NMAFBActivityTableViewCell()
 
@@ -34,8 +36,6 @@ static const NSInteger kCommentParagraphSpacing = 7;
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
-    self.messageLabel.textColor = [UIColor nma_almostBlack];
-    self.likeCreditsLabel.textColor = [UIColor nma_almostBlack];
     self.commentThreadLabel.textColor = [UIColor nma_almostBlack];
     self.continueLabel.textColor = [UIColor nma_lightGray];
     [self.viewMoreButton setTitleColor:[UIColor nma_lightGray] forState:UIControlStateNormal];
@@ -205,9 +205,7 @@ static const NSInteger kCommentParagraphSpacing = 7;
     [self.likesButton setTitle:likeCountText forState:UIControlStateNormal];
     NSString *commentCountText = [@(fbActivity.comments.count) stringValue];
     [self.commentsButton setTitle:commentCountText forState:UIControlStateNormal];
-    
     [self.messageLabel sizeToFit];
-    
 }
 
 #pragma mark - Like Construction

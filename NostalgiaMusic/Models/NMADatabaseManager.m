@@ -10,6 +10,8 @@
 #import "NMASong.h"
 #import <sqlite3.h>
 
+static NSString * const query = @"SELECT * FROM tracks WHERE year_peaked = %@";
+
 @interface NMADatabaseManager ()
 
 @property (strong, nonatomic) NSMutableArray *queryResultsArray;
@@ -35,19 +37,15 @@
     NMASong *song;
     sqlite3 *database;
     NSString *dbFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/tracks.db"];
-
+    
     if (sqlite3_open([dbFilePath UTF8String], &database) == SQLITE_OK) {
-        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM tracks WHERE year_peaked = %@", year] UTF8String];
+        const char *sql = [[NSString stringWithFormat:query, year] UTF8String];
         sqlite3_stmt *selectStatement;
         int databaseCallResult = sqlite3_prepare_v2(database, sql, -1, &selectStatement, NULL);
-
-        if (databaseCallResult == SQLITE_OK) {
-            song = [self getSongWithSQLStatement:selectStatement];
-        } else {
-            song = nil;
-        }
+        song = (databaseCallResult == SQLITE_OK) ? [self getSongWithSQLStatement:selectStatement] : nil;
         sqlite3_finalize(selectStatement);
     }
+    
     sqlite3_close(database);
     return song;
 }
@@ -66,6 +64,7 @@
         newSong.title = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
         [self.queryResultsArray addObject:newSong];
     }
+    
     if ([self.queryResultsArray count]) {
         NSUInteger hashIndex = [self.queryResultsArray count] % dayOfMonth;
         return self.queryResultsArray[hashIndex];

@@ -9,6 +9,9 @@
 #import "NMAPlaybackManager.h"
 #import <AVFoundation/AVFoundation.h>
 
+static NSString * const kResumeAVPlayerNotification = @"resumeAVPlayerNotification";
+static NSString * const kPauseAVPlayerNotification = @"pauseAVPlayerNotification";
+
 @interface NMAPlaybackManager ()
 
 @property (nonatomic) int previousRate;
@@ -35,16 +38,18 @@
     return sharedPlayerManagerInstance;
 }
 
-#pragma mark - Public Methods
+#pragma mark - Public AVPlayer Methods
 
 - (void)setUpAVPlayerWithURL:(NSURL *)url {
-    [NMAPlaybackManager sharedPlayer].audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
-    [NMAPlaybackManager sharedPlayer].audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:[NMAPlaybackManager sharedPlayer].audioAsset];
-    [[NMAPlaybackManager sharedPlayer].audioPlayer replaceCurrentItemWithPlayerItem:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
+    NMAPlaybackManager *shared = [NMAPlaybackManager sharedPlayer];
+    shared.audioAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    shared.audioPlayerItem = [[AVPlayerItem alloc] initWithAsset:shared.audioAsset];
+    [shared.audioPlayer replaceCurrentItemWithPlayerItem:shared.audioPlayerItem];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(itemDidFinishPlaying:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[NMAPlaybackManager sharedPlayer].audioPlayerItem];
+                                               object:shared.audioPlayerItem];
 }
 
 - (void)startPlaying {
@@ -74,12 +79,10 @@
     
     NSNumber *newValue = [change objectForKey:NSKeyValueChangeNewKey];
     NSNumber *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    
     if (![newValue isEqual:oldValue]) {
-        if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeAVPlayerNotification" object:self];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"pauseAVPlayerNotification" object:self];
-        }
+        NSString *notification = [NMAPlaybackManager sharedPlayer].audioPlayer.rate ? kResumeAVPlayerNotification : kPauseAVPlayerNotification;
+        [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
     }
 }
 

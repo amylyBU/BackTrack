@@ -27,11 +27,9 @@ static const NSInteger kNumberOfFBActivities = 3;
 
 - (instancetype)initWithYear:(NSString *)year {
     self = [super init];
-    
     if (self) {
         _year = year; //TODO: check for valid years
     }
-
     return self;
 }
 
@@ -49,7 +47,7 @@ static const NSInteger kNumberOfFBActivities = 3;
                                                             amount:kNumberOfFBActivities
                                                        dayDelegate:dayDelegate
                                                            success:^(NSArray *fbActivities) {
-                                                               //We reverse the array because we get the acitvities from later in the day
+                                                               //We reverse the array because we get the activities from later in the day
                                                                //to earlier, but we want earlier day posts to show up first
                                                                NSArray *reversedActivities = [[fbActivities reverseObjectEnumerator] allObjects];
                                                                self.fbActivities = reversedActivities;

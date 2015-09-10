@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, NMAScrollViewYearPosition) {
 
 BOOL isEarliestYearVisble;
 BOOL isMostRecentYearVisible;
+static NSString * const kEarliestYear = @"1981";
 
 @interface NMAYearActivityScrollViewController ()
 
@@ -37,8 +38,12 @@ BOOL isMostRecentYearVisible;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.earliestYear = @"1981";
+    self.earliestYear = kEarliestYear;
     [self getLatestYear];
+    [self setUpScrollView];
+}
+
+- (void)setUpScrollView {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
@@ -99,6 +104,7 @@ BOOL isMostRecentYearVisible;
 }
 
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.swipeContentOffset = self.scrollView.contentOffset.x;
 }
@@ -107,8 +113,7 @@ BOOL isMostRecentYearVisible;
     [self scrollingDidEnd];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
-                  willDecelerate:(BOOL)decelerate {
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
         [self scrollingDidEnd];
     }

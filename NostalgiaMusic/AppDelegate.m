@@ -30,16 +30,9 @@ static const NSTimeInterval kMinimumSplashScreenTime = 2;
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [self goToSplashScreen];
     
-    SEL transitionMethod;
-    if ([[NMAAppSettings sharedSettings] userHasCompletedOnboarding]) {
-        transitionMethod = @selector(goToHome);
-    } else {
-        transitionMethod = @selector(goToOnboarding);
-    }
+    SEL transitionMethod = [[NMAAppSettings sharedSettings] userHasCompletedOnboarding] ? @selector(goToHome) : @selector(goToOnboarding);
     [NSTimer scheduledTimerWithTimeInterval:kMinimumSplashScreenTime target:self selector:transitionMethod userInfo:nil repeats:NO];
-    
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -78,8 +71,9 @@ static const NSTimeInterval kMinimumSplashScreenTime = 2;
 #pragma mark - NMAOnboardingViewControllerDelegate
 
 - (void)userDidFinishOnboarding {
-    [[NMAAppSettings sharedSettings] setUserOnboardingStatusToCompleted];
-    [[NMAAppSettings sharedSettings] setAutoplaySettingToOn];
+    NMAAppSettings *shared = [NMAAppSettings sharedSettings];
+    [shared setUserOnboardingStatusToCompleted];
+    [shared setAutoplaySettingToOn];
     [self goToHome];
 }
 

@@ -10,17 +10,23 @@
 #import "NMASong.h"
 #import "NMAAppSettings.h"
 #import "NMAPlaybackManager.h"
+
 #import "UIFont+NMAFonts.h"
 #import "UIColor+NMAColors.h"
 #import "UIImage+NMAImages.h"
+
 #import <AVFoundation/AVFoundation.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 static NSString * const kPlayImageName = @"play-circle-button";
 static NSString * const kPauseImageName = @"pause-circle-button";
 
 @interface NMATodaysSongTableViewCell ()
+
 @property (strong, nonatomic) NMASong *song;
+
 @end
+
 
 @implementation NMATodaysSongTableViewCell
 
@@ -41,8 +47,7 @@ static NSString * const kPauseImageName = @"pause-circle-button";
     self.songTitleLabel.text = song.title;
     self.songTitleLabel.textColor = [UIColor nma_almostBlack];
     self.artistLabel.text = song.artistAsAppearsOnLabel;
-    UIImage *albumImage = song.albumImageUrl600x600 ? [UIImage imageWithData:[NSData dataWithContentsOfURL:song.albumImageUrl600x600]] : [UIImage nma_defaultRecord];
-    self.albumImageView.image = albumImage;
+    song.albumImageUrl600x600 ? [self.albumImageView sd_setImageWithURL:song.albumImageUrl600x600] : [self.albumImageView setImage:[UIImage nma_defaultRecord]] ;
     self.albumImageView.layer.cornerRadius = CGRectGetHeight(self.albumImageView.frame) /2;
     self.albumImageView.layer.masksToBounds = YES;
     if ([[NMAAppSettings sharedSettings] userDidAutoplay]) {
@@ -61,11 +66,12 @@ static NSString * const kPauseImageName = @"pause-circle-button";
 #pragma mark - Private Methods
 
 - (IBAction)playButtonPressed:(UIButton *)sender {
-    if ([NMAPlaybackManager sharedPlayer].audioPlayer.rate) {
-        [[NMAPlaybackManager sharedPlayer] pausePlaying];
+    NMAPlaybackManager *shared = [NMAPlaybackManager sharedPlayer];
+    if (shared.audioPlayer.rate) {
+        [shared pausePlaying];
         [self.playButton setImage:[UIImage imageNamed:kPlayImageName] forState:UIControlStateNormal];
     } else {
-        [[NMAPlaybackManager sharedPlayer] startPlaying];
+        [shared startPlaying];
         [self.playButton setImage:[UIImage imageNamed:kPauseImageName] forState:UIControlStateNormal];
     }
 }

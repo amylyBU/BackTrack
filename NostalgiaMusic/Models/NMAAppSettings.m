@@ -37,6 +37,7 @@ static NSString * const kAutoplaySettingKey = @"kAutoplaySettingKey";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:key];
 }
+
 - (void)setAccessTokenForKey:(NSString *)key withAccessToken:(FBSDKAccessToken *)token {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:token.tokenString forKey:key];
